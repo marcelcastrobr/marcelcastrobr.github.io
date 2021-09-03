@@ -1,3 +1,3 @@
 layout: page
 title: "Intro"
-permalink: https://marcelcastrobr.github.io/page
+permalink: https://marcelcastrobr.github.io/intro
