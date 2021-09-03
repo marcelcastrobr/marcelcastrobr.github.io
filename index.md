@@ -8,5 +8,3 @@ Welcome to My Home Page
 - Original date - {{ date }}
 - With timeago filter - {{ date | timeago }}
 
-# [My Notebooks](https://marcelcastrobr.github.io/notebooks/)
-
