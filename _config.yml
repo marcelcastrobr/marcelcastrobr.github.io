@@ -1,13 +1,13 @@
 #Inspirations: https://github.com/dzlab/dzlab.github.io/blob/master/_config.yml
 
 #Setup
-title:        notebooks
+title:        Marcel Castro
 tagline:      'Machine Learning'
 email:        marcelcastrobr@gmail.com
 description: >- # this means to ignore newlines until "baseurl:"
   Personal site to capture my path in Machine Learning.
 baseurl:      /
-url:          https://marcelcastrobr.github.io/notebooks/
+url:          https://marcelcastrobr.github.io
 
 # twitter_username: jekyllrb
 github_username:  marcelcastrobr
