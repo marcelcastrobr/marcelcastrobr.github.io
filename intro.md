@@ -1,5 +1,5 @@
 ---
 layout: page
 title: "Intro"
-permalink: https://marcelcastrobr.github.io/intro
+permalink: /about/contact/
 ---
