@@ -1,5 +1,5 @@
 ---
 layout: page
 title: "Intro"
-permalink: 
+permalink: /about/contact/
 ---
