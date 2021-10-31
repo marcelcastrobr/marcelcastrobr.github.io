@@ -1,3 +1,11 @@
+---
+layout: post
+title:  "Generative Deep Learning"
+date:   2021-09-22 09:19:07 +0200
+categories: machine_learning
+
+---
+
 # Generative Deep Learning
 
 This repository is intended as place to keep my current experimentations on generative deep learning using tensorflow.
