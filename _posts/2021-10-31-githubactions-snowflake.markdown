@@ -1,3 +1,11 @@
+---
+layout: post
+title:  "Github Actions and Snowflake Integration"
+date:   2021-10-31 18:19:07 +0200
+categories: github, snowflake, CICD
+
+---
+
 # GitHub Actions and Snowflake Integration
 
 The objective of this article is to explore CICD (Continuous Integration / Continuous Deployment) for our data modelling using Github actions and Snowflake data platform.  
