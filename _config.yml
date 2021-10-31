@@ -8,6 +8,7 @@ description: >- # this means to ignore newlines until "baseurl:"
   Personal site to capture my path in Machine Learning.
 baseurl:      /
 url:          https://marcelcastrobr.github.io
+markdown: kramdown
 
 # twitter_username: jekyllrb
 github_username:  marcelcastrobr
