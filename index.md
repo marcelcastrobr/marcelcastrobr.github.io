@@ -1,17 +1,21 @@
 ---
----
-
-Welcome to My Home Page
 
 
+<img src="index.assets/marcel.jpeg" alt="marcel" style="zoom:50%;" />
 
-|                                                              |                                                              |
-| ------------------------------------------------------------ | :----------------------------------------------------------- |
-| <img src="index.assets/marcel.jpeg" alt="mar cel" style="zoom:50%;" /> | **Short biography:**  <br />My name is Marcel Cavalcanti de Castro. <br />Born in Brazil and working as a data scientist in Norway. |
+**Short biography:**
 
-{% assign date = '2020-09-22T08:07:00Z' %}
+ My name is Marcel Cavalcanti de Castro.
 
-- Last update at - {{ date }}
+I am born in Brazil and working as a Data Scientist in Norway.
+
+
+
+
+
+{% assign date = '2021-11-02T08:07:00Z' %}
+
+Last update at - {{ date }}
 
 
 
