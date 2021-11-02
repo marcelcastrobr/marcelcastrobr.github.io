@@ -9,6 +9,7 @@ description: >- # this means to ignore newlines until "baseurl:"
 baseurl:      /
 url:          https://marcelcastrobr.github.io/notebooks/
 #markdown: kramdown
+repository: marcelcastrobr/marcelcastrobr.github.io
 
 # twitter_username: jekyllrb
 github_username:  marcelcastrobr
