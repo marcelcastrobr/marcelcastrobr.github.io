@@ -8,6 +8,8 @@ permalink: /about/
 
 <img src="index.assets/marcel.jpeg" alt="marcel" style="zoom:50%;" />
 
+-
+
 {% if site.github_username %} {% endif %}
 
 **marcelcastrobr@gmail.com**
