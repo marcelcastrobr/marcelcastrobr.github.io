@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>Github Actions and Snowflake Integration | Marcel Castro</title>
+<meta name="generator" content="Jekyll v3.9.0" />
+<meta property="og:title" content="Github Actions and Snowflake Integration" />
+<meta name="author" content="marcelcastrobr" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="GitHub Actions and Snowflake Integration" />
+<meta property="og:description" content="GitHub Actions and Snowflake Integration" />
+<link rel="canonical" href="https://marcelcastrobr.github.io/notebooks//pages/marcelcastrobr/2021/10/31/githubactions-snowflake.html" />
+<meta property="og:url" content="https://marcelcastrobr.github.io/notebooks//pages/marcelcastrobr/2021/10/31/githubactions-snowflake.html" />
+<meta property="og:site_name" content="Marcel Castro" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2021-10-31T16:19:07+00:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Github Actions and Snowflake Integration" />
+<script type="application/ld+json">
+{"datePublished":"2021-10-31T16:19:07+00:00","description":"GitHub Actions and Snowflake Integration","url":"https://marcelcastrobr.github.io/notebooks//pages/marcelcastrobr/2021/10/31/githubactions-snowflake.html","@type":"BlogPosting","dateModified":"2021-10-31T16:19:07+00:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://marcelcastrobr.github.io/notebooks//pages/marcelcastrobr/2021/10/31/githubactions-snowflake.html"},"author":{"@type":"Person","name":"marcelcastrobr"},"headline":"Github Actions and Snowflake Integration","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/pages/marcelcastrobr/assets/main.css"><link type="application/atom+xml" rel="alternate" href="https://marcelcastrobr.github.io/notebooks//pages/marcelcastrobr/feed.xml" title="Marcel Castro" /></head>
+<body><header class="site-header" role="banner">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/pages/marcelcastrobr/">Marcel Castro</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/pages/marcelcastrobr/about/">About</a><a class="page-link" href="/pages/marcelcastrobr/about/">About</a><a class="page-link" href="/pages/marcelcastrobr/notebooks/">Notebooks</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">Github Actions and Snowflake Integration</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2021-10-31T16:19:07+00:00" itemprop="datePublished">Oct 31, 2021
+      </time></p>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <h1 id="github-actions-and-snowflake-integration">GitHub Actions and Snowflake Integration</h1>
+
+<p>The objective of this article is to explore CICD (Continuous Integration / Continuous Deployment) for our data modelling using Github actions and Snowflake data platform.</p>
+
+<p>The benefit of applying CICD concept on your data model is to keep traceability of your model and easy deployment to your data platform, which in this case is Snowflake.</p>
+
+<p>GitHub is used as a repository for the data model. The data model is a collection of sql queries used to generated tables and views.</p>
+
+<h2 id="authentication">Authentication:</h2>
+
+<p>In this setup, two authentication methods towards Snowflake were tested: using of AzureAD Single Sign On (a.k.a. SSO) and Key-pair authentication. But for the remaining of this article, the key-pair authentication towards Snowflake was used.</p>
+
+<h3 id="using-key-pair-authentication">Using Key-pair Authentication</h3>
+
+<p>In order to use key-pair authentication, we need the following steps:</p>
+
+<p>1) Create a key-pair key (private and public key) to be used to Authenticate towards snowflake while running the queries. 
+2) Load the private key unders the secrets of your repository on gitHub used to capture your data model.
+3) Load your public key to your snowflake account.</p>
+
+<p>Below are the command needs for each step.</p>
+
+<ul>
+  <li>
+    <p><strong>Step1 : Creating encrypted key</strong></p>
+
+    <p>Using a a linux command line (CLI) you can generate your private (<strong>rsa_key.p8</strong>) an public key (<strong>rsa_key.pub</strong>) executing the commands below (ref. <a href="https://docs.snowflake.com/en/user-guide/key-pair-auth.html">Snowflake docs</a>).</p>
+
+    <p>I decided to use encrypted private key, which means I created an additional passphrase needed while using the key-pair.</p>
+
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Create a private encrypted key</span>
+<span class="nv">$ </span>openssl genrsa 2048 | openssl pkcs8 <span class="nt">-topk8</span> <span class="nt">-inform</span> PEM <span class="nt">-out</span> rsa_key.p8
+  
+<span class="c"># Create a public key</span>
+<span class="nv">$ </span>openssl rsa <span class="nt">-in</span> rsa_key.p8 <span class="nt">-pubout</span> <span class="nt">-out</span> rsa_key.pub
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>https://docs.snowflake.com/en/user-guide/key-pair-auth.html</p>
+
+    <p>Export your private key (<strong>rsa_key.p8</strong>) and password/passphrase to GitHub Actions under Settings-&gt; Secrets (secrets SF_PRIVATE_KEY and and SF_PRIVATE_PASSPHRASE in picture below):</p>
+
+    <p><img src="2021-10-31-githubactions-snowflake.assets/image-20211026153527604.png" alt="image-20211026153527604" /></p>
+  </li>
+  <li>
+    <p>Write your public key (<strong>rsa_key.pub</strong>) to your username in snowflake using the command below in Snowflake console:</p>
+
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#Adding public key to snowflake user. You can add a second key also using RSA_PUBLIC_KEY_2</span>
+ALTER USER <span class="s2">"&lt;your user&gt;"</span> SET <span class="nv">RSA_PUBLIC_KEY</span><span class="o">=</span><span class="s2">"&lt; your public key&gt;"</span><span class="p">;</span>
+  
+<span class="c">#You can check if key was update by issuing the following command:</span>
+DESC USER <span class="s2">"&lt;your user&gt;"</span><span class="p">;</span>
+  
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<p>Beside the key-pair, you also need to pass the authentication parameters needed by snowsql, which are listed below. We will describe snowsql later in this section.</p>
+
+<ul>
+  <li>SF_ACCOUNT: <snowflake account=""></snowflake></li>
+  <li>SF_DATABASE: <snowflake database=""></snowflake></li>
+  <li>SF_ROLE: <snowflake role=""></snowflake></li>
+  <li>SF_USERNAME: <snowflake username=""></snowflake></li>
+  <li>SF_WAREHOUSE: <snowflake warehouse="" compute=""></snowflake></li>
+</ul>
+
+<h1 id="interacting-with-snowflake">Interacting with Snowflake</h1>
+
+<p>There are several ways to interact with snowflake. In this notebook, I have tested:</p>
+
+<ul>
+  <li>Snowflake web console</li>
+  <li>Snowsql</li>
+</ul>
+
+<h3 id="using-snowsql">Using Snowsql</h3>
+
+<p>Snowsql is the command line for connecting to Snowflake to execute SQL queries and perform all DDL and DML operations, including loading data into and unloading data out of database tables (ref. <a href="https://docs.snowflake.com/en/user-guide/snowsql.html">SnowSQL (CLI Client))</a>.</p>
+
+<p>Snowsql allows us to use both Single Sign On (SSO) and key-value pair. Below are the commands needed.</p>
+
+<h4 id="snowsql-with-sso">Snowsql with SSO</h4>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>snowsql <span class="nt">-a</span> &lt;snowflake_account&gt; <span class="nt">-u</span> <span class="s2">"&lt;snowflake_username&gt;"</span> <span class="nt">--authenticator</span> externalbrowser
+</code></pre></div></div>
+
+<h4 id="snowsql-with-key-pair">Snowsql with key-pair</h4>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#Getting snowsql cli</span>
+<span class="nv">$ </span>snowsql <span class="nt">-a</span> &lt;snowflake_account&gt; <span class="nt">-u</span> <span class="s2">"&lt;snowflake_username&gt;"</span> <span class="nt">--private-key-path</span> ~/.ssh/snowflake-key-private.p8
+
+<span class="c">#Running specific sql file named myfile.sql</span>
+<span class="nv">$ </span>snowsql <span class="nt">-a</span> &lt;snowflake_account&gt; <span class="nt">-u</span> <span class="s2">"&lt;snowflake_username&gt;"</span> <span class="nt">--private-key-path</span> ~/.ssh/snowflake-key-private.p8 <span class="nt">-f</span> scripts/myfile.sql
+</code></pre></div></div>
+
+<p>See the Snowflake documentation https://docs.snowflake.net/manuals/user-guide/snowsql.html for more information on how to interact with snowsql.</p>
+
+<h4 id="connector-python-library">Connector Python Library</h4>
+
+<p>In addition to snowsql, you can also interact with Snowflake using the <a href="https://docs.snowflake.com/en/user-guide/python-connector.html">snowflake connector python library</a>.</p>
+
+<p>There are two ways of executing queries with the library - <code class="language-plaintext highlighter-rouge">execute</code> for synchronous execution and <code class="language-plaintext highlighter-rouge">execute_async</code> for asynchronous ones.</p>
+
+<p>The synchronous way is simple and good for a batch of quick/dependent queries. But, if you have independent queries, some of which may take a long time to run, there is no reason to block each other and use the synchronous way (ref. <a href="https://medium.com/snowflake/use-github-actions-to-query-your-snowflake-data-cloud-70b5e477869e">Article</a>).</p>
+
+<p>You can use <a href="https://github.com/anecdotes-ai/snowflake-query">Snowflake-query</a> GitHub action to run your queries.</p>
+
+<h2 id="github-actions">GitHub Actions</h2>
+
+<p>In this section we show how to configure GitHub actions through a simple workflow. Thereafter we run the workflow manually and the its execution.</p>
+
+<h3 id="configuring-the-pipeline-workflow">Configuring the pipeline workflow</h3>
+
+<p>The code below is our data pipeline workflow named <strong>snowflake-devops-demo.yml.</strong> The workflow is a yaml file located inside the path <strong>snowflake-datapipeline/.github/workflows/</strong>.Please note that github actions can run several workflow, we only need to create different yaml files within the workflow folder.</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># **snowflake-devops-demo.yml.**</span>
+<span class="na">name</span><span class="pi">:</span> <span class="s">snowflake-devops-demo</span>
+
+<span class="c1"># Environment variable created under github secrets. </span>
+<span class="na">env</span><span class="pi">:</span>
+  <span class="na">SF_ACCOUNT</span><span class="pi">:</span> <span class="s">$</span>
+  <span class="na">SF_USERNAME</span><span class="pi">:</span> <span class="s">$</span>
+  <span class="na">SF_ROLE</span><span class="pi">:</span> <span class="s">$</span>
+  <span class="na">SF_WAREHOUSE</span><span class="pi">:</span> <span class="s">$</span>
+  <span class="na">SF_DATABASE</span><span class="pi">:</span> <span class="s">$</span>
+  <span class="na">SNOWFLAKE_PRIVATE_KEY</span><span class="pi">:</span> <span class="s">$</span>
+  <span class="na">SNOWFLAKE_PRIVATE_KEY_PASSPHRASE</span><span class="pi">:</span> <span class="s">$</span>
+  <span class="na">SNOWSQL_PRIVATE_KEY_PASSPHRASE</span><span class="pi">:</span> <span class="s">$</span>
+
+<span class="c1"># Controls when the action will run.  In this case for branch main under changes under the path migrations.</span>
+<span class="na">on</span><span class="pi">:</span>
+  <span class="na">push</span><span class="pi">:</span>
+    <span class="na">branches</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">main</span>
+    <span class="na">paths</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s1">'</span><span class="s">migrations/**'</span>
+
+  <span class="c1"># Allows you to run this workflow manually from the Actions tab</span>
+  <span class="na">workflow_dispatch</span><span class="pi">:</span>
+
+<span class="na">jobs</span><span class="pi">:</span>
+  <span class="na">deploy-snowflake-changes-job</span><span class="pi">:</span>
+    <span class="na">runs-on</span><span class="pi">:</span> <span class="s">ubuntu-latest</span>
+
+    <span class="na">steps</span><span class="pi">:</span>
+      <span class="c1"># Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it</span>
+      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Checkout repository</span>
+        <span class="na">uses</span><span class="pi">:</span> <span class="s">actions/checkout@v2</span>
+
+      <span class="c1"># Copying our private key under ~/.ssh/</span>
+      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Install SSH Key</span>
+        <span class="na">uses</span><span class="pi">:</span> <span class="s">shimataro/ssh-key-action@v2</span>
+        <span class="na">with</span><span class="pi">:</span>
+          <span class="na">key</span><span class="pi">:</span> <span class="s">$</span>
+          <span class="na">name</span><span class="pi">:</span> <span class="s">id_rsa-snowflake</span>
+          <span class="na">known_hosts</span><span class="pi">:</span> <span class="s1">'</span><span class="s">just-a-placeholder-so-we-dont-get-errors'</span>
+
+      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Use Python 3.8.x</span>
+        <span class="na">uses</span><span class="pi">:</span> <span class="s">actions/setup-python@v2.2.1</span>
+        <span class="na">with</span><span class="pi">:</span>
+          <span class="na">python-version</span><span class="pi">:</span> <span class="s">3.8.x</span>
+
+      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Download SnowSQL</span>
+        <span class="na">run</span><span class="pi">:</span>  <span class="s">curl -O https://sfc-repo.snowflakecomputing.com/snowsql/bootstrap/1.2/linux_x86_64/snowsql-1.2.19-linux_x86_64.bash</span>
+    
+      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Install SnowSQL</span>
+        <span class="na">run</span><span class="pi">:</span> <span class="s">SNOWSQL_DEST=~/snowflake SNOWSQL_LOGIN_SHELL=~/.profile bash snowsql-1.2.19-linux_x86_64.bash</span>
+    
+      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Test installation</span>
+        <span class="na">run</span><span class="pi">:</span>  <span class="s">~/snowflake/snowsql -v</span>
+    
+      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Execute sql files against Snowflake</span>
+        <span class="na">run</span><span class="pi">:</span> <span class="pi">|</span>
+          <span class="s">echo "Creating SNOWFLAKE_PRIVATE_KEY_PATH variable"</span>
+          <span class="s">export SNOWFLAKE_PRIVATE_KEY_PATH=~/.ssh/id_rsa-snowflake</span>
+          <span class="s">echo "Step 3: Executing snowsql"</span>
+          <span class="s"># Give permission to execute bash script</span>
+          <span class="s">chmod u+x $GITHUB_WORKSPACE/simple_integration.sh</span>
+          <span class="s">$GITHUB_WORKSPACE/simple_integration.sh</span>
+
+</code></pre></div></div>
+
+<p>The code below is the content of the simple_integration.sh script, which reads a workflow.conf file and execute each line in snowflake using the snowsql commands.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># simple_integration.sh script that reads workflow.conf file and execute it.</span>
+<span class="c">#!/bin/bash</span>
+<span class="c"># author: Marcel Castro</span>
+<span class="nb">set</span> <span class="nt">-e</span>
+print_log <span class="o">()</span> <span class="o">{</span>
+    <span class="nb">printf</span> <span class="s2">"[</span><span class="sb">`</span><span class="nb">date</span> +<span class="s1">'%d/%m/%Y %H:%M:%S'</span><span class="sb">`</span><span class="s2">] [</span><span class="nv">$1</span><span class="s2">] </span><span class="nv">$2</span><span class="se">\n</span><span class="s2">"</span>
+<span class="o">}</span>
+<span class="nb">export</span> <span class="nt">-f</span> print_log
+
+run_workflow <span class="o">()</span> <span class="o">{</span>
+    print_log <span class="s2">"INFO"</span> <span class="s2">"Running workflow"</span>
+    <span class="nv">workflow_config</span><span class="o">=</span><span class="si">$(</span><span class="nb">echo sed</span> <span class="nt">-e</span> <span class="s1">'s/#.*$//'</span> <span class="nt">-e</span> <span class="s1">'/^$/d'</span> workflow.conf<span class="si">)</span>
+    <span class="k">while </span><span class="nv">IFS</span><span class="o">=</span> <span class="nb">read</span> <span class="nt">-r</span> sql_file_name<span class="p">;</span> <span class="k">do
+        </span>print_log <span class="s2">"INFO"</span> <span class="s2">"Running: </span><span class="nv">$sql_file_name</span><span class="s2">"</span>
+        print_log <span class="s2">"INFO"</span> <span class="s2">"Running ~/snowflake/snowsql -a </span><span class="nv">$SF_ACCOUNT</span><span class="s2"> -u </span><span class="nv">$SF_USERNAME</span><span class="s2"> -r </span><span class="nv">$SF_ROLE</span><span class="s2"> -w </span><span class="nv">$SF_WAREHOUSE</span><span class="s2"> -d </span><span class="nv">$SF_DATABASE</span><span class="s2"> --private-key-path </span><span class="nv">$SNOWFLAKE_PRIVATE_KEY_PATH</span><span class="s2"> -f </span><span class="k">${</span><span class="nv">GITHUB_WORKSPACE</span><span class="k">}</span><span class="s2">/</span><span class="k">${</span><span class="nv">sql_file_name</span><span class="k">}</span><span class="s2">"</span>
+        ~/snowflake/snowsql <span class="nt">-a</span> <span class="nv">$SF_ACCOUNT</span> <span class="nt">-u</span> <span class="nv">$SF_USERNAME</span> <span class="nt">-r</span> <span class="nv">$SF_ROLE</span> <span class="nt">-w</span> <span class="nv">$SF_WAREHOUSE</span> <span class="nt">-d</span> <span class="nv">$SF_DATABASE</span> <span class="nt">--private-key-path</span> <span class="nv">$SNOWFLAKE_PRIVATE_KEY_PATH</span> <span class="nt">-f</span> <span class="k">${</span><span class="nv">GITHUB_WORKSPACE</span><span class="k">}</span>/<span class="k">${</span><span class="nv">sql_file_name</span><span class="k">}</span>
+    <span class="k">done</span> &lt; &lt;<span class="o">(</span><span class="nv">$workflow_config</span><span class="o">)</span><span class="p">;</span>
+<span class="o">}</span>
+
+<span class="c">## running workflow</span>
+run_workflow
+</code></pre></div></div>
+
+<p>An example of workflow.conf file can be:</p>
+
+<pre><code class="language-txt"># Create views
+views/my_first_view.sql
+views/my_second_view.sql
+
+#Create procedures
+procedures/my_first_procedure.sql
+
+# Remember to have an empty line by the end at the end of the file
+# so that every line is processed
+</code></pre>
+
+<h3 id="running-the-pipeline-workflow">Running the pipeline workflow</h3>
+
+<p>You can either run your workflow manually as highlighted in the picture below or triggered by a commit to your repository.</p>
+
+<p><img src="2021-10-31-githubactions-snowflake.assets/image-20211031165242061.png" alt="image-20211031165242061" /></p>
+
+<p>After some minutes you see that the workflow run successfully. The picture below shows the results of each steps within the workflow.</p>
+
+<p><img src="2021-10-31-githubactions-snowflake.assets/image-20211027195531968.png" alt="image-20211027195531968" /></p>
+
+<h2 id="summary">Summary</h2>
+
+<p>In this article we explored a simple data workflow using GitHub actions and Snowflake. Github is used a code repository to version our data model.</p>
+
+<p>We introduce the use of GitHub actions as a CICD (Continuous Integration / Continuous Deployment) data pipeline which deploys our simple data model on snowflake through the use of snowsql commands.</p>
+
+<p>The deployment is done in a secure way through the use of key pairs stored in the GitHub actions secrets.</p>
+
+<p>In the future work, I would like to explore the use of <a href="https://docs.getdbt.com/docs/introduction">dbt</a> (data build tool) to perform data transformation.  The idea is to make use of the dbt <a href="https://docs.getdbt.com/docs/building-a-dbt-project/tests">test</a> and <a href="https://docs.getdbt.com/docs/building-a-dbt-project/documentation">documentation</a> capabilities.</p>
+
+  </div><a class="u-url" href="/pages/marcelcastrobr/2021/10/31/githubactions-snowflake.html" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/pages/marcelcastrobr/"></data>
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">Marcel Castro</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li class="p-name">{&quot;name&quot;=&gt;&quot;marcelcastrobr&quot;}</li><li><a class="u-email" href="mailto:marcelcastrobr@gmail.com">marcelcastrobr@gmail.com</a></li></ul>
+      </div>
+
+      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/marcelcastrobr"><svg class="svg-icon"><use xlink:href="/pages/marcelcastrobr/assets/minima-social-icons.svg#github"></use></svg> <span class="username">marcelcastrobr</span></a></li></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p>Personal site to capture my learning path in Machine Learning.</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>

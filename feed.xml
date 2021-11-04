@@ -1,0 +1,272 @@
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.0">Jekyll</generator><link href="https://marcelcastrobr.github.io/notebooks//pages/marcelcastrobr/feed.xml" rel="self" type="application/atom+xml" /><link href="https://marcelcastrobr.github.io/notebooks//pages/marcelcastrobr/" rel="alternate" type="text/html" /><updated>2021-11-04T09:28:32+00:00</updated><id>https://marcelcastrobr.github.io/notebooks//pages/marcelcastrobr/feed.xml</id><title type="html">Marcel Castro</title><subtitle>Personal site to capture my learning path in Machine Learning.</subtitle><author><name>marcelcastrobr</name></author><entry><title type="html">Github Actions and Snowflake Integration</title><link href="https://marcelcastrobr.github.io/notebooks//pages/marcelcastrobr/2021/10/31/githubactions-snowflake.html" rel="alternate" type="text/html" title="Github Actions and Snowflake Integration" /><published>2021-10-31T16:19:07+00:00</published><updated>2021-10-31T16:19:07+00:00</updated><id>https://marcelcastrobr.github.io/notebooks//pages/marcelcastrobr/2021/10/31/githubactions-snowflake</id><content type="html" xml:base="https://marcelcastrobr.github.io/notebooks//pages/marcelcastrobr/2021/10/31/githubactions-snowflake.html">&lt;h1 id=&quot;github-actions-and-snowflake-integration&quot;&gt;GitHub Actions and Snowflake Integration&lt;/h1&gt;
+
+&lt;p&gt;The objective of this article is to explore CICD (Continuous Integration / Continuous Deployment) for our data modelling using Github actions and Snowflake data platform.&lt;/p&gt;
+
+&lt;p&gt;The benefit of applying CICD concept on your data model is to keep traceability of your model and easy deployment to your data platform, which in this case is Snowflake.&lt;/p&gt;
+
+&lt;p&gt;GitHub is used as a repository for the data model. The data model is a collection of sql queries used to generated tables and views.&lt;/p&gt;
+
+&lt;h2 id=&quot;authentication&quot;&gt;Authentication:&lt;/h2&gt;
+
+&lt;p&gt;In this setup, two authentication methods towards Snowflake were tested: using of AzureAD Single Sign On (a.k.a. SSO) and Key-pair authentication. But for the remaining of this article, the key-pair authentication towards Snowflake was used.&lt;/p&gt;
+
+&lt;h3 id=&quot;using-key-pair-authentication&quot;&gt;Using Key-pair Authentication&lt;/h3&gt;
+
+&lt;p&gt;In order to use key-pair authentication, we need the following steps:&lt;/p&gt;
+
+&lt;p&gt;1) Create a key-pair key (private and public key) to be used to Authenticate towards snowflake while running the queries. 
+2) Load the private key unders the secrets of your repository on gitHub used to capture your data model.
+3) Load your public key to your snowflake account.&lt;/p&gt;
+
+&lt;p&gt;Below are the command needs for each step.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;Step1 : Creating encrypted key&lt;/strong&gt;&lt;/p&gt;
+
+    &lt;p&gt;Using a a linux command line (CLI) you can generate your private (&lt;strong&gt;rsa_key.p8&lt;/strong&gt;) an public key (&lt;strong&gt;rsa_key.pub&lt;/strong&gt;) executing the commands below (ref. &lt;a href=&quot;https://docs.snowflake.com/en/user-guide/key-pair-auth.html&quot;&gt;Snowflake docs&lt;/a&gt;).&lt;/p&gt;
+
+    &lt;p&gt;I decided to use encrypted private key, which means I created an additional passphrase needed while using the key-pair.&lt;/p&gt;
+
+    &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;# Create a private encrypted key&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;openssl genrsa 2048 | openssl pkcs8 &lt;span class=&quot;nt&quot;&gt;-topk8&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-inform&lt;/span&gt; PEM &lt;span class=&quot;nt&quot;&gt;-out&lt;/span&gt; rsa_key.p8
+  
+&lt;span class=&quot;c&quot;&gt;# Create a public key&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;openssl rsa &lt;span class=&quot;nt&quot;&gt;-in&lt;/span&gt; rsa_key.p8 &lt;span class=&quot;nt&quot;&gt;-pubout&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-out&lt;/span&gt; rsa_key.pub
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;https://docs.snowflake.com/en/user-guide/key-pair-auth.html&lt;/p&gt;
+
+    &lt;p&gt;Export your private key (&lt;strong&gt;rsa_key.p8&lt;/strong&gt;) and password/passphrase to GitHub Actions under Settings-&amp;gt; Secrets (secrets SF_PRIVATE_KEY and and SF_PRIVATE_PASSPHRASE in picture below):&lt;/p&gt;
+
+    &lt;p&gt;&lt;img src=&quot;2021-10-31-githubactions-snowflake.assets/image-20211026153527604.png&quot; alt=&quot;image-20211026153527604&quot; /&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Write your public key (&lt;strong&gt;rsa_key.pub&lt;/strong&gt;) to your username in snowflake using the command below in Snowflake console:&lt;/p&gt;
+
+    &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;#Adding public key to snowflake user. You can add a second key also using RSA_PUBLIC_KEY_2&lt;/span&gt;
+ALTER USER &lt;span class=&quot;s2&quot;&gt;&quot;&amp;lt;your user&amp;gt;&quot;&lt;/span&gt; SET &lt;span class=&quot;nv&quot;&gt;RSA_PUBLIC_KEY&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&amp;lt; your public key&amp;gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+  
+&lt;span class=&quot;c&quot;&gt;#You can check if key was update by issuing the following command:&lt;/span&gt;
+DESC USER &lt;span class=&quot;s2&quot;&gt;&quot;&amp;lt;your user&amp;gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+  
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Beside the key-pair, you also need to pass the authentication parameters needed by snowsql, which are listed below. We will describe snowsql later in this section.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;SF_ACCOUNT: &lt;snowflake account=&quot;&quot;&gt;&lt;/snowflake&gt;&lt;/li&gt;
+  &lt;li&gt;SF_DATABASE: &lt;snowflake database=&quot;&quot;&gt;&lt;/snowflake&gt;&lt;/li&gt;
+  &lt;li&gt;SF_ROLE: &lt;snowflake role=&quot;&quot;&gt;&lt;/snowflake&gt;&lt;/li&gt;
+  &lt;li&gt;SF_USERNAME: &lt;snowflake username=&quot;&quot;&gt;&lt;/snowflake&gt;&lt;/li&gt;
+  &lt;li&gt;SF_WAREHOUSE: &lt;snowflake warehouse=&quot;&quot; compute=&quot;&quot;&gt;&lt;/snowflake&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&quot;interacting-with-snowflake&quot;&gt;Interacting with Snowflake&lt;/h1&gt;
+
+&lt;p&gt;There are several ways to interact with snowflake. In this notebook, I have tested:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Snowflake web console&lt;/li&gt;
+  &lt;li&gt;Snowsql&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;using-snowsql&quot;&gt;Using Snowsql&lt;/h3&gt;
+
+&lt;p&gt;Snowsql is the command line for connecting to Snowflake to execute SQL queries and perform all DDL and DML operations, including loading data into and unloading data out of database tables (ref. &lt;a href=&quot;https://docs.snowflake.com/en/user-guide/snowsql.html&quot;&gt;SnowSQL (CLI Client))&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Snowsql allows us to use both Single Sign On (SSO) and key-value pair. Below are the commands needed.&lt;/p&gt;
+
+&lt;h4 id=&quot;snowsql-with-sso&quot;&gt;Snowsql with SSO&lt;/h4&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;snowsql &lt;span class=&quot;nt&quot;&gt;-a&lt;/span&gt; &amp;lt;snowflake_account&amp;gt; &lt;span class=&quot;nt&quot;&gt;-u&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;&amp;lt;snowflake_username&amp;gt;&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--authenticator&lt;/span&gt; externalbrowser
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h4 id=&quot;snowsql-with-key-pair&quot;&gt;Snowsql with key-pair&lt;/h4&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;#Getting snowsql cli&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;snowsql &lt;span class=&quot;nt&quot;&gt;-a&lt;/span&gt; &amp;lt;snowflake_account&amp;gt; &lt;span class=&quot;nt&quot;&gt;-u&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;&amp;lt;snowflake_username&amp;gt;&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--private-key-path&lt;/span&gt; ~/.ssh/snowflake-key-private.p8
+
+&lt;span class=&quot;c&quot;&gt;#Running specific sql file named myfile.sql&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;snowsql &lt;span class=&quot;nt&quot;&gt;-a&lt;/span&gt; &amp;lt;snowflake_account&amp;gt; &lt;span class=&quot;nt&quot;&gt;-u&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;&amp;lt;snowflake_username&amp;gt;&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--private-key-path&lt;/span&gt; ~/.ssh/snowflake-key-private.p8 &lt;span class=&quot;nt&quot;&gt;-f&lt;/span&gt; scripts/myfile.sql
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;See the Snowflake documentation https://docs.snowflake.net/manuals/user-guide/snowsql.html for more information on how to interact with snowsql.&lt;/p&gt;
+
+&lt;h4 id=&quot;connector-python-library&quot;&gt;Connector Python Library&lt;/h4&gt;
+
+&lt;p&gt;In addition to snowsql, you can also interact with Snowflake using the &lt;a href=&quot;https://docs.snowflake.com/en/user-guide/python-connector.html&quot;&gt;snowflake connector python library&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;There are two ways of executing queries with the library - &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;execute&lt;/code&gt; for synchronous execution and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;execute_async&lt;/code&gt; for asynchronous ones.&lt;/p&gt;
+
+&lt;p&gt;The synchronous way is simple and good for a batch of quick/dependent queries. But, if you have independent queries, some of which may take a long time to run, there is no reason to block each other and use the synchronous way (ref. &lt;a href=&quot;https://medium.com/snowflake/use-github-actions-to-query-your-snowflake-data-cloud-70b5e477869e&quot;&gt;Article&lt;/a&gt;).&lt;/p&gt;
+
+&lt;p&gt;You can use &lt;a href=&quot;https://github.com/anecdotes-ai/snowflake-query&quot;&gt;Snowflake-query&lt;/a&gt; GitHub action to run your queries.&lt;/p&gt;
+
+&lt;h2 id=&quot;github-actions&quot;&gt;GitHub Actions&lt;/h2&gt;
+
+&lt;p&gt;In this section we show how to configure GitHub actions through a simple workflow. Thereafter we run the workflow manually and the its execution.&lt;/p&gt;
+
+&lt;h3 id=&quot;configuring-the-pipeline-workflow&quot;&gt;Configuring the pipeline workflow&lt;/h3&gt;
+
+&lt;p&gt;The code below is our data pipeline workflow named &lt;strong&gt;snowflake-devops-demo.yml.&lt;/strong&gt; The workflow is a yaml file located inside the path &lt;strong&gt;snowflake-datapipeline/.github/workflows/&lt;/strong&gt;.Please note that github actions can run several workflow, we only need to create different yaml files within the workflow folder.&lt;/p&gt;
+
+&lt;div class=&quot;language-yaml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;# **snowflake-devops-demo.yml.**&lt;/span&gt;
+&lt;span class=&quot;na&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;snowflake-devops-demo&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;# Environment variable created under github secrets. &lt;/span&gt;
+&lt;span class=&quot;na&quot;&gt;env&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;SF_ACCOUNT&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;$&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;SF_USERNAME&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;$&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;SF_ROLE&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;$&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;SF_WAREHOUSE&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;$&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;SF_DATABASE&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;$&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;SNOWFLAKE_PRIVATE_KEY&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;$&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;SNOWFLAKE_PRIVATE_KEY_PASSPHRASE&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;$&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;SNOWSQL_PRIVATE_KEY_PASSPHRASE&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;$&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;# Controls when the action will run.  In this case for branch main under changes under the path migrations.&lt;/span&gt;
+&lt;span class=&quot;na&quot;&gt;on&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;push&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;branches&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+      &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;main&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;paths&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+      &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;migrations/**'&lt;/span&gt;
+
+  &lt;span class=&quot;c1&quot;&gt;# Allows you to run this workflow manually from the Actions tab&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;workflow_dispatch&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+
+&lt;span class=&quot;na&quot;&gt;jobs&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;deploy-snowflake-changes-job&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;runs-on&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;ubuntu-latest&lt;/span&gt;
+
+    &lt;span class=&quot;na&quot;&gt;steps&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+      &lt;span class=&quot;c1&quot;&gt;# Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it&lt;/span&gt;
+      &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;Checkout repository&lt;/span&gt;
+        &lt;span class=&quot;na&quot;&gt;uses&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;actions/checkout@v2&lt;/span&gt;
+
+      &lt;span class=&quot;c1&quot;&gt;# Copying our private key under ~/.ssh/&lt;/span&gt;
+      &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;Install SSH Key&lt;/span&gt;
+        &lt;span class=&quot;na&quot;&gt;uses&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;shimataro/ssh-key-action@v2&lt;/span&gt;
+        &lt;span class=&quot;na&quot;&gt;with&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+          &lt;span class=&quot;na&quot;&gt;key&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;$&lt;/span&gt;
+          &lt;span class=&quot;na&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;id_rsa-snowflake&lt;/span&gt;
+          &lt;span class=&quot;na&quot;&gt;known_hosts&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;just-a-placeholder-so-we-dont-get-errors'&lt;/span&gt;
+
+      &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;Use Python 3.8.x&lt;/span&gt;
+        &lt;span class=&quot;na&quot;&gt;uses&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;actions/setup-python@v2.2.1&lt;/span&gt;
+        &lt;span class=&quot;na&quot;&gt;with&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+          &lt;span class=&quot;na&quot;&gt;python-version&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;3.8.x&lt;/span&gt;
+
+      &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;Download SnowSQL&lt;/span&gt;
+        &lt;span class=&quot;na&quot;&gt;run&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;  &lt;span class=&quot;s&quot;&gt;curl -O https://sfc-repo.snowflakecomputing.com/snowsql/bootstrap/1.2/linux_x86_64/snowsql-1.2.19-linux_x86_64.bash&lt;/span&gt;
+    
+      &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;Install SnowSQL&lt;/span&gt;
+        &lt;span class=&quot;na&quot;&gt;run&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;SNOWSQL_DEST=~/snowflake SNOWSQL_LOGIN_SHELL=~/.profile bash snowsql-1.2.19-linux_x86_64.bash&lt;/span&gt;
+    
+      &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;Test installation&lt;/span&gt;
+        &lt;span class=&quot;na&quot;&gt;run&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;  &lt;span class=&quot;s&quot;&gt;~/snowflake/snowsql -v&lt;/span&gt;
+    
+      &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;Execute sql files against Snowflake&lt;/span&gt;
+        &lt;span class=&quot;na&quot;&gt;run&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;pi&quot;&gt;|&lt;/span&gt;
+          &lt;span class=&quot;s&quot;&gt;echo &quot;Creating SNOWFLAKE_PRIVATE_KEY_PATH variable&quot;&lt;/span&gt;
+          &lt;span class=&quot;s&quot;&gt;export SNOWFLAKE_PRIVATE_KEY_PATH=~/.ssh/id_rsa-snowflake&lt;/span&gt;
+          &lt;span class=&quot;s&quot;&gt;echo &quot;Step 3: Executing snowsql&quot;&lt;/span&gt;
+          &lt;span class=&quot;s&quot;&gt;# Give permission to execute bash script&lt;/span&gt;
+          &lt;span class=&quot;s&quot;&gt;chmod u+x $GITHUB_WORKSPACE/simple_integration.sh&lt;/span&gt;
+          &lt;span class=&quot;s&quot;&gt;$GITHUB_WORKSPACE/simple_integration.sh&lt;/span&gt;
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;The code below is the content of the simple_integration.sh script, which reads a workflow.conf file and execute each line in snowflake using the snowsql commands.&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;# simple_integration.sh script that reads workflow.conf file and execute it.&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;#!/bin/bash&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# author: Marcel Castro&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;set&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-e&lt;/span&gt;
+print_log &lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;nb&quot;&gt;printf&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;[&lt;/span&gt;&lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;date&lt;/span&gt; +&lt;span class=&quot;s1&quot;&gt;'%d/%m/%Y %H:%M:%S'&lt;/span&gt;&lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;] [&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$1&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;] &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$2&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\n&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;export&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-f&lt;/span&gt; print_log
+
+run_workflow &lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    print_log &lt;span class=&quot;s2&quot;&gt;&quot;INFO&quot;&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;Running workflow&quot;&lt;/span&gt;
+    &lt;span class=&quot;nv&quot;&gt;workflow_config&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;$(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;echo sed&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-e&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'s/#.*$//'&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-e&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'/^$/d'&lt;/span&gt; workflow.conf&lt;span class=&quot;si&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;while &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;IFS&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;read&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-r&lt;/span&gt; sql_file_name&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do
+        &lt;/span&gt;print_log &lt;span class=&quot;s2&quot;&gt;&quot;INFO&quot;&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;Running: &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$sql_file_name&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;
+        print_log &lt;span class=&quot;s2&quot;&gt;&quot;INFO&quot;&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;Running ~/snowflake/snowsql -a &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$SF_ACCOUNT&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt; -u &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$SF_USERNAME&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt; -r &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$SF_ROLE&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt; -w &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$SF_WAREHOUSE&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt; -d &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$SF_DATABASE&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt; --private-key-path &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$SNOWFLAKE_PRIVATE_KEY_PATH&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt; -f &lt;/span&gt;&lt;span class=&quot;k&quot;&gt;${&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;GITHUB_WORKSPACE&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;${&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;sql_file_name&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;
+        ~/snowflake/snowsql &lt;span class=&quot;nt&quot;&gt;-a&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$SF_ACCOUNT&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-u&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$SF_USERNAME&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-r&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$SF_ROLE&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-w&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$SF_WAREHOUSE&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-d&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$SF_DATABASE&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--private-key-path&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$SNOWFLAKE_PRIVATE_KEY_PATH&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-f&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;${&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;GITHUB_WORKSPACE&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;}&lt;/span&gt;/&lt;span class=&quot;k&quot;&gt;${&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;sql_file_name&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;done&lt;/span&gt; &amp;lt; &amp;lt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$workflow_config&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;## running workflow&lt;/span&gt;
+run_workflow
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;An example of workflow.conf file can be:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-txt&quot;&gt;# Create views
+views/my_first_view.sql
+views/my_second_view.sql
+
+#Create procedures
+procedures/my_first_procedure.sql
+
+# Remember to have an empty line by the end at the end of the file
+# so that every line is processed
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&quot;running-the-pipeline-workflow&quot;&gt;Running the pipeline workflow&lt;/h3&gt;
+
+&lt;p&gt;You can either run your workflow manually as highlighted in the picture below or triggered by a commit to your repository.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;2021-10-31-githubactions-snowflake.assets/image-20211031165242061.png&quot; alt=&quot;image-20211031165242061&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;After some minutes you see that the workflow run successfully. The picture below shows the results of each steps within the workflow.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;2021-10-31-githubactions-snowflake.assets/image-20211027195531968.png&quot; alt=&quot;image-20211027195531968&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;summary&quot;&gt;Summary&lt;/h2&gt;
+
+&lt;p&gt;In this article we explored a simple data workflow using GitHub actions and Snowflake. Github is used a code repository to version our data model.&lt;/p&gt;
+
+&lt;p&gt;We introduce the use of GitHub actions as a CICD (Continuous Integration / Continuous Deployment) data pipeline which deploys our simple data model on snowflake through the use of snowsql commands.&lt;/p&gt;
+
+&lt;p&gt;The deployment is done in a secure way through the use of key pairs stored in the GitHub actions secrets.&lt;/p&gt;
+
+&lt;p&gt;In the future work, I would like to explore the use of &lt;a href=&quot;https://docs.getdbt.com/docs/introduction&quot;&gt;dbt&lt;/a&gt; (data build tool) to perform data transformation.  The idea is to make use of the dbt &lt;a href=&quot;https://docs.getdbt.com/docs/building-a-dbt-project/tests&quot;&gt;test&lt;/a&gt; and &lt;a href=&quot;https://docs.getdbt.com/docs/building-a-dbt-project/documentation&quot;&gt;documentation&lt;/a&gt; capabilities.&lt;/p&gt;</content><author><name>marcelcastrobr</name></author><category term="github," /><category term="snowflake," /><category term="CICD" /><summary type="html">GitHub Actions and Snowflake Integration</summary></entry><entry><title type="html">Generative Deep Learning</title><link href="https://marcelcastrobr.github.io/notebooks//pages/marcelcastrobr/2021/09/22/generative-deep-learning.html" rel="alternate" type="text/html" title="Generative Deep Learning" /><published>2021-09-22T07:19:07+00:00</published><updated>2021-09-22T07:19:07+00:00</updated><id>https://marcelcastrobr.github.io/notebooks//pages/marcelcastrobr/2021/09/22/generative-deep-learning</id><content type="html" xml:base="https://marcelcastrobr.github.io/notebooks//pages/marcelcastrobr/2021/09/22/generative-deep-learning.html">&lt;h1 id=&quot;generative-deep-learning&quot;&gt;Generative Deep Learning&lt;/h1&gt;
+
+&lt;p&gt;This repository is intended as place to keep my current experimentations on generative deep learning using tensorflow.&lt;/p&gt;
+
+&lt;p&gt;Most of the code is based on the Coursera course &lt;a href=&quot;https://www.coursera.org/learn/generative-deep-learning-with-tensorflow/home/welcome&quot;&gt;Generative Deep Learning with TensorFlow&lt;/a&gt; by Laurence Moroney and Eddy Shyu.&lt;/p&gt;
+
+&lt;p&gt;Check notebook &lt;a href=&quot;https://github.com/marcelcastrobr/generative_deep_learning/blob/master/fast_neural_style_transfer/fast_neural_style_transfer.ipynb&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h2 id=&quot;fast-neural-style-transfer&quot;&gt;Fast Neural Style Transfer&lt;/h2&gt;
+
+&lt;p&gt;Paper describing Fast Neural Style Transfer can be found &lt;a href=&quot;https://arxiv.org/abs/1705.06830&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;The model is provided by &lt;a href=&quot;https://tfhub.dev/google/magenta/arbitrary-image-stylization-v1-256/2&quot;&gt;Tensorflow Hub&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Figure below illustrate the main concept of Neural Style Transfer, which is based on the paper &lt;a href=&quot;https://arxiv.org/abs/1508.06576&quot;&gt;A Neural Algorithm of Artistic Style&lt;/a&gt; (Gatys, Ecker &amp;amp; Bethge, 2015).&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;2021-09-22-generative-deep-learning.assets/image-20210225231302419.png&quot; alt=&quot;image-20210225231302419&quot; /&gt;&lt;/p&gt;</content><author><name>marcelcastrobr</name></author><category term="machine_learning" /><summary type="html">Generative Deep Learning</summary></entry><entry><title type="html">Welcome to Jekyll!</title><link href="https://marcelcastrobr.github.io/notebooks//pages/marcelcastrobr/2021/09/03/welcome-to-jekyll.html" rel="alternate" type="text/html" title="Welcome to Jekyll!" /><published>2021-09-03T20:04:07+00:00</published><updated>2021-09-03T20:04:07+00:00</updated><id>https://marcelcastrobr.github.io/notebooks//pages/marcelcastrobr/2021/09/03/welcome-to-jekyll</id><content type="html" xml:base="https://marcelcastrobr.github.io/notebooks//pages/marcelcastrobr/2021/09/03/welcome-to-jekyll.html">&lt;p&gt;You’ll find this post in your &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;_posts&lt;/code&gt; directory. Go ahead and edit it and re-build the site to see your changes. You can rebuild the site in many different ways, but the most common way is to run &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;jekyll serve&lt;/code&gt;, which launches a web server and auto-regenerates your site when a file is updated.&lt;/p&gt;
+
+&lt;p&gt;Jekyll requires blog post files to be named according to the following format:&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;YEAR-MONTH-DAY-title.MARKUP&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;Where &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;YEAR&lt;/code&gt; is a four-digit number, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;MONTH&lt;/code&gt; and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;DAY&lt;/code&gt; are both two-digit numbers, and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;MARKUP&lt;/code&gt; is the file extension representing the format used in the file. After that, include the necessary front matter. Take a look at the source for this post to get an idea about how it works.&lt;/p&gt;
+
+&lt;p&gt;Jekyll also offers powerful support for code snippets:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;print_hi&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+  &lt;span class=&quot;nb&quot;&gt;puts&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;Hi, &lt;/span&gt;&lt;span class=&quot;si&quot;&gt;#{&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;print_hi&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'Tom'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;#=&amp;gt; prints 'Hi, Tom' to STDOUT.&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Check out the &lt;a href=&quot;https://jekyllrb.com/docs/home&quot;&gt;Jekyll docs&lt;/a&gt; for more info on how to get the most out of Jekyll. File all bugs/feature requests at &lt;a href=&quot;https://github.com/jekyll/jekyll&quot;&gt;Jekyll’s GitHub repo&lt;/a&gt;. If you have questions, you can ask them on &lt;a href=&quot;https://talk.jekyllrb.com/&quot;&gt;Jekyll Talk&lt;/a&gt;.&lt;/p&gt;</content><author><name>marcelcastrobr</name></author><category term="jekyll" /><category term="update" /><summary type="html">You’ll find this post in your _posts directory. Go ahead and edit it and re-build the site to see your changes. You can rebuild the site in many different ways, but the most common way is to run jekyll serve, which launches a web server and auto-regenerates your site when a file is updated.</summary></entry></feed>
