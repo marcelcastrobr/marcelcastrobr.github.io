@@ -1,0 +1,5 @@
+baseURL = 'http://example.org/'
+languageCode = 'en-us'
+title = 'marcelcastrobr site'
+theme = 'ananke'
+canonifyURLs = true
