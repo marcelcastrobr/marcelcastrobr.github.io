@@ -3,3 +3,10 @@ languageCode = 'en-us'
 title = 'marcelcastrobr site'
 theme = 'ananke'
 canonifyURLs = true
+
+params:
+  ananke_socials:
+  - name: github
+    url: https://github.com/marcelcastrobr
+  - name: linkedin
+    url: https://www.linkedin.com/in/marcelcastrobr/
