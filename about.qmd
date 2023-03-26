@@ -10,7 +10,10 @@ about:
       href: https://www.linkedin.com/in/marcelcastrobr/
     - icon: github
       text: Github
-      href: github.com/marcelcastrobr
+      href: https://github.com/marcelcastrobr
+    - icon: bi-filetype-pdf
+      text: CV
+      href: https://github.com/marcelcastrobr/marcelcastrobr.github.io/blob/main/cv/cv-marcelcastro.pdf
 
 ---
 
@@ -22,7 +25,7 @@ about:
 
 
 
-I am Marcel Cavalcanti de Castro, born in Brazil and working as a data scientist in Norway.
+I am Marcel Cavalcanti de Castro, born in Brazil and working in Norway.
 
 - **2004**: start working as a network engineer in Brazil working with embedded linux and wireless ad-hoc/mesh network to provide internet access to rural areas.
 - **2006:** decided to move to Karlstad, Sweden to pursue my Ph.D. in computer science on wireless mesh networks. A lot of fun working with mathematical models, simulation and testbed experiment to check reality. :smile:
