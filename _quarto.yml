@@ -12,6 +12,8 @@ website:
         file: index.qmd
       - about.qmd
     right:
+      - icon: bi-filetype-pdf
+        href: https://marcelcastrobr.github.io/my_ml_links/
       - icon: bi-diagram-3-fill
         href: https://marcelcastrobr.github.io/my_ml_links/
       - icon: github
