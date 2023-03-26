@@ -1,0 +1,30 @@
+project:
+  type: website
+  output-dir: docs
+
+website:
+  title: "Marcel Castro"
+  navbar:
+    background: primary
+    search: true
+    left: 
+      - text: "Home"
+        file: index.qmd
+      - about.qmd
+    right:
+      - icon: bi-diagram-3-fill
+        href: https://marcelcastrobr.github.io/my_ml_links/
+      - icon: github
+        href: https://github.com/marcelcastrobr
+      - icon: linkedin
+        href: https://www.linkedin.com/in/marcelcastrobr/
+  page-footer: "Copyright 2023, Marcel Castro" 
+  reader-mode: true
+  #repo-url: https://github.com/marcelcastrobr/quarto_notebooks
+  #repo-actions: [edit, issue]
+format:
+  html:
+    theme: default
+    css: styles.css
+
+

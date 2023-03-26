@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.2.475">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="dcterms.date" content="2021-10-31">
+<meta name="description" content="Using github actions to create a CICD data pipeline in snowflake data.">
+
+<title>Marcel Castro - Github Actions and Snowflake Integration</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="../styles.css">
+</head>
+
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">Marcel Castro</span>
+    </a>
+  </div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../index.html">
+ <span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../about.html">
+ <span class="menu-text">About</span></a>
+  </li>  
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://marcelcastrobr.github.io/my_ml_links/"><i class="bi bi-diagram-3-fill" role="img">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/marcelcastrobr"><i class="bi bi-github" role="img">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://www.linkedin.com/in/marcelcastrobr/"><i class="bi bi-linkedin" role="img">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+</ul>
+              <div class="quarto-toggle-container">
+                  <a href="" class="quarto-reader-toggle nav-link" onclick="window.quartoToggleReader(); return false;" title="Toggle reader mode">
+  <div class="quarto-reader-toggle-btn">
+  <i class="bi"></i>
+  </div>
+</a>
+              </div>
+              <div id="quarto-search" class="" title="Search"></div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">Github Actions and Snowflake Integration</h1>
+                  <div>
+        <div class="description">
+          Using github actions to create a CICD data pipeline in snowflake data.
+        </div>
+      </div>
+                          <div class="quarto-categories">
+                <div class="quarto-category">github</div>
+                <div class="quarto-category">snowflake</div>
+                <div class="quarto-category">CICD</div>
+              </div>
+                  </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">October 31, 2021</p>
+      </div>
+    </div>
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#github-actions-and-snowflake-integration" id="toc-github-actions-and-snowflake-integration" class="nav-link active" data-scroll-target="#github-actions-and-snowflake-integration">GitHub Actions and Snowflake Integration</a>
+  <ul class="collapse">
+  <li><a href="#authentication" id="toc-authentication" class="nav-link" data-scroll-target="#authentication">Authentication:</a>
+  <ul class="collapse">
+  <li><a href="#using-key-pair-authentication" id="toc-using-key-pair-authentication" class="nav-link" data-scroll-target="#using-key-pair-authentication">Using Key-pair Authentication</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#interacting-with-snowflake" id="toc-interacting-with-snowflake" class="nav-link" data-scroll-target="#interacting-with-snowflake">Interacting with Snowflake</a>
+  <ul class="collapse">
+  <li><a href="#using-snowsql" id="toc-using-snowsql" class="nav-link" data-scroll-target="#using-snowsql">Using Snowsql</a></li>
+  <li><a href="#github-actions" id="toc-github-actions" class="nav-link" data-scroll-target="#github-actions">GitHub Actions</a>
+  <ul class="collapse">
+  <li><a href="#configuring-the-pipeline-workflow" id="toc-configuring-the-pipeline-workflow" class="nav-link" data-scroll-target="#configuring-the-pipeline-workflow">Configuring the pipeline workflow</a></li>
+  <li><a href="#running-the-pipeline-workflow" id="toc-running-the-pipeline-workflow" class="nav-link" data-scroll-target="#running-the-pipeline-workflow">Running the pipeline workflow</a></li>
+  </ul></li>
+  <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary">Summary</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content quarto-banner-title-block" id="quarto-document-content">
+
+
+
+
+<section id="github-actions-and-snowflake-integration" class="level1">
+<h1>GitHub Actions and Snowflake Integration</h1>
+<p>The objective of this article is to explore CICD (Continuous Integration / Continuous Deployment) for our data modelling using Github actions and Snowflake data platform.</p>
+<p>The benefit of applying CICD concept on your data model is to keep traceability of your model and easy deployment to your data platform, which in this case is Snowflake.</p>
+<p>GitHub is used as a repository for the data model. The data model is a collection of sql queries used to generated tables and views.</p>
+<section id="authentication" class="level2">
+<h2 class="anchored" data-anchor-id="authentication">Authentication:</h2>
+<p>In this setup, two authentication methods towards Snowflake were tested: using of AzureAD Single Sign On (a.k.a. SSO) and Key-pair authentication. But for the remaining of this article, the key-pair authentication towards Snowflake was used.</p>
+<section id="using-key-pair-authentication" class="level3">
+<h3 class="anchored" data-anchor-id="using-key-pair-authentication">Using Key-pair Authentication</h3>
+<p>In order to use key-pair authentication, we need the following steps:</p>
+<ol type="1">
+<li>Create a key-pair key (private and public key) to be used to Authenticate towards snowflake while running the queries.</li>
+<li>Load the private key unders the secrets of your repository on gitHub used to capture your data model.</li>
+<li>Load your public key to your snowflake account.</li>
+</ol>
+<p>Below are the command needs for each step.</p>
+<ul>
+<li><p><strong>Step1 : Creating encrypted key</strong></p>
+<p>Using a a linux command line (CLI) you can generate your private (<strong>rsa_key.p8</strong>) an public key (<strong>rsa_key.pub</strong>) executing the commands below (ref. <a href="https://docs.snowflake.com/en/user-guide/key-pair-auth.html">Snowflake docs</a>).</p>
+<p>I decided to use encrypted private key, which means I created an additional passphrase needed while using the key-pair.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a private encrypted key</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> openssl genrsa 2048 <span class="kw">|</span> <span class="ex">openssl</span> pkcs8 <span class="at">-topk8</span> <span class="at">-inform</span> PEM <span class="at">-out</span> rsa_key.p8</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a public key</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> openssl rsa <span class="at">-in</span> rsa_key.p8 <span class="at">-pubout</span> <span class="at">-out</span> rsa_key.pub</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+<li><p>https://docs.snowflake.com/en/user-guide/key-pair-auth.html</p>
+<p>Export your private key (<strong>rsa_key.p8</strong>) and password/passphrase to GitHub Actions under Settings-&gt; Secrets (secrets SF_PRIVATE_KEY and and SF_PRIVATE_PASSPHRASE in picture below):</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="2021-10-31-githubactions-snowflake.assets/image-20211026153527604.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">image-20211026153527604</figcaption><p></p>
+</figure>
+</div></li>
+<li><p>Write your public key (<strong>rsa_key.pub</strong>) to your username in snowflake using the command below in Snowflake console:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Adding public key to snowflake user. You can add a second key also using RSA_PUBLIC_KEY_2</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="ex">ALTER</span> USER <span class="st">"&lt;your user&gt;"</span> SET RSA_PUBLIC_KEY=<span class="st">"&lt; your public key&gt;"</span><span class="kw">;</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co">#You can check if key was update by issuing the following command:</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="ex">DESC</span> USER <span class="st">"&lt;your user&gt;"</span><span class="kw">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+</ul>
+<p>Beside the key-pair, you also need to pass the authentication parameters needed by snowsql, which are listed below. We will describe snowsql later in this section.</p>
+<ul>
+<li>SF_ACCOUNT: <snowflake account=""></snowflake></li>
+<li>SF_DATABASE: <snowflake database=""></snowflake></li>
+<li>SF_ROLE: <snowflake role=""></snowflake></li>
+<li>SF_USERNAME: <snowflake username=""></snowflake></li>
+<li>SF_WAREHOUSE: <snowflake warehouse="" compute=""></snowflake></li>
+</ul>
+</section>
+</section>
+</section>
+<section id="interacting-with-snowflake" class="level1">
+<h1>Interacting with Snowflake</h1>
+<p>There are several ways to interact with snowflake. In this notebook, I have tested:</p>
+<ul>
+<li>Snowflake web console</li>
+<li>Snowsql</li>
+</ul>
+<section id="using-snowsql" class="level3">
+<h3 class="anchored" data-anchor-id="using-snowsql">Using Snowsql</h3>
+<p>Snowsql is the command line for connecting to Snowflake to execute SQL queries and perform all DDL and DML operations, including loading data into and unloading data out of database tables (ref. <a href="https://docs.snowflake.com/en/user-guide/snowsql.html">SnowSQL (CLI Client))</a>.</p>
+<p>Snowsql allows us to use both Single Sign On (SSO) and key-value pair. Below are the commands needed.</p>
+<section id="snowsql-with-sso" class="level4">
+<h4 class="anchored" data-anchor-id="snowsql-with-sso">Snowsql with SSO</h4>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> snowsql <span class="at">-a</span> <span class="op">&lt;</span>snowflake_account<span class="op">&gt;</span> -u <span class="st">"&lt;snowflake_username&gt;"</span> <span class="at">--authenticator</span> externalbrowser</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="snowsql-with-key-pair" class="level4">
+<h4 class="anchored" data-anchor-id="snowsql-with-key-pair">Snowsql with key-pair</h4>
+<div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Getting snowsql cli</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> snowsql <span class="at">-a</span> <span class="op">&lt;</span>snowflake_account<span class="op">&gt;</span> -u <span class="st">"&lt;snowflake_username&gt;"</span> <span class="at">--private-key-path</span> ~/.ssh/snowflake-key-private.p8</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="co">#Running specific sql file named myfile.sql</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> snowsql <span class="at">-a</span> <span class="op">&lt;</span>snowflake_account<span class="op">&gt;</span> -u <span class="st">"&lt;snowflake_username&gt;"</span> <span class="at">--private-key-path</span> ~/.ssh/snowflake-key-private.p8 <span class="at">-f</span> scripts/myfile.sql</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>See the Snowflake documentation https://docs.snowflake.net/manuals/user-guide/snowsql.html for more information on how to interact with snowsql.</p>
+</section>
+<section id="connector-python-library" class="level4">
+<h4 class="anchored" data-anchor-id="connector-python-library">Connector Python Library</h4>
+<p>In addition to snowsql, you can also interact with Snowflake using the <a href="https://docs.snowflake.com/en/user-guide/python-connector.html">snowflake connector python library</a>.</p>
+<p>There are two ways of executing queries with the library - <code>execute</code> for synchronous execution and <code>execute_async</code> for asynchronous ones.</p>
+<p>The synchronous way is simple and good for a batch of quick/dependent queries. But, if you have independent queries, some of which may take a long time to run, there is no reason to block each other and use the synchronous way (ref. <a href="https://medium.com/snowflake/use-github-actions-to-query-your-snowflake-data-cloud-70b5e477869e">Article</a>).</p>
+<p>You can use <a href="https://github.com/anecdotes-ai/snowflake-query">Snowflake-query</a> GitHub action to run your queries.</p>
+</section>
+</section>
+<section id="github-actions" class="level2">
+<h2 class="anchored" data-anchor-id="github-actions">GitHub Actions</h2>
+<p>In this section we show how to configure GitHub actions through a simple workflow. Thereafter we run the workflow manually and the its execution.</p>
+<section id="configuring-the-pipeline-workflow" class="level3">
+<h3 class="anchored" data-anchor-id="configuring-the-pipeline-workflow">Configuring the pipeline workflow</h3>
+<p>The code below is our data pipeline workflow named <strong>snowflake-devops-demo.yml.</strong> The workflow is a yaml file located inside the path <strong>snowflake-datapipeline/.github/workflows/</strong>.Please note that github actions can run several workflow, we only need to create different yaml files within the workflow folder.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># **snowflake-devops-demo.yml.**</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">name</span><span class="kw">:</span><span class="at"> snowflake-devops-demo</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Environment variable created under github secrets. </span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="fu">env</span><span class="kw">:</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">SF_ACCOUNT</span><span class="kw">:</span><span class="at"> ${{ secrets.SF_ACCOUNT }}</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">SF_USERNAME</span><span class="kw">:</span><span class="at"> ${{ secrets.SF_USERNAME }}</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">SF_ROLE</span><span class="kw">:</span><span class="at"> ${{ secrets.SF_ROLE }}</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">SF_WAREHOUSE</span><span class="kw">:</span><span class="at"> ${{ secrets.SF_WAREHOUSE }}</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">SF_DATABASE</span><span class="kw">:</span><span class="at"> ${{ secrets.SF_DATABASE }}</span></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">SNOWFLAKE_PRIVATE_KEY</span><span class="kw">:</span><span class="at"> ${{ secrets.SF_PRIVATE_KEY }}</span></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">SNOWFLAKE_PRIVATE_KEY_PASSPHRASE</span><span class="kw">:</span><span class="at"> ${{ secrets.SF_PRIVATE_PASSPHRASE }}</span></span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">SNOWSQL_PRIVATE_KEY_PASSPHRASE</span><span class="kw">:</span><span class="at"> ${{ secrets.SF_PRIVATE_PASSPHRASE }}</span></span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Controls when the action will run.  In this case for branch main under changes under the path migrations.</span></span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a><span class="fu">on</span><span class="kw">:</span></span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">push</span><span class="kw">:</span></span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">branches</span><span class="kw">:</span></span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> main</span></span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">paths</span><span class="kw">:</span></span>
+<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="st">'migrations/**'</span></span>
+<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a><span class="co">  # Allows you to run this workflow manually from the Actions tab</span></span>
+<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">workflow_dispatch</span><span class="kw">:</span></span>
+<span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-26"><a href="#cb5-26" aria-hidden="true" tabindex="-1"></a><span class="fu">jobs</span><span class="kw">:</span></span>
+<span id="cb5-27"><a href="#cb5-27" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">deploy-snowflake-changes-job</span><span class="kw">:</span></span>
+<span id="cb5-28"><a href="#cb5-28" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">runs-on</span><span class="kw">:</span><span class="at"> ubuntu-latest</span></span>
+<span id="cb5-29"><a href="#cb5-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-30"><a href="#cb5-30" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">steps</span><span class="kw">:</span></span>
+<span id="cb5-31"><a href="#cb5-31" aria-hidden="true" tabindex="-1"></a><span class="co">      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it</span></span>
+<span id="cb5-32"><a href="#cb5-32" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> Checkout repository</span></span>
+<span id="cb5-33"><a href="#cb5-33" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">uses</span><span class="kw">:</span><span class="at"> actions/checkout@v2</span></span>
+<span id="cb5-34"><a href="#cb5-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-35"><a href="#cb5-35" aria-hidden="true" tabindex="-1"></a><span class="co">      # Copying our private key under ~/.ssh/</span></span>
+<span id="cb5-36"><a href="#cb5-36" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> Install SSH Key</span></span>
+<span id="cb5-37"><a href="#cb5-37" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">uses</span><span class="kw">:</span><span class="at"> shimataro/ssh-key-action@v2</span></span>
+<span id="cb5-38"><a href="#cb5-38" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">with</span><span class="kw">:</span></span>
+<span id="cb5-39"><a href="#cb5-39" aria-hidden="true" tabindex="-1"></a><span class="at">          </span><span class="fu">key</span><span class="kw">:</span><span class="at"> ${{ secrets.SF_PRIVATE_KEY }}</span></span>
+<span id="cb5-40"><a href="#cb5-40" aria-hidden="true" tabindex="-1"></a><span class="at">          </span><span class="fu">name</span><span class="kw">:</span><span class="at"> id_rsa-snowflake</span></span>
+<span id="cb5-41"><a href="#cb5-41" aria-hidden="true" tabindex="-1"></a><span class="at">          </span><span class="fu">known_hosts</span><span class="kw">:</span><span class="at"> </span><span class="st">'just-a-placeholder-so-we-dont-get-errors'</span></span>
+<span id="cb5-42"><a href="#cb5-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-43"><a href="#cb5-43" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> Use Python 3.8.x</span></span>
+<span id="cb5-44"><a href="#cb5-44" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">uses</span><span class="kw">:</span><span class="at"> actions/setup-python@v2.2.1</span></span>
+<span id="cb5-45"><a href="#cb5-45" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">with</span><span class="kw">:</span></span>
+<span id="cb5-46"><a href="#cb5-46" aria-hidden="true" tabindex="-1"></a><span class="at">          </span><span class="fu">python-version</span><span class="kw">:</span><span class="at"> 3.8.x</span></span>
+<span id="cb5-47"><a href="#cb5-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-48"><a href="#cb5-48" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> Download SnowSQL</span></span>
+<span id="cb5-49"><a href="#cb5-49" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">run</span><span class="kw">:</span><span class="at">  curl -O https://sfc-repo.snowflakecomputing.com/snowsql/bootstrap/1.2/linux_x86_64/snowsql-1.2.19-linux_x86_64.bash</span></span>
+<span id="cb5-50"><a href="#cb5-50" aria-hidden="true" tabindex="-1"></a><span class="at">    </span></span>
+<span id="cb5-51"><a href="#cb5-51" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> Install SnowSQL</span></span>
+<span id="cb5-52"><a href="#cb5-52" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">run</span><span class="kw">:</span><span class="at"> SNOWSQL_DEST=~/snowflake SNOWSQL_LOGIN_SHELL=~/.profile bash snowsql-1.2.19-linux_x86_64.bash</span></span>
+<span id="cb5-53"><a href="#cb5-53" aria-hidden="true" tabindex="-1"></a><span class="at">    </span></span>
+<span id="cb5-54"><a href="#cb5-54" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> Test installation</span></span>
+<span id="cb5-55"><a href="#cb5-55" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">run</span><span class="kw">:</span><span class="at">  ~/snowflake/snowsql -v</span></span>
+<span id="cb5-56"><a href="#cb5-56" aria-hidden="true" tabindex="-1"></a><span class="at">    </span></span>
+<span id="cb5-57"><a href="#cb5-57" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> Execute sql files against Snowflake</span></span>
+<span id="cb5-58"><a href="#cb5-58" aria-hidden="true" tabindex="-1"></a><span class="fu">        run</span><span class="kw">: </span><span class="ch">|</span></span>
+<span id="cb5-59"><a href="#cb5-59" aria-hidden="true" tabindex="-1"></a>          echo "Creating SNOWFLAKE_PRIVATE_KEY_PATH variable"</span>
+<span id="cb5-60"><a href="#cb5-60" aria-hidden="true" tabindex="-1"></a>          export SNOWFLAKE_PRIVATE_KEY_PATH=~/.ssh/id_rsa-snowflake</span>
+<span id="cb5-61"><a href="#cb5-61" aria-hidden="true" tabindex="-1"></a>          echo "Step 3: Executing snowsql"</span>
+<span id="cb5-62"><a href="#cb5-62" aria-hidden="true" tabindex="-1"></a>          # Give permission to execute bash script</span>
+<span id="cb5-63"><a href="#cb5-63" aria-hidden="true" tabindex="-1"></a>          chmod u+x $GITHUB_WORKSPACE/simple_integration.sh</span>
+<span id="cb5-64"><a href="#cb5-64" aria-hidden="true" tabindex="-1"></a>          $GITHUB_WORKSPACE/simple_integration.sh</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>The code below is the content of the simple_integration.sh script, which reads a workflow.conf file and execute each line in snowflake using the snowsql commands.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># simple_integration.sh script that reads workflow.conf file and execute it.</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="co">#!/bin/bash</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="co"># author: Marcel Castro</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="bu">set</span> <span class="at">-e</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="fu">print_log ()</span> <span class="kw">{</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>    <span class="bu">printf</span> <span class="st">"[</span><span class="kw">`</span><span class="fu">date</span> +<span class="st">'%d/%m/%Y %H:%M:%S'</span><span class="kw">`</span><span class="st">] [</span><span class="va">$1</span><span class="st">] </span><span class="va">$2</span><span class="st">\n"</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="kw">}</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="bu">export</span> <span class="at">-f</span> <span class="va">print_log</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a><span class="fu">run_workflow ()</span> <span class="kw">{</span></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>    <span class="ex">print_log</span> <span class="st">"INFO"</span> <span class="st">"Running workflow"</span></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>    <span class="va">workflow_config</span><span class="op">=</span><span class="va">$(</span><span class="bu">echo</span> sed <span class="at">-e</span> <span class="st">'s/#.*$//'</span> <span class="at">-e</span> <span class="st">'/^$/d'</span> workflow.conf<span class="va">)</span></span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span> <span class="va">IFS</span><span class="op">=</span> <span class="bu">read</span> <span class="at">-r</span> <span class="va">sql_file_name</span><span class="kw">;</span> <span class="cf">do</span></span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>        <span class="ex">print_log</span> <span class="st">"INFO"</span> <span class="st">"Running: </span><span class="va">$sql_file_name</span><span class="st">"</span></span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>        <span class="ex">print_log</span> <span class="st">"INFO"</span> <span class="st">"Running ~/snowflake/snowsql -a </span><span class="va">$SF_ACCOUNT</span><span class="st"> -u </span><span class="va">$SF_USERNAME</span><span class="st"> -r </span><span class="va">$SF_ROLE</span><span class="st"> -w </span><span class="va">$SF_WAREHOUSE</span><span class="st"> -d </span><span class="va">$SF_DATABASE</span><span class="st"> --private-key-path </span><span class="va">$SNOWFLAKE_PRIVATE_KEY_PATH</span><span class="st"> -f </span><span class="va">${GITHUB_WORKSPACE}</span><span class="st">/</span><span class="va">${sql_file_name}</span><span class="st">"</span></span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>        <span class="ex">~/snowflake/snowsql</span> <span class="at">-a</span> <span class="va">$SF_ACCOUNT</span> <span class="at">-u</span> <span class="va">$SF_USERNAME</span> <span class="at">-r</span> <span class="va">$SF_ROLE</span> <span class="at">-w</span> <span class="va">$SF_WAREHOUSE</span> <span class="at">-d</span> <span class="va">$SF_DATABASE</span> <span class="at">--private-key-path</span> <span class="va">$SNOWFLAKE_PRIVATE_KEY_PATH</span> <span class="at">-f</span> <span class="va">${GITHUB_WORKSPACE}</span>/<span class="va">${sql_file_name}</span></span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>    <span class="cf">done</span> <span class="op">&lt;</span> <span class="op">&lt;(</span><span class="va">$workflow_config</span><span class="op">)</span><span class="kw">;</span></span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a><span class="kw">}</span></span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a><span class="co">## running workflow</span></span>
+<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a><span class="ex">run_workflow</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>An example of workflow.conf file can be:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode txt code-with-copy"><code class="sourceCode default"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a># Create views</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>views/my_first_view.sql</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>views/my_second_view.sql</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>#Create procedures</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>procedures/my_first_procedure.sql</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a># Remember to have an empty line by the end at the end of the file</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a># so that every line is processed</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="running-the-pipeline-workflow" class="level3">
+<h3 class="anchored" data-anchor-id="running-the-pipeline-workflow">Running the pipeline workflow</h3>
+<p>You can either run your workflow manually as highlighted in the picture below or triggered by a commit to your repository.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="2021-10-31-githubactions-snowflake.assets/image-20211031165242061.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">image-20211031165242061</figcaption><p></p>
+</figure>
+</div>
+<p>After some minutes you see that the workflow run successfully. The picture below shows the results of each steps within the workflow.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="2021-10-31-githubactions-snowflake.assets/image-20211027195531968.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">image-20211027195531968</figcaption><p></p>
+</figure>
+</div>
+</section>
+</section>
+<section id="summary" class="level2">
+<h2 class="anchored" data-anchor-id="summary">Summary</h2>
+<p>In this article we explored a simple data workflow using GitHub actions and Snowflake. Github is used a code repository to version our data model.</p>
+<p>We introduce the use of GitHub actions as a CICD (Continuous Integration / Continuous Deployment) data pipeline which deploys our simple data model on snowflake through the use of snowsql commands.</p>
+<p>The deployment is done in a secure way through the use of key pairs stored in the GitHub actions secrets.</p>
+<p>In the future work, I would like to explore the use of <a href="https://docs.getdbt.com/docs/introduction">dbt</a> (data build tool) to perform data transformation. The idea is to make use of the dbt <a href="https://docs.getdbt.com/docs/building-a-dbt-project/tests">test</a> and <a href="https://docs.getdbt.com/docs/building-a-dbt-project/documentation">documentation</a> capabilities.</p>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+      <div class="nav-footer-center">Copyright 2023, Marcel Castro</div>
+  </div>
+</footer>
+
+
+
+</body></html>

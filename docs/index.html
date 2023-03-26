@@ -1,0 +1,756 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.2.475">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Marcel Castro</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-listing/list.min.js"></script>
+<script src="site_libs/quarto-listing/quarto-listing.js"></script>
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+<script>
+
+  window.document.addEventListener("DOMContentLoaded", function (_event) {
+    const listingTargetEl = window.document.querySelector('#listing-listing .list');
+    if (!listingTargetEl) {
+      // No listing discovered, do not attach.
+      return; 
+    }
+
+    const options = {
+      valueNames: ['listing-date','listing-title','listing-author','listing-image','listing-description','listing-categories',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
+      
+      searchColumns: ["listing-date","listing-title","listing-author","listing-image","listing-description","listing-categories"],
+    };
+
+    window['quarto-listings'] = window['quarto-listings'] || {};
+    window['quarto-listings']['listing-listing'] = new List('listing-listing', options);
+
+    if (window['quarto-listing-loaded']) {
+      window['quarto-listing-loaded']();
+    }
+  });
+
+  window.addEventListener('hashchange',() => {
+    if (window['quarto-listing-loaded']) {
+      window['quarto-listing-loaded']();
+    }
+  })
+  </script>
+
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<link rel="stylesheet" href="styles.css">
+</head>
+
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="./index.html">
+    <span class="navbar-title">Marcel Castro</span>
+    </a>
+  </div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link active" href="./index.html" aria-current="page">
+ <span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./about.html">
+ <span class="menu-text">About</span></a>
+  </li>  
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://marcelcastrobr.github.io/my_ml_links/"><i class="bi bi-diagram-3-fill" role="img">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/marcelcastrobr"><i class="bi bi-github" role="img">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://www.linkedin.com/in/marcelcastrobr/"><i class="bi bi-linkedin" role="img">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+</ul>
+              <div class="quarto-toggle-container">
+                  <a href="" class="quarto-reader-toggle nav-link" onclick="window.quartoToggleReader(); return false;" title="Toggle reader mode">
+  <div class="quarto-reader-toggle-btn">
+  <i class="bi"></i>
+  </div>
+</a>
+              </div>
+              <div id="quarto-search" class="" title="Search"></div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        
+    <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">All <span class="quarto-category-count">(12)</span></div><div class="category" data-category="CICD">CICD <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Dimensionality">Dimensionality <span class="quarto-category-count">(2)</span></div><div class="category" data-category="ML">ML <span class="quarto-category-count">(1)</span></div><div class="category" data-category="MLOps">MLOps <span class="quarto-category-count">(1)</span></div><div class="category" data-category="NLP">NLP <span class="quarto-category-count">(2)</span></div><div class="category" data-category="NMF">NMF <span class="quarto-category-count">(1)</span></div><div class="category" data-category="PCA">PCA <span class="quarto-category-count">(1)</span></div><div class="category" data-category="PMI">PMI <span class="quarto-category-count">(1)</span></div><div class="category" data-category="TF-IDF">TF-IDF <span class="quarto-category-count">(1)</span></div><div class="category" data-category="data drift">data drift <span class="quarto-category-count">(1)</span></div><div class="category" data-category="github">github <span class="quarto-category-count">(1)</span></div><div class="category" data-category="jupyter">jupyter <span class="quarto-category-count">(3)</span></div><div class="category" data-category="kerastuner">kerastuner <span class="quarto-category-count">(1)</span></div><div class="category" data-category="machine_learning">machine_learning <span class="quarto-category-count">(1)</span></div><div class="category" data-category="model drift">model drift <span class="quarto-category-count">(1)</span></div><div class="category" data-category="snowflake">snowflake <span class="quarto-category-count">(1)</span></div><div class="category" data-category="stablediffusion">stablediffusion <span class="quarto-category-count">(1)</span></div><div class="category" data-category="tensorflow">tensorflow <span class="quarto-category-count">(2)</span></div><div class="category" data-category="transfomers">transfomers <span class="quarto-category-count">(1)</span></div><div class="category" data-category="word2vector">word2vector <span class="quarto-category-count">(1)</span></div></div></div>
+<!-- main -->
+<main class="content quarto-banner-title-block column-page-left" id="quarto-document-content">
+
+
+
+
+
+
+
+<div class="quarto-listing quarto-listing-container-default" id="listing-listing">
+<div class="list quarto-listing-default">
+<div class="quarto-post image-right" data-index="0" data-listing-date-sort="1679612400000" data-listing-file-modified-sort="1679825294449" data-listing-reading-time-sort="2.05">
+<div class="thumbnail">
+<p><a href="./posts/2023-03-24-semanticsearchopenai.html"> <img src="https://files.readme.io/6a3ea5a-pinecone-openai-overview.png" class="thumnail-image"> </a></p>
+</div>
+<div class="body">
+<a href="./posts/2023-03-24-semanticsearchopenai.html">
+<h3 class="no-anchor listing-title">
+Semantic Search with Pinecone and OpenAI
+</h3>
+<div class="listing-subtitle">
+
+</div>
+<div class="listing-description">
+In this guide you…
+</div>
+</a>
+</div>
+<div class="metadata">
+<a href="./posts/2023-03-24-semanticsearchopenai.html">
+<div class="listing-date">
+Mar 24, 2023
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="1" data-categories="NLP,transfomers,stablediffusion" data-listing-date-sort="1667516400000" data-listing-file-modified-sort="1679666155674" data-listing-reading-time-sort="1.215">
+<div class="thumbnail">
+<a href="./posts/2022-11-04-stablediffusionsagemaker.html">
+<div class="thumbnail-image">
+
+</div>
+</a><p><a href="./posts/2022-11-04-stablediffusionsagemaker.html"></a></p>
+</div>
+<div class="body">
+<a href="./posts/2022-11-04-stablediffusionsagemaker.html">
+<h3 class="no-anchor listing-title">
+Stable Diffusion on Amazon SageMaker
+</h3>
+<div class="listing-subtitle">
+
+</div>
+</a>
+<div class="listing-categories">
+<div class="listing-category" onclick="window.quartoListingCategory('NLP'); return false;">
+NLP
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('transfomers'); return false;">
+transfomers
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('stablediffusion'); return false;">
+stablediffusion
+</div>
+</div>
+<a href="./posts/2022-11-04-stablediffusionsagemaker.html">
+<div class="listing-description">
+<p>Journey to learn about transformer models in SageMaker. Inspired by <span>philschmid</span>.</p>
+</div>
+</a>
+</div>
+<div class="metadata">
+<a href="./posts/2022-11-04-stablediffusionsagemaker.html">
+<div class="listing-date">
+Nov 4, 2022
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="2" data-categories="NLP,word2vector" data-listing-date-sort="1641250800000" data-listing-file-modified-sort="1679666155668" data-listing-reading-time-sort="0.6">
+<div class="thumbnail">
+<a href="./posts/2022-01-04-nlpdeeplearning.html">
+<div class="thumbnail-image">
+
+</div>
+</a><p><a href="./posts/2022-01-04-nlpdeeplearning.html"></a></p>
+</div>
+<div class="body">
+<a href="./posts/2022-01-04-nlpdeeplearning.html">
+<h3 class="no-anchor listing-title">
+Notes on Natural Langage Processing with Deep Learning
+</h3>
+<div class="listing-subtitle">
+
+</div>
+</a>
+<div class="listing-categories">
+<div class="listing-category" onclick="window.quartoListingCategory('NLP'); return false;">
+NLP
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('word2vector'); return false;">
+word2vector
+</div>
+</div>
+<a href="./posts/2022-01-04-nlpdeeplearning.html">
+<div class="listing-description">
+<p>A notebook that reproduces some of the teaching content from Stanford CS224n Natural Language Processing with Deep Learning</p>
+</div>
+</a>
+</div>
+<div class="metadata">
+<a href="./posts/2022-01-04-nlpdeeplearning.html">
+<div class="listing-date">
+Jan 4, 2022
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="3" data-listing-date-sort="1640991600000" data-listing-file-modified-sort="1679666663323" data-listing-reading-time-sort="0.255">
+<div class="thumbnail">
+<a href="./posts/image_search.html">
+<div class="thumbnail-image">
+
+</div>
+</a><p><a href="./posts/image_search.html"></a></p>
+</div>
+<div class="body">
+<a href="./posts/image_search.html">
+<h3 class="no-anchor listing-title">
+Joint Image &amp; Text Embeddings
+</h3>
+<div class="listing-subtitle">
+
+</div>
+<div class="listing-description">
+First we need to install sentence-transformers
+</div>
+</a>
+</div>
+<div class="metadata">
+<a href="./posts/image_search.html">
+<div class="listing-date">
+Jan 1, 2022
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="4" data-listing-date-sort="1640991600000" data-listing-file-modified-sort="1679666666482" data-listing-reading-time-sort="0.035">
+<div class="thumbnail">
+<a href="./posts/image_search_multilingual.html">
+<div class="thumbnail-image">
+
+</div>
+</a><p><a href="./posts/image_search_multilingual.html"></a></p>
+</div>
+<div class="body">
+<a href="./posts/image_search_multilingual.html">
+<h3 class="no-anchor listing-title">
+Multilingual Joint Image &amp; Text Embeddings
+</h3>
+<div class="listing-subtitle">
+
+</div>
+<div class="listing-description">
+
+</div>
+</a>
+</div>
+<div class="metadata">
+<a href="./posts/image_search_multilingual.html">
+<div class="listing-date">
+Jan 1, 2022
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="5" data-categories="ML,data drift,model drift,MLOps" data-listing-date-sort="1639350000000" data-listing-file-modified-sort="1679729583528" data-listing-reading-time-sort="3.145">
+<div class="thumbnail">
+<p><a href="./posts/2021-12-13-ModelMonitoring.html"> <img src="./posts/images/awesome-mlops-intro.png" class="thumnail-image"> </a></p>
+</div>
+<div class="body">
+<a href="./posts/2021-12-13-ModelMonitoring.html">
+<h3 class="no-anchor listing-title">
+Machine Learning Model Monitoring
+</h3>
+<div class="listing-subtitle">
+
+</div>
+</a>
+<div class="listing-categories">
+<div class="listing-category" onclick="window.quartoListingCategory('ML'); return false;">
+ML
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('data drift'); return false;">
+data drift
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('model drift'); return false;">
+model drift
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('MLOps'); return false;">
+MLOps
+</div>
+</div>
+<a href="./posts/2021-12-13-ModelMonitoring.html">
+<div class="listing-description">
+<p>Notes on machine learning model monitoring concepts, challenges and howto.</p>
+</div>
+</a>
+</div>
+<div class="metadata">
+<a href="./posts/2021-12-13-ModelMonitoring.html">
+<div class="listing-date">
+Dec 13, 2021
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="6" data-categories="github,snowflake,CICD" data-listing-date-sort="1635697147000" data-listing-file-modified-sort="1679729489302" data-listing-reading-time-sort="7.31">
+<div class="thumbnail">
+<p><a href="./posts/2021-10-31-githubactions-snowflake.html"> <img src="./posts/2021-10-31-githubactions-snowflake.assets/image-20211026153527604.png" class="thumnail-image"> </a></p>
+</div>
+<div class="body">
+<a href="./posts/2021-10-31-githubactions-snowflake.html">
+<h3 class="no-anchor listing-title">
+Github Actions and Snowflake Integration
+</h3>
+<div class="listing-subtitle">
+
+</div>
+</a>
+<div class="listing-categories">
+<div class="listing-category" onclick="window.quartoListingCategory('github'); return false;">
+github
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('snowflake'); return false;">
+snowflake
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('CICD'); return false;">
+CICD
+</div>
+</div>
+<a href="./posts/2021-10-31-githubactions-snowflake.html">
+<div class="listing-description">
+<p>Using github actions to create a CICD data pipeline in snowflake data.</p>
+</div>
+</a>
+</div>
+<div class="metadata">
+<a href="./posts/2021-10-31-githubactions-snowflake.html">
+<div class="listing-date">
+Oct 31, 2021
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="7" data-categories="jupyter,NMF,Dimensionality,TF-IDF,PMI" data-listing-date-sort="1635112800000" data-listing-file-modified-sort="1679729320626" data-listing-reading-time-sort="2.69">
+<div class="thumbnail">
+<p><a href="./posts/2021-10-25-nmf.html"> <img src="./posts/images/NMF.png" class="thumnail-image"> </a></p>
+</div>
+<div class="body">
+<a href="./posts/2021-10-25-nmf.html">
+<h3 class="no-anchor listing-title">
+Dimensionality Reduction - Non-negative Matrix Factorization - NMF
+</h3>
+<div class="listing-subtitle">
+
+</div>
+</a>
+<div class="listing-categories">
+<div class="listing-category" onclick="window.quartoListingCategory('jupyter'); return false;">
+jupyter
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('NMF'); return false;">
+NMF
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('Dimensionality'); return false;">
+Dimensionality
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('TF-IDF'); return false;">
+TF-IDF
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('PMI'); return false;">
+PMI
+</div>
+</div>
+<a href="./posts/2021-10-25-nmf.html">
+<div class="listing-description">
+<p>A notebook to evaluate topics on non-conformance reports.</p>
+</div>
+</a>
+</div>
+<div class="metadata">
+<a href="./posts/2021-10-25-nmf.html">
+<div class="listing-date">
+Oct 25, 2021
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="8" data-categories="machine_learning" data-listing-date-sort="1632295147000" data-listing-file-modified-sort="1679826150309" data-listing-reading-time-sort="0.42">
+<div class="thumbnail">
+<p><a href="./posts/2021-09-22-generative-deep-learning.html"> <img src="./posts/2021-09-22-generative-deep-learning.assets/image-20210225231302419.png" class="thumnail-image"> </a></p>
+</div>
+<div class="body">
+<a href="./posts/2021-09-22-generative-deep-learning.html">
+<h3 class="no-anchor listing-title">
+Generative Deep Learning
+</h3>
+<div class="listing-subtitle">
+
+</div>
+</a>
+<div class="listing-categories">
+<div class="listing-category" onclick="window.quartoListingCategory('machine_learning'); return false;">
+machine_learning
+</div>
+</div>
+<a href="./posts/2021-09-22-generative-deep-learning.html">
+<div class="listing-description">
+This repository is intended as place to keep my current experimentations on generative deep learning using tensorflow.
+</div>
+</a>
+</div>
+<div class="metadata">
+<a href="./posts/2021-09-22-generative-deep-learning.html">
+<div class="listing-date">
+Sep 22, 2021
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="9" data-categories="jupyter,Dimensionality,PCA" data-listing-date-sort="1632175200000" data-listing-file-modified-sort="1679666155689" data-listing-reading-time-sort="1.76">
+<div class="thumbnail">
+<a href="./posts/2021-09-21-pca.html">
+<div class="thumbnail-image">
+
+</div>
+</a><p><a href="./posts/2021-09-21-pca.html"></a></p>
+</div>
+<div class="body">
+<a href="./posts/2021-09-21-pca.html">
+<h3 class="no-anchor listing-title">
+Principal Component Analysis - PCA
+</h3>
+<div class="listing-subtitle">
+
+</div>
+</a>
+<div class="listing-categories">
+<div class="listing-category" onclick="window.quartoListingCategory('jupyter'); return false;">
+jupyter
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('Dimensionality'); return false;">
+Dimensionality
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('PCA'); return false;">
+PCA
+</div>
+</div>
+<a href="./posts/2021-09-21-pca.html">
+<div class="listing-description">
+<p>Step-by-step use of PCA for dimensionality reduction.</p>
+</div>
+</a>
+</div>
+<div class="metadata">
+<a href="./posts/2021-09-21-pca.html">
+<div class="listing-date">
+Sep 21, 2021
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="10" data-categories="kerastuner,tensorflow" data-listing-date-sort="1630792800000" data-listing-file-modified-sort="1679666155706" data-listing-reading-time-sort="5.055">
+<div class="thumbnail">
+<a href="./posts/2021-09-05-kerastuner.html">
+<div class="thumbnail-image">
+
+</div>
+</a><p><a href="./posts/2021-09-05-kerastuner.html"></a></p>
+</div>
+<div class="body">
+<a href="./posts/2021-09-05-kerastuner.html">
+<h3 class="no-anchor listing-title">
+Using Keras Tuner for hyperparameter tunning
+</h3>
+<div class="listing-subtitle">
+
+</div>
+</a>
+<div class="listing-categories">
+<div class="listing-category" onclick="window.quartoListingCategory('kerastuner'); return false;">
+kerastuner
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('tensorflow'); return false;">
+tensorflow
+</div>
+</div>
+<a href="./posts/2021-09-05-kerastuner.html">
+<div class="listing-description">
+<p>Adaptation from notebook from C3_W1_Lab_1_Keras_Tuner from DeepLearningAi MLOPs Specialization - Course 3</p>
+</div>
+</a>
+</div>
+<div class="metadata">
+<a href="./posts/2021-09-05-kerastuner.html">
+<div class="listing-date">
+Sep 5, 2021
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="11" data-categories="jupyter,tensorflow" data-listing-date-sort="1630706400000" data-listing-file-modified-sort="1679666155667" data-listing-reading-time-sort="14.45">
+<div class="thumbnail">
+<a href="./posts/2021-09-04-featureengtensorflow.html">
+<div class="thumbnail-image">
+
+</div>
+</a><p><a href="./posts/2021-09-04-featureengtensorflow.html"></a></p>
+</div>
+<div class="body">
+<a href="./posts/2021-09-04-featureengtensorflow.html">
+<h3 class="no-anchor listing-title">
+Feature Engineering with Tensorflow
+</h3>
+<div class="listing-subtitle">
+
+</div>
+</a>
+<div class="listing-categories">
+<div class="listing-category" onclick="window.quartoListingCategory('jupyter'); return false;">
+jupyter
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('tensorflow'); return false;">
+tensorflow
+</div>
+</div>
+<a href="./posts/2021-09-04-featureengtensorflow.html">
+<div class="listing-description">
+<p>Notebook from C2W1_Assignment lab assignment from DeepLearningAi MLOPs Specialization - Course 2 -</p>
+</div>
+</a>
+</div>
+<div class="metadata">
+<a href="./posts/2021-09-04-featureengtensorflow.html">
+<div class="listing-date">
+Sep 4, 2021
+</div>
+</a>
+</div>
+</div>
+</div>
+<div class="listing-no-matching d-none">
+No matching items
+</div>
+</div></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+      <div class="nav-footer-center">Copyright 2023, Marcel Castro</div>
+  </div>
+</footer>
+
+
+
+</body></html>

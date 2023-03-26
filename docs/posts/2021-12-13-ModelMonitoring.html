@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.2.475">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="dcterms.date" content="2021-12-13">
+<meta name="description" content="Notes on machine learning model monitoring concepts, challenges and howto.">
+
+<title>Marcel Castro - Machine Learning Model Monitoring</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="../styles.css">
+</head>
+
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">Marcel Castro</span>
+    </a>
+  </div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../index.html">
+ <span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../about.html">
+ <span class="menu-text">About</span></a>
+  </li>  
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://marcelcastrobr.github.io/my_ml_links/"><i class="bi bi-diagram-3-fill" role="img">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/marcelcastrobr"><i class="bi bi-github" role="img">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://www.linkedin.com/in/marcelcastrobr/"><i class="bi bi-linkedin" role="img">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+</ul>
+              <div class="quarto-toggle-container">
+                  <a href="" class="quarto-reader-toggle nav-link" onclick="window.quartoToggleReader(); return false;" title="Toggle reader mode">
+  <div class="quarto-reader-toggle-btn">
+  <i class="bi"></i>
+  </div>
+</a>
+              </div>
+              <div id="quarto-search" class="" title="Search"></div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">Machine Learning Model Monitoring</h1>
+                  <div>
+        <div class="description">
+          Notes on machine learning model monitoring concepts, challenges and howto.
+        </div>
+      </div>
+                          <div class="quarto-categories">
+                <div class="quarto-category">ML</div>
+                <div class="quarto-category">data drift</div>
+                <div class="quarto-category">model drift</div>
+                <div class="quarto-category">MLOps</div>
+              </div>
+                  </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">December 13, 2021</p>
+      </div>
+    </div>
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#machine-learning-model-monitoring" id="toc-machine-learning-model-monitoring" class="nav-link active" data-scroll-target="#machine-learning-model-monitoring">Machine Learning Model Monitoring</a></li>
+  <li><a href="#why-monitoring-matters" id="toc-why-monitoring-matters" class="nav-link" data-scroll-target="#why-monitoring-matters">Why monitoring matters:</a></li>
+  <li><a href="#concepts" id="toc-concepts" class="nav-link" data-scroll-target="#concepts">Concepts</a>
+  <ul class="collapse">
+  <li><a href="#data-skew" id="toc-data-skew" class="nav-link" data-scroll-target="#data-skew">Data Skew:</a></li>
+  <li><a href="#model-staleness" id="toc-model-staleness" class="nav-link" data-scroll-target="#model-staleness">Model Staleness</a></li>
+  <li><a href="#negative-feedback-loops" id="toc-negative-feedback-loops" class="nav-link" data-scroll-target="#negative-feedback-loops">Negative feedback loops</a></li>
+  <li><a href="#model-decay" id="toc-model-decay" class="nav-link" data-scroll-target="#model-decay">Model Decay</a></li>
+  </ul></li>
+  <li><a href="#what-and-how-to-monitor-in-ml-models" id="toc-what-and-how-to-monitor-in-ml-models" class="nav-link" data-scroll-target="#what-and-how-to-monitor-in-ml-models">What and How to Monitor in ML models:</a></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References:</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content quarto-banner-title-block" id="quarto-document-content">
+
+
+
+
+<section id="machine-learning-model-monitoring" class="level1">
+<h1>Machine Learning Model Monitoring</h1>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="./images/awesome-mlops-intro.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">MLOps. You Desing It. Your Train It. You Run It.</figcaption><p></p>
+</figure>
+</div>
+</section>
+<section id="why-monitoring-matters" class="level1">
+<h1>Why monitoring matters:</h1>
+<p>Machine learning model monitoring is important as it allows to check for changes on the model performance. It is a cyclical and interactive process and need also to consider the monitoring of the infrastructure such as database and application.</p>
+<p>Model monitoring should account for:</p>
+<ul>
+<li><p>Data skews</p></li>
+<li><p>Model staleness</p></li>
+<li><p>Negative feedback loops</p></li>
+</ul>
+<p>Functional and non-functional monitoring points are:</p>
+<ul>
+<li>Functional:
+<ul>
+<li>Predictive peformance</li>
+<li>Changes in serving data</li>
+<li>Metrics used during training</li>
+<li>Characteristics of features</li>
+</ul></li>
+<li>Non-functional
+<ul>
+<li>System performance</li>
+<li>System status</li>
+<li>System reliability</li>
+</ul></li>
+</ul>
+</section>
+<section id="concepts" class="level1">
+<h1>Concepts</h1>
+<section id="data-skew" class="level3">
+<h3 class="anchored" data-anchor-id="data-skew">Data Skew:</h3>
+<p>Data skews occurs when the model training data is not representative of the live data. There are several reasons for data skew, such as:</p>
+<ul>
+<li>Training data was designed wrong such as the distribution of the features in the training is different from the distribution of the features in real life data.</li>
+<li>Feature not available in production</li>
+</ul>
+</section>
+<section id="model-staleness" class="level3">
+<h3 class="anchored" data-anchor-id="model-staleness">Model Staleness</h3>
+<p>Model staleness can occur based on:</p>
+<ul>
+<li>Shifts in the environment as historic data used during model training may change as time progress (e.g.&nbsp;financial models using time of recession might not be effective for predicting default when economy is healthy).</li>
+<li>Consumer behaviour change such as trends in politics, fashion, etc.</li>
+<li>Adversarial scenarios where bad actors (e.g.&nbsp;criminals) seek to weaken the model.</li>
+</ul>
+</section>
+<section id="negative-feedback-loops" class="level3">
+<h3 class="anchored" data-anchor-id="negative-feedback-loops">Negative feedback loops</h3>
+<p>Negative feedback loop arises when you train data collected in production that can lead to bias.</p>
+</section>
+<section id="model-decay" class="level3">
+<h3 class="anchored" data-anchor-id="model-decay">Model Decay</h3>
+<p>Production ML models often operation in dynamic environments (e.g.&nbsp;recommendation system of clothes need to change over time as the clothes style change over time.</p>
+<p>If the. Model is static, it will move further away from the truth, issue known as Model drift. Model drift can be split in:</p>
+<ul>
+<li><strong>Data drift:</strong> statistical properties of the input features changes. (e.g.&nbsp;distribution of age feature in a population over time). Real examples <a href="https://www.bankofengland.co.uk/bank-overground/2021/how-has-covid-affected-the-performance-of-machine-learning-models-used-by-uk-banks">here</a> and <a href="https://medium.com/eliiza-ai/why-your-models-might-not-work-after-covid-19-a00509e4920b#id_token=eyJhbGciOiJSUzI1NiIsImtpZCI6ImMxODkyZWI0OWQ3ZWY5YWRmOGIyZTE0YzA1Y2EwZDAzMjcxNGEyMzciLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJodHRwczovL2FjY291bnRzLmdvb2dsZS5jb20iLCJuYmYiOjE2Mzk0MDEwOTIsImF1ZCI6IjIxNjI5NjAzNTgzNC1rMWs2cWUwNjBzMnRwMmEyamFtNGxqZGNtczAwc3R0Zy5hcHBzLmdvb2dsZXVzZXJjb250ZW50LmNvbSIsInN1YiI6IjExMDQ2Mzc1MjEzMjEzNDkzNDM0OCIsImVtYWlsIjoibWFyY2VsY2FzdHJvYnJAZ21haWwuY29tIiwiZW1haWxfdmVyaWZpZWQiOnRydWUsImF6cCI6IjIxNjI5NjAzNTgzNC1rMWs2cWUwNjBzMnRwMmEyamFtNGxqZGNtczAwc3R0Zy5hcHBzLmdvb2dsZXVzZXJjb250ZW50LmNvbSIsIm5hbWUiOiJNYXJjZWwgQ2FzdHJvIiwicGljdHVyZSI6Imh0dHBzOi8vbGgzLmdvb2dsZXVzZXJjb250ZW50LmNvbS9hLS9BT2gxNEdnbG94QXhza3ZfS01tWndGSGt2MzA0NDloZmtqdTBrU2hyQ3o1OT1zOTYtYyIsImdpdmVuX25hbWUiOiJNYXJjZWwiLCJmYW1pbHlfbmFtZSI6IkNhc3RybyIsImlhdCI6MTYzOTQwMTM5MiwiZXhwIjoxNjM5NDA0OTkyLCJqdGkiOiI3NzAxNjM5YjZiNTY5ZjY1ODk4MTIwOTZlNzg3ZWI3ZjI4MzVkYTA1In0.MF4MzS2sYN613RnhZ_79M1pr0LvheloeBZYjUkuOAyxGmXGubyKfEmHpz8YoLqDcDZb1y_h4i3woncCTyqjR9tIzxseAcW711QlMTn1liS_om4y7dcPhFXymho1i8Oxct1g7K1cKHZgjrdXX5b-S-0usbsb9_GtUS3kD4vKV7-lS3sz0JGXU87O6KiiPRPc1JS6FejJ7WPLCTAjNGTHEVNIolToE2ixhnZmtjuMgrjLfEkscn9YO1OpltLqXen7fQ1GKh28xhqR8cQc2td6E9NA9XRmVJiA4uXd9TJn5yM944_zs1O_IMAFABkUwtZYgPO2lhl2SkeBD1pxYwWottQ">here</a>.</li>
+<li><strong>Concept drift:</strong> occurs when the relationship between the features and labels changes. Examples are prediction drift and label drift. A real example <a href="https://towardsdatascience.com/the-covid-19-concept-drift-using-sydney-ferry-activity-data-32bbff63cb9f">here</a>.</li>
+</ul>
+</section>
+</section>
+<section id="what-and-how-to-monitor-in-ml-models" class="level1">
+<h1>What and How to Monitor in ML models:</h1>
+<p>WHAT should we monitor in an ML model in production:</p>
+<ul>
+<li>Model input distribution
+<ul>
+<li>Errors: input values fall within an allowed set/range?</li>
+<li>Changes: does the distribution align with what was seen during training?</li>
+</ul></li>
+<li>Model prediction distribution
+<ul>
+<li>Statistical significance: e.g.&nbsp;if variables are normally distributes, we might expect the mean values to be within the standard euro of the mean interval.</li>
+</ul></li>
+<li>Model versions</li>
+<li>Input/prediction correlation</li>
+</ul>
+<p>HOW should we monitor it:</p>
+<ul>
+<li>Tracing your ML model through logging.
+<ul>
+<li>Observability of ML model while logging distributed tracings might be challenging. However, tools like Dapper, Zipkin and Jaeger could help to do the job.</li>
+</ul></li>
+<li>Detecting drift:
+<ul>
+<li>Check for statistical properties of the logged data, model predictions and possibly ground truth over time. Examples of tools that can be used are TensorFlow data validation (TFDV), <a href="https://scikit-multiflow.github.io/">scikit-multiflow library</a>, or Google Vertex prediction.</li>
+<li>What if Drift is detected:
+<ul>
+<li>Determine the portion of your training dataset that is still correct.</li>
+<li>Keep good data and discard the bad.</li>
+<li>Create an entirely new training dataset from the new data.</li>
+</ul></li>
+<li>When to retrain my model:
+<ul>
+<li>On demand -&gt; manual retrain the model</li>
+<li>On schedule -&gt; when new labelled data is available at a daily/weekely/yearly basis</li>
+<li>Availability of new training data -&gt; new data is available on an ad-hoc basis.</li>
+</ul></li>
+</ul></li>
+</ul>
+</section>
+<section id="references" class="level1">
+<h1>References:</h1>
+<p><a href="https://www.coursera.org/learn/deploying-machine-learning-models-in-production/lecture/Bew5j/why-monitoring-matters">[1] Deploying Machine Learning in Production, Deeplearning</a></p>
+<p><a href="">[2] MLOps: What It Is, Why It Matters, and How to Implement It</a></p>
+<p><a href="https://github.com/visenger/awesome-mlops">[3] Awesome MLOps</a></p>
+<p><a href="https://neptune.ai/blog/retraining-model-during-deployment-continuous-training-continuous-testing">[4] Retraining Model During Deployment: Continuous Training and Continuous Testing</a></p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+      <div class="nav-footer-center">Copyright 2023, Marcel Castro</div>
+  </div>
+</footer>
+
+
+
+</body></html>
