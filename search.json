@@ -137,7 +137,7 @@
     "href": "posts/2023-03-24-semanticsearchopenai.html",
     "title": "Semantic Search with Pinecone and OpenAI",
     "section": "",
-    "text": "In this guide you will learn how to use the OpenAI Embedding API to generate language embeddings, and then index those embeddings in the Pinecone vector database for fast and scalable vector search.\nThis is a powerful and common combination for building semantic search, question-answering, threat-detection, and other applications that rely on NLP and search over a large corpus of text data.\nThe basic workflow looks like this:\nEmbed and index\nSearch\nLet’s get started…"
+    "text": "This repository uses OpenAI Embedding API to generate language embeddings and store them in pinecone. Ref. ChatGPT Retrieval Plugin.\nIn this guide you will learn how to use the OpenAI Embedding API to generate language embeddings, and then index those embeddings in the Pinecone vector database for fast and scalable vector search.\nThis is a powerful and common combination for building semantic search, question-answering, threat-detection, and other applications that rely on NLP and search over a large corpus of text data.\nThe basic workflow looks like this:\nEmbed and index\nSearch\nLet’s get started…"
   },
   {
     "objectID": "posts/2023-03-24-semanticsearchopenai.html#setup",
