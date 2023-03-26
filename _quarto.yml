@@ -13,7 +13,7 @@ website:
       - about.qmd
     right:
       - icon: bi-filetype-pdf
-        href: https://marcelcastrobr.github.io/my_ml_links/
+        href: https://github.com/marcelcastrobr/marcelcastrobr.github.io/blob/main/cv/cv-marcelcastro.pdf
       - icon: bi-diagram-3-fill
         href: https://marcelcastrobr.github.io/my_ml_links/
       - icon: github
