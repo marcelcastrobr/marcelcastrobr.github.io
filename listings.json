@@ -1,0 +1,19 @@
+[
+  {
+    "listing": "/index.html",
+    "items": [
+      "/posts/2023-03-24-semanticsearchopenai.html",
+      "/posts/2022-11-04-stablediffusionsagemaker.html",
+      "/posts/2022-01-04-nlpdeeplearning.html",
+      "/posts/image_search.html",
+      "/posts/image_search_multilingual.html",
+      "/posts/2021-12-13-ModelMonitoring.html",
+      "/posts/2021-10-31-githubactions-snowflake.html",
+      "/posts/2021-10-25-nmf.html",
+      "/posts/2021-09-22-generative-deep-learning.html",
+      "/posts/2021-09-21-pca.html",
+      "/posts/2021-09-05-kerastuner.html",
+      "/posts/2021-09-04-featureengtensorflow.html"
+    ]
+  }
+]
