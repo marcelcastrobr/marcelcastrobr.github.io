@@ -199,7 +199,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 
 
-<p><a href="https://colab.research.google.com/github/marcelcastrobr/marcelcastrobr.github.io/blob/main/2023-03-27-VisualChatGPT.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"></a></p>
+<p><a href="https://colab.research.google.com/github/marcelcastrobr/marcelcastrobr.github.io/blob/new-notebooks/2023-03-27-VisualChatGPT.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"></a></p>
 <p>Download visual-chatgpt</p>
 <div class="cell" data-outputid="137dbd1e-1ba7-453b-a407-83e095e687c2" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="op">!</span>rm <span class="op">-</span>rf visual<span class="op">-</span>chatgpt <span class="op">&amp;&amp;</span> git clone https:<span class="op">//</span>github.com<span class="op">/</span>microsoft<span class="op">/</span>visual<span class="op">-</span>chatgpt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -221,459 +221,16 @@ Resolving deltas: 100% (83/83), done.</code></pre>
 </div>
 </div>
 <p>Install packages</p>
-<div class="cell" data-outputid="89073043-71fd-4e13-cc64-c141c1e76190" data-execution_count="3">
+<div class="cell">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="op">!</span>pip install <span class="op">-</span>r requirements.txt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Looking in indexes: https://pypi.org/simple, https://us-python.pkg.dev/colab-wheels/public/simple/
-Collecting langchain==0.0.101
-  Downloading langchain-0.0.101-py3-none-any.whl (344 kB)
-     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 344.0/344.0 KB 8.7 MB/s eta 0:00:00
-Collecting torch==1.12.1
-  Downloading torch-1.12.1-cp39-cp39-manylinux1_x86_64.whl (776.4 MB)
-     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 776.4/776.4 MB 2.3 MB/s eta 0:00:00
-Collecting torchvision==0.13.1
-  Downloading torchvision-0.13.1-cp39-cp39-manylinux1_x86_64.whl (19.1 MB)
-     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 19.1/19.1 MB 70.0 MB/s eta 0:00:00
-Collecting gradio==3.20.1
-  Downloading gradio-3.20.1-py3-none-any.whl (14.3 MB)
-     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 14.3/14.3 MB 78.6 MB/s eta 0:00:00
-Collecting accelerate
-  Downloading accelerate-0.18.0-py3-none-any.whl (215 kB)
-     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 215.3/215.3 KB 26.1 MB/s eta 0:00:00
-Collecting addict
-  Downloading addict-2.4.0-py3-none-any.whl (3.8 kB)
-Requirement already satisfied: albumentations in /usr/local/lib/python3.9/dist-packages (from -r requirements.txt (line 7)) (1.2.1)
-Collecting basicsr
-  Downloading basicsr-1.4.2.tar.gz (172 kB)
-     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 172.5/172.5 KB 19.5 MB/s eta 0:00:00
-  Preparing metadata (setup.py) ... done
-Collecting controlnet-aux
-  Downloading controlnet_aux-0.0.1-py3-none-any.whl (26 kB)
-Collecting diffusers
-  Downloading diffusers-0.14.0-py3-none-any.whl (737 kB)
-     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 737.4/737.4 KB 47.2 MB/s eta 0:00:00
-Collecting einops
-  Downloading einops-0.6.0-py3-none-any.whl (41 kB)
-     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 41.6/41.6 KB 2.6 MB/s eta 0:00:00
-Requirement already satisfied: imageio in /usr/local/lib/python3.9/dist-packages (from -r requirements.txt (line 12)) (2.25.1)
-Requirement already satisfied: imageio-ffmpeg in /usr/local/lib/python3.9/dist-packages (from -r requirements.txt (line 13)) (0.4.8)
-Collecting invisible-watermark
-  Downloading invisible_watermark-0.1.5-py3-none-any.whl (1.6 MB)
-     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.6/1.6 MB 45.4 MB/s eta 0:00:00
-Collecting kornia
-  Downloading kornia-0.6.10-py2.py3-none-any.whl (612 kB)
-     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 612.0/612.0 KB 20.1 MB/s eta 0:00:00
-Requirement already satisfied: numpy in /usr/local/lib/python3.9/dist-packages (from -r requirements.txt (line 16)) (1.22.4)
-Collecting omegaconf
-  Downloading omegaconf-2.3.0-py3-none-any.whl (79 kB)
-     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 79.5/79.5 KB 7.8 MB/s eta 0:00:00
-Collecting open_clip_torch
-  Downloading open_clip_torch-2.16.0-py3-none-any.whl (1.5 MB)
-     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.5/1.5 MB 61.6 MB/s eta 0:00:00
-Collecting openai
-  Downloading openai-0.27.2-py3-none-any.whl (70 kB)
-     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 70.1/70.1 KB 7.7 MB/s eta 0:00:00
-Requirement already satisfied: opencv-python in /usr/local/lib/python3.9/dist-packages (from -r requirements.txt (line 20)) (4.7.0.72)
-Requirement already satisfied: prettytable in /usr/local/lib/python3.9/dist-packages (from -r requirements.txt (line 21)) (0.7.2)
-Collecting safetensors
-  Downloading safetensors-0.3.0-cp39-cp39-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (1.2 MB)
-     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.2/1.2 MB 49.4 MB/s eta 0:00:00
-Collecting streamlit
-  Downloading streamlit-1.20.0-py2.py3-none-any.whl (9.6 MB)
-     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 9.6/9.6 MB 77.2 MB/s eta 0:00:00
-Collecting test-tube
-  Downloading test_tube-0.7.5.tar.gz (21 kB)
-  Preparing metadata (setup.py) ... done
-Collecting timm
-  Downloading timm-0.6.13-py3-none-any.whl (549 kB)
-     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 549.1/549.1 KB 47.1 MB/s eta 0:00:00
-Collecting torchmetrics
-  Downloading torchmetrics-0.11.4-py3-none-any.whl (519 kB)
-     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 519.2/519.2 KB 48.8 MB/s eta 0:00:00
-Collecting transformers
-  Downloading transformers-4.27.3-py3-none-any.whl (6.8 MB)
-     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 6.8/6.8 MB 95.9 MB/s eta 0:00:00
-Collecting webdataset
-  Downloading webdataset-0.2.48-py3-none-any.whl (51 kB)
-     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 51.9/51.9 KB 6.5 MB/s eta 0:00:00
-Collecting yapf
-  Downloading yapf-0.32.0-py2.py3-none-any.whl (190 kB)
-     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 190.2/190.2 KB 22.7 MB/s eta 0:00:00
-Requirement already satisfied: PyYAML&lt;7,&gt;=6 in /usr/local/lib/python3.9/dist-packages (from langchain==0.0.101-&gt;-r requirements.txt (line 1)) (6.0)
-Requirement already satisfied: SQLAlchemy&lt;2,&gt;=1 in /usr/local/lib/python3.9/dist-packages (from langchain==0.0.101-&gt;-r requirements.txt (line 1)) (1.4.47)
-Requirement already satisfied: tenacity&lt;9.0.0,&gt;=8.1.0 in /usr/local/lib/python3.9/dist-packages (from langchain==0.0.101-&gt;-r requirements.txt (line 1)) (8.2.2)
-Collecting aiohttp&lt;4.0.0,&gt;=3.8.3
-  Downloading aiohttp-3.8.4-cp39-cp39-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (1.0 MB)
-     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.0/1.0 MB 5.6 MB/s eta 0:00:00
-Requirement already satisfied: pydantic&lt;2,&gt;=1 in /usr/local/lib/python3.9/dist-packages (from langchain==0.0.101-&gt;-r requirements.txt (line 1)) (1.10.7)
-Collecting dataclasses-json&lt;0.6.0,&gt;=0.5.7
-  Downloading dataclasses_json-0.5.7-py3-none-any.whl (25 kB)
-Requirement already satisfied: requests&lt;3,&gt;=2 in /usr/local/lib/python3.9/dist-packages (from langchain==0.0.101-&gt;-r requirements.txt (line 1)) (2.27.1)
-Requirement already satisfied: typing-extensions in /usr/local/lib/python3.9/dist-packages (from torch==1.12.1-&gt;-r requirements.txt (line 2)) (4.5.0)
-Requirement already satisfied: pillow!=8.3.*,&gt;=5.3.0 in /usr/local/lib/python3.9/dist-packages (from torchvision==0.13.1-&gt;-r requirements.txt (line 3)) (8.4.0)
-Collecting python-multipart
-  Downloading python_multipart-0.0.6-py3-none-any.whl (45 kB)
-     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 45.7/45.7 KB 3.9 MB/s eta 0:00:00
-Requirement already satisfied: markdown-it-py[linkify]&gt;=2.0.0 in /usr/local/lib/python3.9/dist-packages (from gradio==3.20.1-&gt;-r requirements.txt (line 4)) (2.2.0)
-Requirement already satisfied: markupsafe in /usr/local/lib/python3.9/dist-packages (from gradio==3.20.1-&gt;-r requirements.txt (line 4)) (2.1.2)
-Collecting fastapi
-  Downloading fastapi-0.95.0-py3-none-any.whl (57 kB)
-     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 57.1/57.1 KB 7.3 MB/s eta 0:00:00
-Requirement already satisfied: pandas in /usr/local/lib/python3.9/dist-packages (from gradio==3.20.1-&gt;-r requirements.txt (line 4)) (1.4.4)
-Collecting pydub
-  Downloading pydub-0.25.1-py2.py3-none-any.whl (32 kB)
-Collecting websockets&gt;=10.0
-  Downloading websockets-10.4-cp39-cp39-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl (106 kB)
-     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 106.5/106.5 KB 11.6 MB/s eta 0:00:00
-Requirement already satisfied: fsspec in /usr/local/lib/python3.9/dist-packages (from gradio==3.20.1-&gt;-r requirements.txt (line 4)) (2023.3.0)
-Collecting orjson
-  Downloading orjson-3.8.8-cp39-cp39-manylinux_2_28_x86_64.whl (143 kB)
-     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 143.5/143.5 KB 15.7 MB/s eta 0:00:00
-Requirement already satisfied: matplotlib in /usr/local/lib/python3.9/dist-packages (from gradio==3.20.1-&gt;-r requirements.txt (line 4)) (3.7.1)
-Collecting aiofiles
-  Downloading aiofiles-23.1.0-py3-none-any.whl (14 kB)
-Requirement already satisfied: jinja2 in /usr/local/lib/python3.9/dist-packages (from gradio==3.20.1-&gt;-r requirements.txt (line 4)) (3.1.2)
-Collecting httpx
-  Downloading httpx-0.23.3-py3-none-any.whl (71 kB)
-     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 71.5/71.5 KB 9.6 MB/s eta 0:00:00
-Collecting ffmpy
-  Downloading ffmpy-0.3.0.tar.gz (4.8 kB)
-  Preparing metadata (setup.py) ... done
-Collecting pycryptodome
-  Downloading pycryptodome-3.17-cp35-abi3-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (2.1 MB)
-     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 2.1/2.1 MB 87.2 MB/s eta 0:00:00
-Collecting uvicorn
-  Downloading uvicorn-0.21.1-py3-none-any.whl (57 kB)
-     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 57.8/57.8 KB 3.6 MB/s eta 0:00:00
-Requirement already satisfied: altair&gt;=4.2.0 in /usr/local/lib/python3.9/dist-packages (from gradio==3.20.1-&gt;-r requirements.txt (line 4)) (4.2.2)
-Collecting mdit-py-plugins&lt;=0.3.3
-  Downloading mdit_py_plugins-0.3.3-py3-none-any.whl (50 kB)
-     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 50.5/50.5 KB 6.7 MB/s eta 0:00:00
-Requirement already satisfied: packaging&gt;=20.0 in /usr/local/lib/python3.9/dist-packages (from accelerate-&gt;-r requirements.txt (line 5)) (23.0)
-Requirement already satisfied: psutil in /usr/local/lib/python3.9/dist-packages (from accelerate-&gt;-r requirements.txt (line 5)) (5.9.4)
-Requirement already satisfied: scipy in /usr/local/lib/python3.9/dist-packages (from albumentations-&gt;-r requirements.txt (line 7)) (1.10.1)
-Requirement already satisfied: opencv-python-headless&gt;=4.1.1 in /usr/local/lib/python3.9/dist-packages (from albumentations-&gt;-r requirements.txt (line 7)) (4.7.0.72)
-Requirement already satisfied: scikit-image&gt;=0.16.1 in /usr/local/lib/python3.9/dist-packages (from albumentations-&gt;-r requirements.txt (line 7)) (0.19.3)
-Requirement already satisfied: qudida&gt;=0.0.4 in /usr/local/lib/python3.9/dist-packages (from albumentations-&gt;-r requirements.txt (line 7)) (0.0.4)
-Requirement already satisfied: future in /usr/local/lib/python3.9/dist-packages (from basicsr-&gt;-r requirements.txt (line 8)) (0.18.3)
-Collecting lmdb
-  Downloading lmdb-1.4.0-cp39-cp39-manylinux_2_12_x86_64.manylinux2010_x86_64.whl (305 kB)
-     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 305.9/305.9 KB 31.7 MB/s eta 0:00:00
-Collecting tb-nightly
-  Downloading tb_nightly-2.13.0a20230326-py3-none-any.whl (5.6 MB)
-     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 5.6/5.6 MB 109.4 MB/s eta 0:00:00
-Requirement already satisfied: tqdm in /usr/local/lib/python3.9/dist-packages (from basicsr-&gt;-r requirements.txt (line 8)) (4.65.0)
-Requirement already satisfied: filelock in /usr/local/lib/python3.9/dist-packages (from controlnet-aux-&gt;-r requirements.txt (line 9)) (3.10.1)
-Collecting huggingface-hub
-  Downloading huggingface_hub-0.13.3-py3-none-any.whl (199 kB)
-     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 199.8/199.8 KB 21.5 MB/s eta 0:00:00
-Requirement already satisfied: importlib-metadata in /usr/local/lib/python3.9/dist-packages (from controlnet-aux-&gt;-r requirements.txt (line 9)) (6.1.0)
-Requirement already satisfied: regex!=2019.12.17 in /usr/local/lib/python3.9/dist-packages (from diffusers-&gt;-r requirements.txt (line 10)) (2022.10.31)
-Requirement already satisfied: PyWavelets&gt;=1.1.1 in /usr/local/lib/python3.9/dist-packages (from invisible-watermark-&gt;-r requirements.txt (line 14)) (1.4.1)
-Collecting onnxruntime
-  Downloading onnxruntime-1.14.1-cp39-cp39-manylinux_2_27_x86_64.whl (5.0 MB)
-     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 5.0/5.0 MB 110.4 MB/s eta 0:00:00
-Collecting onnx
-  Downloading onnx-1.13.1-cp39-cp39-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (13.5 MB)
-     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 13.5/13.5 MB 102.1 MB/s eta 0:00:00
-Collecting antlr4-python3-runtime==4.9.*
-  Downloading antlr4-python3-runtime-4.9.3.tar.gz (117 kB)
-     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 117.0/117.0 KB 13.0 MB/s eta 0:00:00
-  Preparing metadata (setup.py) ... done
-Requirement already satisfied: protobuf&lt;4 in /usr/local/lib/python3.9/dist-packages (from open_clip_torch-&gt;-r requirements.txt (line 18)) (3.19.6)
-Collecting sentencepiece
-  Downloading sentencepiece-0.1.97-cp39-cp39-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (1.3 MB)
-     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.3/1.3 MB 71.6 MB/s eta 0:00:00
-Collecting ftfy
-  Downloading ftfy-6.1.1-py3-none-any.whl (53 kB)
-     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 53.1/53.1 KB 6.3 MB/s eta 0:00:00
-Collecting validators&gt;=0.2
-  Downloading validators-0.20.0.tar.gz (30 kB)
-  Preparing metadata (setup.py) ... done
-Requirement already satisfied: click&gt;=7.0 in /usr/local/lib/python3.9/dist-packages (from streamlit-&gt;-r requirements.txt (line 23)) (8.1.3)
-Requirement already satisfied: tornado&gt;=6.0.3 in /usr/local/lib/python3.9/dist-packages (from streamlit-&gt;-r requirements.txt (line 23)) (6.2)
-Requirement already satisfied: toml in /usr/local/lib/python3.9/dist-packages (from streamlit-&gt;-r requirements.txt (line 23)) (0.10.2)
-Requirement already satisfied: cachetools&gt;=4.0 in /usr/local/lib/python3.9/dist-packages (from streamlit-&gt;-r requirements.txt (line 23)) (5.3.0)
-Requirement already satisfied: python-dateutil in /usr/local/lib/python3.9/dist-packages (from streamlit-&gt;-r requirements.txt (line 23)) (2.8.2)
-Collecting gitpython!=3.1.19
-  Downloading GitPython-3.1.31-py3-none-any.whl (184 kB)
-     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 184.3/184.3 KB 19.3 MB/s eta 0:00:00
-Requirement already satisfied: tzlocal&gt;=1.1 in /usr/local/lib/python3.9/dist-packages (from streamlit-&gt;-r requirements.txt (line 23)) (4.3)
-Requirement already satisfied: pyarrow&gt;=4.0 in /usr/local/lib/python3.9/dist-packages (from streamlit-&gt;-r requirements.txt (line 23)) (9.0.0)
-Collecting watchdog
-  Downloading watchdog-3.0.0-py3-none-manylinux2014_x86_64.whl (82 kB)
-     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 82.1/82.1 KB 9.9 MB/s eta 0:00:00
-Collecting semver
-  Downloading semver-2.13.0-py2.py3-none-any.whl (12 kB)
-Collecting blinker&gt;=1.0.0
-  Downloading blinker-1.5-py2.py3-none-any.whl (12 kB)
-Collecting pympler&gt;=0.9
-  Downloading Pympler-1.0.1-py3-none-any.whl (164 kB)
-     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 164.8/164.8 KB 16.8 MB/s eta 0:00:00
-Requirement already satisfied: rich&gt;=10.11.0 in /usr/local/lib/python3.9/dist-packages (from streamlit-&gt;-r requirements.txt (line 23)) (13.3.2)
-Collecting pydeck&gt;=0.1.dev5
-  Downloading pydeck-0.8.0-py2.py3-none-any.whl (4.7 MB)
-     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 4.7/4.7 MB 71.5 MB/s eta 0:00:00
-Requirement already satisfied: tensorboard&gt;=1.15.0 in /usr/local/lib/python3.9/dist-packages (from test-tube-&gt;-r requirements.txt (line 24)) (2.11.2)
-Collecting tokenizers!=0.11.3,&lt;0.14,&gt;=0.11.1
-  Downloading tokenizers-0.13.2-cp39-cp39-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (7.6 MB)
-     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 7.6/7.6 MB 109.1 MB/s eta 0:00:00
-Collecting braceexpand
-  Downloading braceexpand-0.1.7-py2.py3-none-any.whl (5.9 kB)
-Collecting frozenlist&gt;=1.1.1
-  Downloading frozenlist-1.3.3-cp39-cp39-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl (158 kB)
-     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 158.8/158.8 KB 19.3 MB/s eta 0:00:00
-Requirement already satisfied: attrs&gt;=17.3.0 in /usr/local/lib/python3.9/dist-packages (from aiohttp&lt;4.0.0,&gt;=3.8.3-&gt;langchain==0.0.101-&gt;-r requirements.txt (line 1)) (22.2.0)
-Collecting yarl&lt;2.0,&gt;=1.0
-  Downloading yarl-1.8.2-cp39-cp39-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (264 kB)
-     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 264.6/264.6 KB 26.7 MB/s eta 0:00:00
-Collecting async-timeout&lt;5.0,&gt;=4.0.0a3
-  Downloading async_timeout-4.0.2-py3-none-any.whl (5.8 kB)
-Collecting multidict&lt;7.0,&gt;=4.5
-  Downloading multidict-6.0.4-cp39-cp39-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (114 kB)
-     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 114.2/114.2 KB 15.4 MB/s eta 0:00:00
-Requirement already satisfied: charset-normalizer&lt;4.0,&gt;=2.0 in /usr/local/lib/python3.9/dist-packages (from aiohttp&lt;4.0.0,&gt;=3.8.3-&gt;langchain==0.0.101-&gt;-r requirements.txt (line 1)) (2.0.12)
-Collecting aiosignal&gt;=1.1.2
-  Downloading aiosignal-1.3.1-py3-none-any.whl (7.6 kB)
-Requirement already satisfied: entrypoints in /usr/local/lib/python3.9/dist-packages (from altair&gt;=4.2.0-&gt;gradio==3.20.1-&gt;-r requirements.txt (line 4)) (0.4)
-Requirement already satisfied: jsonschema&gt;=3.0 in /usr/local/lib/python3.9/dist-packages (from altair&gt;=4.2.0-&gt;gradio==3.20.1-&gt;-r requirements.txt (line 4)) (4.3.3)
-Requirement already satisfied: toolz in /usr/local/lib/python3.9/dist-packages (from altair&gt;=4.2.0-&gt;gradio==3.20.1-&gt;-r requirements.txt (line 4)) (0.12.0)
-Collecting marshmallow-enum&lt;2.0.0,&gt;=1.5.1
-  Downloading marshmallow_enum-1.5.1-py2.py3-none-any.whl (4.2 kB)
-Collecting typing-inspect&gt;=0.4.0
-  Downloading typing_inspect-0.8.0-py3-none-any.whl (8.7 kB)
-Collecting marshmallow&lt;4.0.0,&gt;=3.3.0
-  Downloading marshmallow-3.19.0-py3-none-any.whl (49 kB)
-     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 49.1/49.1 KB 5.9 MB/s eta 0:00:00
-Collecting gitdb&lt;5,&gt;=4.0.1
-  Downloading gitdb-4.0.10-py3-none-any.whl (62 kB)
-     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 62.7/62.7 KB 7.7 MB/s eta 0:00:00
-Requirement already satisfied: zipp&gt;=0.5 in /usr/local/lib/python3.9/dist-packages (from importlib-metadata-&gt;controlnet-aux-&gt;-r requirements.txt (line 9)) (3.15.0)
-Requirement already satisfied: mdurl~=0.1 in /usr/local/lib/python3.9/dist-packages (from markdown-it-py[linkify]&gt;=2.0.0-&gt;gradio==3.20.1-&gt;-r requirements.txt (line 4)) (0.1.2)
-Collecting linkify-it-py&lt;3,&gt;=1
-  Downloading linkify_it_py-2.0.0-py3-none-any.whl (19 kB)
-Requirement already satisfied: pytz&gt;=2020.1 in /usr/local/lib/python3.9/dist-packages (from pandas-&gt;gradio==3.20.1-&gt;-r requirements.txt (line 4)) (2022.7.1)
-Requirement already satisfied: six&gt;=1.5 in /usr/local/lib/python3.9/dist-packages (from python-dateutil-&gt;streamlit-&gt;-r requirements.txt (line 23)) (1.16.0)
-Requirement already satisfied: scikit-learn&gt;=0.19.1 in /usr/local/lib/python3.9/dist-packages (from qudida&gt;=0.0.4-&gt;albumentations-&gt;-r requirements.txt (line 7)) (1.2.2)
-Requirement already satisfied: idna&lt;4,&gt;=2.5 in /usr/local/lib/python3.9/dist-packages (from requests&lt;3,&gt;=2-&gt;langchain==0.0.101-&gt;-r requirements.txt (line 1)) (3.4)
-Requirement already satisfied: certifi&gt;=2017.4.17 in /usr/local/lib/python3.9/dist-packages (from requests&lt;3,&gt;=2-&gt;langchain==0.0.101-&gt;-r requirements.txt (line 1)) (2022.12.7)
-Requirement already satisfied: urllib3&lt;1.27,&gt;=1.21.1 in /usr/local/lib/python3.9/dist-packages (from requests&lt;3,&gt;=2-&gt;langchain==0.0.101-&gt;-r requirements.txt (line 1)) (1.26.15)
-Requirement already satisfied: pygments&lt;3.0.0,&gt;=2.13.0 in /usr/local/lib/python3.9/dist-packages (from rich&gt;=10.11.0-&gt;streamlit-&gt;-r requirements.txt (line 23)) (2.14.0)
-Requirement already satisfied: tifffile&gt;=2019.7.26 in /usr/local/lib/python3.9/dist-packages (from scikit-image&gt;=0.16.1-&gt;albumentations-&gt;-r requirements.txt (line 7)) (2023.3.21)
-Requirement already satisfied: networkx&gt;=2.2 in /usr/local/lib/python3.9/dist-packages (from scikit-image&gt;=0.16.1-&gt;albumentations-&gt;-r requirements.txt (line 7)) (3.0)
-Requirement already satisfied: greenlet!=0.4.17 in /usr/local/lib/python3.9/dist-packages (from SQLAlchemy&lt;2,&gt;=1-&gt;langchain==0.0.101-&gt;-r requirements.txt (line 1)) (2.0.2)
-Requirement already satisfied: werkzeug&gt;=1.0.1 in /usr/local/lib/python3.9/dist-packages (from tensorboard&gt;=1.15.0-&gt;test-tube-&gt;-r requirements.txt (line 24)) (2.2.3)
-Requirement already satisfied: google-auth-oauthlib&lt;0.5,&gt;=0.4.1 in /usr/local/lib/python3.9/dist-packages (from tensorboard&gt;=1.15.0-&gt;test-tube-&gt;-r requirements.txt (line 24)) (0.4.6)
-Requirement already satisfied: tensorboard-plugin-wit&gt;=1.6.0 in /usr/local/lib/python3.9/dist-packages (from tensorboard&gt;=1.15.0-&gt;test-tube-&gt;-r requirements.txt (line 24)) (1.8.1)
-Requirement already satisfied: wheel&gt;=0.26 in /usr/local/lib/python3.9/dist-packages (from tensorboard&gt;=1.15.0-&gt;test-tube-&gt;-r requirements.txt (line 24)) (0.40.0)
-Requirement already satisfied: grpcio&gt;=1.24.3 in /usr/local/lib/python3.9/dist-packages (from tensorboard&gt;=1.15.0-&gt;test-tube-&gt;-r requirements.txt (line 24)) (1.51.3)
-Requirement already satisfied: markdown&gt;=2.6.8 in /usr/local/lib/python3.9/dist-packages (from tensorboard&gt;=1.15.0-&gt;test-tube-&gt;-r requirements.txt (line 24)) (3.4.2)
-Requirement already satisfied: tensorboard-data-server&lt;0.7.0,&gt;=0.6.0 in /usr/local/lib/python3.9/dist-packages (from tensorboard&gt;=1.15.0-&gt;test-tube-&gt;-r requirements.txt (line 24)) (0.6.1)
-Requirement already satisfied: google-auth&lt;3,&gt;=1.6.3 in /usr/local/lib/python3.9/dist-packages (from tensorboard&gt;=1.15.0-&gt;test-tube-&gt;-r requirements.txt (line 24)) (2.16.2)
-Requirement already satisfied: absl-py&gt;=0.4 in /usr/local/lib/python3.9/dist-packages (from tensorboard&gt;=1.15.0-&gt;test-tube-&gt;-r requirements.txt (line 24)) (1.4.0)
-Requirement already satisfied: setuptools&gt;=41.0.0 in /usr/local/lib/python3.9/dist-packages (from tensorboard&gt;=1.15.0-&gt;test-tube-&gt;-r requirements.txt (line 24)) (67.6.0)
-Requirement already satisfied: pytz-deprecation-shim in /usr/local/lib/python3.9/dist-packages (from tzlocal&gt;=1.1-&gt;streamlit-&gt;-r requirements.txt (line 23)) (0.1.0.post0)
-Requirement already satisfied: decorator&gt;=3.4.0 in /usr/local/lib/python3.9/dist-packages (from validators&gt;=0.2-&gt;streamlit-&gt;-r requirements.txt (line 23)) (4.4.2)
-Collecting starlette&lt;0.27.0,&gt;=0.26.1
-  Downloading starlette-0.26.1-py3-none-any.whl (66 kB)
-     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 66.9/66.9 KB 8.2 MB/s eta 0:00:00
-Requirement already satisfied: wcwidth&gt;=0.2.5 in /usr/local/lib/python3.9/dist-packages (from ftfy-&gt;open_clip_torch-&gt;-r requirements.txt (line 18)) (0.2.6)
-Collecting httpcore&lt;0.17.0,&gt;=0.15.0
-  Downloading httpcore-0.16.3-py3-none-any.whl (69 kB)
-     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 69.6/69.6 KB 8.7 MB/s eta 0:00:00
-Collecting sniffio
-  Downloading sniffio-1.3.0-py3-none-any.whl (10 kB)
-Collecting rfc3986[idna2008]&lt;2,&gt;=1.3
-  Downloading rfc3986-1.5.0-py2.py3-none-any.whl (31 kB)
-Requirement already satisfied: cycler&gt;=0.10 in /usr/local/lib/python3.9/dist-packages (from matplotlib-&gt;gradio==3.20.1-&gt;-r requirements.txt (line 4)) (0.11.0)
-Requirement already satisfied: pyparsing&gt;=2.3.1 in /usr/local/lib/python3.9/dist-packages (from matplotlib-&gt;gradio==3.20.1-&gt;-r requirements.txt (line 4)) (3.0.9)
-Requirement already satisfied: kiwisolver&gt;=1.0.1 in /usr/local/lib/python3.9/dist-packages (from matplotlib-&gt;gradio==3.20.1-&gt;-r requirements.txt (line 4)) (1.4.4)
-Requirement already satisfied: contourpy&gt;=1.0.1 in /usr/local/lib/python3.9/dist-packages (from matplotlib-&gt;gradio==3.20.1-&gt;-r requirements.txt (line 4)) (1.0.7)
-Requirement already satisfied: importlib-resources&gt;=3.2.0 in /usr/local/lib/python3.9/dist-packages (from matplotlib-&gt;gradio==3.20.1-&gt;-r requirements.txt (line 4)) (5.12.0)
-Requirement already satisfied: fonttools&gt;=4.22.0 in /usr/local/lib/python3.9/dist-packages (from matplotlib-&gt;gradio==3.20.1-&gt;-r requirements.txt (line 4)) (4.39.2)
-Collecting protobuf&lt;4
-  Downloading protobuf-3.20.3-cp39-cp39-manylinux_2_5_x86_64.manylinux1_x86_64.whl (1.0 MB)
-     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.0/1.0 MB 67.6 MB/s eta 0:00:00
-Collecting coloredlogs
-  Downloading coloredlogs-15.0.1-py2.py3-none-any.whl (46 kB)
-     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 46.0/46.0 KB 5.0 MB/s eta 0:00:00
-Requirement already satisfied: flatbuffers in /usr/local/lib/python3.9/dist-packages (from onnxruntime-&gt;invisible-watermark-&gt;-r requirements.txt (line 14)) (23.3.3)
-Requirement already satisfied: sympy in /usr/local/lib/python3.9/dist-packages (from onnxruntime-&gt;invisible-watermark-&gt;-r requirements.txt (line 14)) (1.11.1)
-Collecting tb-nightly
-  Downloading tb_nightly-2.13.0a20230325-py3-none-any.whl (5.6 MB)
-     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 5.6/5.6 MB 108.9 MB/s eta 0:00:00
-  Downloading tb_nightly-2.13.0a20230324-py3-none-any.whl (5.6 MB)
-     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 5.6/5.6 MB 107.5 MB/s eta 0:00:00
-  Downloading tb_nightly-2.13.0a20230321-py3-none-any.whl (5.6 MB)
-     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 5.6/5.6 MB 98.0 MB/s eta 0:00:00
-  Downloading tb_nightly-2.13.0a20230319-py3-none-any.whl (5.6 MB)
-     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 5.6/5.6 MB 99.6 MB/s eta 0:00:00
-  Downloading tb_nightly-2.13.0a20230317-py3-none-any.whl (5.6 MB)
-     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 5.6/5.6 MB 91.8 MB/s eta 0:00:00
-  Downloading tb_nightly-2.13.0a20230316-py3-none-any.whl (5.6 MB)
-     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 5.6/5.6 MB 92.6 MB/s eta 0:00:00
-  Downloading tb_nightly-2.13.0a20230315-py3-none-any.whl (5.6 MB)
-     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 5.6/5.6 MB 110.7 MB/s eta 0:00:00
-  Downloading tb_nightly-2.13.0a20230314-py3-none-any.whl (5.6 MB)
-     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 5.6/5.6 MB 111.5 MB/s eta 0:00:00
-  Downloading tb_nightly-2.13.0a20230313-py3-none-any.whl (5.6 MB)
-     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 5.6/5.6 MB 102.8 MB/s eta 0:00:00
-  Downloading tb_nightly-2.13.0a20230312-py3-none-any.whl (5.6 MB)
-     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 5.6/5.6 MB 112.4 MB/s eta 0:00:00
-  Downloading tb_nightly-2.13.0a20230311-py3-none-any.whl (5.6 MB)
-     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 5.6/5.6 MB 109.7 MB/s eta 0:00:00
-  Downloading tb_nightly-2.13.0a20230310-py3-none-any.whl (5.6 MB)
-     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 5.6/5.6 MB 112.5 MB/s eta 0:00:00
-  Downloading tb_nightly-2.13.0a20230309-py3-none-any.whl (5.6 MB)
-     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 5.6/5.6 MB 93.3 MB/s eta 0:00:00
-  Downloading tb_nightly-2.13.0a20230308-py3-none-any.whl (5.6 MB)
-     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 5.6/5.6 MB 98.8 MB/s eta 0:00:00
-  Downloading tb_nightly-2.13.0a20230307-py3-none-any.whl (5.6 MB)
-     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 5.6/5.6 MB 71.6 MB/s eta 0:00:00
-  Downloading tb_nightly-2.13.0a20230306-py3-none-any.whl (5.6 MB)
-     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 5.6/5.6 MB 105.7 MB/s eta 0:00:00
-  Downloading tb_nightly-2.13.0a20230305-py3-none-any.whl (5.6 MB)
-     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 5.6/5.6 MB 102.5 MB/s eta 0:00:00
-  Downloading tb_nightly-2.13.0a20230304-py3-none-any.whl (5.6 MB)
-     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 5.6/5.6 MB 107.2 MB/s eta 0:00:00
-  Downloading tb_nightly-2.13.0a20230303-py3-none-any.whl (5.6 MB)
-     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 5.6/5.6 MB 10.5 MB/s eta 0:00:00
-  Downloading tb_nightly-2.13.0a20230302-py3-none-any.whl (5.6 MB)
-     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 5.6/5.6 MB 83.5 MB/s eta 0:00:00
-  Downloading tb_nightly-2.13.0a20230301-py3-none-any.whl (5.6 MB)
-     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 5.6/5.6 MB 110.6 MB/s eta 0:00:00
-  Downloading tb_nightly-2.13.0a20230228-py3-none-any.whl (5.6 MB)
-     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 5.6/5.6 MB 108.2 MB/s eta 0:00:00
-  Downloading tb_nightly-2.13.0a20230226-py3-none-any.whl (5.6 MB)
-     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 5.6/5.6 MB 64.1 MB/s eta 0:00:00
-  Downloading tb_nightly-2.13.0a20230225-py3-none-any.whl (5.6 MB)
-     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 5.6/5.6 MB 103.8 MB/s eta 0:00:00
-  Downloading tb_nightly-2.13.0a20230224-py3-none-any.whl (5.6 MB)
-     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 5.6/5.6 MB 106.5 MB/s eta 0:00:00
-  Downloading tb_nightly-2.13.0a20230223-py3-none-any.whl (5.6 MB)
-     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 5.6/5.6 MB 69.6 MB/s eta 0:00:00
-  Downloading tb_nightly-2.13.0a20230221-py3-none-any.whl (5.6 MB)
-     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 5.6/5.6 MB 80.6 MB/s eta 0:00:00
-  Downloading tb_nightly-2.13.0a20230220-py3-none-any.whl (5.6 MB)
-     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 5.6/5.6 MB 76.2 MB/s eta 0:00:00
-  Downloading tb_nightly-2.13.0a20230219-py3-none-any.whl (5.6 MB)
-     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 5.6/5.6 MB 84.3 MB/s eta 0:00:00
-  Downloading tb_nightly-2.13.0a20230218-py3-none-any.whl (5.6 MB)
-     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 5.6/5.6 MB 85.6 MB/s eta 0:00:00
-  Downloading tb_nightly-2.13.0a20230217-py3-none-any.whl (5.6 MB)
-     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 5.6/5.6 MB 83.8 MB/s eta 0:00:00
-  Downloading tb_nightly-2.13.0a20230215-py3-none-any.whl (5.6 MB)
-     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 5.6/5.6 MB 84.2 MB/s eta 0:00:00
-  Downloading tb_nightly-2.13.0a20230214-py3-none-any.whl (5.6 MB)
-     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 5.6/5.6 MB 74.5 MB/s eta 0:00:00
-  Downloading tb_nightly-2.13.0a20230213-py3-none-any.whl (5.6 MB)
-     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 5.6/5.6 MB 76.8 MB/s eta 0:00:00
-  Downloading tb_nightly-2.13.0a20230212-py3-none-any.whl (5.6 MB)
-     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 5.6/5.6 MB 73.4 MB/s eta 0:00:00
-  Downloading tb_nightly-2.13.0a20230211-py3-none-any.whl (5.6 MB)
-     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 5.6/5.6 MB 85.2 MB/s eta 0:00:00
-  Downloading tb_nightly-2.13.0a20230210-py3-none-any.whl (5.6 MB)
-     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 5.6/5.6 MB 79.4 MB/s eta 0:00:00
-  Downloading tb_nightly-2.12.0a20230209-py3-none-any.whl (5.6 MB)
-     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 5.6/5.6 MB 76.0 MB/s eta 0:00:00
-  Downloading tb_nightly-2.12.0a20230207-py3-none-any.whl (5.6 MB)
-     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 5.6/5.6 MB 10.2 MB/s eta 0:00:00
-  Downloading tb_nightly-2.12.0a20230206-py3-none-any.whl (5.6 MB)
-     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 5.6/5.6 MB 98.3 MB/s eta 0:00:00
-  Downloading tb_nightly-2.12.0a20230205-py3-none-any.whl (5.6 MB)
-     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 5.6/5.6 MB 104.5 MB/s eta 0:00:00
-  Downloading tb_nightly-2.12.0a20230204-py3-none-any.whl (5.6 MB)
-     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 5.6/5.6 MB 105.6 MB/s eta 0:00:00
-  Downloading tb_nightly-2.12.0a20230203-py3-none-any.whl (5.6 MB)
-     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 5.6/5.6 MB 98.0 MB/s eta 0:00:00
-  Downloading tb_nightly-2.12.0a20230202-py3-none-any.whl (5.6 MB)
-     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 5.6/5.6 MB 109.2 MB/s eta 0:00:00
-  Downloading tb_nightly-2.12.0a20230201-py3-none-any.whl (5.6 MB)
-     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 5.6/5.6 MB 104.8 MB/s eta 0:00:00
-  Downloading tb_nightly-2.12.0a20230131-py3-none-any.whl (5.6 MB)
-     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 5.6/5.6 MB 109.1 MB/s eta 0:00:00
-  Downloading tb_nightly-2.12.0a20230130-py3-none-any.whl (5.6 MB)
-     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 5.6/5.6 MB 103.0 MB/s eta 0:00:00
-  Downloading tb_nightly-2.12.0a20230129-py3-none-any.whl (5.6 MB)
-     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 5.6/5.6 MB 95.8 MB/s eta 0:00:00
-  Downloading tb_nightly-2.12.0a20230128-py3-none-any.whl (5.6 MB)
-     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 5.6/5.6 MB 107.5 MB/s eta 0:00:00
-  Downloading tb_nightly-2.12.0a20230127-py3-none-any.whl (5.6 MB)
-     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 5.6/5.6 MB 115.2 MB/s eta 0:00:00
-  Downloading tb_nightly-2.12.0a20230126-py3-none-any.whl (5.6 MB)
-     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 5.6/5.6 MB 43.3 MB/s eta 0:00:00
-Collecting h11&gt;=0.8
-  Downloading h11-0.14.0-py3-none-any.whl (58 kB)
-     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 58.3/58.3 KB 7.7 MB/s eta 0:00:00
-Collecting smmap&lt;6,&gt;=3.0.1
-  Downloading smmap-5.0.0-py3-none-any.whl (24 kB)
-Requirement already satisfied: pyasn1-modules&gt;=0.2.1 in /usr/local/lib/python3.9/dist-packages (from google-auth&lt;3,&gt;=1.6.3-&gt;tensorboard&gt;=1.15.0-&gt;test-tube-&gt;-r requirements.txt (line 24)) (0.2.8)
-Requirement already satisfied: rsa&lt;5,&gt;=3.1.4 in /usr/local/lib/python3.9/dist-packages (from google-auth&lt;3,&gt;=1.6.3-&gt;tensorboard&gt;=1.15.0-&gt;test-tube-&gt;-r requirements.txt (line 24)) (4.9)
-Requirement already satisfied: requests-oauthlib&gt;=0.7.0 in /usr/local/lib/python3.9/dist-packages (from google-auth-oauthlib&lt;0.5,&gt;=0.4.1-&gt;tensorboard&gt;=1.15.0-&gt;test-tube-&gt;-r requirements.txt (line 24)) (1.3.1)
-Collecting anyio&lt;5.0,&gt;=3.0
-  Downloading anyio-3.6.2-py3-none-any.whl (80 kB)
-     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 80.6/80.6 KB 9.7 MB/s eta 0:00:00
-Requirement already satisfied: pyrsistent!=0.17.0,!=0.17.1,!=0.17.2,&gt;=0.14.0 in /usr/local/lib/python3.9/dist-packages (from jsonschema&gt;=3.0-&gt;altair&gt;=4.2.0-&gt;gradio==3.20.1-&gt;-r requirements.txt (line 4)) (0.19.3)
-Collecting uc-micro-py
-  Downloading uc_micro_py-1.0.1-py3-none-any.whl (6.2 kB)
-Requirement already satisfied: joblib&gt;=1.1.1 in /usr/local/lib/python3.9/dist-packages (from scikit-learn&gt;=0.19.1-&gt;qudida&gt;=0.0.4-&gt;albumentations-&gt;-r requirements.txt (line 7)) (1.1.1)
-Requirement already satisfied: threadpoolctl&gt;=2.0.0 in /usr/local/lib/python3.9/dist-packages (from scikit-learn&gt;=0.19.1-&gt;qudida&gt;=0.0.4-&gt;albumentations-&gt;-r requirements.txt (line 7)) (3.1.0)
-Collecting mypy-extensions&gt;=0.3.0
-  Downloading mypy_extensions-1.0.0-py3-none-any.whl (4.7 kB)
-Collecting humanfriendly&gt;=9.1
-  Downloading humanfriendly-10.0-py2.py3-none-any.whl (86 kB)
-     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 86.8/86.8 KB 9.8 MB/s eta 0:00:00
-Requirement already satisfied: tzdata in /usr/local/lib/python3.9/dist-packages (from pytz-deprecation-shim-&gt;tzlocal&gt;=1.1-&gt;streamlit-&gt;-r requirements.txt (line 23)) (2022.7)
-Requirement already satisfied: mpmath&gt;=0.19 in /usr/local/lib/python3.9/dist-packages (from sympy-&gt;onnxruntime-&gt;invisible-watermark-&gt;-r requirements.txt (line 14)) (1.3.0)
-Requirement already satisfied: pyasn1&lt;0.5.0,&gt;=0.4.6 in /usr/local/lib/python3.9/dist-packages (from pyasn1-modules&gt;=0.2.1-&gt;google-auth&lt;3,&gt;=1.6.3-&gt;tensorboard&gt;=1.15.0-&gt;test-tube-&gt;-r requirements.txt (line 24)) (0.4.8)
-Requirement already satisfied: oauthlib&gt;=3.0.0 in /usr/local/lib/python3.9/dist-packages (from requests-oauthlib&gt;=0.7.0-&gt;google-auth-oauthlib&lt;0.5,&gt;=0.4.1-&gt;tensorboard&gt;=1.15.0-&gt;test-tube-&gt;-r requirements.txt (line 24)) (3.2.2)
-Building wheels for collected packages: basicsr, antlr4-python3-runtime, test-tube, validators, ffmpy
-  Building wheel for basicsr (setup.py) ... done
-  Created wheel for basicsr: filename=basicsr-1.4.2-py3-none-any.whl size=214837 sha256=8d3bcd73ff4d45cb7c13b7388c36561e6b16e522192fbace22dff417df280ec1
-  Stored in directory: /root/.cache/pip/wheels/42/d6/3d/6d8c4b8fabeb93dd442eb255f133e8928c75d903fe20e9472c
-  Building wheel for antlr4-python3-runtime (setup.py) ... done
-  Created wheel for antlr4-python3-runtime: filename=antlr4_python3_runtime-4.9.3-py3-none-any.whl size=144573 sha256=566cecf0de58c1ea7f23a00d390255f17a6c6148cd1ddaec1ef1588dd0e9b38b
-  Stored in directory: /root/.cache/pip/wheels/23/cf/80/f3efa822e6ab23277902ee9165fe772eeb1dfb8014f359020a
-  Building wheel for test-tube (setup.py) ... done
-  Created wheel for test-tube: filename=test_tube-0.7.5-py3-none-any.whl size=25356 sha256=e5466718c2fe51e946defc6ef41d37b6bc47a214796197e3caa010d89d33b129
-  Stored in directory: /root/.cache/pip/wheels/67/58/3f/e21fc7e325685fffc4b9b866f3be18d7a208f34ff5f847f3d5
-  Building wheel for validators (setup.py) ... done
-  Created wheel for validators: filename=validators-0.20.0-py3-none-any.whl size=19579 sha256=a795b315740f8b6063525670055788d4e6b3e157e4fbf0d8840b91e356ed0119
-  Stored in directory: /root/.cache/pip/wheels/2d/f0/a8/1094fca7a7e5d0d12ff56e0c64675d72aa5cc81a5fc200e849
-  Building wheel for ffmpy (setup.py) ... done
-  Created wheel for ffmpy: filename=ffmpy-0.3.0-py3-none-any.whl size=4707 sha256=43e73c127bd6b63990c36d429776f131b918d120286fac582bf9765f1bf58c3b
-  Stored in directory: /root/.cache/pip/wheels/91/e2/96/f676aa08bfd789328c6576cd0f1fde4a3d686703bb0c247697
-Successfully built basicsr antlr4-python3-runtime test-tube validators ffmpy
-Installing collected packages: yapf, tokenizers, sentencepiece, safetensors, rfc3986, pydub, lmdb, ffmpy, braceexpand, antlr4-python3-runtime, addict, websockets, webdataset, watchdog, validators, uc-micro-py, torch, sniffio, smmap, semver, python-multipart, pympler, pycryptodome, protobuf, orjson, omegaconf, mypy-extensions, multidict, marshmallow, humanfriendly, h11, ftfy, frozenlist, einops, blinker, async-timeout, aiofiles, yarl, uvicorn, typing-inspect, torchvision, torchmetrics, pydeck, onnx, mdit-py-plugins, marshmallow-enum, linkify-it-py, kornia, huggingface-hub, gitdb, coloredlogs, anyio, aiosignal, accelerate, transformers, timm, starlette, onnxruntime, httpcore, gitpython, diffusers, dataclasses-json, controlnet-aux, aiohttp, tb-nightly, streamlit, openai, open_clip_torch, langchain, invisible-watermark, httpx, fastapi, test-tube, gradio, basicsr
-  Attempting uninstall: torch
-    Found existing installation: torch 1.13.1+cu116
-    Uninstalling torch-1.13.1+cu116:
-      Successfully uninstalled torch-1.13.1+cu116
-  Attempting uninstall: protobuf
-    Found existing installation: protobuf 3.19.6
-    Uninstalling protobuf-3.19.6:
-      Successfully uninstalled protobuf-3.19.6
-  Attempting uninstall: torchvision
-    Found existing installation: torchvision 0.14.1+cu116
-    Uninstalling torchvision-0.14.1+cu116:
-      Successfully uninstalled torchvision-0.14.1+cu116
-ERROR: pip's dependency resolver does not currently take into account all the packages that are installed. This behaviour is the source of the following dependency conflicts.
-torchtext 0.14.1 requires torch==1.13.1, but you have torch 1.12.1 which is incompatible.
-torchaudio 0.13.1+cu116 requires torch==1.13.1, but you have torch 1.12.1 which is incompatible.
-tensorflow 2.11.0 requires protobuf&lt;3.20,&gt;=3.9.2, but you have protobuf 3.20.3 which is incompatible.
-Successfully installed accelerate-0.18.0 addict-2.4.0 aiofiles-23.1.0 aiohttp-3.8.4 aiosignal-1.3.1 antlr4-python3-runtime-4.9.3 anyio-3.6.2 async-timeout-4.0.2 basicsr-1.4.2 blinker-1.5 braceexpand-0.1.7 coloredlogs-15.0.1 controlnet-aux-0.0.1 dataclasses-json-0.5.7 diffusers-0.14.0 einops-0.6.0 fastapi-0.95.0 ffmpy-0.3.0 frozenlist-1.3.3 ftfy-6.1.1 gitdb-4.0.10 gitpython-3.1.31 gradio-3.20.1 h11-0.14.0 httpcore-0.16.3 httpx-0.23.3 huggingface-hub-0.13.3 humanfriendly-10.0 invisible-watermark-0.1.5 kornia-0.6.10 langchain-0.0.101 linkify-it-py-2.0.0 lmdb-1.4.0 marshmallow-3.19.0 marshmallow-enum-1.5.1 mdit-py-plugins-0.3.3 multidict-6.0.4 mypy-extensions-1.0.0 omegaconf-2.3.0 onnx-1.13.1 onnxruntime-1.14.1 open_clip_torch-2.16.0 openai-0.27.2 orjson-3.8.8 protobuf-3.20.3 pycryptodome-3.17 pydeck-0.8.0 pydub-0.25.1 pympler-1.0.1 python-multipart-0.0.6 rfc3986-1.5.0 safetensors-0.3.0 semver-2.13.0 sentencepiece-0.1.97 smmap-5.0.0 sniffio-1.3.0 starlette-0.26.1 streamlit-1.20.0 tb-nightly-2.12.0a20230126 test-tube-0.7.5 timm-0.6.13 tokenizers-0.13.2 torch-1.12.1 torchmetrics-0.11.4 torchvision-0.13.1 transformers-4.27.3 typing-inspect-0.8.0 uc-micro-py-1.0.1 uvicorn-0.21.1 validators-0.20.0 watchdog-3.0.0 webdataset-0.2.48 websockets-10.4 yapf-0.32.0 yarl-1.8.2</code></pre>
-</div>
 </div>
 <p>Set your OPENAI_API_KEY</p>
-<div class="cell" data-outputid="9172a353-815e-4f82-a988-15cab3cde366" data-execution_count="4">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>env OPENAI_API_KEY<span class="op">=&lt;</span>YOURKEY<span class="op">&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>env: OPENAI_API_KEY=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</code></pre>
-</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>env OPENAI_API_KEY<span class="op">=&lt;</span>YOURKEY<span class="op">&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Import dependencies</p>
 <div class="cell" data-outputid="eda374d2-84fe-4626-ea2e-90b21c6b0355" data-execution_count="5">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> visual_chatgpt <span class="im">import</span> <span class="op">*</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> visual_chatgpt <span class="im">import</span> <span class="op">*</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>/usr/local/lib/python3.9/dist-packages/flax/core/frozen_dict.py:169: FutureWarning: jax.tree_util.register_keypaths is deprecated, and will be removed in a future release. Please use `register_pytree_with_keys()` instead.
   jax.tree_util.register_keypaths(</code></pre>
@@ -681,30 +238,30 @@ Successfully installed accelerate-0.18.0 addict-2.4.0 aiofiles-23.1.0 aiohttp-3.
 </div>
 <p>Run VisualChatGPT</p>
 <div class="cell" data-outputid="739d2b46-022b-4437-cd27-19e25b68643d" data-execution_count="6">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># load = "ImageCaptioning_cuda:0,Text2Image_cuda:0"</span></span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>load <span class="op">=</span> <span class="st">"Text2Image_cuda:0,ImageCaptioning_cuda:0,VisualQuestionAnswering_cuda:0,Image2Canny_cpu,Image2Line_cpu,Image2Pose_cpu,Image2Depth_cpu,CannyText2Image_cuda:0,InstructPix2Pix_cuda:0,Image2Seg_cuda:0"</span></span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>load_dict <span class="op">=</span> {e.split(<span class="st">'_'</span>)[<span class="dv">0</span>].strip(): e.split(<span class="st">'_'</span>)[<span class="dv">1</span>].strip() <span class="cf">for</span> e <span class="kw">in</span> load.split(<span class="st">','</span>)}</span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>bot <span class="op">=</span> ConversationBot(load_dict<span class="op">=</span>load_dict)</span>
-<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> gr.Blocks(css<span class="op">=</span><span class="st">"#chatbot .overflow-y-auto{height:500px}"</span>) <span class="im">as</span> demo:</span>
-<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>    chatbot <span class="op">=</span> gr.Chatbot(elem_id<span class="op">=</span><span class="st">"chatbot"</span>, label<span class="op">=</span><span class="st">"Visual ChatGPT"</span>)</span>
-<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>    state <span class="op">=</span> gr.State([])</span>
-<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">with</span> gr.Row():</span>
-<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>        <span class="cf">with</span> gr.Column(scale<span class="op">=</span><span class="fl">0.7</span>):</span>
-<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>            txt <span class="op">=</span> gr.Textbox(show_label<span class="op">=</span><span class="va">False</span>, placeholder<span class="op">=</span><span class="st">"Enter text and press enter, or upload an image"</span>).style(</span>
-<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>                container<span class="op">=</span><span class="va">False</span>)</span>
-<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a>        <span class="cf">with</span> gr.Column(scale<span class="op">=</span><span class="fl">0.15</span>, min_width<span class="op">=</span><span class="dv">0</span>):</span>
-<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a>            clear <span class="op">=</span> gr.Button(<span class="st">"Clear️"</span>)</span>
-<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a>        <span class="cf">with</span> gr.Column(scale<span class="op">=</span><span class="fl">0.15</span>, min_width<span class="op">=</span><span class="dv">0</span>):</span>
-<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a>            btn <span class="op">=</span> gr.UploadButton(<span class="st">"Upload"</span>, file_types<span class="op">=</span>[<span class="st">"image"</span>])</span>
-<span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-18"><a href="#cb11-18" aria-hidden="true" tabindex="-1"></a>    txt.submit(bot.run_text, [txt, state], [chatbot, state])</span>
-<span id="cb11-19"><a href="#cb11-19" aria-hidden="true" tabindex="-1"></a>    txt.submit(<span class="kw">lambda</span>: <span class="st">""</span>, <span class="va">None</span>, txt)</span>
-<span id="cb11-20"><a href="#cb11-20" aria-hidden="true" tabindex="-1"></a>    btn.upload(bot.run_image, [btn, state, txt], [chatbot, state, txt])</span>
-<span id="cb11-21"><a href="#cb11-21" aria-hidden="true" tabindex="-1"></a>    clear.click(bot.memory.clear)</span>
-<span id="cb11-22"><a href="#cb11-22" aria-hidden="true" tabindex="-1"></a>    clear.click(<span class="kw">lambda</span>: [], <span class="va">None</span>, chatbot)</span>
-<span id="cb11-23"><a href="#cb11-23" aria-hidden="true" tabindex="-1"></a>    clear.click(<span class="kw">lambda</span>: [], <span class="va">None</span>, state)</span>
-<span id="cb11-24"><a href="#cb11-24" aria-hidden="true" tabindex="-1"></a>    demo.launch(server_name<span class="op">=</span><span class="st">"0.0.0.0"</span>, server_port<span class="op">=</span><span class="dv">7861</span>, share<span class="op">=</span><span class="va">True</span>, debug<span class="op">=</span><span class="va">True</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># load = "ImageCaptioning_cuda:0,Text2Image_cuda:0"</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>load <span class="op">=</span> <span class="st">"Text2Image_cuda:0,ImageCaptioning_cuda:0,VisualQuestionAnswering_cuda:0,Image2Canny_cpu,Image2Line_cpu,Image2Pose_cpu,Image2Depth_cpu,CannyText2Image_cuda:0,InstructPix2Pix_cuda:0,Image2Seg_cuda:0"</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>load_dict <span class="op">=</span> {e.split(<span class="st">'_'</span>)[<span class="dv">0</span>].strip(): e.split(<span class="st">'_'</span>)[<span class="dv">1</span>].strip() <span class="cf">for</span> e <span class="kw">in</span> load.split(<span class="st">','</span>)}</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>bot <span class="op">=</span> ConversationBot(load_dict<span class="op">=</span>load_dict)</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> gr.Blocks(css<span class="op">=</span><span class="st">"#chatbot .overflow-y-auto{height:500px}"</span>) <span class="im">as</span> demo:</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>    chatbot <span class="op">=</span> gr.Chatbot(elem_id<span class="op">=</span><span class="st">"chatbot"</span>, label<span class="op">=</span><span class="st">"Visual ChatGPT"</span>)</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>    state <span class="op">=</span> gr.State([])</span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">with</span> gr.Row():</span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>        <span class="cf">with</span> gr.Column(scale<span class="op">=</span><span class="fl">0.7</span>):</span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>            txt <span class="op">=</span> gr.Textbox(show_label<span class="op">=</span><span class="va">False</span>, placeholder<span class="op">=</span><span class="st">"Enter text and press enter, or upload an image"</span>).style(</span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>                container<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>        <span class="cf">with</span> gr.Column(scale<span class="op">=</span><span class="fl">0.15</span>, min_width<span class="op">=</span><span class="dv">0</span>):</span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>            clear <span class="op">=</span> gr.Button(<span class="st">"Clear️"</span>)</span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>        <span class="cf">with</span> gr.Column(scale<span class="op">=</span><span class="fl">0.15</span>, min_width<span class="op">=</span><span class="dv">0</span>):</span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a>            btn <span class="op">=</span> gr.UploadButton(<span class="st">"Upload"</span>, file_types<span class="op">=</span>[<span class="st">"image"</span>])</span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a>    txt.submit(bot.run_text, [txt, state], [chatbot, state])</span>
+<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a>    txt.submit(<span class="kw">lambda</span>: <span class="st">""</span>, <span class="va">None</span>, txt)</span>
+<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a>    btn.upload(bot.run_image, [btn, state, txt], [chatbot, state, txt])</span>
+<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a>    clear.click(bot.memory.clear)</span>
+<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a>    clear.click(<span class="kw">lambda</span>: [], <span class="va">None</span>, chatbot)</span>
+<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a>    clear.click(<span class="kw">lambda</span>: [], <span class="va">None</span>, state)</span>
+<span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a>    demo.launch(server_name<span class="op">=</span><span class="st">"0.0.0.0"</span>, server_port<span class="op">=</span><span class="dv">7861</span>, share<span class="op">=</span><span class="va">True</span>, debug<span class="op">=</span><span class="va">True</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Initializing VisualChatGPT, load_dict={'Text2Image': 'cuda:0', 'ImageCaptioning': 'cuda:0', 'VisualQuestionAnswering': 'cuda:0', 'Image2Canny': 'cpu', 'Image2Line': 'cpu', 'Image2Pose': 'cpu', 'Image2Depth': 'cpu', 'CannyText2Image': 'cuda:0', 'InstructPix2Pix': 'cuda:0', 'Image2Seg': 'cuda:0'}
 Initializing Text2Image to cuda:0</code></pre>
@@ -1703,18 +1260,9 @@ Keyboard interruption in main thread... closing server.
 Killing tunnel 0.0.0.0:7861 &lt;&gt; https://7b55e143590acf0035.gradio.live</code></pre>
 </div>
 </div>
-<div class="cell" data-outputid="bfc8a304-6e53-447d-a73f-5c9310c22870" data-execution_count="7">
-<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="op">!</span>ps <span class="op">-</span>aux <span class="op">|</span> grep <span class="st">"python"</span></span>
-<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a><span class="co"># !kill -9 7507    </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>root          52  0.2  0.0      0     0 ?        Z    08:11   0:04 [python3] &lt;defunct&gt;
-root          53  0.0  0.2  74300 36344 ?        S    08:11   0:00 python3 /usr/local/bin/colab-fileshim.py
-root          88  0.6  0.9 552712 129440 ?       Sl   08:11   0:14 /usr/bin/python3 /usr/local/bin/jupyter-notebook --transport="ipc" --ip=172.28.0.12 --port=9000 --FileContentsManager.root_dir=/ --MappingKernelManager.root_dir=/content
-root         431  8.9 62.1 31968480 8260384 ?    Ssl  08:12   3:15 /usr/bin/python3 -m ipykernel_launcher -f /root/.local/share/jupyter/runtime/kernel-73f0c2f8-75d3-491d-82c5-9c44e2aab6e4.json
-root         476  0.1  0.1 539396 14596 ?        Sl   08:12   0:04 /usr/bin/python3 /usr/local/lib/python3.9/dist-packages/debugpy/adapter --for-server 45805 --host 127.0.0.1 --port 19632 --server-access-token e19ef3b0bb6d4e16a6eeb4d46462047341db2153708893f65de808f336d6a567
-root        9969 21.0  0.0   6904  3176 ?        S    08:49   0:00 /bin/bash -c ps -aux | grep "python"
-root        9972  0.0  0.0   6444   656 ?        S    08:49   0:00 grep python</code></pre>
-</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="op">!</span>ps <span class="op">-</span>aux <span class="op">|</span> grep <span class="st">"python"</span></span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a><span class="co"># !kill -9 7507    </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 
 
