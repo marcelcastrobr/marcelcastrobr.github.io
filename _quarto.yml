@@ -16,6 +16,8 @@ website:
         href: https://github.com/marcelcastrobr/marcelcastrobr.github.io/blob/main/cv/cv-marcelcastro.pdf
       - icon: bi-diagram-3-fill
         href: https://marcelcastrobr.github.io/my_ml_links/
+      - icon: emoji-smile
+        href: https://huggingface.co/marcelcastrobr
       - icon: github
         href: https://github.com/marcelcastrobr
       - icon: linkedin
