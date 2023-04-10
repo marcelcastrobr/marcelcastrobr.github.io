@@ -2,8 +2,8 @@
   {
     "listing": "/index.html",
     "items": [
-      "/posts/2023-04-10-chatGPT-over-your-data.html",
       "/posts/2023-04-06-PromptEngineering.html",
+      "/posts/2023-04-10-ChatGPToveryourdata.html",
       "/posts/2023-03-27-visualchatgpt.html",
       "/posts/2023-03-24-semanticsearchopenai.html",
       "/posts/2022-11-04-stablediffusionsagemaker.html",
