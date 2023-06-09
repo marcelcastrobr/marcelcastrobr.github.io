@@ -1,7 +1,9 @@
 ---
 #title: "Marcel Castro"
 listing:
-  contents: posts
+  contents: 
+    - posts
+    - external-items.yaml
   sort: "date desc"
   type: default
   categories: true
