@@ -11,6 +11,8 @@ website:
       - text: "Home"
         file: index.qmd
       - about.qmd
+      - text: Links
+        href: https://marcelcastrobr.github.io/my_ml_links/
     right:
       - icon: bi-filetype-pdf
         href: https://github.com/marcelcastrobr/marcelcastrobr.github.io/blob/main/cv/cv-marcelcastro.pdf
