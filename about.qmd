@@ -21,7 +21,7 @@ about:
 
 
 
-> I made this website to capture my learning in the field of artificial intelligence, machine learning, data science and devops. Check [post and notebooks](https://marcelcastrobr.github.io/notebooks/).
+> I made this website to capture my learning in the field of artificial intelligence, machine learning, data science and devops. Check [post and notebooks](https://marcelcastrobr.github.io/).
 
 
 
