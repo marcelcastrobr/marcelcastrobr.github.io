@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.2.475">
+<meta name="generator" content="quarto-1.3.361">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -19,9 +19,10 @@ div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
   width: 0.8em;
-  margin: 0 0.8em 0.2em -1.6em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
@@ -48,43 +49,13 @@ pre.numberSource code > span > a:first-child::before
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
     padding: 0 4px; width: 4em;
-    color: #aaaaaa;
   }
-pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
 div.sourceCode
   {   }
 @media screen {
 pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
-code span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code span.at { color: #7d9029; } /* Attribute */
-code span.bn { color: #40a070; } /* BaseN */
-code span.bu { color: #008000; } /* BuiltIn */
-code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code span.ch { color: #4070a0; } /* Char */
-code span.cn { color: #880000; } /* Constant */
-code span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code span.dt { color: #902000; } /* DataType */
-code span.dv { color: #40a070; } /* DecVal */
-code span.er { color: #ff0000; font-weight: bold; } /* Error */
-code span.ex { } /* Extension */
-code span.fl { color: #40a070; } /* Float */
-code span.fu { color: #06287e; } /* Function */
-code span.im { color: #008000; font-weight: bold; } /* Import */
-code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
-code span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code span.op { color: #666666; } /* Operator */
-code span.ot { color: #007020; } /* Other */
-code span.pp { color: #bc7a00; } /* Preprocessor */
-code span.sc { color: #4070a0; } /* SpecialChar */
-code span.ss { color: #bb6688; } /* SpecialString */
-code span.st { color: #4070a0; } /* String */
-code span.va { color: #19177c; } /* Variable */
-code span.vs { color: #4070a0; } /* VerbatimString */
-code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
 
@@ -120,7 +91,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
     "search-detached-cancel-button-title": "Cancel",
-    "search-submit-button-title": "Submit"
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
   }
 }</script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
@@ -142,55 +114,55 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <span class="navbar-title">Marcel Castro</span>
     </a>
   </div>
+            <div id="quarto-search" class="" title="Search"></div>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
   <span class="navbar-toggler-icon"></span>
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="../index.html">
+    <a class="nav-link" href="../index.html" rel="" target="">
  <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../about.html">
+    <a class="nav-link" href="../about.html" rel="" target="">
  <span class="menu-text">About</span></a>
   </li>  
 </ul>
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item compact">
-    <a class="nav-link" href="https://github.com/marcelcastrobr/marcelcastrobr.github.io/blob/main/cv/cv-marcelcastro.pdf"><i class="bi bi-filetype-pdf" role="img">
+    <a class="nav-link" href="https://github.com/marcelcastrobr/marcelcastrobr.github.io/blob/main/cv/cv-marcelcastro.pdf" rel="" target=""><i class="bi bi-filetype-pdf" role="img">
 </i> 
  <span class="menu-text"></span></a>
   </li>  
   <li class="nav-item compact">
-    <a class="nav-link" href="https://marcelcastrobr.github.io/my_ml_links/"><i class="bi bi-diagram-3-fill" role="img">
+    <a class="nav-link" href="https://marcelcastrobr.github.io/my_ml_links/" rel="" target=""><i class="bi bi-diagram-3-fill" role="img">
 </i> 
  <span class="menu-text"></span></a>
   </li>  
   <li class="nav-item compact">
-    <a class="nav-link" href="https://huggingface.co/marcelcastrobr"><i class="bi bi-emoji-smile" role="img">
+    <a class="nav-link" href="https://huggingface.co/marcelcastrobr" rel="" target=""><i class="bi bi-emoji-smile" role="img">
 </i> 
  <span class="menu-text"></span></a>
   </li>  
   <li class="nav-item compact">
-    <a class="nav-link" href="https://github.com/marcelcastrobr"><i class="bi bi-github" role="img">
+    <a class="nav-link" href="https://github.com/marcelcastrobr" rel="" target=""><i class="bi bi-github" role="img">
 </i> 
  <span class="menu-text"></span></a>
   </li>  
   <li class="nav-item compact">
-    <a class="nav-link" href="https://www.linkedin.com/in/marcelcastrobr/"><i class="bi bi-linkedin" role="img">
+    <a class="nav-link" href="https://www.linkedin.com/in/marcelcastrobr/" rel="" target=""><i class="bi bi-linkedin" role="img">
 </i> 
  <span class="menu-text"></span></a>
   </li>  
 </ul>
-              <div class="quarto-toggle-container">
-                  <a href="" class="quarto-reader-toggle nav-link" onclick="window.quartoToggleReader(); return false;" title="Toggle reader mode">
+            <div class="quarto-navbar-tools">
+  <a href="" class="quarto-reader-toggle quarto-navigation-tool px-1" onclick="window.quartoToggleReader(); return false;" title="Toggle reader mode">
   <div class="quarto-reader-toggle-btn">
   <i class="bi"></i>
   </div>
 </a>
-              </div>
-              <div id="quarto-search" class="" title="Search"></div>
+</div>
           </div> <!-- /navcollapse -->
       </div> <!-- /container-fluid -->
     </nav>
@@ -282,159 +254,160 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Preview the dataset</span></span>
 <span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>df.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="2">
-
 <div>
 
-<table class="dataframe table table-sm table-striped">
-  <thead>
-    <tr>
-      <th></th>
-      <th>encounter_id</th>
-      <th>patient_nbr</th>
-      <th>race</th>
-      <th>gender</th>
-      <th>age</th>
-      <th>weight</th>
-      <th>admission_type_id</th>
-      <th>discharge_disposition_id</th>
-      <th>admission_source_id</th>
-      <th>time_in_hospital</th>
-      <th>...</th>
-      <th>citoglipton</th>
-      <th>insulin</th>
-      <th>glyburide-metformin</th>
-      <th>glipizide-metformin</th>
-      <th>glimepiride-pioglitazone</th>
-      <th>metformin-rosiglitazone</th>
-      <th>metformin-pioglitazone</th>
-      <th>change</th>
-      <th>diabetesMed</th>
-      <th>readmitted</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>2278392</td>
-      <td>8222157</td>
-      <td>Caucasian</td>
-      <td>Female</td>
-      <td>[0-10)</td>
-      <td>NaN</td>
-      <td>6</td>
-      <td>25</td>
-      <td>1</td>
-      <td>1</td>
-      <td>...</td>
-      <td>No</td>
-      <td>No</td>
-      <td>No</td>
-      <td>No</td>
-      <td>No</td>
-      <td>No</td>
-      <td>No</td>
-      <td>No</td>
-      <td>No</td>
-      <td>NO</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>149190</td>
-      <td>55629189</td>
-      <td>Caucasian</td>
-      <td>Female</td>
-      <td>[10-20)</td>
-      <td>NaN</td>
-      <td>1</td>
-      <td>1</td>
-      <td>7</td>
-      <td>3</td>
-      <td>...</td>
-      <td>No</td>
-      <td>Up</td>
-      <td>No</td>
-      <td>No</td>
-      <td>No</td>
-      <td>No</td>
-      <td>No</td>
-      <td>Ch</td>
-      <td>Yes</td>
-      <td>&gt;30</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>64410</td>
-      <td>86047875</td>
-      <td>AfricanAmerican</td>
-      <td>Female</td>
-      <td>[20-30)</td>
-      <td>NaN</td>
-      <td>1</td>
-      <td>1</td>
-      <td>7</td>
-      <td>2</td>
-      <td>...</td>
-      <td>No</td>
-      <td>No</td>
-      <td>No</td>
-      <td>No</td>
-      <td>No</td>
-      <td>No</td>
-      <td>No</td>
-      <td>No</td>
-      <td>Yes</td>
-      <td>NO</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>500364</td>
-      <td>82442376</td>
-      <td>Caucasian</td>
-      <td>Male</td>
-      <td>[30-40)</td>
-      <td>NaN</td>
-      <td>1</td>
-      <td>1</td>
-      <td>7</td>
-      <td>2</td>
-      <td>...</td>
-      <td>No</td>
-      <td>Up</td>
-      <td>No</td>
-      <td>No</td>
-      <td>No</td>
-      <td>No</td>
-      <td>No</td>
-      <td>Ch</td>
-      <td>Yes</td>
-      <td>NO</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>16680</td>
-      <td>42519267</td>
-      <td>Caucasian</td>
-      <td>Male</td>
-      <td>[40-50)</td>
-      <td>NaN</td>
-      <td>1</td>
-      <td>1</td>
-      <td>7</td>
-      <td>1</td>
-      <td>...</td>
-      <td>No</td>
-      <td>Steady</td>
-      <td>No</td>
-      <td>No</td>
-      <td>No</td>
-      <td>No</td>
-      <td>No</td>
-      <td>Ch</td>
-      <td>Yes</td>
-      <td>NO</td>
-    </tr>
-  </tbody>
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">encounter_id</th>
+<th data-quarto-table-cell-role="th">patient_nbr</th>
+<th data-quarto-table-cell-role="th">race</th>
+<th data-quarto-table-cell-role="th">gender</th>
+<th data-quarto-table-cell-role="th">age</th>
+<th data-quarto-table-cell-role="th">weight</th>
+<th data-quarto-table-cell-role="th">admission_type_id</th>
+<th data-quarto-table-cell-role="th">discharge_disposition_id</th>
+<th data-quarto-table-cell-role="th">admission_source_id</th>
+<th data-quarto-table-cell-role="th">time_in_hospital</th>
+<th data-quarto-table-cell-role="th">...</th>
+<th data-quarto-table-cell-role="th">citoglipton</th>
+<th data-quarto-table-cell-role="th">insulin</th>
+<th data-quarto-table-cell-role="th">glyburide-metformin</th>
+<th data-quarto-table-cell-role="th">glipizide-metformin</th>
+<th data-quarto-table-cell-role="th">glimepiride-pioglitazone</th>
+<th data-quarto-table-cell-role="th">metformin-rosiglitazone</th>
+<th data-quarto-table-cell-role="th">metformin-pioglitazone</th>
+<th data-quarto-table-cell-role="th">change</th>
+<th data-quarto-table-cell-role="th">diabetesMed</th>
+<th data-quarto-table-cell-role="th">readmitted</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>2278392</td>
+<td>8222157</td>
+<td>Caucasian</td>
+<td>Female</td>
+<td>[0-10)</td>
+<td>NaN</td>
+<td>6</td>
+<td>25</td>
+<td>1</td>
+<td>1</td>
+<td>...</td>
+<td>No</td>
+<td>No</td>
+<td>No</td>
+<td>No</td>
+<td>No</td>
+<td>No</td>
+<td>No</td>
+<td>No</td>
+<td>No</td>
+<td>NO</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>149190</td>
+<td>55629189</td>
+<td>Caucasian</td>
+<td>Female</td>
+<td>[10-20)</td>
+<td>NaN</td>
+<td>1</td>
+<td>1</td>
+<td>7</td>
+<td>3</td>
+<td>...</td>
+<td>No</td>
+<td>Up</td>
+<td>No</td>
+<td>No</td>
+<td>No</td>
+<td>No</td>
+<td>No</td>
+<td>Ch</td>
+<td>Yes</td>
+<td>&gt;30</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>64410</td>
+<td>86047875</td>
+<td>AfricanAmerican</td>
+<td>Female</td>
+<td>[20-30)</td>
+<td>NaN</td>
+<td>1</td>
+<td>1</td>
+<td>7</td>
+<td>2</td>
+<td>...</td>
+<td>No</td>
+<td>No</td>
+<td>No</td>
+<td>No</td>
+<td>No</td>
+<td>No</td>
+<td>No</td>
+<td>No</td>
+<td>Yes</td>
+<td>NO</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>500364</td>
+<td>82442376</td>
+<td>Caucasian</td>
+<td>Male</td>
+<td>[30-40)</td>
+<td>NaN</td>
+<td>1</td>
+<td>1</td>
+<td>7</td>
+<td>2</td>
+<td>...</td>
+<td>No</td>
+<td>Up</td>
+<td>No</td>
+<td>No</td>
+<td>No</td>
+<td>No</td>
+<td>No</td>
+<td>Ch</td>
+<td>Yes</td>
+<td>NO</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>16680</td>
+<td>42519267</td>
+<td>Caucasian</td>
+<td>Male</td>
+<td>[40-50)</td>
+<td>NaN</td>
+<td>1</td>
+<td>1</td>
+<td>7</td>
+<td>1</td>
+<td>...</td>
+<td>No</td>
+<td>Steady</td>
+<td>No</td>
+<td>No</td>
+<td>No</td>
+<td>No</td>
+<td>No</td>
+<td>Ch</td>
+<td>Yes</td>
+<td>NO</td>
+</tr>
+</tbody>
 </table>
+
 <p>5 rows × 50 columns</p>
 </div>
 </div>
@@ -597,521 +570,523 @@ Last feature: readmitted</code></pre>
 <span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>tfdv.display_schema(schema)</span>
 <span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a><span class="co">### </span><span class="re">END</span><span class="co"> CODE HERE</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
-
 <div>
 
-<table class="dataframe table table-sm table-striped">
-  <thead>
-    <tr>
-      <th></th>
-      <th>Type</th>
-      <th>Presence</th>
-      <th>Valency</th>
-      <th>Domain</th>
-    </tr>
-    <tr>
-      <th>Feature name</th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>'race'</th>
-      <td>STRING</td>
-      <td>optional</td>
-      <td>single</td>
-      <td>'race'</td>
-    </tr>
-    <tr>
-      <th>'gender'</th>
-      <td>STRING</td>
-      <td>required</td>
-      <td></td>
-      <td>'gender'</td>
-    </tr>
-    <tr>
-      <th>'age'</th>
-      <td>STRING</td>
-      <td>required</td>
-      <td></td>
-      <td>'age'</td>
-    </tr>
-    <tr>
-      <th>'weight'</th>
-      <td>STRING</td>
-      <td>optional</td>
-      <td>single</td>
-      <td>'weight'</td>
-    </tr>
-    <tr>
-      <th>'admission_type_id'</th>
-      <td>INT</td>
-      <td>required</td>
-      <td></td>
-      <td>-</td>
-    </tr>
-    <tr>
-      <th>'discharge_disposition_id'</th>
-      <td>INT</td>
-      <td>required</td>
-      <td></td>
-      <td>-</td>
-    </tr>
-    <tr>
-      <th>'admission_source_id'</th>
-      <td>INT</td>
-      <td>required</td>
-      <td></td>
-      <td>-</td>
-    </tr>
-    <tr>
-      <th>'time_in_hospital'</th>
-      <td>INT</td>
-      <td>required</td>
-      <td></td>
-      <td>-</td>
-    </tr>
-    <tr>
-      <th>'payer_code'</th>
-      <td>STRING</td>
-      <td>optional</td>
-      <td>single</td>
-      <td>'payer_code'</td>
-    </tr>
-    <tr>
-      <th>'medical_specialty'</th>
-      <td>STRING</td>
-      <td>optional</td>
-      <td>single</td>
-      <td>'medical_specialty'</td>
-    </tr>
-    <tr>
-      <th>'num_lab_procedures'</th>
-      <td>INT</td>
-      <td>required</td>
-      <td></td>
-      <td>-</td>
-    </tr>
-    <tr>
-      <th>'num_procedures'</th>
-      <td>INT</td>
-      <td>required</td>
-      <td></td>
-      <td>-</td>
-    </tr>
-    <tr>
-      <th>'num_medications'</th>
-      <td>INT</td>
-      <td>required</td>
-      <td></td>
-      <td>-</td>
-    </tr>
-    <tr>
-      <th>'number_outpatient'</th>
-      <td>INT</td>
-      <td>required</td>
-      <td></td>
-      <td>-</td>
-    </tr>
-    <tr>
-      <th>'number_emergency'</th>
-      <td>INT</td>
-      <td>required</td>
-      <td></td>
-      <td>-</td>
-    </tr>
-    <tr>
-      <th>'number_inpatient'</th>
-      <td>INT</td>
-      <td>required</td>
-      <td></td>
-      <td>-</td>
-    </tr>
-    <tr>
-      <th>'diag_1'</th>
-      <td>BYTES</td>
-      <td>optional</td>
-      <td>single</td>
-      <td>-</td>
-    </tr>
-    <tr>
-      <th>'diag_2'</th>
-      <td>BYTES</td>
-      <td>optional</td>
-      <td>single</td>
-      <td>-</td>
-    </tr>
-    <tr>
-      <th>'diag_3'</th>
-      <td>BYTES</td>
-      <td>optional</td>
-      <td>single</td>
-      <td>-</td>
-    </tr>
-    <tr>
-      <th>'number_diagnoses'</th>
-      <td>INT</td>
-      <td>required</td>
-      <td></td>
-      <td>-</td>
-    </tr>
-    <tr>
-      <th>'max_glu_serum'</th>
-      <td>STRING</td>
-      <td>required</td>
-      <td></td>
-      <td>'max_glu_serum'</td>
-    </tr>
-    <tr>
-      <th>'A1Cresult'</th>
-      <td>STRING</td>
-      <td>required</td>
-      <td></td>
-      <td>'A1Cresult'</td>
-    </tr>
-    <tr>
-      <th>'metformin'</th>
-      <td>STRING</td>
-      <td>required</td>
-      <td></td>
-      <td>'metformin'</td>
-    </tr>
-    <tr>
-      <th>'repaglinide'</th>
-      <td>STRING</td>
-      <td>required</td>
-      <td></td>
-      <td>'repaglinide'</td>
-    </tr>
-    <tr>
-      <th>'nateglinide'</th>
-      <td>STRING</td>
-      <td>required</td>
-      <td></td>
-      <td>'nateglinide'</td>
-    </tr>
-    <tr>
-      <th>'chlorpropamide'</th>
-      <td>STRING</td>
-      <td>required</td>
-      <td></td>
-      <td>'chlorpropamide'</td>
-    </tr>
-    <tr>
-      <th>'glimepiride'</th>
-      <td>STRING</td>
-      <td>required</td>
-      <td></td>
-      <td>'glimepiride'</td>
-    </tr>
-    <tr>
-      <th>'acetohexamide'</th>
-      <td>STRING</td>
-      <td>required</td>
-      <td></td>
-      <td>'acetohexamide'</td>
-    </tr>
-    <tr>
-      <th>'glipizide'</th>
-      <td>STRING</td>
-      <td>required</td>
-      <td></td>
-      <td>'glipizide'</td>
-    </tr>
-    <tr>
-      <th>'glyburide'</th>
-      <td>STRING</td>
-      <td>required</td>
-      <td></td>
-      <td>'glyburide'</td>
-    </tr>
-    <tr>
-      <th>'tolbutamide'</th>
-      <td>STRING</td>
-      <td>required</td>
-      <td></td>
-      <td>'tolbutamide'</td>
-    </tr>
-    <tr>
-      <th>'pioglitazone'</th>
-      <td>STRING</td>
-      <td>required</td>
-      <td></td>
-      <td>'pioglitazone'</td>
-    </tr>
-    <tr>
-      <th>'rosiglitazone'</th>
-      <td>STRING</td>
-      <td>required</td>
-      <td></td>
-      <td>'rosiglitazone'</td>
-    </tr>
-    <tr>
-      <th>'acarbose'</th>
-      <td>STRING</td>
-      <td>required</td>
-      <td></td>
-      <td>'acarbose'</td>
-    </tr>
-    <tr>
-      <th>'miglitol'</th>
-      <td>STRING</td>
-      <td>required</td>
-      <td></td>
-      <td>'miglitol'</td>
-    </tr>
-    <tr>
-      <th>'troglitazone'</th>
-      <td>STRING</td>
-      <td>required</td>
-      <td></td>
-      <td>'troglitazone'</td>
-    </tr>
-    <tr>
-      <th>'tolazamide'</th>
-      <td>STRING</td>
-      <td>required</td>
-      <td></td>
-      <td>'tolazamide'</td>
-    </tr>
-    <tr>
-      <th>'examide'</th>
-      <td>STRING</td>
-      <td>required</td>
-      <td></td>
-      <td>'examide'</td>
-    </tr>
-    <tr>
-      <th>'citoglipton'</th>
-      <td>STRING</td>
-      <td>required</td>
-      <td></td>
-      <td>'citoglipton'</td>
-    </tr>
-    <tr>
-      <th>'insulin'</th>
-      <td>STRING</td>
-      <td>required</td>
-      <td></td>
-      <td>'insulin'</td>
-    </tr>
-    <tr>
-      <th>'glyburide-metformin'</th>
-      <td>STRING</td>
-      <td>required</td>
-      <td></td>
-      <td>'glyburide-metformin'</td>
-    </tr>
-    <tr>
-      <th>'glipizide-metformin'</th>
-      <td>STRING</td>
-      <td>required</td>
-      <td></td>
-      <td>'glipizide-metformin'</td>
-    </tr>
-    <tr>
-      <th>'glimepiride-pioglitazone'</th>
-      <td>STRING</td>
-      <td>required</td>
-      <td></td>
-      <td>'glimepiride-pioglitazone'</td>
-    </tr>
-    <tr>
-      <th>'metformin-rosiglitazone'</th>
-      <td>STRING</td>
-      <td>required</td>
-      <td></td>
-      <td>'metformin-rosiglitazone'</td>
-    </tr>
-    <tr>
-      <th>'metformin-pioglitazone'</th>
-      <td>STRING</td>
-      <td>required</td>
-      <td></td>
-      <td>'metformin-pioglitazone'</td>
-    </tr>
-    <tr>
-      <th>'change'</th>
-      <td>STRING</td>
-      <td>required</td>
-      <td></td>
-      <td>'change'</td>
-    </tr>
-    <tr>
-      <th>'diabetesMed'</th>
-      <td>STRING</td>
-      <td>required</td>
-      <td></td>
-      <td>'diabetesMed'</td>
-    </tr>
-    <tr>
-      <th>'readmitted'</th>
-      <td>STRING</td>
-      <td>required</td>
-      <td></td>
-      <td>'readmitted'</td>
-    </tr>
-  </tbody>
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">Type</th>
+<th data-quarto-table-cell-role="th">Presence</th>
+<th data-quarto-table-cell-role="th">Valency</th>
+<th data-quarto-table-cell-role="th">Domain</th>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">Feature name</th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">'race'</td>
+<td>STRING</td>
+<td>optional</td>
+<td>single</td>
+<td>'race'</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">'gender'</td>
+<td>STRING</td>
+<td>required</td>
+<td></td>
+<td>'gender'</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">'age'</td>
+<td>STRING</td>
+<td>required</td>
+<td></td>
+<td>'age'</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">'weight'</td>
+<td>STRING</td>
+<td>optional</td>
+<td>single</td>
+<td>'weight'</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">'admission_type_id'</td>
+<td>INT</td>
+<td>required</td>
+<td></td>
+<td>-</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">'discharge_disposition_id'</td>
+<td>INT</td>
+<td>required</td>
+<td></td>
+<td>-</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">'admission_source_id'</td>
+<td>INT</td>
+<td>required</td>
+<td></td>
+<td>-</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">'time_in_hospital'</td>
+<td>INT</td>
+<td>required</td>
+<td></td>
+<td>-</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">'payer_code'</td>
+<td>STRING</td>
+<td>optional</td>
+<td>single</td>
+<td>'payer_code'</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">'medical_specialty'</td>
+<td>STRING</td>
+<td>optional</td>
+<td>single</td>
+<td>'medical_specialty'</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">'num_lab_procedures'</td>
+<td>INT</td>
+<td>required</td>
+<td></td>
+<td>-</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">'num_procedures'</td>
+<td>INT</td>
+<td>required</td>
+<td></td>
+<td>-</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">'num_medications'</td>
+<td>INT</td>
+<td>required</td>
+<td></td>
+<td>-</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">'number_outpatient'</td>
+<td>INT</td>
+<td>required</td>
+<td></td>
+<td>-</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">'number_emergency'</td>
+<td>INT</td>
+<td>required</td>
+<td></td>
+<td>-</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">'number_inpatient'</td>
+<td>INT</td>
+<td>required</td>
+<td></td>
+<td>-</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">'diag_1'</td>
+<td>BYTES</td>
+<td>optional</td>
+<td>single</td>
+<td>-</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">'diag_2'</td>
+<td>BYTES</td>
+<td>optional</td>
+<td>single</td>
+<td>-</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">'diag_3'</td>
+<td>BYTES</td>
+<td>optional</td>
+<td>single</td>
+<td>-</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">'number_diagnoses'</td>
+<td>INT</td>
+<td>required</td>
+<td></td>
+<td>-</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">'max_glu_serum'</td>
+<td>STRING</td>
+<td>required</td>
+<td></td>
+<td>'max_glu_serum'</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">'A1Cresult'</td>
+<td>STRING</td>
+<td>required</td>
+<td></td>
+<td>'A1Cresult'</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">'metformin'</td>
+<td>STRING</td>
+<td>required</td>
+<td></td>
+<td>'metformin'</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">'repaglinide'</td>
+<td>STRING</td>
+<td>required</td>
+<td></td>
+<td>'repaglinide'</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">'nateglinide'</td>
+<td>STRING</td>
+<td>required</td>
+<td></td>
+<td>'nateglinide'</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">'chlorpropamide'</td>
+<td>STRING</td>
+<td>required</td>
+<td></td>
+<td>'chlorpropamide'</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">'glimepiride'</td>
+<td>STRING</td>
+<td>required</td>
+<td></td>
+<td>'glimepiride'</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">'acetohexamide'</td>
+<td>STRING</td>
+<td>required</td>
+<td></td>
+<td>'acetohexamide'</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">'glipizide'</td>
+<td>STRING</td>
+<td>required</td>
+<td></td>
+<td>'glipizide'</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">'glyburide'</td>
+<td>STRING</td>
+<td>required</td>
+<td></td>
+<td>'glyburide'</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">'tolbutamide'</td>
+<td>STRING</td>
+<td>required</td>
+<td></td>
+<td>'tolbutamide'</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">'pioglitazone'</td>
+<td>STRING</td>
+<td>required</td>
+<td></td>
+<td>'pioglitazone'</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">'rosiglitazone'</td>
+<td>STRING</td>
+<td>required</td>
+<td></td>
+<td>'rosiglitazone'</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">'acarbose'</td>
+<td>STRING</td>
+<td>required</td>
+<td></td>
+<td>'acarbose'</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">'miglitol'</td>
+<td>STRING</td>
+<td>required</td>
+<td></td>
+<td>'miglitol'</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">'troglitazone'</td>
+<td>STRING</td>
+<td>required</td>
+<td></td>
+<td>'troglitazone'</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">'tolazamide'</td>
+<td>STRING</td>
+<td>required</td>
+<td></td>
+<td>'tolazamide'</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">'examide'</td>
+<td>STRING</td>
+<td>required</td>
+<td></td>
+<td>'examide'</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">'citoglipton'</td>
+<td>STRING</td>
+<td>required</td>
+<td></td>
+<td>'citoglipton'</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">'insulin'</td>
+<td>STRING</td>
+<td>required</td>
+<td></td>
+<td>'insulin'</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">'glyburide-metformin'</td>
+<td>STRING</td>
+<td>required</td>
+<td></td>
+<td>'glyburide-metformin'</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">'glipizide-metformin'</td>
+<td>STRING</td>
+<td>required</td>
+<td></td>
+<td>'glipizide-metformin'</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">'glimepiride-pioglitazone'</td>
+<td>STRING</td>
+<td>required</td>
+<td></td>
+<td>'glimepiride-pioglitazone'</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">'metformin-rosiglitazone'</td>
+<td>STRING</td>
+<td>required</td>
+<td></td>
+<td>'metformin-rosiglitazone'</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">'metformin-pioglitazone'</td>
+<td>STRING</td>
+<td>required</td>
+<td></td>
+<td>'metformin-pioglitazone'</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">'change'</td>
+<td>STRING</td>
+<td>required</td>
+<td></td>
+<td>'change'</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">'diabetesMed'</td>
+<td>STRING</td>
+<td>required</td>
+<td></td>
+<td>'diabetesMed'</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">'readmitted'</td>
+<td>STRING</td>
+<td>required</td>
+<td></td>
+<td>'readmitted'</td>
+</tr>
+</tbody>
 </table>
+
 </div>
 </div>
 <div class="cell-output cell-output-display">
-
 <div>
 
-<table class="dataframe table table-sm table-striped">
-  <thead>
-    <tr>
-      <th></th>
-      <th>Values</th>
-    </tr>
-    <tr>
-      <th>Domain</th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>'race'</th>
-      <td>'AfricanAmerican', 'Asian', 'Caucasian', 'Hispanic', 'Other'</td>
-    </tr>
-    <tr>
-      <th>'gender'</th>
-      <td>'Female', 'Male', 'Unknown/Invalid'</td>
-    </tr>
-    <tr>
-      <th>'age'</th>
-      <td>'[0-10)', '[10-20)', '[20-30)', '[30-40)', '[40-50)', '[50-60)', '[60-70)', '[70-80)', '[80-90)', '[90-100)'</td>
-    </tr>
-    <tr>
-      <th>'weight'</th>
-      <td>'&gt;200', '[0-25)', '[100-125)', '[125-150)', '[150-175)', '[175-200)', '[25-50)', '[50-75)', '[75-100)'</td>
-    </tr>
-    <tr>
-      <th>'payer_code'</th>
-      <td>'BC', 'CH', 'CM', 'CP', 'DM', 'HM', 'MC', 'MD', 'MP', 'OG', 'OT', 'PO', 'SI', 'SP', 'UN', 'WC'</td>
-    </tr>
-    <tr>
-      <th>'medical_specialty'</th>
-      <td>'AllergyandImmunology', 'Anesthesiology', 'Anesthesiology-Pediatric', 'Cardiology', 'Cardiology-Pediatric', 'Dentistry', 'Dermatology', 'Emergency/Trauma', 'Endocrinology', 'Family/GeneralPractice', 'Gastroenterology', 'Gynecology', 'Hematology', 'Hematology/Oncology', 'Hospitalist', 'InfectiousDiseases', 'InternalMedicine', 'Nephrology', 'Neurology', 'Obsterics&amp;Gynecology-GynecologicOnco', 'Obstetrics', 'ObstetricsandGynecology', 'Oncology', 'Ophthalmology', 'Orthopedics', 'Orthopedics-Reconstructive', 'Osteopath', 'Otolaryngology', 'OutreachServices', 'Pathology', 'Pediatrics', 'Pediatrics-AllergyandImmunology', 'Pediatrics-CriticalCare', 'Pediatrics-EmergencyMedicine', 'Pediatrics-Endocrinology', 'Pediatrics-Hematology-Oncology', 'Pediatrics-InfectiousDiseases', 'Pediatrics-Neurology', 'Pediatrics-Pulmonology', 'Perinatology', 'PhysicalMedicineandRehabilitation', 'PhysicianNotFound', 'Podiatry', 'Proctology', 'Psychiatry', 'Psychiatry-Addictive', 'Psychiatry-Child/Adolescent', 'Psychology', 'Pulmonology', 'Radiologist', 'Radiology', 'Rheumatology', 'Speech', 'SportsMedicine', 'Surgeon', 'Surgery-Cardiovascular', 'Surgery-Cardiovascular/Thoracic', 'Surgery-Colon&amp;Rectal', 'Surgery-General', 'Surgery-Maxillofacial', 'Surgery-Neuro', 'Surgery-Pediatric', 'Surgery-Plastic', 'Surgery-PlasticwithinHeadandNeck', 'Surgery-Thoracic', 'Surgery-Vascular', 'SurgicalSpecialty', 'Urology'</td>
-    </tr>
-    <tr>
-      <th>'max_glu_serum'</th>
-      <td>'&gt;200', '&gt;300', 'None', 'Norm'</td>
-    </tr>
-    <tr>
-      <th>'A1Cresult'</th>
-      <td>'&gt;7', '&gt;8', 'None', 'Norm'</td>
-    </tr>
-    <tr>
-      <th>'metformin'</th>
-      <td>'Down', 'No', 'Steady', 'Up'</td>
-    </tr>
-    <tr>
-      <th>'repaglinide'</th>
-      <td>'Down', 'No', 'Steady', 'Up'</td>
-    </tr>
-    <tr>
-      <th>'nateglinide'</th>
-      <td>'Down', 'No', 'Steady', 'Up'</td>
-    </tr>
-    <tr>
-      <th>'chlorpropamide'</th>
-      <td>'Down', 'No', 'Steady', 'Up'</td>
-    </tr>
-    <tr>
-      <th>'glimepiride'</th>
-      <td>'Down', 'No', 'Steady', 'Up'</td>
-    </tr>
-    <tr>
-      <th>'acetohexamide'</th>
-      <td>'No', 'Steady'</td>
-    </tr>
-    <tr>
-      <th>'glipizide'</th>
-      <td>'Down', 'No', 'Steady', 'Up'</td>
-    </tr>
-    <tr>
-      <th>'glyburide'</th>
-      <td>'Down', 'No', 'Steady', 'Up'</td>
-    </tr>
-    <tr>
-      <th>'tolbutamide'</th>
-      <td>'No', 'Steady'</td>
-    </tr>
-    <tr>
-      <th>'pioglitazone'</th>
-      <td>'Down', 'No', 'Steady', 'Up'</td>
-    </tr>
-    <tr>
-      <th>'rosiglitazone'</th>
-      <td>'Down', 'No', 'Steady', 'Up'</td>
-    </tr>
-    <tr>
-      <th>'acarbose'</th>
-      <td>'Down', 'No', 'Steady', 'Up'</td>
-    </tr>
-    <tr>
-      <th>'miglitol'</th>
-      <td>'Down', 'No', 'Steady', 'Up'</td>
-    </tr>
-    <tr>
-      <th>'troglitazone'</th>
-      <td>'No', 'Steady'</td>
-    </tr>
-    <tr>
-      <th>'tolazamide'</th>
-      <td>'No', 'Steady', 'Up'</td>
-    </tr>
-    <tr>
-      <th>'examide'</th>
-      <td>'No'</td>
-    </tr>
-    <tr>
-      <th>'citoglipton'</th>
-      <td>'No'</td>
-    </tr>
-    <tr>
-      <th>'insulin'</th>
-      <td>'Down', 'No', 'Steady', 'Up'</td>
-    </tr>
-    <tr>
-      <th>'glyburide-metformin'</th>
-      <td>'Down', 'No', 'Steady', 'Up'</td>
-    </tr>
-    <tr>
-      <th>'glipizide-metformin'</th>
-      <td>'No', 'Steady'</td>
-    </tr>
-    <tr>
-      <th>'glimepiride-pioglitazone'</th>
-      <td>'No'</td>
-    </tr>
-    <tr>
-      <th>'metformin-rosiglitazone'</th>
-      <td>'No'</td>
-    </tr>
-    <tr>
-      <th>'metformin-pioglitazone'</th>
-      <td>'No'</td>
-    </tr>
-    <tr>
-      <th>'change'</th>
-      <td>'Ch', 'No'</td>
-    </tr>
-    <tr>
-      <th>'diabetesMed'</th>
-      <td>'No', 'Yes'</td>
-    </tr>
-    <tr>
-      <th>'readmitted'</th>
-      <td>'&lt;30', '&gt;30', 'NO'</td>
-    </tr>
-  </tbody>
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">Values</th>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">Domain</th>
+<th data-quarto-table-cell-role="th"></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">'race'</td>
+<td>'AfricanAmerican', 'Asian', 'Caucasian', 'Hispanic', 'Other'</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">'gender'</td>
+<td>'Female', 'Male', 'Unknown/Invalid'</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">'age'</td>
+<td>'[0-10)', '[10-20)', '[20-30)', '[30-40)', '[40-50)', '[50-60)', '[60-70)', '[70-80)', '[80-90)', '[90-100)'</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">'weight'</td>
+<td>'&gt;200', '[0-25)', '[100-125)', '[125-150)', '[150-175)', '[175-200)', '[25-50)', '[50-75)', '[75-100)'</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">'payer_code'</td>
+<td>'BC', 'CH', 'CM', 'CP', 'DM', 'HM', 'MC', 'MD', 'MP', 'OG', 'OT', 'PO', 'SI', 'SP', 'UN', 'WC'</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">'medical_specialty'</td>
+<td>'AllergyandImmunology', 'Anesthesiology', 'Anesthesiology-Pediatric', 'Cardiology', 'Cardiology-Pediatric', 'Dentistry', 'Dermatology', 'Emergency/Trauma', 'Endocrinology', 'Family/GeneralPractice', 'Gastroenterology', 'Gynecology', 'Hematology', 'Hematology/Oncology', 'Hospitalist', 'InfectiousDiseases', 'InternalMedicine', 'Nephrology', 'Neurology', 'Obsterics&amp;Gynecology-GynecologicOnco', 'Obstetrics', 'ObstetricsandGynecology', 'Oncology', 'Ophthalmology', 'Orthopedics', 'Orthopedics-Reconstructive', 'Osteopath', 'Otolaryngology', 'OutreachServices', 'Pathology', 'Pediatrics', 'Pediatrics-AllergyandImmunology', 'Pediatrics-CriticalCare', 'Pediatrics-EmergencyMedicine', 'Pediatrics-Endocrinology', 'Pediatrics-Hematology-Oncology', 'Pediatrics-InfectiousDiseases', 'Pediatrics-Neurology', 'Pediatrics-Pulmonology', 'Perinatology', 'PhysicalMedicineandRehabilitation', 'PhysicianNotFound', 'Podiatry', 'Proctology', 'Psychiatry', 'Psychiatry-Addictive', 'Psychiatry-Child/Adolescent', 'Psychology', 'Pulmonology', 'Radiologist', 'Radiology', 'Rheumatology', 'Speech', 'SportsMedicine', 'Surgeon', 'Surgery-Cardiovascular', 'Surgery-Cardiovascular/Thoracic', 'Surgery-Colon&amp;Rectal', 'Surgery-General', 'Surgery-Maxillofacial', 'Surgery-Neuro', 'Surgery-Pediatric', 'Surgery-Plastic', 'Surgery-PlasticwithinHeadandNeck', 'Surgery-Thoracic', 'Surgery-Vascular', 'SurgicalSpecialty', 'Urology'</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">'max_glu_serum'</td>
+<td>'&gt;200', '&gt;300', 'None', 'Norm'</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">'A1Cresult'</td>
+<td>'&gt;7', '&gt;8', 'None', 'Norm'</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">'metformin'</td>
+<td>'Down', 'No', 'Steady', 'Up'</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">'repaglinide'</td>
+<td>'Down', 'No', 'Steady', 'Up'</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">'nateglinide'</td>
+<td>'Down', 'No', 'Steady', 'Up'</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">'chlorpropamide'</td>
+<td>'Down', 'No', 'Steady', 'Up'</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">'glimepiride'</td>
+<td>'Down', 'No', 'Steady', 'Up'</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">'acetohexamide'</td>
+<td>'No', 'Steady'</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">'glipizide'</td>
+<td>'Down', 'No', 'Steady', 'Up'</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">'glyburide'</td>
+<td>'Down', 'No', 'Steady', 'Up'</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">'tolbutamide'</td>
+<td>'No', 'Steady'</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">'pioglitazone'</td>
+<td>'Down', 'No', 'Steady', 'Up'</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">'rosiglitazone'</td>
+<td>'Down', 'No', 'Steady', 'Up'</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">'acarbose'</td>
+<td>'Down', 'No', 'Steady', 'Up'</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">'miglitol'</td>
+<td>'Down', 'No', 'Steady', 'Up'</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">'troglitazone'</td>
+<td>'No', 'Steady'</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">'tolazamide'</td>
+<td>'No', 'Steady', 'Up'</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">'examide'</td>
+<td>'No'</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">'citoglipton'</td>
+<td>'No'</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">'insulin'</td>
+<td>'Down', 'No', 'Steady', 'Up'</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">'glyburide-metformin'</td>
+<td>'Down', 'No', 'Steady', 'Up'</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">'glipizide-metformin'</td>
+<td>'No', 'Steady'</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">'glimepiride-pioglitazone'</td>
+<td>'No'</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">'metformin-rosiglitazone'</td>
+<td>'No'</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">'metformin-pioglitazone'</td>
+<td>'No'</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">'change'</td>
+<td>'Ch', 'No'</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">'diabetesMed'</td>
+<td>'No', 'Yes'</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">'readmitted'</td>
+<td>'&lt;30', '&gt;30', 'NO'</td>
+</tr>
+</tbody>
 </table>
+
 </div>
 </div>
 </div>
@@ -1331,50 +1306,51 @@ value: "Steady"
 <span id="cb31-9"><a href="#cb31-9" aria-hidden="true" tabindex="-1"></a>calculate_and_display_anomalies(serving_stats, schema<span class="op">=</span>schema)</span>
 <span id="cb31-10"><a href="#cb31-10" aria-hidden="true" tabindex="-1"></a><span class="co">### </span><span class="re">END</span><span class="co"> CODE HERE</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
-
 <div>
 
-<table class="dataframe table table-sm table-striped">
-  <thead>
-    <tr>
-      <th></th>
-      <th>Anomaly short description</th>
-      <th>Anomaly long description</th>
-    </tr>
-    <tr>
-      <th>Feature name</th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>'metformin-pioglitazone'</th>
-      <td>Unexpected string values</td>
-      <td>Examples contain values missing from the schema: Steady (&lt;1%).</td>
-    </tr>
-    <tr>
-      <th>'payer_code'</th>
-      <td>Unexpected string values</td>
-      <td>Examples contain values missing from the schema: FR (&lt;1%).</td>
-    </tr>
-    <tr>
-      <th>'medical_specialty'</th>
-      <td>Unexpected string values</td>
-      <td>Examples contain values missing from the schema: DCPTEAM (&lt;1%), Endocrinology-Metabolism (&lt;1%), Resident (&lt;1%).</td>
-    </tr>
-    <tr>
-      <th>'metformin-rosiglitazone'</th>
-      <td>Unexpected string values</td>
-      <td>Examples contain values missing from the schema: Steady (&lt;1%).</td>
-    </tr>
-    <tr>
-      <th>'readmitted'</th>
-      <td>Column dropped</td>
-      <td>Column is completely missing</td>
-    </tr>
-  </tbody>
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">Anomaly short description</th>
+<th data-quarto-table-cell-role="th">Anomaly long description</th>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">Feature name</th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">'metformin-pioglitazone'</td>
+<td>Unexpected string values</td>
+<td>Examples contain values missing from the schema: Steady (&lt;1%).</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">'payer_code'</td>
+<td>Unexpected string values</td>
+<td>Examples contain values missing from the schema: FR (&lt;1%).</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">'medical_specialty'</td>
+<td>Unexpected string values</td>
+<td>Examples contain values missing from the schema: DCPTEAM (&lt;1%), Endocrinology-Metabolism (&lt;1%), Resident (&lt;1%).</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">'metformin-rosiglitazone'</td>
+<td>Unexpected string values</td>
+<td>Examples contain values missing from the schema: Steady (&lt;1%).</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">'readmitted'</td>
+<td>Column dropped</td>
+<td>Column is completely missing</td>
+</tr>
+</tbody>
 </table>
+
 </div>
 </div>
 </div>
@@ -1394,40 +1370,41 @@ value: "Steady"
 <span id="cb32-11"><a href="#cb32-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Detect anomalies with the updated constraints</span></span>
 <span id="cb32-12"><a href="#cb32-12" aria-hidden="true" tabindex="-1"></a>calculate_and_display_anomalies(serving_stats, schema<span class="op">=</span>schema)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
-
 <div>
 
-<table class="dataframe table table-sm table-striped">
-  <thead>
-    <tr>
-      <th></th>
-      <th>Anomaly short description</th>
-      <th>Anomaly long description</th>
-    </tr>
-    <tr>
-      <th>Feature name</th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>'metformin-pioglitazone'</th>
-      <td>Unexpected string values</td>
-      <td>Examples contain values missing from the schema: Steady (&lt;1%).</td>
-    </tr>
-    <tr>
-      <th>'metformin-rosiglitazone'</th>
-      <td>Unexpected string values</td>
-      <td>Examples contain values missing from the schema: Steady (&lt;1%).</td>
-    </tr>
-    <tr>
-      <th>'readmitted'</th>
-      <td>Column dropped</td>
-      <td>Column is completely missing</td>
-    </tr>
-  </tbody>
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">Anomaly short description</th>
+<th data-quarto-table-cell-role="th">Anomaly long description</th>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">Feature name</th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">'metformin-pioglitazone'</td>
+<td>Unexpected string values</td>
+<td>Examples contain values missing from the schema: Steady (&lt;1%).</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">'metformin-rosiglitazone'</td>
+<td>Unexpected string values</td>
+<td>Examples contain values missing from the schema: Steady (&lt;1%).</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">'readmitted'</td>
+<td>Column dropped</td>
+<td>Column is completely missing</td>
+</tr>
+</tbody>
 </table>
+
 </div>
 </div>
 </div>
@@ -1438,521 +1415,523 @@ value: "Steady"
 <div class="cell" data-execution_count="43">
 <div class="sourceCode cell-code" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>tfdv.display_schema(schema)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
-
 <div>
 
-<table class="dataframe table table-sm table-striped">
-  <thead>
-    <tr>
-      <th></th>
-      <th>Type</th>
-      <th>Presence</th>
-      <th>Valency</th>
-      <th>Domain</th>
-    </tr>
-    <tr>
-      <th>Feature name</th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>'race'</th>
-      <td>STRING</td>
-      <td>optional</td>
-      <td>single</td>
-      <td>'race'</td>
-    </tr>
-    <tr>
-      <th>'gender'</th>
-      <td>STRING</td>
-      <td>required</td>
-      <td></td>
-      <td>'gender'</td>
-    </tr>
-    <tr>
-      <th>'age'</th>
-      <td>STRING</td>
-      <td>required</td>
-      <td></td>
-      <td>'age'</td>
-    </tr>
-    <tr>
-      <th>'weight'</th>
-      <td>STRING</td>
-      <td>optional</td>
-      <td>single</td>
-      <td>'weight'</td>
-    </tr>
-    <tr>
-      <th>'admission_type_id'</th>
-      <td>INT</td>
-      <td>required</td>
-      <td></td>
-      <td>-</td>
-    </tr>
-    <tr>
-      <th>'discharge_disposition_id'</th>
-      <td>INT</td>
-      <td>required</td>
-      <td></td>
-      <td>-</td>
-    </tr>
-    <tr>
-      <th>'admission_source_id'</th>
-      <td>INT</td>
-      <td>required</td>
-      <td></td>
-      <td>-</td>
-    </tr>
-    <tr>
-      <th>'time_in_hospital'</th>
-      <td>INT</td>
-      <td>required</td>
-      <td></td>
-      <td>-</td>
-    </tr>
-    <tr>
-      <th>'payer_code'</th>
-      <td>STRING</td>
-      <td>optional</td>
-      <td>single</td>
-      <td>'payer_code'</td>
-    </tr>
-    <tr>
-      <th>'medical_specialty'</th>
-      <td>STRING</td>
-      <td>optional</td>
-      <td>single</td>
-      <td>'medical_specialty'</td>
-    </tr>
-    <tr>
-      <th>'num_lab_procedures'</th>
-      <td>INT</td>
-      <td>required</td>
-      <td></td>
-      <td>-</td>
-    </tr>
-    <tr>
-      <th>'num_procedures'</th>
-      <td>INT</td>
-      <td>required</td>
-      <td></td>
-      <td>-</td>
-    </tr>
-    <tr>
-      <th>'num_medications'</th>
-      <td>INT</td>
-      <td>required</td>
-      <td></td>
-      <td>-</td>
-    </tr>
-    <tr>
-      <th>'number_outpatient'</th>
-      <td>INT</td>
-      <td>required</td>
-      <td></td>
-      <td>-</td>
-    </tr>
-    <tr>
-      <th>'number_emergency'</th>
-      <td>INT</td>
-      <td>required</td>
-      <td></td>
-      <td>-</td>
-    </tr>
-    <tr>
-      <th>'number_inpatient'</th>
-      <td>INT</td>
-      <td>required</td>
-      <td></td>
-      <td>-</td>
-    </tr>
-    <tr>
-      <th>'diag_1'</th>
-      <td>BYTES</td>
-      <td>optional</td>
-      <td>single</td>
-      <td>-</td>
-    </tr>
-    <tr>
-      <th>'diag_2'</th>
-      <td>BYTES</td>
-      <td>optional</td>
-      <td>single</td>
-      <td>-</td>
-    </tr>
-    <tr>
-      <th>'diag_3'</th>
-      <td>BYTES</td>
-      <td>optional</td>
-      <td>single</td>
-      <td>-</td>
-    </tr>
-    <tr>
-      <th>'number_diagnoses'</th>
-      <td>INT</td>
-      <td>required</td>
-      <td></td>
-      <td>-</td>
-    </tr>
-    <tr>
-      <th>'max_glu_serum'</th>
-      <td>STRING</td>
-      <td>required</td>
-      <td></td>
-      <td>'max_glu_serum'</td>
-    </tr>
-    <tr>
-      <th>'A1Cresult'</th>
-      <td>STRING</td>
-      <td>required</td>
-      <td></td>
-      <td>'A1Cresult'</td>
-    </tr>
-    <tr>
-      <th>'metformin'</th>
-      <td>STRING</td>
-      <td>required</td>
-      <td></td>
-      <td>'metformin'</td>
-    </tr>
-    <tr>
-      <th>'repaglinide'</th>
-      <td>STRING</td>
-      <td>required</td>
-      <td></td>
-      <td>'repaglinide'</td>
-    </tr>
-    <tr>
-      <th>'nateglinide'</th>
-      <td>STRING</td>
-      <td>required</td>
-      <td></td>
-      <td>'nateglinide'</td>
-    </tr>
-    <tr>
-      <th>'chlorpropamide'</th>
-      <td>STRING</td>
-      <td>required</td>
-      <td></td>
-      <td>'chlorpropamide'</td>
-    </tr>
-    <tr>
-      <th>'glimepiride'</th>
-      <td>STRING</td>
-      <td>required</td>
-      <td></td>
-      <td>'glimepiride'</td>
-    </tr>
-    <tr>
-      <th>'acetohexamide'</th>
-      <td>STRING</td>
-      <td>required</td>
-      <td></td>
-      <td>'acetohexamide'</td>
-    </tr>
-    <tr>
-      <th>'glipizide'</th>
-      <td>STRING</td>
-      <td>required</td>
-      <td></td>
-      <td>'glipizide'</td>
-    </tr>
-    <tr>
-      <th>'glyburide'</th>
-      <td>STRING</td>
-      <td>required</td>
-      <td></td>
-      <td>'glyburide'</td>
-    </tr>
-    <tr>
-      <th>'tolbutamide'</th>
-      <td>STRING</td>
-      <td>required</td>
-      <td></td>
-      <td>'tolbutamide'</td>
-    </tr>
-    <tr>
-      <th>'pioglitazone'</th>
-      <td>STRING</td>
-      <td>required</td>
-      <td></td>
-      <td>'pioglitazone'</td>
-    </tr>
-    <tr>
-      <th>'rosiglitazone'</th>
-      <td>STRING</td>
-      <td>required</td>
-      <td></td>
-      <td>'rosiglitazone'</td>
-    </tr>
-    <tr>
-      <th>'acarbose'</th>
-      <td>STRING</td>
-      <td>required</td>
-      <td></td>
-      <td>'acarbose'</td>
-    </tr>
-    <tr>
-      <th>'miglitol'</th>
-      <td>STRING</td>
-      <td>required</td>
-      <td></td>
-      <td>'miglitol'</td>
-    </tr>
-    <tr>
-      <th>'troglitazone'</th>
-      <td>STRING</td>
-      <td>required</td>
-      <td></td>
-      <td>'troglitazone'</td>
-    </tr>
-    <tr>
-      <th>'tolazamide'</th>
-      <td>STRING</td>
-      <td>required</td>
-      <td></td>
-      <td>'tolazamide'</td>
-    </tr>
-    <tr>
-      <th>'examide'</th>
-      <td>STRING</td>
-      <td>required</td>
-      <td></td>
-      <td>'examide'</td>
-    </tr>
-    <tr>
-      <th>'citoglipton'</th>
-      <td>STRING</td>
-      <td>required</td>
-      <td></td>
-      <td>'citoglipton'</td>
-    </tr>
-    <tr>
-      <th>'insulin'</th>
-      <td>STRING</td>
-      <td>required</td>
-      <td></td>
-      <td>'insulin'</td>
-    </tr>
-    <tr>
-      <th>'glyburide-metformin'</th>
-      <td>STRING</td>
-      <td>required</td>
-      <td></td>
-      <td>'glyburide-metformin'</td>
-    </tr>
-    <tr>
-      <th>'glipizide-metformin'</th>
-      <td>STRING</td>
-      <td>required</td>
-      <td></td>
-      <td>'glipizide-metformin'</td>
-    </tr>
-    <tr>
-      <th>'glimepiride-pioglitazone'</th>
-      <td>STRING</td>
-      <td>required</td>
-      <td></td>
-      <td>'glimepiride-pioglitazone'</td>
-    </tr>
-    <tr>
-      <th>'metformin-rosiglitazone'</th>
-      <td>STRING</td>
-      <td>required</td>
-      <td></td>
-      <td>'metformin-rosiglitazone'</td>
-    </tr>
-    <tr>
-      <th>'metformin-pioglitazone'</th>
-      <td>STRING</td>
-      <td>required</td>
-      <td></td>
-      <td>'metformin-pioglitazone'</td>
-    </tr>
-    <tr>
-      <th>'change'</th>
-      <td>STRING</td>
-      <td>required</td>
-      <td></td>
-      <td>'change'</td>
-    </tr>
-    <tr>
-      <th>'diabetesMed'</th>
-      <td>STRING</td>
-      <td>required</td>
-      <td></td>
-      <td>'diabetesMed'</td>
-    </tr>
-    <tr>
-      <th>'readmitted'</th>
-      <td>STRING</td>
-      <td>required</td>
-      <td></td>
-      <td>'readmitted'</td>
-    </tr>
-  </tbody>
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">Type</th>
+<th data-quarto-table-cell-role="th">Presence</th>
+<th data-quarto-table-cell-role="th">Valency</th>
+<th data-quarto-table-cell-role="th">Domain</th>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">Feature name</th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">'race'</td>
+<td>STRING</td>
+<td>optional</td>
+<td>single</td>
+<td>'race'</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">'gender'</td>
+<td>STRING</td>
+<td>required</td>
+<td></td>
+<td>'gender'</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">'age'</td>
+<td>STRING</td>
+<td>required</td>
+<td></td>
+<td>'age'</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">'weight'</td>
+<td>STRING</td>
+<td>optional</td>
+<td>single</td>
+<td>'weight'</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">'admission_type_id'</td>
+<td>INT</td>
+<td>required</td>
+<td></td>
+<td>-</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">'discharge_disposition_id'</td>
+<td>INT</td>
+<td>required</td>
+<td></td>
+<td>-</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">'admission_source_id'</td>
+<td>INT</td>
+<td>required</td>
+<td></td>
+<td>-</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">'time_in_hospital'</td>
+<td>INT</td>
+<td>required</td>
+<td></td>
+<td>-</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">'payer_code'</td>
+<td>STRING</td>
+<td>optional</td>
+<td>single</td>
+<td>'payer_code'</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">'medical_specialty'</td>
+<td>STRING</td>
+<td>optional</td>
+<td>single</td>
+<td>'medical_specialty'</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">'num_lab_procedures'</td>
+<td>INT</td>
+<td>required</td>
+<td></td>
+<td>-</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">'num_procedures'</td>
+<td>INT</td>
+<td>required</td>
+<td></td>
+<td>-</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">'num_medications'</td>
+<td>INT</td>
+<td>required</td>
+<td></td>
+<td>-</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">'number_outpatient'</td>
+<td>INT</td>
+<td>required</td>
+<td></td>
+<td>-</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">'number_emergency'</td>
+<td>INT</td>
+<td>required</td>
+<td></td>
+<td>-</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">'number_inpatient'</td>
+<td>INT</td>
+<td>required</td>
+<td></td>
+<td>-</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">'diag_1'</td>
+<td>BYTES</td>
+<td>optional</td>
+<td>single</td>
+<td>-</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">'diag_2'</td>
+<td>BYTES</td>
+<td>optional</td>
+<td>single</td>
+<td>-</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">'diag_3'</td>
+<td>BYTES</td>
+<td>optional</td>
+<td>single</td>
+<td>-</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">'number_diagnoses'</td>
+<td>INT</td>
+<td>required</td>
+<td></td>
+<td>-</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">'max_glu_serum'</td>
+<td>STRING</td>
+<td>required</td>
+<td></td>
+<td>'max_glu_serum'</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">'A1Cresult'</td>
+<td>STRING</td>
+<td>required</td>
+<td></td>
+<td>'A1Cresult'</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">'metformin'</td>
+<td>STRING</td>
+<td>required</td>
+<td></td>
+<td>'metformin'</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">'repaglinide'</td>
+<td>STRING</td>
+<td>required</td>
+<td></td>
+<td>'repaglinide'</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">'nateglinide'</td>
+<td>STRING</td>
+<td>required</td>
+<td></td>
+<td>'nateglinide'</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">'chlorpropamide'</td>
+<td>STRING</td>
+<td>required</td>
+<td></td>
+<td>'chlorpropamide'</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">'glimepiride'</td>
+<td>STRING</td>
+<td>required</td>
+<td></td>
+<td>'glimepiride'</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">'acetohexamide'</td>
+<td>STRING</td>
+<td>required</td>
+<td></td>
+<td>'acetohexamide'</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">'glipizide'</td>
+<td>STRING</td>
+<td>required</td>
+<td></td>
+<td>'glipizide'</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">'glyburide'</td>
+<td>STRING</td>
+<td>required</td>
+<td></td>
+<td>'glyburide'</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">'tolbutamide'</td>
+<td>STRING</td>
+<td>required</td>
+<td></td>
+<td>'tolbutamide'</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">'pioglitazone'</td>
+<td>STRING</td>
+<td>required</td>
+<td></td>
+<td>'pioglitazone'</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">'rosiglitazone'</td>
+<td>STRING</td>
+<td>required</td>
+<td></td>
+<td>'rosiglitazone'</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">'acarbose'</td>
+<td>STRING</td>
+<td>required</td>
+<td></td>
+<td>'acarbose'</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">'miglitol'</td>
+<td>STRING</td>
+<td>required</td>
+<td></td>
+<td>'miglitol'</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">'troglitazone'</td>
+<td>STRING</td>
+<td>required</td>
+<td></td>
+<td>'troglitazone'</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">'tolazamide'</td>
+<td>STRING</td>
+<td>required</td>
+<td></td>
+<td>'tolazamide'</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">'examide'</td>
+<td>STRING</td>
+<td>required</td>
+<td></td>
+<td>'examide'</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">'citoglipton'</td>
+<td>STRING</td>
+<td>required</td>
+<td></td>
+<td>'citoglipton'</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">'insulin'</td>
+<td>STRING</td>
+<td>required</td>
+<td></td>
+<td>'insulin'</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">'glyburide-metformin'</td>
+<td>STRING</td>
+<td>required</td>
+<td></td>
+<td>'glyburide-metformin'</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">'glipizide-metformin'</td>
+<td>STRING</td>
+<td>required</td>
+<td></td>
+<td>'glipizide-metformin'</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">'glimepiride-pioglitazone'</td>
+<td>STRING</td>
+<td>required</td>
+<td></td>
+<td>'glimepiride-pioglitazone'</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">'metformin-rosiglitazone'</td>
+<td>STRING</td>
+<td>required</td>
+<td></td>
+<td>'metformin-rosiglitazone'</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">'metformin-pioglitazone'</td>
+<td>STRING</td>
+<td>required</td>
+<td></td>
+<td>'metformin-pioglitazone'</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">'change'</td>
+<td>STRING</td>
+<td>required</td>
+<td></td>
+<td>'change'</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">'diabetesMed'</td>
+<td>STRING</td>
+<td>required</td>
+<td></td>
+<td>'diabetesMed'</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">'readmitted'</td>
+<td>STRING</td>
+<td>required</td>
+<td></td>
+<td>'readmitted'</td>
+</tr>
+</tbody>
 </table>
+
 </div>
 </div>
 <div class="cell-output cell-output-display">
-
 <div>
 
-<table class="dataframe table table-sm table-striped">
-  <thead>
-    <tr>
-      <th></th>
-      <th>Values</th>
-    </tr>
-    <tr>
-      <th>Domain</th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>'race'</th>
-      <td>'AfricanAmerican', 'Asian', 'Caucasian', 'Hispanic', 'Other'</td>
-    </tr>
-    <tr>
-      <th>'gender'</th>
-      <td>'Female', 'Male', 'Unknown/Invalid'</td>
-    </tr>
-    <tr>
-      <th>'age'</th>
-      <td>'[0-10)', '[10-20)', '[20-30)', '[30-40)', '[40-50)', '[50-60)', '[60-70)', '[70-80)', '[80-90)', '[90-100)'</td>
-    </tr>
-    <tr>
-      <th>'weight'</th>
-      <td>'&gt;200', '[0-25)', '[100-125)', '[125-150)', '[150-175)', '[175-200)', '[25-50)', '[50-75)', '[75-100)'</td>
-    </tr>
-    <tr>
-      <th>'payer_code'</th>
-      <td>'BC', 'CH', 'CM', 'CP', 'DM', 'HM', 'MC', 'MD', 'MP', 'OG', 'OT', 'PO', 'SI', 'SP', 'UN', 'WC'</td>
-    </tr>
-    <tr>
-      <th>'medical_specialty'</th>
-      <td>'AllergyandImmunology', 'Anesthesiology', 'Anesthesiology-Pediatric', 'Cardiology', 'Cardiology-Pediatric', 'Dentistry', 'Dermatology', 'Emergency/Trauma', 'Endocrinology', 'Family/GeneralPractice', 'Gastroenterology', 'Gynecology', 'Hematology', 'Hematology/Oncology', 'Hospitalist', 'InfectiousDiseases', 'InternalMedicine', 'Nephrology', 'Neurology', 'Obsterics&amp;Gynecology-GynecologicOnco', 'Obstetrics', 'ObstetricsandGynecology', 'Oncology', 'Ophthalmology', 'Orthopedics', 'Orthopedics-Reconstructive', 'Osteopath', 'Otolaryngology', 'OutreachServices', 'Pathology', 'Pediatrics', 'Pediatrics-AllergyandImmunology', 'Pediatrics-CriticalCare', 'Pediatrics-EmergencyMedicine', 'Pediatrics-Endocrinology', 'Pediatrics-Hematology-Oncology', 'Pediatrics-InfectiousDiseases', 'Pediatrics-Neurology', 'Pediatrics-Pulmonology', 'Perinatology', 'PhysicalMedicineandRehabilitation', 'PhysicianNotFound', 'Podiatry', 'Proctology', 'Psychiatry', 'Psychiatry-Addictive', 'Psychiatry-Child/Adolescent', 'Psychology', 'Pulmonology', 'Radiologist', 'Radiology', 'Rheumatology', 'Speech', 'SportsMedicine', 'Surgeon', 'Surgery-Cardiovascular', 'Surgery-Cardiovascular/Thoracic', 'Surgery-Colon&amp;Rectal', 'Surgery-General', 'Surgery-Maxillofacial', 'Surgery-Neuro', 'Surgery-Pediatric', 'Surgery-Plastic', 'Surgery-PlasticwithinHeadandNeck', 'Surgery-Thoracic', 'Surgery-Vascular', 'SurgicalSpecialty', 'Urology', 'Neurophysiology', 'Neurophysiology', 'Neurophysiology', 'Neurophysiology'</td>
-    </tr>
-    <tr>
-      <th>'max_glu_serum'</th>
-      <td>'&gt;200', '&gt;300', 'None', 'Norm'</td>
-    </tr>
-    <tr>
-      <th>'A1Cresult'</th>
-      <td>'&gt;7', '&gt;8', 'None', 'Norm'</td>
-    </tr>
-    <tr>
-      <th>'metformin'</th>
-      <td>'Down', 'No', 'Steady', 'Up'</td>
-    </tr>
-    <tr>
-      <th>'repaglinide'</th>
-      <td>'Down', 'No', 'Steady', 'Up'</td>
-    </tr>
-    <tr>
-      <th>'nateglinide'</th>
-      <td>'Down', 'No', 'Steady', 'Up'</td>
-    </tr>
-    <tr>
-      <th>'chlorpropamide'</th>
-      <td>'Down', 'No', 'Steady', 'Up'</td>
-    </tr>
-    <tr>
-      <th>'glimepiride'</th>
-      <td>'Down', 'No', 'Steady', 'Up'</td>
-    </tr>
-    <tr>
-      <th>'acetohexamide'</th>
-      <td>'No', 'Steady'</td>
-    </tr>
-    <tr>
-      <th>'glipizide'</th>
-      <td>'Down', 'No', 'Steady', 'Up'</td>
-    </tr>
-    <tr>
-      <th>'glyburide'</th>
-      <td>'Down', 'No', 'Steady', 'Up'</td>
-    </tr>
-    <tr>
-      <th>'tolbutamide'</th>
-      <td>'No', 'Steady'</td>
-    </tr>
-    <tr>
-      <th>'pioglitazone'</th>
-      <td>'Down', 'No', 'Steady', 'Up'</td>
-    </tr>
-    <tr>
-      <th>'rosiglitazone'</th>
-      <td>'Down', 'No', 'Steady', 'Up'</td>
-    </tr>
-    <tr>
-      <th>'acarbose'</th>
-      <td>'Down', 'No', 'Steady', 'Up'</td>
-    </tr>
-    <tr>
-      <th>'miglitol'</th>
-      <td>'Down', 'No', 'Steady', 'Up'</td>
-    </tr>
-    <tr>
-      <th>'troglitazone'</th>
-      <td>'No', 'Steady'</td>
-    </tr>
-    <tr>
-      <th>'tolazamide'</th>
-      <td>'No', 'Steady', 'Up'</td>
-    </tr>
-    <tr>
-      <th>'examide'</th>
-      <td>'No'</td>
-    </tr>
-    <tr>
-      <th>'citoglipton'</th>
-      <td>'No'</td>
-    </tr>
-    <tr>
-      <th>'insulin'</th>
-      <td>'Down', 'No', 'Steady', 'Up'</td>
-    </tr>
-    <tr>
-      <th>'glyburide-metformin'</th>
-      <td>'Down', 'No', 'Steady', 'Up'</td>
-    </tr>
-    <tr>
-      <th>'glipizide-metformin'</th>
-      <td>'No', 'Steady'</td>
-    </tr>
-    <tr>
-      <th>'glimepiride-pioglitazone'</th>
-      <td>'No', 'Steady', 'Steady', 'Steady', 'Steady', 'Steady', 'Steady'</td>
-    </tr>
-    <tr>
-      <th>'metformin-rosiglitazone'</th>
-      <td>'No'</td>
-    </tr>
-    <tr>
-      <th>'metformin-pioglitazone'</th>
-      <td>'No'</td>
-    </tr>
-    <tr>
-      <th>'change'</th>
-      <td>'Ch', 'No'</td>
-    </tr>
-    <tr>
-      <th>'diabetesMed'</th>
-      <td>'No', 'Yes'</td>
-    </tr>
-    <tr>
-      <th>'readmitted'</th>
-      <td>'&lt;30', '&gt;30', 'NO'</td>
-    </tr>
-  </tbody>
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">Values</th>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">Domain</th>
+<th data-quarto-table-cell-role="th"></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">'race'</td>
+<td>'AfricanAmerican', 'Asian', 'Caucasian', 'Hispanic', 'Other'</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">'gender'</td>
+<td>'Female', 'Male', 'Unknown/Invalid'</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">'age'</td>
+<td>'[0-10)', '[10-20)', '[20-30)', '[30-40)', '[40-50)', '[50-60)', '[60-70)', '[70-80)', '[80-90)', '[90-100)'</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">'weight'</td>
+<td>'&gt;200', '[0-25)', '[100-125)', '[125-150)', '[150-175)', '[175-200)', '[25-50)', '[50-75)', '[75-100)'</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">'payer_code'</td>
+<td>'BC', 'CH', 'CM', 'CP', 'DM', 'HM', 'MC', 'MD', 'MP', 'OG', 'OT', 'PO', 'SI', 'SP', 'UN', 'WC'</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">'medical_specialty'</td>
+<td>'AllergyandImmunology', 'Anesthesiology', 'Anesthesiology-Pediatric', 'Cardiology', 'Cardiology-Pediatric', 'Dentistry', 'Dermatology', 'Emergency/Trauma', 'Endocrinology', 'Family/GeneralPractice', 'Gastroenterology', 'Gynecology', 'Hematology', 'Hematology/Oncology', 'Hospitalist', 'InfectiousDiseases', 'InternalMedicine', 'Nephrology', 'Neurology', 'Obsterics&amp;Gynecology-GynecologicOnco', 'Obstetrics', 'ObstetricsandGynecology', 'Oncology', 'Ophthalmology', 'Orthopedics', 'Orthopedics-Reconstructive', 'Osteopath', 'Otolaryngology', 'OutreachServices', 'Pathology', 'Pediatrics', 'Pediatrics-AllergyandImmunology', 'Pediatrics-CriticalCare', 'Pediatrics-EmergencyMedicine', 'Pediatrics-Endocrinology', 'Pediatrics-Hematology-Oncology', 'Pediatrics-InfectiousDiseases', 'Pediatrics-Neurology', 'Pediatrics-Pulmonology', 'Perinatology', 'PhysicalMedicineandRehabilitation', 'PhysicianNotFound', 'Podiatry', 'Proctology', 'Psychiatry', 'Psychiatry-Addictive', 'Psychiatry-Child/Adolescent', 'Psychology', 'Pulmonology', 'Radiologist', 'Radiology', 'Rheumatology', 'Speech', 'SportsMedicine', 'Surgeon', 'Surgery-Cardiovascular', 'Surgery-Cardiovascular/Thoracic', 'Surgery-Colon&amp;Rectal', 'Surgery-General', 'Surgery-Maxillofacial', 'Surgery-Neuro', 'Surgery-Pediatric', 'Surgery-Plastic', 'Surgery-PlasticwithinHeadandNeck', 'Surgery-Thoracic', 'Surgery-Vascular', 'SurgicalSpecialty', 'Urology', 'Neurophysiology', 'Neurophysiology', 'Neurophysiology', 'Neurophysiology'</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">'max_glu_serum'</td>
+<td>'&gt;200', '&gt;300', 'None', 'Norm'</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">'A1Cresult'</td>
+<td>'&gt;7', '&gt;8', 'None', 'Norm'</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">'metformin'</td>
+<td>'Down', 'No', 'Steady', 'Up'</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">'repaglinide'</td>
+<td>'Down', 'No', 'Steady', 'Up'</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">'nateglinide'</td>
+<td>'Down', 'No', 'Steady', 'Up'</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">'chlorpropamide'</td>
+<td>'Down', 'No', 'Steady', 'Up'</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">'glimepiride'</td>
+<td>'Down', 'No', 'Steady', 'Up'</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">'acetohexamide'</td>
+<td>'No', 'Steady'</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">'glipizide'</td>
+<td>'Down', 'No', 'Steady', 'Up'</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">'glyburide'</td>
+<td>'Down', 'No', 'Steady', 'Up'</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">'tolbutamide'</td>
+<td>'No', 'Steady'</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">'pioglitazone'</td>
+<td>'Down', 'No', 'Steady', 'Up'</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">'rosiglitazone'</td>
+<td>'Down', 'No', 'Steady', 'Up'</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">'acarbose'</td>
+<td>'Down', 'No', 'Steady', 'Up'</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">'miglitol'</td>
+<td>'Down', 'No', 'Steady', 'Up'</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">'troglitazone'</td>
+<td>'No', 'Steady'</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">'tolazamide'</td>
+<td>'No', 'Steady', 'Up'</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">'examide'</td>
+<td>'No'</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">'citoglipton'</td>
+<td>'No'</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">'insulin'</td>
+<td>'Down', 'No', 'Steady', 'Up'</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">'glyburide-metformin'</td>
+<td>'Down', 'No', 'Steady', 'Up'</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">'glipizide-metformin'</td>
+<td>'No', 'Steady'</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">'glimepiride-pioglitazone'</td>
+<td>'No', 'Steady', 'Steady', 'Steady', 'Steady', 'Steady', 'Steady'</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">'metformin-rosiglitazone'</td>
+<td>'No'</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">'metformin-pioglitazone'</td>
+<td>'No'</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">'change'</td>
+<td>'Ch', 'No'</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">'diabetesMed'</td>
+<td>'No', 'Yes'</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">'readmitted'</td>
+<td>'&lt;30', '&gt;30', 'NO'</td>
+</tr>
+</tbody>
 </table>
+
 </div>
 </div>
 </div>
@@ -2026,521 +2005,523 @@ WARNING:root:Replacing existing domain of feature "metformin-rosiglitazone".
 WARNING:root:Replacing existing domain of feature "metformin-pioglitazone".</code></pre>
 </div>
 <div class="cell-output cell-output-display">
-
 <div>
 
-<table class="dataframe table table-sm table-striped">
-  <thead>
-    <tr>
-      <th></th>
-      <th>Type</th>
-      <th>Presence</th>
-      <th>Valency</th>
-      <th>Domain</th>
-    </tr>
-    <tr>
-      <th>Feature name</th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>'race'</th>
-      <td>STRING</td>
-      <td>optional</td>
-      <td>single</td>
-      <td>'race'</td>
-    </tr>
-    <tr>
-      <th>'gender'</th>
-      <td>STRING</td>
-      <td>required</td>
-      <td></td>
-      <td>'gender'</td>
-    </tr>
-    <tr>
-      <th>'age'</th>
-      <td>STRING</td>
-      <td>required</td>
-      <td></td>
-      <td>'age'</td>
-    </tr>
-    <tr>
-      <th>'weight'</th>
-      <td>STRING</td>
-      <td>optional</td>
-      <td>single</td>
-      <td>'weight'</td>
-    </tr>
-    <tr>
-      <th>'admission_type_id'</th>
-      <td>INT</td>
-      <td>required</td>
-      <td></td>
-      <td>-</td>
-    </tr>
-    <tr>
-      <th>'discharge_disposition_id'</th>
-      <td>INT</td>
-      <td>required</td>
-      <td></td>
-      <td>-</td>
-    </tr>
-    <tr>
-      <th>'admission_source_id'</th>
-      <td>INT</td>
-      <td>required</td>
-      <td></td>
-      <td>-</td>
-    </tr>
-    <tr>
-      <th>'time_in_hospital'</th>
-      <td>INT</td>
-      <td>required</td>
-      <td></td>
-      <td>-</td>
-    </tr>
-    <tr>
-      <th>'payer_code'</th>
-      <td>STRING</td>
-      <td>optional</td>
-      <td>single</td>
-      <td>'payer_code'</td>
-    </tr>
-    <tr>
-      <th>'medical_specialty'</th>
-      <td>STRING</td>
-      <td>optional</td>
-      <td>single</td>
-      <td>'medical_specialty'</td>
-    </tr>
-    <tr>
-      <th>'num_lab_procedures'</th>
-      <td>INT</td>
-      <td>required</td>
-      <td></td>
-      <td>-</td>
-    </tr>
-    <tr>
-      <th>'num_procedures'</th>
-      <td>INT</td>
-      <td>required</td>
-      <td></td>
-      <td>-</td>
-    </tr>
-    <tr>
-      <th>'num_medications'</th>
-      <td>INT</td>
-      <td>required</td>
-      <td></td>
-      <td>-</td>
-    </tr>
-    <tr>
-      <th>'number_outpatient'</th>
-      <td>INT</td>
-      <td>required</td>
-      <td></td>
-      <td>-</td>
-    </tr>
-    <tr>
-      <th>'number_emergency'</th>
-      <td>INT</td>
-      <td>required</td>
-      <td></td>
-      <td>-</td>
-    </tr>
-    <tr>
-      <th>'number_inpatient'</th>
-      <td>INT</td>
-      <td>required</td>
-      <td></td>
-      <td>-</td>
-    </tr>
-    <tr>
-      <th>'diag_1'</th>
-      <td>BYTES</td>
-      <td>optional</td>
-      <td>single</td>
-      <td>-</td>
-    </tr>
-    <tr>
-      <th>'diag_2'</th>
-      <td>BYTES</td>
-      <td>optional</td>
-      <td>single</td>
-      <td>-</td>
-    </tr>
-    <tr>
-      <th>'diag_3'</th>
-      <td>BYTES</td>
-      <td>optional</td>
-      <td>single</td>
-      <td>-</td>
-    </tr>
-    <tr>
-      <th>'number_diagnoses'</th>
-      <td>INT</td>
-      <td>required</td>
-      <td></td>
-      <td>-</td>
-    </tr>
-    <tr>
-      <th>'max_glu_serum'</th>
-      <td>STRING</td>
-      <td>required</td>
-      <td></td>
-      <td>'max_glu_serum'</td>
-    </tr>
-    <tr>
-      <th>'A1Cresult'</th>
-      <td>STRING</td>
-      <td>required</td>
-      <td></td>
-      <td>'A1Cresult'</td>
-    </tr>
-    <tr>
-      <th>'metformin'</th>
-      <td>STRING</td>
-      <td>required</td>
-      <td></td>
-      <td>'metformin'</td>
-    </tr>
-    <tr>
-      <th>'repaglinide'</th>
-      <td>STRING</td>
-      <td>required</td>
-      <td></td>
-      <td>'metformin'</td>
-    </tr>
-    <tr>
-      <th>'nateglinide'</th>
-      <td>STRING</td>
-      <td>required</td>
-      <td></td>
-      <td>'metformin'</td>
-    </tr>
-    <tr>
-      <th>'chlorpropamide'</th>
-      <td>STRING</td>
-      <td>required</td>
-      <td></td>
-      <td>'metformin'</td>
-    </tr>
-    <tr>
-      <th>'glimepiride'</th>
-      <td>STRING</td>
-      <td>required</td>
-      <td></td>
-      <td>'metformin'</td>
-    </tr>
-    <tr>
-      <th>'acetohexamide'</th>
-      <td>STRING</td>
-      <td>required</td>
-      <td></td>
-      <td>'metformin'</td>
-    </tr>
-    <tr>
-      <th>'glipizide'</th>
-      <td>STRING</td>
-      <td>required</td>
-      <td></td>
-      <td>'metformin'</td>
-    </tr>
-    <tr>
-      <th>'glyburide'</th>
-      <td>STRING</td>
-      <td>required</td>
-      <td></td>
-      <td>'metformin'</td>
-    </tr>
-    <tr>
-      <th>'tolbutamide'</th>
-      <td>STRING</td>
-      <td>required</td>
-      <td></td>
-      <td>'metformin'</td>
-    </tr>
-    <tr>
-      <th>'pioglitazone'</th>
-      <td>STRING</td>
-      <td>required</td>
-      <td></td>
-      <td>'metformin'</td>
-    </tr>
-    <tr>
-      <th>'rosiglitazone'</th>
-      <td>STRING</td>
-      <td>required</td>
-      <td></td>
-      <td>'metformin'</td>
-    </tr>
-    <tr>
-      <th>'acarbose'</th>
-      <td>STRING</td>
-      <td>required</td>
-      <td></td>
-      <td>'metformin'</td>
-    </tr>
-    <tr>
-      <th>'miglitol'</th>
-      <td>STRING</td>
-      <td>required</td>
-      <td></td>
-      <td>'metformin'</td>
-    </tr>
-    <tr>
-      <th>'troglitazone'</th>
-      <td>STRING</td>
-      <td>required</td>
-      <td></td>
-      <td>'metformin'</td>
-    </tr>
-    <tr>
-      <th>'tolazamide'</th>
-      <td>STRING</td>
-      <td>required</td>
-      <td></td>
-      <td>'metformin'</td>
-    </tr>
-    <tr>
-      <th>'examide'</th>
-      <td>STRING</td>
-      <td>required</td>
-      <td></td>
-      <td>'metformin'</td>
-    </tr>
-    <tr>
-      <th>'citoglipton'</th>
-      <td>STRING</td>
-      <td>required</td>
-      <td></td>
-      <td>'metformin'</td>
-    </tr>
-    <tr>
-      <th>'insulin'</th>
-      <td>STRING</td>
-      <td>required</td>
-      <td></td>
-      <td>'metformin'</td>
-    </tr>
-    <tr>
-      <th>'glyburide-metformin'</th>
-      <td>STRING</td>
-      <td>required</td>
-      <td></td>
-      <td>'metformin'</td>
-    </tr>
-    <tr>
-      <th>'glipizide-metformin'</th>
-      <td>STRING</td>
-      <td>required</td>
-      <td></td>
-      <td>'metformin'</td>
-    </tr>
-    <tr>
-      <th>'glimepiride-pioglitazone'</th>
-      <td>STRING</td>
-      <td>required</td>
-      <td></td>
-      <td>'metformin'</td>
-    </tr>
-    <tr>
-      <th>'metformin-rosiglitazone'</th>
-      <td>STRING</td>
-      <td>required</td>
-      <td></td>
-      <td>'metformin'</td>
-    </tr>
-    <tr>
-      <th>'metformin-pioglitazone'</th>
-      <td>STRING</td>
-      <td>required</td>
-      <td></td>
-      <td>'metformin'</td>
-    </tr>
-    <tr>
-      <th>'change'</th>
-      <td>STRING</td>
-      <td>required</td>
-      <td></td>
-      <td>'change'</td>
-    </tr>
-    <tr>
-      <th>'diabetesMed'</th>
-      <td>STRING</td>
-      <td>required</td>
-      <td></td>
-      <td>'diabetesMed'</td>
-    </tr>
-    <tr>
-      <th>'readmitted'</th>
-      <td>STRING</td>
-      <td>required</td>
-      <td></td>
-      <td>'readmitted'</td>
-    </tr>
-  </tbody>
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">Type</th>
+<th data-quarto-table-cell-role="th">Presence</th>
+<th data-quarto-table-cell-role="th">Valency</th>
+<th data-quarto-table-cell-role="th">Domain</th>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">Feature name</th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">'race'</td>
+<td>STRING</td>
+<td>optional</td>
+<td>single</td>
+<td>'race'</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">'gender'</td>
+<td>STRING</td>
+<td>required</td>
+<td></td>
+<td>'gender'</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">'age'</td>
+<td>STRING</td>
+<td>required</td>
+<td></td>
+<td>'age'</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">'weight'</td>
+<td>STRING</td>
+<td>optional</td>
+<td>single</td>
+<td>'weight'</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">'admission_type_id'</td>
+<td>INT</td>
+<td>required</td>
+<td></td>
+<td>-</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">'discharge_disposition_id'</td>
+<td>INT</td>
+<td>required</td>
+<td></td>
+<td>-</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">'admission_source_id'</td>
+<td>INT</td>
+<td>required</td>
+<td></td>
+<td>-</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">'time_in_hospital'</td>
+<td>INT</td>
+<td>required</td>
+<td></td>
+<td>-</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">'payer_code'</td>
+<td>STRING</td>
+<td>optional</td>
+<td>single</td>
+<td>'payer_code'</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">'medical_specialty'</td>
+<td>STRING</td>
+<td>optional</td>
+<td>single</td>
+<td>'medical_specialty'</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">'num_lab_procedures'</td>
+<td>INT</td>
+<td>required</td>
+<td></td>
+<td>-</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">'num_procedures'</td>
+<td>INT</td>
+<td>required</td>
+<td></td>
+<td>-</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">'num_medications'</td>
+<td>INT</td>
+<td>required</td>
+<td></td>
+<td>-</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">'number_outpatient'</td>
+<td>INT</td>
+<td>required</td>
+<td></td>
+<td>-</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">'number_emergency'</td>
+<td>INT</td>
+<td>required</td>
+<td></td>
+<td>-</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">'number_inpatient'</td>
+<td>INT</td>
+<td>required</td>
+<td></td>
+<td>-</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">'diag_1'</td>
+<td>BYTES</td>
+<td>optional</td>
+<td>single</td>
+<td>-</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">'diag_2'</td>
+<td>BYTES</td>
+<td>optional</td>
+<td>single</td>
+<td>-</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">'diag_3'</td>
+<td>BYTES</td>
+<td>optional</td>
+<td>single</td>
+<td>-</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">'number_diagnoses'</td>
+<td>INT</td>
+<td>required</td>
+<td></td>
+<td>-</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">'max_glu_serum'</td>
+<td>STRING</td>
+<td>required</td>
+<td></td>
+<td>'max_glu_serum'</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">'A1Cresult'</td>
+<td>STRING</td>
+<td>required</td>
+<td></td>
+<td>'A1Cresult'</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">'metformin'</td>
+<td>STRING</td>
+<td>required</td>
+<td></td>
+<td>'metformin'</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">'repaglinide'</td>
+<td>STRING</td>
+<td>required</td>
+<td></td>
+<td>'metformin'</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">'nateglinide'</td>
+<td>STRING</td>
+<td>required</td>
+<td></td>
+<td>'metformin'</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">'chlorpropamide'</td>
+<td>STRING</td>
+<td>required</td>
+<td></td>
+<td>'metformin'</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">'glimepiride'</td>
+<td>STRING</td>
+<td>required</td>
+<td></td>
+<td>'metformin'</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">'acetohexamide'</td>
+<td>STRING</td>
+<td>required</td>
+<td></td>
+<td>'metformin'</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">'glipizide'</td>
+<td>STRING</td>
+<td>required</td>
+<td></td>
+<td>'metformin'</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">'glyburide'</td>
+<td>STRING</td>
+<td>required</td>
+<td></td>
+<td>'metformin'</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">'tolbutamide'</td>
+<td>STRING</td>
+<td>required</td>
+<td></td>
+<td>'metformin'</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">'pioglitazone'</td>
+<td>STRING</td>
+<td>required</td>
+<td></td>
+<td>'metformin'</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">'rosiglitazone'</td>
+<td>STRING</td>
+<td>required</td>
+<td></td>
+<td>'metformin'</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">'acarbose'</td>
+<td>STRING</td>
+<td>required</td>
+<td></td>
+<td>'metformin'</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">'miglitol'</td>
+<td>STRING</td>
+<td>required</td>
+<td></td>
+<td>'metformin'</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">'troglitazone'</td>
+<td>STRING</td>
+<td>required</td>
+<td></td>
+<td>'metformin'</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">'tolazamide'</td>
+<td>STRING</td>
+<td>required</td>
+<td></td>
+<td>'metformin'</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">'examide'</td>
+<td>STRING</td>
+<td>required</td>
+<td></td>
+<td>'metformin'</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">'citoglipton'</td>
+<td>STRING</td>
+<td>required</td>
+<td></td>
+<td>'metformin'</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">'insulin'</td>
+<td>STRING</td>
+<td>required</td>
+<td></td>
+<td>'metformin'</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">'glyburide-metformin'</td>
+<td>STRING</td>
+<td>required</td>
+<td></td>
+<td>'metformin'</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">'glipizide-metformin'</td>
+<td>STRING</td>
+<td>required</td>
+<td></td>
+<td>'metformin'</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">'glimepiride-pioglitazone'</td>
+<td>STRING</td>
+<td>required</td>
+<td></td>
+<td>'metformin'</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">'metformin-rosiglitazone'</td>
+<td>STRING</td>
+<td>required</td>
+<td></td>
+<td>'metformin'</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">'metformin-pioglitazone'</td>
+<td>STRING</td>
+<td>required</td>
+<td></td>
+<td>'metformin'</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">'change'</td>
+<td>STRING</td>
+<td>required</td>
+<td></td>
+<td>'change'</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">'diabetesMed'</td>
+<td>STRING</td>
+<td>required</td>
+<td></td>
+<td>'diabetesMed'</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">'readmitted'</td>
+<td>STRING</td>
+<td>required</td>
+<td></td>
+<td>'readmitted'</td>
+</tr>
+</tbody>
 </table>
+
 </div>
 </div>
 <div class="cell-output cell-output-display">
-
 <div>
 
-<table class="dataframe table table-sm table-striped">
-  <thead>
-    <tr>
-      <th></th>
-      <th>Values</th>
-    </tr>
-    <tr>
-      <th>Domain</th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>'race'</th>
-      <td>'AfricanAmerican', 'Asian', 'Caucasian', 'Hispanic', 'Other'</td>
-    </tr>
-    <tr>
-      <th>'gender'</th>
-      <td>'Female', 'Male', 'Unknown/Invalid'</td>
-    </tr>
-    <tr>
-      <th>'age'</th>
-      <td>'[0-10)', '[10-20)', '[20-30)', '[30-40)', '[40-50)', '[50-60)', '[60-70)', '[70-80)', '[80-90)', '[90-100)'</td>
-    </tr>
-    <tr>
-      <th>'weight'</th>
-      <td>'&gt;200', '[0-25)', '[100-125)', '[125-150)', '[150-175)', '[175-200)', '[25-50)', '[50-75)', '[75-100)'</td>
-    </tr>
-    <tr>
-      <th>'payer_code'</th>
-      <td>'BC', 'CH', 'CM', 'CP', 'DM', 'HM', 'MC', 'MD', 'MP', 'OG', 'OT', 'PO', 'SI', 'SP', 'UN', 'WC'</td>
-    </tr>
-    <tr>
-      <th>'medical_specialty'</th>
-      <td>'AllergyandImmunology', 'Anesthesiology', 'Anesthesiology-Pediatric', 'Cardiology', 'Cardiology-Pediatric', 'Dentistry', 'Dermatology', 'Emergency/Trauma', 'Endocrinology', 'Family/GeneralPractice', 'Gastroenterology', 'Gynecology', 'Hematology', 'Hematology/Oncology', 'Hospitalist', 'InfectiousDiseases', 'InternalMedicine', 'Nephrology', 'Neurology', 'Obsterics&amp;Gynecology-GynecologicOnco', 'Obstetrics', 'ObstetricsandGynecology', 'Oncology', 'Ophthalmology', 'Orthopedics', 'Orthopedics-Reconstructive', 'Osteopath', 'Otolaryngology', 'OutreachServices', 'Pathology', 'Pediatrics', 'Pediatrics-AllergyandImmunology', 'Pediatrics-CriticalCare', 'Pediatrics-EmergencyMedicine', 'Pediatrics-Endocrinology', 'Pediatrics-Hematology-Oncology', 'Pediatrics-InfectiousDiseases', 'Pediatrics-Neurology', 'Pediatrics-Pulmonology', 'Perinatology', 'PhysicalMedicineandRehabilitation', 'PhysicianNotFound', 'Podiatry', 'Proctology', 'Psychiatry', 'Psychiatry-Addictive', 'Psychiatry-Child/Adolescent', 'Psychology', 'Pulmonology', 'Radiologist', 'Radiology', 'Rheumatology', 'Speech', 'SportsMedicine', 'Surgeon', 'Surgery-Cardiovascular', 'Surgery-Cardiovascular/Thoracic', 'Surgery-Colon&amp;Rectal', 'Surgery-General', 'Surgery-Maxillofacial', 'Surgery-Neuro', 'Surgery-Pediatric', 'Surgery-Plastic', 'Surgery-PlasticwithinHeadandNeck', 'Surgery-Thoracic', 'Surgery-Vascular', 'SurgicalSpecialty', 'Urology', 'Neurophysiology', 'Neurophysiology', 'Neurophysiology', 'Neurophysiology'</td>
-    </tr>
-    <tr>
-      <th>'max_glu_serum'</th>
-      <td>'&gt;200', '&gt;300', 'None', 'Norm'</td>
-    </tr>
-    <tr>
-      <th>'A1Cresult'</th>
-      <td>'&gt;7', '&gt;8', 'None', 'Norm'</td>
-    </tr>
-    <tr>
-      <th>'metformin'</th>
-      <td>'Down', 'No', 'Steady', 'Up'</td>
-    </tr>
-    <tr>
-      <th>'repaglinide'</th>
-      <td>'Down', 'No', 'Steady', 'Up'</td>
-    </tr>
-    <tr>
-      <th>'nateglinide'</th>
-      <td>'Down', 'No', 'Steady', 'Up'</td>
-    </tr>
-    <tr>
-      <th>'chlorpropamide'</th>
-      <td>'Down', 'No', 'Steady', 'Up'</td>
-    </tr>
-    <tr>
-      <th>'glimepiride'</th>
-      <td>'Down', 'No', 'Steady', 'Up'</td>
-    </tr>
-    <tr>
-      <th>'acetohexamide'</th>
-      <td>'No', 'Steady'</td>
-    </tr>
-    <tr>
-      <th>'glipizide'</th>
-      <td>'Down', 'No', 'Steady', 'Up'</td>
-    </tr>
-    <tr>
-      <th>'glyburide'</th>
-      <td>'Down', 'No', 'Steady', 'Up'</td>
-    </tr>
-    <tr>
-      <th>'tolbutamide'</th>
-      <td>'No', 'Steady'</td>
-    </tr>
-    <tr>
-      <th>'pioglitazone'</th>
-      <td>'Down', 'No', 'Steady', 'Up'</td>
-    </tr>
-    <tr>
-      <th>'rosiglitazone'</th>
-      <td>'Down', 'No', 'Steady', 'Up'</td>
-    </tr>
-    <tr>
-      <th>'acarbose'</th>
-      <td>'Down', 'No', 'Steady', 'Up'</td>
-    </tr>
-    <tr>
-      <th>'miglitol'</th>
-      <td>'Down', 'No', 'Steady', 'Up'</td>
-    </tr>
-    <tr>
-      <th>'troglitazone'</th>
-      <td>'No', 'Steady'</td>
-    </tr>
-    <tr>
-      <th>'tolazamide'</th>
-      <td>'No', 'Steady', 'Up'</td>
-    </tr>
-    <tr>
-      <th>'examide'</th>
-      <td>'No'</td>
-    </tr>
-    <tr>
-      <th>'citoglipton'</th>
-      <td>'No'</td>
-    </tr>
-    <tr>
-      <th>'insulin'</th>
-      <td>'Down', 'No', 'Steady', 'Up'</td>
-    </tr>
-    <tr>
-      <th>'glyburide-metformin'</th>
-      <td>'Down', 'No', 'Steady', 'Up'</td>
-    </tr>
-    <tr>
-      <th>'glipizide-metformin'</th>
-      <td>'No', 'Steady'</td>
-    </tr>
-    <tr>
-      <th>'glimepiride-pioglitazone'</th>
-      <td>'No', 'Steady', 'Steady', 'Steady', 'Steady', 'Steady', 'Steady'</td>
-    </tr>
-    <tr>
-      <th>'metformin-rosiglitazone'</th>
-      <td>'No'</td>
-    </tr>
-    <tr>
-      <th>'metformin-pioglitazone'</th>
-      <td>'No'</td>
-    </tr>
-    <tr>
-      <th>'change'</th>
-      <td>'Ch', 'No'</td>
-    </tr>
-    <tr>
-      <th>'diabetesMed'</th>
-      <td>'No', 'Yes'</td>
-    </tr>
-    <tr>
-      <th>'readmitted'</th>
-      <td>'&lt;30', '&gt;30', 'NO'</td>
-    </tr>
-  </tbody>
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">Values</th>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">Domain</th>
+<th data-quarto-table-cell-role="th"></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">'race'</td>
+<td>'AfricanAmerican', 'Asian', 'Caucasian', 'Hispanic', 'Other'</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">'gender'</td>
+<td>'Female', 'Male', 'Unknown/Invalid'</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">'age'</td>
+<td>'[0-10)', '[10-20)', '[20-30)', '[30-40)', '[40-50)', '[50-60)', '[60-70)', '[70-80)', '[80-90)', '[90-100)'</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">'weight'</td>
+<td>'&gt;200', '[0-25)', '[100-125)', '[125-150)', '[150-175)', '[175-200)', '[25-50)', '[50-75)', '[75-100)'</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">'payer_code'</td>
+<td>'BC', 'CH', 'CM', 'CP', 'DM', 'HM', 'MC', 'MD', 'MP', 'OG', 'OT', 'PO', 'SI', 'SP', 'UN', 'WC'</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">'medical_specialty'</td>
+<td>'AllergyandImmunology', 'Anesthesiology', 'Anesthesiology-Pediatric', 'Cardiology', 'Cardiology-Pediatric', 'Dentistry', 'Dermatology', 'Emergency/Trauma', 'Endocrinology', 'Family/GeneralPractice', 'Gastroenterology', 'Gynecology', 'Hematology', 'Hematology/Oncology', 'Hospitalist', 'InfectiousDiseases', 'InternalMedicine', 'Nephrology', 'Neurology', 'Obsterics&amp;Gynecology-GynecologicOnco', 'Obstetrics', 'ObstetricsandGynecology', 'Oncology', 'Ophthalmology', 'Orthopedics', 'Orthopedics-Reconstructive', 'Osteopath', 'Otolaryngology', 'OutreachServices', 'Pathology', 'Pediatrics', 'Pediatrics-AllergyandImmunology', 'Pediatrics-CriticalCare', 'Pediatrics-EmergencyMedicine', 'Pediatrics-Endocrinology', 'Pediatrics-Hematology-Oncology', 'Pediatrics-InfectiousDiseases', 'Pediatrics-Neurology', 'Pediatrics-Pulmonology', 'Perinatology', 'PhysicalMedicineandRehabilitation', 'PhysicianNotFound', 'Podiatry', 'Proctology', 'Psychiatry', 'Psychiatry-Addictive', 'Psychiatry-Child/Adolescent', 'Psychology', 'Pulmonology', 'Radiologist', 'Radiology', 'Rheumatology', 'Speech', 'SportsMedicine', 'Surgeon', 'Surgery-Cardiovascular', 'Surgery-Cardiovascular/Thoracic', 'Surgery-Colon&amp;Rectal', 'Surgery-General', 'Surgery-Maxillofacial', 'Surgery-Neuro', 'Surgery-Pediatric', 'Surgery-Plastic', 'Surgery-PlasticwithinHeadandNeck', 'Surgery-Thoracic', 'Surgery-Vascular', 'SurgicalSpecialty', 'Urology', 'Neurophysiology', 'Neurophysiology', 'Neurophysiology', 'Neurophysiology'</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">'max_glu_serum'</td>
+<td>'&gt;200', '&gt;300', 'None', 'Norm'</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">'A1Cresult'</td>
+<td>'&gt;7', '&gt;8', 'None', 'Norm'</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">'metformin'</td>
+<td>'Down', 'No', 'Steady', 'Up'</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">'repaglinide'</td>
+<td>'Down', 'No', 'Steady', 'Up'</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">'nateglinide'</td>
+<td>'Down', 'No', 'Steady', 'Up'</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">'chlorpropamide'</td>
+<td>'Down', 'No', 'Steady', 'Up'</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">'glimepiride'</td>
+<td>'Down', 'No', 'Steady', 'Up'</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">'acetohexamide'</td>
+<td>'No', 'Steady'</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">'glipizide'</td>
+<td>'Down', 'No', 'Steady', 'Up'</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">'glyburide'</td>
+<td>'Down', 'No', 'Steady', 'Up'</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">'tolbutamide'</td>
+<td>'No', 'Steady'</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">'pioglitazone'</td>
+<td>'Down', 'No', 'Steady', 'Up'</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">'rosiglitazone'</td>
+<td>'Down', 'No', 'Steady', 'Up'</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">'acarbose'</td>
+<td>'Down', 'No', 'Steady', 'Up'</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">'miglitol'</td>
+<td>'Down', 'No', 'Steady', 'Up'</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">'troglitazone'</td>
+<td>'No', 'Steady'</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">'tolazamide'</td>
+<td>'No', 'Steady', 'Up'</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">'examide'</td>
+<td>'No'</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">'citoglipton'</td>
+<td>'No'</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">'insulin'</td>
+<td>'Down', 'No', 'Steady', 'Up'</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">'glyburide-metformin'</td>
+<td>'Down', 'No', 'Steady', 'Up'</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">'glipizide-metformin'</td>
+<td>'No', 'Steady'</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">'glimepiride-pioglitazone'</td>
+<td>'No', 'Steady', 'Steady', 'Steady', 'Steady', 'Steady', 'Steady'</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">'metformin-rosiglitazone'</td>
+<td>'No'</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">'metformin-pioglitazone'</td>
+<td>'No'</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">'change'</td>
+<td>'Ch', 'No'</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">'diabetesMed'</td>
+<td>'No', 'Yes'</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">'readmitted'</td>
+<td>'&lt;30', '&gt;30', 'NO'</td>
+</tr>
+</tbody>
 </table>
+
 </div>
 </div>
 </div>
@@ -2574,30 +2555,31 @@ Domain values of 'nateglinide': ['Down', 'No', 'Steady', 'Up']</code></pre>
 <div class="cell" data-execution_count="47">
 <div class="sourceCode cell-code" id="cb40"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>calculate_and_display_anomalies(serving_stats, schema<span class="op">=</span>schema)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
-
 <div>
 
-<table class="dataframe table table-sm table-striped">
-  <thead>
-    <tr>
-      <th></th>
-      <th>Anomaly short description</th>
-      <th>Anomaly long description</th>
-    </tr>
-    <tr>
-      <th>Feature name</th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>'readmitted'</th>
-      <td>Column dropped</td>
-      <td>Column is completely missing</td>
-    </tr>
-  </tbody>
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">Anomaly short description</th>
+<th data-quarto-table-cell-role="th">Anomaly long description</th>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">Feature name</th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">'readmitted'</td>
+<td>Column dropped</td>
+<td>Column is completely missing</td>
+</tr>
+</tbody>
 </table>
+
 </div>
 </div>
 </div>
@@ -2611,521 +2593,523 @@ Domain values of 'nateglinide': ['Down', 'No', 'Steady', 'Up']</code></pre>
 <span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a>schema.default_environment.append(<span class="st">'SERVING'</span>)</span>
 <span id="cb41-4"><a href="#cb41-4" aria-hidden="true" tabindex="-1"></a>tfdv.display_schema(schema)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
-
 <div>
 
-<table class="dataframe table table-sm table-striped">
-  <thead>
-    <tr>
-      <th></th>
-      <th>Type</th>
-      <th>Presence</th>
-      <th>Valency</th>
-      <th>Domain</th>
-    </tr>
-    <tr>
-      <th>Feature name</th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>'race'</th>
-      <td>STRING</td>
-      <td>optional</td>
-      <td>single</td>
-      <td>'race'</td>
-    </tr>
-    <tr>
-      <th>'gender'</th>
-      <td>STRING</td>
-      <td>required</td>
-      <td></td>
-      <td>'gender'</td>
-    </tr>
-    <tr>
-      <th>'age'</th>
-      <td>STRING</td>
-      <td>required</td>
-      <td></td>
-      <td>'age'</td>
-    </tr>
-    <tr>
-      <th>'weight'</th>
-      <td>STRING</td>
-      <td>optional</td>
-      <td>single</td>
-      <td>'weight'</td>
-    </tr>
-    <tr>
-      <th>'admission_type_id'</th>
-      <td>INT</td>
-      <td>required</td>
-      <td></td>
-      <td>-</td>
-    </tr>
-    <tr>
-      <th>'discharge_disposition_id'</th>
-      <td>INT</td>
-      <td>required</td>
-      <td></td>
-      <td>-</td>
-    </tr>
-    <tr>
-      <th>'admission_source_id'</th>
-      <td>INT</td>
-      <td>required</td>
-      <td></td>
-      <td>-</td>
-    </tr>
-    <tr>
-      <th>'time_in_hospital'</th>
-      <td>INT</td>
-      <td>required</td>
-      <td></td>
-      <td>-</td>
-    </tr>
-    <tr>
-      <th>'payer_code'</th>
-      <td>STRING</td>
-      <td>optional</td>
-      <td>single</td>
-      <td>'payer_code'</td>
-    </tr>
-    <tr>
-      <th>'medical_specialty'</th>
-      <td>STRING</td>
-      <td>optional</td>
-      <td>single</td>
-      <td>'medical_specialty'</td>
-    </tr>
-    <tr>
-      <th>'num_lab_procedures'</th>
-      <td>INT</td>
-      <td>required</td>
-      <td></td>
-      <td>-</td>
-    </tr>
-    <tr>
-      <th>'num_procedures'</th>
-      <td>INT</td>
-      <td>required</td>
-      <td></td>
-      <td>-</td>
-    </tr>
-    <tr>
-      <th>'num_medications'</th>
-      <td>INT</td>
-      <td>required</td>
-      <td></td>
-      <td>-</td>
-    </tr>
-    <tr>
-      <th>'number_outpatient'</th>
-      <td>INT</td>
-      <td>required</td>
-      <td></td>
-      <td>-</td>
-    </tr>
-    <tr>
-      <th>'number_emergency'</th>
-      <td>INT</td>
-      <td>required</td>
-      <td></td>
-      <td>-</td>
-    </tr>
-    <tr>
-      <th>'number_inpatient'</th>
-      <td>INT</td>
-      <td>required</td>
-      <td></td>
-      <td>-</td>
-    </tr>
-    <tr>
-      <th>'diag_1'</th>
-      <td>BYTES</td>
-      <td>optional</td>
-      <td>single</td>
-      <td>-</td>
-    </tr>
-    <tr>
-      <th>'diag_2'</th>
-      <td>BYTES</td>
-      <td>optional</td>
-      <td>single</td>
-      <td>-</td>
-    </tr>
-    <tr>
-      <th>'diag_3'</th>
-      <td>BYTES</td>
-      <td>optional</td>
-      <td>single</td>
-      <td>-</td>
-    </tr>
-    <tr>
-      <th>'number_diagnoses'</th>
-      <td>INT</td>
-      <td>required</td>
-      <td></td>
-      <td>-</td>
-    </tr>
-    <tr>
-      <th>'max_glu_serum'</th>
-      <td>STRING</td>
-      <td>required</td>
-      <td></td>
-      <td>'max_glu_serum'</td>
-    </tr>
-    <tr>
-      <th>'A1Cresult'</th>
-      <td>STRING</td>
-      <td>required</td>
-      <td></td>
-      <td>'A1Cresult'</td>
-    </tr>
-    <tr>
-      <th>'metformin'</th>
-      <td>STRING</td>
-      <td>required</td>
-      <td></td>
-      <td>'metformin'</td>
-    </tr>
-    <tr>
-      <th>'repaglinide'</th>
-      <td>STRING</td>
-      <td>required</td>
-      <td></td>
-      <td>'metformin'</td>
-    </tr>
-    <tr>
-      <th>'nateglinide'</th>
-      <td>STRING</td>
-      <td>required</td>
-      <td></td>
-      <td>'metformin'</td>
-    </tr>
-    <tr>
-      <th>'chlorpropamide'</th>
-      <td>STRING</td>
-      <td>required</td>
-      <td></td>
-      <td>'metformin'</td>
-    </tr>
-    <tr>
-      <th>'glimepiride'</th>
-      <td>STRING</td>
-      <td>required</td>
-      <td></td>
-      <td>'metformin'</td>
-    </tr>
-    <tr>
-      <th>'acetohexamide'</th>
-      <td>STRING</td>
-      <td>required</td>
-      <td></td>
-      <td>'metformin'</td>
-    </tr>
-    <tr>
-      <th>'glipizide'</th>
-      <td>STRING</td>
-      <td>required</td>
-      <td></td>
-      <td>'metformin'</td>
-    </tr>
-    <tr>
-      <th>'glyburide'</th>
-      <td>STRING</td>
-      <td>required</td>
-      <td></td>
-      <td>'metformin'</td>
-    </tr>
-    <tr>
-      <th>'tolbutamide'</th>
-      <td>STRING</td>
-      <td>required</td>
-      <td></td>
-      <td>'metformin'</td>
-    </tr>
-    <tr>
-      <th>'pioglitazone'</th>
-      <td>STRING</td>
-      <td>required</td>
-      <td></td>
-      <td>'metformin'</td>
-    </tr>
-    <tr>
-      <th>'rosiglitazone'</th>
-      <td>STRING</td>
-      <td>required</td>
-      <td></td>
-      <td>'metformin'</td>
-    </tr>
-    <tr>
-      <th>'acarbose'</th>
-      <td>STRING</td>
-      <td>required</td>
-      <td></td>
-      <td>'metformin'</td>
-    </tr>
-    <tr>
-      <th>'miglitol'</th>
-      <td>STRING</td>
-      <td>required</td>
-      <td></td>
-      <td>'metformin'</td>
-    </tr>
-    <tr>
-      <th>'troglitazone'</th>
-      <td>STRING</td>
-      <td>required</td>
-      <td></td>
-      <td>'metformin'</td>
-    </tr>
-    <tr>
-      <th>'tolazamide'</th>
-      <td>STRING</td>
-      <td>required</td>
-      <td></td>
-      <td>'metformin'</td>
-    </tr>
-    <tr>
-      <th>'examide'</th>
-      <td>STRING</td>
-      <td>required</td>
-      <td></td>
-      <td>'metformin'</td>
-    </tr>
-    <tr>
-      <th>'citoglipton'</th>
-      <td>STRING</td>
-      <td>required</td>
-      <td></td>
-      <td>'metformin'</td>
-    </tr>
-    <tr>
-      <th>'insulin'</th>
-      <td>STRING</td>
-      <td>required</td>
-      <td></td>
-      <td>'metformin'</td>
-    </tr>
-    <tr>
-      <th>'glyburide-metformin'</th>
-      <td>STRING</td>
-      <td>required</td>
-      <td></td>
-      <td>'metformin'</td>
-    </tr>
-    <tr>
-      <th>'glipizide-metformin'</th>
-      <td>STRING</td>
-      <td>required</td>
-      <td></td>
-      <td>'metformin'</td>
-    </tr>
-    <tr>
-      <th>'glimepiride-pioglitazone'</th>
-      <td>STRING</td>
-      <td>required</td>
-      <td></td>
-      <td>'metformin'</td>
-    </tr>
-    <tr>
-      <th>'metformin-rosiglitazone'</th>
-      <td>STRING</td>
-      <td>required</td>
-      <td></td>
-      <td>'metformin'</td>
-    </tr>
-    <tr>
-      <th>'metformin-pioglitazone'</th>
-      <td>STRING</td>
-      <td>required</td>
-      <td></td>
-      <td>'metformin'</td>
-    </tr>
-    <tr>
-      <th>'change'</th>
-      <td>STRING</td>
-      <td>required</td>
-      <td></td>
-      <td>'change'</td>
-    </tr>
-    <tr>
-      <th>'diabetesMed'</th>
-      <td>STRING</td>
-      <td>required</td>
-      <td></td>
-      <td>'diabetesMed'</td>
-    </tr>
-    <tr>
-      <th>'readmitted'</th>
-      <td>STRING</td>
-      <td>required</td>
-      <td></td>
-      <td>'readmitted'</td>
-    </tr>
-  </tbody>
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">Type</th>
+<th data-quarto-table-cell-role="th">Presence</th>
+<th data-quarto-table-cell-role="th">Valency</th>
+<th data-quarto-table-cell-role="th">Domain</th>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">Feature name</th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">'race'</td>
+<td>STRING</td>
+<td>optional</td>
+<td>single</td>
+<td>'race'</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">'gender'</td>
+<td>STRING</td>
+<td>required</td>
+<td></td>
+<td>'gender'</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">'age'</td>
+<td>STRING</td>
+<td>required</td>
+<td></td>
+<td>'age'</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">'weight'</td>
+<td>STRING</td>
+<td>optional</td>
+<td>single</td>
+<td>'weight'</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">'admission_type_id'</td>
+<td>INT</td>
+<td>required</td>
+<td></td>
+<td>-</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">'discharge_disposition_id'</td>
+<td>INT</td>
+<td>required</td>
+<td></td>
+<td>-</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">'admission_source_id'</td>
+<td>INT</td>
+<td>required</td>
+<td></td>
+<td>-</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">'time_in_hospital'</td>
+<td>INT</td>
+<td>required</td>
+<td></td>
+<td>-</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">'payer_code'</td>
+<td>STRING</td>
+<td>optional</td>
+<td>single</td>
+<td>'payer_code'</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">'medical_specialty'</td>
+<td>STRING</td>
+<td>optional</td>
+<td>single</td>
+<td>'medical_specialty'</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">'num_lab_procedures'</td>
+<td>INT</td>
+<td>required</td>
+<td></td>
+<td>-</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">'num_procedures'</td>
+<td>INT</td>
+<td>required</td>
+<td></td>
+<td>-</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">'num_medications'</td>
+<td>INT</td>
+<td>required</td>
+<td></td>
+<td>-</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">'number_outpatient'</td>
+<td>INT</td>
+<td>required</td>
+<td></td>
+<td>-</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">'number_emergency'</td>
+<td>INT</td>
+<td>required</td>
+<td></td>
+<td>-</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">'number_inpatient'</td>
+<td>INT</td>
+<td>required</td>
+<td></td>
+<td>-</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">'diag_1'</td>
+<td>BYTES</td>
+<td>optional</td>
+<td>single</td>
+<td>-</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">'diag_2'</td>
+<td>BYTES</td>
+<td>optional</td>
+<td>single</td>
+<td>-</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">'diag_3'</td>
+<td>BYTES</td>
+<td>optional</td>
+<td>single</td>
+<td>-</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">'number_diagnoses'</td>
+<td>INT</td>
+<td>required</td>
+<td></td>
+<td>-</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">'max_glu_serum'</td>
+<td>STRING</td>
+<td>required</td>
+<td></td>
+<td>'max_glu_serum'</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">'A1Cresult'</td>
+<td>STRING</td>
+<td>required</td>
+<td></td>
+<td>'A1Cresult'</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">'metformin'</td>
+<td>STRING</td>
+<td>required</td>
+<td></td>
+<td>'metformin'</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">'repaglinide'</td>
+<td>STRING</td>
+<td>required</td>
+<td></td>
+<td>'metformin'</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">'nateglinide'</td>
+<td>STRING</td>
+<td>required</td>
+<td></td>
+<td>'metformin'</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">'chlorpropamide'</td>
+<td>STRING</td>
+<td>required</td>
+<td></td>
+<td>'metformin'</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">'glimepiride'</td>
+<td>STRING</td>
+<td>required</td>
+<td></td>
+<td>'metformin'</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">'acetohexamide'</td>
+<td>STRING</td>
+<td>required</td>
+<td></td>
+<td>'metformin'</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">'glipizide'</td>
+<td>STRING</td>
+<td>required</td>
+<td></td>
+<td>'metformin'</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">'glyburide'</td>
+<td>STRING</td>
+<td>required</td>
+<td></td>
+<td>'metformin'</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">'tolbutamide'</td>
+<td>STRING</td>
+<td>required</td>
+<td></td>
+<td>'metformin'</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">'pioglitazone'</td>
+<td>STRING</td>
+<td>required</td>
+<td></td>
+<td>'metformin'</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">'rosiglitazone'</td>
+<td>STRING</td>
+<td>required</td>
+<td></td>
+<td>'metformin'</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">'acarbose'</td>
+<td>STRING</td>
+<td>required</td>
+<td></td>
+<td>'metformin'</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">'miglitol'</td>
+<td>STRING</td>
+<td>required</td>
+<td></td>
+<td>'metformin'</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">'troglitazone'</td>
+<td>STRING</td>
+<td>required</td>
+<td></td>
+<td>'metformin'</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">'tolazamide'</td>
+<td>STRING</td>
+<td>required</td>
+<td></td>
+<td>'metformin'</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">'examide'</td>
+<td>STRING</td>
+<td>required</td>
+<td></td>
+<td>'metformin'</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">'citoglipton'</td>
+<td>STRING</td>
+<td>required</td>
+<td></td>
+<td>'metformin'</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">'insulin'</td>
+<td>STRING</td>
+<td>required</td>
+<td></td>
+<td>'metformin'</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">'glyburide-metformin'</td>
+<td>STRING</td>
+<td>required</td>
+<td></td>
+<td>'metformin'</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">'glipizide-metformin'</td>
+<td>STRING</td>
+<td>required</td>
+<td></td>
+<td>'metformin'</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">'glimepiride-pioglitazone'</td>
+<td>STRING</td>
+<td>required</td>
+<td></td>
+<td>'metformin'</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">'metformin-rosiglitazone'</td>
+<td>STRING</td>
+<td>required</td>
+<td></td>
+<td>'metformin'</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">'metformin-pioglitazone'</td>
+<td>STRING</td>
+<td>required</td>
+<td></td>
+<td>'metformin'</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">'change'</td>
+<td>STRING</td>
+<td>required</td>
+<td></td>
+<td>'change'</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">'diabetesMed'</td>
+<td>STRING</td>
+<td>required</td>
+<td></td>
+<td>'diabetesMed'</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">'readmitted'</td>
+<td>STRING</td>
+<td>required</td>
+<td></td>
+<td>'readmitted'</td>
+</tr>
+</tbody>
 </table>
+
 </div>
 </div>
 <div class="cell-output cell-output-display">
-
 <div>
 
-<table class="dataframe table table-sm table-striped">
-  <thead>
-    <tr>
-      <th></th>
-      <th>Values</th>
-    </tr>
-    <tr>
-      <th>Domain</th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>'race'</th>
-      <td>'AfricanAmerican', 'Asian', 'Caucasian', 'Hispanic', 'Other'</td>
-    </tr>
-    <tr>
-      <th>'gender'</th>
-      <td>'Female', 'Male', 'Unknown/Invalid'</td>
-    </tr>
-    <tr>
-      <th>'age'</th>
-      <td>'[0-10)', '[10-20)', '[20-30)', '[30-40)', '[40-50)', '[50-60)', '[60-70)', '[70-80)', '[80-90)', '[90-100)'</td>
-    </tr>
-    <tr>
-      <th>'weight'</th>
-      <td>'&gt;200', '[0-25)', '[100-125)', '[125-150)', '[150-175)', '[175-200)', '[25-50)', '[50-75)', '[75-100)'</td>
-    </tr>
-    <tr>
-      <th>'payer_code'</th>
-      <td>'BC', 'CH', 'CM', 'CP', 'DM', 'HM', 'MC', 'MD', 'MP', 'OG', 'OT', 'PO', 'SI', 'SP', 'UN', 'WC'</td>
-    </tr>
-    <tr>
-      <th>'medical_specialty'</th>
-      <td>'AllergyandImmunology', 'Anesthesiology', 'Anesthesiology-Pediatric', 'Cardiology', 'Cardiology-Pediatric', 'Dentistry', 'Dermatology', 'Emergency/Trauma', 'Endocrinology', 'Family/GeneralPractice', 'Gastroenterology', 'Gynecology', 'Hematology', 'Hematology/Oncology', 'Hospitalist', 'InfectiousDiseases', 'InternalMedicine', 'Nephrology', 'Neurology', 'Obsterics&amp;Gynecology-GynecologicOnco', 'Obstetrics', 'ObstetricsandGynecology', 'Oncology', 'Ophthalmology', 'Orthopedics', 'Orthopedics-Reconstructive', 'Osteopath', 'Otolaryngology', 'OutreachServices', 'Pathology', 'Pediatrics', 'Pediatrics-AllergyandImmunology', 'Pediatrics-CriticalCare', 'Pediatrics-EmergencyMedicine', 'Pediatrics-Endocrinology', 'Pediatrics-Hematology-Oncology', 'Pediatrics-InfectiousDiseases', 'Pediatrics-Neurology', 'Pediatrics-Pulmonology', 'Perinatology', 'PhysicalMedicineandRehabilitation', 'PhysicianNotFound', 'Podiatry', 'Proctology', 'Psychiatry', 'Psychiatry-Addictive', 'Psychiatry-Child/Adolescent', 'Psychology', 'Pulmonology', 'Radiologist', 'Radiology', 'Rheumatology', 'Speech', 'SportsMedicine', 'Surgeon', 'Surgery-Cardiovascular', 'Surgery-Cardiovascular/Thoracic', 'Surgery-Colon&amp;Rectal', 'Surgery-General', 'Surgery-Maxillofacial', 'Surgery-Neuro', 'Surgery-Pediatric', 'Surgery-Plastic', 'Surgery-PlasticwithinHeadandNeck', 'Surgery-Thoracic', 'Surgery-Vascular', 'SurgicalSpecialty', 'Urology', 'Neurophysiology', 'Neurophysiology', 'Neurophysiology', 'Neurophysiology'</td>
-    </tr>
-    <tr>
-      <th>'max_glu_serum'</th>
-      <td>'&gt;200', '&gt;300', 'None', 'Norm'</td>
-    </tr>
-    <tr>
-      <th>'A1Cresult'</th>
-      <td>'&gt;7', '&gt;8', 'None', 'Norm'</td>
-    </tr>
-    <tr>
-      <th>'metformin'</th>
-      <td>'Down', 'No', 'Steady', 'Up'</td>
-    </tr>
-    <tr>
-      <th>'repaglinide'</th>
-      <td>'Down', 'No', 'Steady', 'Up'</td>
-    </tr>
-    <tr>
-      <th>'nateglinide'</th>
-      <td>'Down', 'No', 'Steady', 'Up'</td>
-    </tr>
-    <tr>
-      <th>'chlorpropamide'</th>
-      <td>'Down', 'No', 'Steady', 'Up'</td>
-    </tr>
-    <tr>
-      <th>'glimepiride'</th>
-      <td>'Down', 'No', 'Steady', 'Up'</td>
-    </tr>
-    <tr>
-      <th>'acetohexamide'</th>
-      <td>'No', 'Steady'</td>
-    </tr>
-    <tr>
-      <th>'glipizide'</th>
-      <td>'Down', 'No', 'Steady', 'Up'</td>
-    </tr>
-    <tr>
-      <th>'glyburide'</th>
-      <td>'Down', 'No', 'Steady', 'Up'</td>
-    </tr>
-    <tr>
-      <th>'tolbutamide'</th>
-      <td>'No', 'Steady'</td>
-    </tr>
-    <tr>
-      <th>'pioglitazone'</th>
-      <td>'Down', 'No', 'Steady', 'Up'</td>
-    </tr>
-    <tr>
-      <th>'rosiglitazone'</th>
-      <td>'Down', 'No', 'Steady', 'Up'</td>
-    </tr>
-    <tr>
-      <th>'acarbose'</th>
-      <td>'Down', 'No', 'Steady', 'Up'</td>
-    </tr>
-    <tr>
-      <th>'miglitol'</th>
-      <td>'Down', 'No', 'Steady', 'Up'</td>
-    </tr>
-    <tr>
-      <th>'troglitazone'</th>
-      <td>'No', 'Steady'</td>
-    </tr>
-    <tr>
-      <th>'tolazamide'</th>
-      <td>'No', 'Steady', 'Up'</td>
-    </tr>
-    <tr>
-      <th>'examide'</th>
-      <td>'No'</td>
-    </tr>
-    <tr>
-      <th>'citoglipton'</th>
-      <td>'No'</td>
-    </tr>
-    <tr>
-      <th>'insulin'</th>
-      <td>'Down', 'No', 'Steady', 'Up'</td>
-    </tr>
-    <tr>
-      <th>'glyburide-metformin'</th>
-      <td>'Down', 'No', 'Steady', 'Up'</td>
-    </tr>
-    <tr>
-      <th>'glipizide-metformin'</th>
-      <td>'No', 'Steady'</td>
-    </tr>
-    <tr>
-      <th>'glimepiride-pioglitazone'</th>
-      <td>'No', 'Steady', 'Steady', 'Steady', 'Steady', 'Steady', 'Steady'</td>
-    </tr>
-    <tr>
-      <th>'metformin-rosiglitazone'</th>
-      <td>'No'</td>
-    </tr>
-    <tr>
-      <th>'metformin-pioglitazone'</th>
-      <td>'No'</td>
-    </tr>
-    <tr>
-      <th>'change'</th>
-      <td>'Ch', 'No'</td>
-    </tr>
-    <tr>
-      <th>'diabetesMed'</th>
-      <td>'No', 'Yes'</td>
-    </tr>
-    <tr>
-      <th>'readmitted'</th>
-      <td>'&lt;30', '&gt;30', 'NO'</td>
-    </tr>
-  </tbody>
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">Values</th>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">Domain</th>
+<th data-quarto-table-cell-role="th"></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">'race'</td>
+<td>'AfricanAmerican', 'Asian', 'Caucasian', 'Hispanic', 'Other'</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">'gender'</td>
+<td>'Female', 'Male', 'Unknown/Invalid'</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">'age'</td>
+<td>'[0-10)', '[10-20)', '[20-30)', '[30-40)', '[40-50)', '[50-60)', '[60-70)', '[70-80)', '[80-90)', '[90-100)'</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">'weight'</td>
+<td>'&gt;200', '[0-25)', '[100-125)', '[125-150)', '[150-175)', '[175-200)', '[25-50)', '[50-75)', '[75-100)'</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">'payer_code'</td>
+<td>'BC', 'CH', 'CM', 'CP', 'DM', 'HM', 'MC', 'MD', 'MP', 'OG', 'OT', 'PO', 'SI', 'SP', 'UN', 'WC'</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">'medical_specialty'</td>
+<td>'AllergyandImmunology', 'Anesthesiology', 'Anesthesiology-Pediatric', 'Cardiology', 'Cardiology-Pediatric', 'Dentistry', 'Dermatology', 'Emergency/Trauma', 'Endocrinology', 'Family/GeneralPractice', 'Gastroenterology', 'Gynecology', 'Hematology', 'Hematology/Oncology', 'Hospitalist', 'InfectiousDiseases', 'InternalMedicine', 'Nephrology', 'Neurology', 'Obsterics&amp;Gynecology-GynecologicOnco', 'Obstetrics', 'ObstetricsandGynecology', 'Oncology', 'Ophthalmology', 'Orthopedics', 'Orthopedics-Reconstructive', 'Osteopath', 'Otolaryngology', 'OutreachServices', 'Pathology', 'Pediatrics', 'Pediatrics-AllergyandImmunology', 'Pediatrics-CriticalCare', 'Pediatrics-EmergencyMedicine', 'Pediatrics-Endocrinology', 'Pediatrics-Hematology-Oncology', 'Pediatrics-InfectiousDiseases', 'Pediatrics-Neurology', 'Pediatrics-Pulmonology', 'Perinatology', 'PhysicalMedicineandRehabilitation', 'PhysicianNotFound', 'Podiatry', 'Proctology', 'Psychiatry', 'Psychiatry-Addictive', 'Psychiatry-Child/Adolescent', 'Psychology', 'Pulmonology', 'Radiologist', 'Radiology', 'Rheumatology', 'Speech', 'SportsMedicine', 'Surgeon', 'Surgery-Cardiovascular', 'Surgery-Cardiovascular/Thoracic', 'Surgery-Colon&amp;Rectal', 'Surgery-General', 'Surgery-Maxillofacial', 'Surgery-Neuro', 'Surgery-Pediatric', 'Surgery-Plastic', 'Surgery-PlasticwithinHeadandNeck', 'Surgery-Thoracic', 'Surgery-Vascular', 'SurgicalSpecialty', 'Urology', 'Neurophysiology', 'Neurophysiology', 'Neurophysiology', 'Neurophysiology'</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">'max_glu_serum'</td>
+<td>'&gt;200', '&gt;300', 'None', 'Norm'</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">'A1Cresult'</td>
+<td>'&gt;7', '&gt;8', 'None', 'Norm'</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">'metformin'</td>
+<td>'Down', 'No', 'Steady', 'Up'</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">'repaglinide'</td>
+<td>'Down', 'No', 'Steady', 'Up'</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">'nateglinide'</td>
+<td>'Down', 'No', 'Steady', 'Up'</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">'chlorpropamide'</td>
+<td>'Down', 'No', 'Steady', 'Up'</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">'glimepiride'</td>
+<td>'Down', 'No', 'Steady', 'Up'</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">'acetohexamide'</td>
+<td>'No', 'Steady'</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">'glipizide'</td>
+<td>'Down', 'No', 'Steady', 'Up'</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">'glyburide'</td>
+<td>'Down', 'No', 'Steady', 'Up'</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">'tolbutamide'</td>
+<td>'No', 'Steady'</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">'pioglitazone'</td>
+<td>'Down', 'No', 'Steady', 'Up'</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">'rosiglitazone'</td>
+<td>'Down', 'No', 'Steady', 'Up'</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">'acarbose'</td>
+<td>'Down', 'No', 'Steady', 'Up'</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">'miglitol'</td>
+<td>'Down', 'No', 'Steady', 'Up'</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">'troglitazone'</td>
+<td>'No', 'Steady'</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">'tolazamide'</td>
+<td>'No', 'Steady', 'Up'</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">'examide'</td>
+<td>'No'</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">'citoglipton'</td>
+<td>'No'</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">'insulin'</td>
+<td>'Down', 'No', 'Steady', 'Up'</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">'glyburide-metformin'</td>
+<td>'Down', 'No', 'Steady', 'Up'</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">'glipizide-metformin'</td>
+<td>'No', 'Steady'</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">'glimepiride-pioglitazone'</td>
+<td>'No', 'Steady', 'Steady', 'Steady', 'Steady', 'Steady', 'Steady'</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">'metformin-rosiglitazone'</td>
+<td>'No'</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">'metformin-pioglitazone'</td>
+<td>'No'</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">'change'</td>
+<td>'Ch', 'No'</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">'diabetesMed'</td>
+<td>'No', 'Yes'</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">'readmitted'</td>
+<td>'&lt;30', '&gt;30', 'NO'</td>
+</tr>
+</tbody>
 </table>
+
 </div>
 </div>
 </div>
@@ -3156,30 +3140,31 @@ Domain values of 'nateglinide': ['Down', 'No', 'Steady', 'Up']</code></pre>
 <div class="sourceCode cell-code" id="cb44"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Display anomalies</span></span>
 <span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a>tfdv.display_anomalies(serving_anomalies_with_env)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
-
 <div>
 
-<table class="dataframe table table-sm table-striped">
-  <thead>
-    <tr>
-      <th></th>
-      <th>Anomaly short description</th>
-      <th>Anomaly long description</th>
-    </tr>
-    <tr>
-      <th>Feature name</th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>'readmitted'</th>
-      <td>Column dropped</td>
-      <td>Column is completely missing</td>
-    </tr>
-  </tbody>
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">Anomaly short description</th>
+<th data-quarto-table-cell-role="th">Anomaly long description</th>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">Feature name</th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">'readmitted'</td>
+<td>Column dropped</td>
+<td>Column is completely missing</td>
+</tr>
+</tbody>
 </table>
+
 </div>
 </div>
 </div>
@@ -3441,9 +3426,23 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     icon: icon
   };
   anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
   const clipboard = new window.ClipboardJS('.code-copy-button', {
-    target: function(trigger) {
-      return trigger.previousElementSibling;
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
     }
   });
   clipboard.on('success', function(e) {
@@ -3508,6 +3507,92 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       return note.innerHTML;
     });
   }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
   const findCites = (el) => {
     const parentEl = el.parentElement;
     if (parentEl) {
@@ -3550,7 +3635,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </div> <!-- /content -->
 <footer class="footer">
   <div class="nav-footer">
-      <div class="nav-footer-center">Copyright 2023, Marcel Castro</div>
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">Copyright 2023, Marcel Castro</div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
   </div>
 </footer>
 
