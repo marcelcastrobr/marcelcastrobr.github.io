@@ -8,7 +8,9 @@ website:
     background: primary
     search: true
     left: 
-      - text: "Home"
+      - text: Notes
+        href: https://marcelcastrobr.github.io/my_ml_notes/
+      - text: Notebooks
         file: index.qmd
       - about.qmd
       - text: Links
