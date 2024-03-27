@@ -208,6 +208,75 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 
+<p>This notebook will capture different methods of performing text moderation, in special with focus on toxicity classification. It will be divided into 3 parts: - Part 1: Text Moderation - Toxicity Classification using Amazon Comprehend API - Part 2: Text Moderation - Toxicity Classification using Amazon Comprehend Custom Model - Part 3: Text Moderation - Toxicity Classification using Large Language Models</p>
+<p>This notebook is adapted from the following sources: - <a href="https://github.com/aws-samples/amazon-rekognition-code-samples/blob/main/content-moderation/04-text-moderation/02-content-moderation-text-toxic-classification.ipynb">aws-samples/amazon-rekognition-code-samples</a></p>
+<section id="text-moderation---toxicity-classification-using-amazon-comprehend-api" class="level2">
+<h2 class="anchored" data-anchor-id="text-moderation---toxicity-classification-using-amazon-comprehend-api">Text Moderation - Toxicity Classification using Amazon Comprehend API</h2>
+<p>Amazon Comprehend has the capability to perform <a href="https://docs.aws.amazon.com/comprehend/latest/dg/trust-safety.html">toxicity analysis</a> through the API <a href="https://docs.aws.amazon.com/comprehend/latest/APIReference/API_DetectToxicContent.html">detect_toxic_content</a>.</p>
+<p>detect_toxic_content performs toxicity analysis on the list of text strings that you provide as input. The API response contains a results list that matches the size of the input list.</p>
+<p>The toxicity content labels are: GRAPHIC | HARASSMENT_OR_ABUSE | HATE_SPEECH | INSULT | PROFANITY | SEXUAL | VIOLENCE_OR_THREAT</p>
+<p>The response syntax for the API call is show below.</p>
+<p><code>json {    "ResultList": [        {           "Labels": [              {                 "Name": "string",                "Score": number             }          ],          "Toxicity": number       }    ] }</code></p>
+<div id="cell-3" class="cell" data-execution_count="132">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> boto3</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Seeting variables</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>boto3session <span class="op">=</span> boto3.Session(profile_name<span class="op">=</span><span class="st">'marcasbr+genai-Admin'</span>)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>region <span class="op">=</span> boto3session.region_name</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>comprehendrole <span class="op">=</span> boto3session.client(<span class="st">'iam'</span>).get_role(RoleName<span class="op">=</span><span class="st">'AmazonComprehendServiceRole-access-role'</span>)[<span class="st">'Role'</span>][<span class="st">'Arn'</span>]</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>comprehend <span class="op">=</span> boto3session.client(<span class="st">'comprehend'</span>, region_name<span class="op">=</span>region)</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>THRESHOLD <span class="op">=</span> <span class="fl">0.2</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>response <span class="op">=</span> comprehend.detect_toxic_content(</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>    TextSegments<span class="op">=</span>[</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>        {</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>            <span class="st">"Text"</span>: <span class="st">"You can go through the door go, he's waiting for you on the right."</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>        },</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>        {</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>            <span class="st">"Text"</span>: <span class="st">"***"</span></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>        },</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>        {</span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>            <span class="st">"Text"</span>: <span class="st">"***"</span></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>        },</span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>        {</span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>            <span class="st">"Text"</span>: <span class="st">"Elon March is a piece of shit, greedy capitalis"</span></span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>        }</span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>    ],</span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>    LanguageCode<span class="op">=</span><span class="st">'en'</span></span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>result_list <span class="op">=</span> response[<span class="st">'ResultList'</span>]</span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(result_list)</span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i, result <span class="kw">in</span> <span class="bu">enumerate</span>(result_list):</span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a>    labels <span class="op">=</span> result[<span class="st">'Labels'</span>]</span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a>    detected <span class="op">=</span> [ l <span class="cf">for</span> l <span class="kw">in</span> labels <span class="cf">if</span> l[<span class="st">'Score'</span>] <span class="op">&gt;</span> THRESHOLD ]</span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="bu">len</span>(detected) <span class="op">&gt;</span> <span class="dv">0</span>:</span>
+<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="st">"Text segment </span><span class="sc">{}</span><span class="st">"</span>.<span class="bu">format</span>(i <span class="op">+</span> <span class="dv">1</span>))</span>
+<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> d <span class="kw">in</span> detected:</span>
+<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a>            <span class="bu">print</span>(<span class="st">"</span><span class="sc">{}</span><span class="st"> score </span><span class="sc">{:.2f}</span><span class="st">"</span>.<span class="bu">format</span>(d[<span class="st">'Name'</span>], d[<span class="st">'Score'</span>]))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[{'Labels': [{'Name': 'PROFANITY', 'Score': 0.046799998730421066}, {'Name': 'HATE_SPEECH', 'Score': 0.056699998676776886}, {'Name': 'INSULT', 'Score': 0.10109999775886536}, {'Name': 'GRAPHIC', 'Score': 0.01860000006854534}, {'Name': 'HARASSMENT_OR_ABUSE', 'Score': 0.08330000191926956}, {'Name': 'SEXUAL', 'Score': 0.07109999656677246}, {'Name': 'VIOLENCE_OR_THREAT', 'Score': 0.03519999980926514}], 'Toxicity': 0.08330000191926956}, {'Labels': [{'Name': 'PROFANITY', 'Score': 0.353300005197525}, {'Name': 'HATE_SPEECH', 'Score': 0.15479999780654907}, {'Name': 'INSULT', 'Score': 0.2046000063419342}, {'Name': 'GRAPHIC', 'Score': 0.0812000036239624}, {'Name': 'HARASSMENT_OR_ABUSE', 'Score': 0.12559999525547028}, {'Name': 'SEXUAL', 'Score': 0.16859999299049377}, {'Name': 'VIOLENCE_OR_THREAT', 'Score': 0.08150000125169754}], 'Toxicity': 0.15479999780654907}, {'Labels': [{'Name': 'PROFANITY', 'Score': 0.353300005197525}, {'Name': 'HATE_SPEECH', 'Score': 0.15479999780654907}, {'Name': 'INSULT', 'Score': 0.2046000063419342}, {'Name': 'GRAPHIC', 'Score': 0.0812000036239624}, {'Name': 'HARASSMENT_OR_ABUSE', 'Score': 0.12559999525547028}, {'Name': 'SEXUAL', 'Score': 0.16859999299049377}, {'Name': 'VIOLENCE_OR_THREAT', 'Score': 0.08150000125169754}], 'Toxicity': 0.15479999780654907}, {'Labels': [{'Name': 'PROFANITY', 'Score': 0.6852999925613403}, {'Name': 'HATE_SPEECH', 'Score': 0.5633000135421753}, {'Name': 'INSULT', 'Score': 0.968999981880188}, {'Name': 'GRAPHIC', 'Score': 0.07450000196695328}, {'Name': 'HARASSMENT_OR_ABUSE', 'Score': 0.2046000063419342}, {'Name': 'SEXUAL', 'Score': 0.26249998807907104}, {'Name': 'VIOLENCE_OR_THREAT', 'Score': 0.10050000250339508}], 'Toxicity': 0.9890000224113464}]
+Text segment 2
+PROFANITY score 0.35
+INSULT score 0.20
+Text segment 3
+PROFANITY score 0.35
+INSULT score 0.20
+Text segment 4
+PROFANITY score 0.69
+HATE_SPEECH score 0.56
+INSULT score 0.97
+HARASSMENT_OR_ABUSE score 0.20
+SEXUAL score 0.26</code></pre>
+</div>
+</div>
+</section>
+<section id="text-moderation---toxicity-classification-using-amazon-comprehend-custom-model" class="level2">
+<h2 class="anchored" data-anchor-id="text-moderation---toxicity-classification-using-amazon-comprehend-custom-model">Text Moderation - Toxicity Classification using Amazon Comprehend Custom Model</h2>
 <p>The threat of abuse and harassment online means that many people stop expressing themselves and give up on seeking different opinions. Platforms struggle to effectively facilitate conversations, leading many communities to limit or completely shut down user comments.</p>
 <p>Toxicity classification allows customers from Gaming, Social Media, and many other industries automatically classify the user-generated text content and filter out the toxic ones to keep the online environment inclusive.</p>
 <p>In this Lab, we will use an AWS AI service - <a href="https://docs.aws.amazon.com/comprehend/latest/dg/how-document-classification.html">Comprehend Custom Classfication</a> feature to train a custom model to classify toxicity text messages.</p>
@@ -217,6 +286,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <figcaption>Arch</figcaption>
 </figure>
 </div>
+</section>
 <section id="toxicity-classficiation" class="level2">
 <h2 class="anchored" data-anchor-id="toxicity-classficiation">Toxicity Classficiation</h2>
 <ul>
@@ -225,16 +295,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><a href="#step3">Step 3: Create Amazon Comprehend Classification training job</a></li>
 <li><a href="#step4">Step 4: Create Amazon Comprehend real time endpoint</a></li>
 <li><a href="#step5">Step 5: Classify Documents using the real-time endpoint</a></li>
+<li><a href="#step6">Step 6: Classify message using the real-time endpoint and capture metrics accross a random selection of texts</a></li>
 </ul>
 </section>
 <section id="step-1-setup-notebook" class="level1">
 <h1>Step 1: Setup Notebook <a id="step1"></a></h1>
 <p>Run the below cell to install/update Python dependencies if you run the lab using a local IDE. It is optional if you use a SageMaker Studio Juypter Notebook, which already includes the dependencies in the kernel.</p>
-<div id="cell-4" class="cell" data-execution_count="8">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># First, let's get the latest installations of our dependencies</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>pip install <span class="op">-</span>qU pip</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>pip install boto3 <span class="op">-</span>qU</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>pip install sagemaker <span class="op">-</span>qU</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="cell-7" class="cell" data-execution_count="8">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># First, let's get the latest installations of our dependencies</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>pip install <span class="op">-</span>qU pip</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>pip install boto3 <span class="op">-</span>qU</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>pip install sagemaker <span class="op">-</span>qU</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Note: you may need to restart the kernel to use updated packages.
 Note: you may need to restart the kernel to use updated packages.
@@ -242,50 +313,49 @@ Note: you may need to restart the kernel to use updated packages.</code></pre>
 </div>
 </div>
 <p>You can skip the below cell if you are using SageMaker Studio Data Science kernel or they are already installed in your environment.</p>
-<div id="cell-6" class="cell" data-execution_count="31">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># install pandas if you are using a local IDE and they are not installed in your env</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>pip install pandas <span class="op">-</span>qU</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>pip install datetime <span class="op">-</span>qU</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="cell-9" class="cell" data-execution_count="31">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># install pandas if you are using a local IDE and they are not installed in your env</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>pip install pandas <span class="op">-</span>qU</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>pip install datetime <span class="op">-</span>qU</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Note: you may need to restart the kernel to use updated packages.
 Note: you may need to restart the kernel to use updated packages.</code></pre>
 </div>
 </div>
-<div id="cell-7" class="cell" data-execution_count="22">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> boto3</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> sagemaker <span class="im">as</span> sm</span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os</span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> io</span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> datetime</span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="co"># variables</span></span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>boto3session <span class="op">=</span> boto3.Session(profile_name<span class="op">=</span><span class="st">'marcasbr+genai-Admin'</span>)</span>
-<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>smsession <span class="op">=</span> sm.Session(boto_session<span class="op">=</span>boto3session)</span>
-<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>data_bucket <span class="op">=</span> sm.Session(boto_session<span class="op">=</span>boto3session).default_bucket()</span>
-<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>region <span class="op">=</span> boto3session.region_name</span>
-<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>os.environ[<span class="st">"BUCKET"</span>] <span class="op">=</span> data_bucket</span>
-<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>os.environ[<span class="st">"REGION"</span>] <span class="op">=</span> region</span>
-<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a><span class="co">#role = sm.get_execution_role()</span></span>
-<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>role <span class="op">=</span> sm.session.get_execution_role(sagemaker_session<span class="op">=</span>smsession)</span>
-<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a><span class="co">#arn:aws:iam::754992829378:role/AmazonComprehendServiceRole-access-role</span></span>
-<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>comprehendrole <span class="op">=</span> boto3session.client(<span class="st">'iam'</span>).get_role(RoleName<span class="op">=</span><span class="st">'AmazonComprehendServiceRole-access-role'</span>)[<span class="st">'Role'</span>][<span class="st">'Arn'</span>]</span>
-<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"SageMaker role is: </span><span class="sc">{</span>role<span class="sc">}</span><span class="ch">\n</span><span class="ss">Default SageMaker Bucket: s3://</span><span class="sc">{</span>data_bucket<span class="sc">}</span><span class="ss">"</span>)</span>
-<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Comprehend role is: </span><span class="sc">{</span>comprehendrole<span class="sc">}</span><span class="ss">"</span>)</span>
-<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"AWS region: </span><span class="sc">{</span>region<span class="sc">}</span><span class="ss">"</span>)</span>
-<span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-26"><a href="#cb5-26" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-27"><a href="#cb5-27" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-28"><a href="#cb5-28" aria-hidden="true" tabindex="-1"></a><span class="co">#s3=boto3.client('s3')</span></span>
-<span id="cb5-29"><a href="#cb5-29" aria-hidden="true" tabindex="-1"></a>s3 <span class="op">=</span> boto3session.client(<span class="st">'s3'</span>)</span>
-<span id="cb5-30"><a href="#cb5-30" aria-hidden="true" tabindex="-1"></a><span class="co">#comprehend=boto3.client('comprehend', region_name=region)</span></span>
-<span id="cb5-31"><a href="#cb5-31" aria-hidden="true" tabindex="-1"></a>comprehend <span class="op">=</span> boto3session.client(<span class="st">'comprehend'</span>, region_name<span class="op">=</span>region)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="cell-10" class="cell" data-execution_count="45">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> boto3</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> sagemaker <span class="im">as</span> sm</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> io</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> datetime</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="co"># variables</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>boto3session <span class="op">=</span> boto3.Session(profile_name<span class="op">=</span><span class="st">'marcasbr+genai-Admin'</span>)</span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>smsession <span class="op">=</span> sm.Session(boto_session<span class="op">=</span>boto3session)</span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>data_bucket <span class="op">=</span> sm.Session(boto_session<span class="op">=</span>boto3session).default_bucket()</span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>region <span class="op">=</span> boto3session.region_name</span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>os.environ[<span class="st">"BUCKET"</span>] <span class="op">=</span> data_bucket</span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>os.environ[<span class="st">"REGION"</span>] <span class="op">=</span> region</span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>role <span class="op">=</span> sm.session.get_execution_role(sagemaker_session<span class="op">=</span>smsession)</span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Get the Comprehend service role ARN. For help check https://docs.aws.amazon.com/comprehend/latest/dg/tutorial-reviews-create-role.html</span></span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a>comprehendrole <span class="op">=</span> boto3session.client(<span class="st">'iam'</span>).get_role(RoleName<span class="op">=</span><span class="st">'AmazonComprehendServiceRole-access-role'</span>)[<span class="st">'Role'</span>][<span class="st">'Arn'</span>]</span>
+<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"SageMaker role is: </span><span class="sc">{</span>role<span class="sc">}</span><span class="ch">\n</span><span class="ss">Default SageMaker Bucket: s3://</span><span class="sc">{</span>data_bucket<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Comprehend role is: </span><span class="sc">{</span>comprehendrole<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"AWS region: </span><span class="sc">{</span>region<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb7-25"><a href="#cb7-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-26"><a href="#cb7-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-27"><a href="#cb7-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-28"><a href="#cb7-28" aria-hidden="true" tabindex="-1"></a>s3 <span class="op">=</span> boto3session.client(<span class="st">'s3'</span>)</span>
+<span id="cb7-29"><a href="#cb7-29" aria-hidden="true" tabindex="-1"></a>comprehend <span class="op">=</span> boto3session.client(<span class="st">'comprehend'</span>, region_name<span class="op">=</span>region)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>SageMaker role is: arn:aws:iam::754992829378:role/Admin
 Default SageMaker Bucket: s3://sagemaker-us-east-1-754992829378
+Comprehend role is: arn:aws:iam::754992829378:role/AmazonComprehendServiceRole-access-role
 AWS region: us-east-1</code></pre>
 </div>
 </div>
@@ -293,8 +363,8 @@ AWS region: us-east-1</code></pre>
 <section id="step-2-prepare-custom-classification-training-dataset" class="level1">
 <h1>Step 2: Prepare custom classification training dataset <a id="step2"></a></h1>
 <p>Unzip the sample data <strong>toxicity.zip</strong> and decompress files to a local folder</p>
-<div id="cell-9" class="cell" data-execution_count="23">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="op">!</span>unzip .<span class="op">/</span>datasets<span class="op">/</span>toxicity.<span class="bu">zip</span> <span class="op">-</span>d toxicity_dataset</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="cell-12" class="cell" data-execution_count="23">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="op">!</span>unzip .<span class="op">/</span>datasets<span class="op">/</span>toxicity.<span class="bu">zip</span> <span class="op">-</span>d toxicity_dataset</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Archive:  ./datasets/toxicity.zip
 replace toxicity_dataset/LICENSE? [y]es, [n]o, [A]ll, [N]one, [r]ename: ^C</code></pre>
@@ -303,10 +373,10 @@ replace toxicity_dataset/LICENSE? [y]es, [n]o, [A]ll, [N]one, [r]ename: ^C</code
 <p>This CSV file contains 500 toxic and 500 non-toxic comments from a variety of popular social media platforms. Click on toxicity_en.csv to see a spreadsheet of 1000 English examples.</p>
 <p>Columns: - text: the text of the comment - is_toxic: whether or not the comment is toxic</p>
 <p>(The dataset contained in <strong>../datasets/toxicity.zip</strong> is an unaltered redistribution of <a href="https://github.com/surge-ai/toxicity">the toxicity dataset</a> made available by Surge AI under MIT License.)</p>
-<div id="cell-11" class="cell" data-execution_count="24">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.read_csv(<span class="st">'./toxicity_dataset/toxicity_en.csv'</span>)</span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="24">
+<div id="cell-14" class="cell" data-execution_count="38">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.read_csv(<span class="st">'./toxicity_dataset/toxicity_en.csv'</span>)</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="38">
 <div>
 <div>
 
@@ -388,13 +458,13 @@ replace toxicity_dataset/LICENSE? [y]es, [n]o, [A]ll, [N]one, [r]ename: ^C</code
 <p>Comprehend custom classification supports 2 modes: <a href="https://docs.aws.amazon.com/comprehend/latest/dg/prep-classifier-data-multi-class.html">multi-class</a> or <a href="https://docs.aws.amazon.com/comprehend/latest/dg/prep-classifier-data-multi-label.html">multi-label</a>. Comprehend multi-class mode accepts training datasets in 2 formats: CSV or Augmented manifest file. In this lab, we will train a model in the multi-class mode with the training dataset in CSV format.</p>
 <p>For more information, refer to this <a href="https://docs.aws.amazon.com/comprehend/latest/dg/prep-classifier-data-multi-class.html">doc</a> for more details about the multi-class data format.</p>
 <p>Comprehend custom classifiers requires the CSV’s first column to be the label and the second column to be the text. The CSV file doesn’t require a header. The below code will create a CSV file in the expected format.</p>
-<div id="cell-14" class="cell" data-execution_count="25">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>df.to_csv(<span class="st">'toxicity-custom-classification.csv'</span>, header<span class="op">=</span><span class="va">False</span>, index<span class="op">=</span><span class="va">False</span>, columns<span class="op">=</span>[<span class="st">'is_toxic'</span>,<span class="st">'text'</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="cell-17" class="cell" data-execution_count="39">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>df.to_csv(<span class="st">'toxicity-custom-classification.csv'</span>, header<span class="op">=</span><span class="va">False</span>, index<span class="op">=</span><span class="va">False</span>, columns<span class="op">=</span>[<span class="st">'is_toxic'</span>,<span class="st">'text'</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Now, let’s upload the training data to the S3 bucket, ready for Comprehend to access.</p>
-<div id="cell-16" class="cell" data-execution_count="26">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>s3_key <span class="op">=</span> <span class="st">'content-moderation-im/text-moderation/toxicity-custom-classification.csv'</span></span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>s3.upload_file(<span class="ss">f'toxicity-custom-classification.csv'</span>, data_bucket, s3_key)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="cell-19" class="cell" data-execution_count="40">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>s3_key <span class="op">=</span> <span class="st">'content-moderation-im/text-moderation/toxicity-custom-classification.csv'</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>s3.upload_file(<span class="ss">f'toxicity-custom-classification.csv'</span>, data_bucket, s3_key)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 </section>
@@ -402,75 +472,75 @@ replace toxicity_dataset/LICENSE? [y]es, [n]o, [A]ll, [N]one, [r]ename: ^C</code
 <h1>Step 3: Create Amazon Comprehend Classification training job <a id="step3"></a></h1>
 <p>Once we have a labeled dataset ready we are going to create and train a <a href="https://docs.aws.amazon.com/comprehend/latest/dg/how-document-classification.html">Amazon Comprehend custom classification model</a> with the dataset.</p>
 <p>This job can take ~40 minutes to complete. Once the training job is completed move on to next step.</p>
-<div id="cell-18" class="cell" data-execution_count="34">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> datetime</span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a Toxicity classifier</span></span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="co">#account_id = boto3.client('sts').get_caller_identity().get('Account')</span></span>
-<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>account_id <span class="op">=</span> boto3session.client(<span class="st">'sts'</span>).get_caller_identity().get(<span class="st">'Account'</span>)</span>
-<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a><span class="bu">id</span> <span class="op">=</span> <span class="bu">str</span>(datetime.datetime.now().strftime(<span class="st">"</span><span class="sc">%s</span><span class="st">"</span>))</span>
-<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>document_classifier_name <span class="op">=</span> <span class="st">'Sample-Toxicity-Classifier-Content-Moderation'</span></span>
-<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>document_classifier_version <span class="op">=</span> <span class="st">'v3'</span></span>
-<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>document_classifier_arn <span class="op">=</span> <span class="st">''</span></span>
-<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>response <span class="op">=</span> <span class="va">None</span></span>
-<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a><span class="cf">try</span>:</span>
-<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a>    create_response <span class="op">=</span> comprehend.create_document_classifier(</span>
-<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a>        InputDataConfig<span class="op">=</span>{</span>
-<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a>            <span class="st">'DataFormat'</span>: <span class="st">'COMPREHEND_CSV'</span>,</span>
-<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a>            <span class="st">'S3Uri'</span>: <span class="ss">f's3://</span><span class="sc">{</span>data_bucket<span class="sc">}</span><span class="ss">/</span><span class="sc">{</span>s3_key<span class="sc">}</span><span class="ss">'</span></span>
-<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a>        },</span>
-<span id="cb12-19"><a href="#cb12-19" aria-hidden="true" tabindex="-1"></a>        DataAccessRoleArn<span class="op">=</span>role,</span>
-<span id="cb12-20"><a href="#cb12-20" aria-hidden="true" tabindex="-1"></a>        DocumentClassifierName<span class="op">=</span>document_classifier_name,</span>
-<span id="cb12-21"><a href="#cb12-21" aria-hidden="true" tabindex="-1"></a>        VersionName<span class="op">=</span>document_classifier_version,</span>
-<span id="cb12-22"><a href="#cb12-22" aria-hidden="true" tabindex="-1"></a>        LanguageCode<span class="op">=</span><span class="st">'en'</span>,</span>
-<span id="cb12-23"><a href="#cb12-23" aria-hidden="true" tabindex="-1"></a>        Mode<span class="op">=</span><span class="st">'MULTI_CLASS'</span></span>
-<span id="cb12-24"><a href="#cb12-24" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb12-25"><a href="#cb12-25" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb12-26"><a href="#cb12-26" aria-hidden="true" tabindex="-1"></a>    document_classifier_arn <span class="op">=</span> create_response[<span class="st">'DocumentClassifierArn'</span>]</span>
-<span id="cb12-27"><a href="#cb12-27" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb12-28"><a href="#cb12-28" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"Comprehend Custom Classifier created with ARN: </span><span class="sc">{</span>document_classifier_arn<span class="sc">}</span><span class="ss">"</span>)</span>
-<span id="cb12-29"><a href="#cb12-29" aria-hidden="true" tabindex="-1"></a><span class="cf">except</span> <span class="pp">Exception</span> <span class="im">as</span> error:</span>
-<span id="cb12-30"><a href="#cb12-30" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> error.response[<span class="st">'Error'</span>][<span class="st">'Code'</span>] <span class="op">==</span> <span class="st">'ResourceInUseException'</span>:</span>
-<span id="cb12-31"><a href="#cb12-31" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="ss">f'A classifier with the name "</span><span class="sc">{</span>document_classifier_name<span class="sc">}</span><span class="ss">" already exists.'</span>)</span>
-<span id="cb12-32"><a href="#cb12-32" aria-hidden="true" tabindex="-1"></a>        document_classifier_arn <span class="op">=</span> <span class="ss">f'arn:aws:comprehend:</span><span class="sc">{</span>region<span class="sc">}</span><span class="ss">:</span><span class="sc">{</span>account_id<span class="sc">}</span><span class="ss">:document-classifier/</span><span class="sc">{</span>document_classifier_name<span class="sc">}</span><span class="ss">/version/</span><span class="sc">{</span>document_classifier_version<span class="sc">}</span><span class="ss">'</span></span>
-<span id="cb12-33"><a href="#cb12-33" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="ss">f'The classifier ARN is: "</span><span class="sc">{</span>document_classifier_arn<span class="sc">}</span><span class="ss">"'</span>)</span>
-<span id="cb12-34"><a href="#cb12-34" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
-<span id="cb12-35"><a href="#cb12-35" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(error)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="cell-21" class="cell" data-execution_count="46">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> datetime</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a Toxicity classifier</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>account_id <span class="op">=</span> boto3session.client(<span class="st">'sts'</span>).get_caller_identity().get(<span class="st">'Account'</span>)</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="bu">id</span> <span class="op">=</span> <span class="bu">str</span>(datetime.datetime.now().strftime(<span class="st">"</span><span class="sc">%s</span><span class="st">"</span>))</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>document_classifier_name <span class="op">=</span> <span class="st">'Sample-Toxicity-Classifier-Content-Moderation'</span></span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>document_classifier_version <span class="op">=</span> <span class="st">'v5'</span></span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>document_classifier_arn <span class="op">=</span> <span class="st">''</span></span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>response <span class="op">=</span> <span class="va">None</span></span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a><span class="cf">try</span>:</span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a>    create_response <span class="op">=</span> comprehend.create_document_classifier(</span>
+<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a>        InputDataConfig<span class="op">=</span>{</span>
+<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a>            <span class="st">'DataFormat'</span>: <span class="st">'COMPREHEND_CSV'</span>,</span>
+<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a>            <span class="st">'S3Uri'</span>: <span class="ss">f's3://</span><span class="sc">{</span>data_bucket<span class="sc">}</span><span class="ss">/</span><span class="sc">{</span>s3_key<span class="sc">}</span><span class="ss">'</span></span>
+<span id="cb14-17"><a href="#cb14-17" aria-hidden="true" tabindex="-1"></a>        },</span>
+<span id="cb14-18"><a href="#cb14-18" aria-hidden="true" tabindex="-1"></a>        DataAccessRoleArn<span class="op">=</span>comprehendrole,</span>
+<span id="cb14-19"><a href="#cb14-19" aria-hidden="true" tabindex="-1"></a>        DocumentClassifierName<span class="op">=</span>document_classifier_name,</span>
+<span id="cb14-20"><a href="#cb14-20" aria-hidden="true" tabindex="-1"></a>        VersionName<span class="op">=</span>document_classifier_version,</span>
+<span id="cb14-21"><a href="#cb14-21" aria-hidden="true" tabindex="-1"></a>        LanguageCode<span class="op">=</span><span class="st">'en'</span>,</span>
+<span id="cb14-22"><a href="#cb14-22" aria-hidden="true" tabindex="-1"></a>        Mode<span class="op">=</span><span class="st">'MULTI_CLASS'</span></span>
+<span id="cb14-23"><a href="#cb14-23" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb14-24"><a href="#cb14-24" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb14-25"><a href="#cb14-25" aria-hidden="true" tabindex="-1"></a>    document_classifier_arn <span class="op">=</span> create_response[<span class="st">'DocumentClassifierArn'</span>]</span>
+<span id="cb14-26"><a href="#cb14-26" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb14-27"><a href="#cb14-27" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"Comprehend Custom Classifier created with ARN: </span><span class="sc">{</span>document_classifier_arn<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb14-28"><a href="#cb14-28" aria-hidden="true" tabindex="-1"></a><span class="cf">except</span> <span class="pp">Exception</span> <span class="im">as</span> error:</span>
+<span id="cb14-29"><a href="#cb14-29" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> error.response[<span class="st">'Error'</span>][<span class="st">'Code'</span>] <span class="op">==</span> <span class="st">'ResourceInUseException'</span>:</span>
+<span id="cb14-30"><a href="#cb14-30" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="ss">f'A classifier with the name "</span><span class="sc">{</span>document_classifier_name<span class="sc">}</span><span class="ss">" already exists.'</span>)</span>
+<span id="cb14-31"><a href="#cb14-31" aria-hidden="true" tabindex="-1"></a>        document_classifier_arn <span class="op">=</span> <span class="ss">f'arn:aws:comprehend:</span><span class="sc">{</span>region<span class="sc">}</span><span class="ss">:</span><span class="sc">{</span>account_id<span class="sc">}</span><span class="ss">:document-classifier/</span><span class="sc">{</span>document_classifier_name<span class="sc">}</span><span class="ss">/version/</span><span class="sc">{</span>document_classifier_version<span class="sc">}</span><span class="ss">'</span></span>
+<span id="cb14-32"><a href="#cb14-32" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="ss">f'The classifier ARN is: "</span><span class="sc">{</span>document_classifier_arn<span class="sc">}</span><span class="ss">"'</span>)</span>
+<span id="cb14-33"><a href="#cb14-33" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
+<span id="cb14-34"><a href="#cb14-34" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(error)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Comprehend Custom Classifier created with ARN: arn:aws:comprehend:us-east-1:754992829378:document-classifier/Sample-Toxicity-Classifier-Content-Moderation/version/v3</code></pre>
+<pre><code>A classifier with the name "Sample-Toxicity-Classifier-Content-Moderation" already exists.
+The classifier ARN is: "arn:aws:comprehend:us-east-1:754992829378:document-classifier/Sample-Toxicity-Classifier-Content-Moderation/version/v5"</code></pre>
 </div>
 </div>
 <p>Check status of the Comprehend Custom Classification Job</p>
-<div id="cell-20" class="cell" data-execution_count="35">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>time</span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Loop through and wait for the training to complete . Takes up to 10 mins </span></span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> IPython.display <span class="im">import</span> clear_output</span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> time</span>
-<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> datetime <span class="im">import</span> datetime</span>
-<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>jobArn <span class="op">=</span> create_response[<span class="st">'DocumentClassifierArn'</span>]</span>
-<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>max_time <span class="op">=</span> time.time() <span class="op">+</span> <span class="dv">3</span><span class="op">*</span><span class="dv">60</span><span class="op">*</span><span class="dv">60</span> <span class="co"># 3 hours</span></span>
-<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a><span class="cf">while</span> time.time() <span class="op">&lt;</span> max_time:</span>
-<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>    now <span class="op">=</span> datetime.now()</span>
-<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a>    current_time <span class="op">=</span> now.strftime(<span class="st">"%H:%M:%S"</span>)</span>
-<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a>    describe_custom_classifier <span class="op">=</span> comprehend.describe_document_classifier(</span>
-<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a>        DocumentClassifierArn <span class="op">=</span> jobArn</span>
-<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a>    status <span class="op">=</span> describe_custom_classifier[<span class="st">"DocumentClassifierProperties"</span>][<span class="st">"Status"</span>]</span>
-<span id="cb14-17"><a href="#cb14-17" aria-hidden="true" tabindex="-1"></a>    clear_output(wait<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb14-18"><a href="#cb14-18" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"</span><span class="sc">{</span>current_time<span class="sc">}</span><span class="ss"> : Custom document classifier: </span><span class="sc">{</span>status<span class="sc">}</span><span class="ss">"</span>)</span>
-<span id="cb14-19"><a href="#cb14-19" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb14-20"><a href="#cb14-20" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> status <span class="op">==</span> <span class="st">"TRAINED"</span> <span class="kw">or</span> status <span class="op">==</span> <span class="st">"IN_ERROR"</span>:</span>
-<span id="cb14-21"><a href="#cb14-21" aria-hidden="true" tabindex="-1"></a>        <span class="cf">break</span></span>
-<span id="cb14-22"><a href="#cb14-22" aria-hidden="true" tabindex="-1"></a>        </span>
-<span id="cb14-23"><a href="#cb14-23" aria-hidden="true" tabindex="-1"></a>    time.sleep(<span class="dv">60</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="cell-23" class="cell" data-execution_count="44">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>time</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Loop through and wait for the training to complete . Takes up to 10 mins </span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> IPython.display <span class="im">import</span> clear_output</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> time</span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> datetime <span class="im">import</span> datetime</span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>jobArn <span class="op">=</span> create_response[<span class="st">'DocumentClassifierArn'</span>]</span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>max_time <span class="op">=</span> time.time() <span class="op">+</span> <span class="dv">3</span><span class="op">*</span><span class="dv">60</span><span class="op">*</span><span class="dv">60</span> <span class="co"># 3 hours</span></span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a><span class="cf">while</span> time.time() <span class="op">&lt;</span> max_time:</span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>    now <span class="op">=</span> datetime.now()</span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a>    current_time <span class="op">=</span> now.strftime(<span class="st">"%H:%M:%S"</span>)</span>
+<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a>    describe_custom_classifier <span class="op">=</span> comprehend.describe_document_classifier(</span>
+<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a>        DocumentClassifierArn <span class="op">=</span> jobArn</span>
+<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a>    status <span class="op">=</span> describe_custom_classifier[<span class="st">"DocumentClassifierProperties"</span>][<span class="st">"Status"</span>]</span>
+<span id="cb16-17"><a href="#cb16-17" aria-hidden="true" tabindex="-1"></a>    clear_output(wait<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb16-18"><a href="#cb16-18" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"</span><span class="sc">{</span>current_time<span class="sc">}</span><span class="ss"> : Custom document classifier: </span><span class="sc">{</span>status<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb16-19"><a href="#cb16-19" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb16-20"><a href="#cb16-20" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> status <span class="op">==</span> <span class="st">"TRAINED"</span> <span class="kw">or</span> status <span class="op">==</span> <span class="st">"IN_ERROR"</span>:</span>
+<span id="cb16-21"><a href="#cb16-21" aria-hidden="true" tabindex="-1"></a>        <span class="cf">break</span></span>
+<span id="cb16-22"><a href="#cb16-22" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb16-23"><a href="#cb16-23" aria-hidden="true" tabindex="-1"></a>    time.sleep(<span class="dv">60</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>09:49:04 : Custom document classifier: IN_ERROR
-CPU times: user 38.7 ms, sys: 21.5 ms, total: 60.2 ms
-Wall time: 1min</code></pre>
+<pre><code>10:56:52 : Custom document classifier: TRAINED
+CPU times: user 1.72 s, sys: 662 ms, total: 2.38 s
+Wall time: 34min 21s</code></pre>
 </div>
 </div>
 <p>Alternatively, to create a Comprehend Custom Classifier Job manually using the console go to Amazon Comprehend Console - On the left menu click “Custom Classification” - In the “Classifier models” section, click on “Create new model” - In Model Setting for Model name, enter a name - In Data Specification; select “Using Single-label” mode and for Data format select CSV file - For Training dataset browse to your data-bucket created above and select the file toxicity-custom-classification.csv - For IAM role select “Create an IAM role” and specify a prefix (this will create a new IAM Role for Comprehend) - Click create</p>
@@ -478,135 +548,234 @@ Wall time: 1min</code></pre>
 <section id="step-4-create-amazon-comprehend-real-time-endpoint" class="level1">
 <h1>Step 4: Create Amazon Comprehend real time endpoint <a id="step4"></a></h1>
 <p>Once our Comprehend custom classifier is fully trained (i.e.&nbsp;status = TRAINED). We can create a real-time endpoint. We will use this endpoint to classify text inputs in real time. The following code cells use the comprehend Boto3 client to create an endpoint, but you can also create one manually via the console. Instructions on how to do that can be found in the subsequent section.</p>
-<div id="cell-23" class="cell" data-execution_count="11">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co">#create comprehend endpoint</span></span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>model_arn <span class="op">=</span> document_classifier_arn</span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>ep_name <span class="op">=</span> <span class="st">'toxicity-endpoint'</span></span>
-<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a><span class="cf">try</span>:</span>
-<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>    endpoint_response <span class="op">=</span> comprehend.create_endpoint(</span>
-<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>        EndpointName<span class="op">=</span>ep_name,</span>
-<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>        ModelArn<span class="op">=</span>model_arn,</span>
-<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>        DesiredInferenceUnits<span class="op">=</span><span class="dv">1</span>,    </span>
-<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>        DataAccessRoleArn<span class="op">=</span>role</span>
-<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a>    ENDPOINT_ARN<span class="op">=</span>endpoint_response[<span class="st">'EndpointArn'</span>]</span>
-<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f'Endpoint created with ARN: </span><span class="sc">{</span>ENDPOINT_ARN<span class="sc">}</span><span class="ss">'</span>)    </span>
-<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a><span class="cf">except</span> <span class="pp">Exception</span> <span class="im">as</span> error:</span>
-<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> error.response[<span class="st">'Error'</span>][<span class="st">'Code'</span>] <span class="op">==</span> <span class="st">'ResourceInUseException'</span>:</span>
-<span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="ss">f'An endpoint with the name "</span><span class="sc">{</span>ep_name<span class="sc">}</span><span class="ss">" already exists.'</span>)</span>
-<span id="cb16-17"><a href="#cb16-17" aria-hidden="true" tabindex="-1"></a>        ENDPOINT_ARN <span class="op">=</span> <span class="ss">f'arn:aws:comprehend:</span><span class="sc">{</span>region<span class="sc">}</span><span class="ss">:</span><span class="sc">{</span>account_id<span class="sc">}</span><span class="ss">:document-classifier-endpoint/</span><span class="sc">{</span>ep_name<span class="sc">}</span><span class="ss">'</span></span>
-<span id="cb16-18"><a href="#cb16-18" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="ss">f'The classifier endpoint ARN is: "</span><span class="sc">{</span>ENDPOINT_ARN<span class="sc">}</span><span class="ss">"'</span>)</span>
-<span id="cb16-19"><a href="#cb16-19" aria-hidden="true" tabindex="-1"></a>        <span class="op">%</span>store ENDPOINT_ARN</span>
-<span id="cb16-20"><a href="#cb16-20" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
-<span id="cb16-21"><a href="#cb16-21" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(error)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="cell-26" class="cell" data-execution_count="47">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co">#create comprehend endpoint</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>model_arn <span class="op">=</span> document_classifier_arn</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>ep_name <span class="op">=</span> <span class="st">'toxicity-endpoint'</span></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a><span class="cf">try</span>:</span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>    endpoint_response <span class="op">=</span> comprehend.create_endpoint(</span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>        EndpointName<span class="op">=</span>ep_name,</span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>        ModelArn<span class="op">=</span>model_arn,</span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>        DesiredInferenceUnits<span class="op">=</span><span class="dv">1</span>,    </span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a>        DataAccessRoleArn<span class="op">=</span>comprehendrole</span>
+<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a>    ENDPOINT_ARN<span class="op">=</span>endpoint_response[<span class="st">'EndpointArn'</span>]</span>
+<span id="cb18-13"><a href="#cb18-13" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f'Endpoint created with ARN: </span><span class="sc">{</span>ENDPOINT_ARN<span class="sc">}</span><span class="ss">'</span>)    </span>
+<span id="cb18-14"><a href="#cb18-14" aria-hidden="true" tabindex="-1"></a><span class="cf">except</span> <span class="pp">Exception</span> <span class="im">as</span> error:</span>
+<span id="cb18-15"><a href="#cb18-15" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> error.response[<span class="st">'Error'</span>][<span class="st">'Code'</span>] <span class="op">==</span> <span class="st">'ResourceInUseException'</span>:</span>
+<span id="cb18-16"><a href="#cb18-16" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="ss">f'An endpoint with the name "</span><span class="sc">{</span>ep_name<span class="sc">}</span><span class="ss">" already exists.'</span>)</span>
+<span id="cb18-17"><a href="#cb18-17" aria-hidden="true" tabindex="-1"></a>        ENDPOINT_ARN <span class="op">=</span> <span class="ss">f'arn:aws:comprehend:</span><span class="sc">{</span>region<span class="sc">}</span><span class="ss">:</span><span class="sc">{</span>account_id<span class="sc">}</span><span class="ss">:document-classifier-endpoint/</span><span class="sc">{</span>ep_name<span class="sc">}</span><span class="ss">'</span></span>
+<span id="cb18-18"><a href="#cb18-18" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="ss">f'The classifier endpoint ARN is: "</span><span class="sc">{</span>ENDPOINT_ARN<span class="sc">}</span><span class="ss">"'</span>)</span>
+<span id="cb18-19"><a href="#cb18-19" aria-hidden="true" tabindex="-1"></a>        <span class="op">%</span>store ENDPOINT_ARN</span>
+<span id="cb18-20"><a href="#cb18-20" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
+<span id="cb18-21"><a href="#cb18-21" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(error)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>An error occurred (ResourceUnavailableException) when calling the CreateEndpoint operation: CLASSIFIER_NOT_TRAINED_MESSAGE: Classifier (arn:aws:comprehend:us-east-1:754992829378:document-classifier/Sample-Toxicity-Classifier-Content-Moderation/version/v1) must have trained status.</code></pre>
+<pre><code>Endpoint created with ARN: arn:aws:comprehend:us-east-1:754992829378:document-classifier-endpoint/toxicity-endpoint</code></pre>
 </div>
 </div>
-<div id="cell-24" class="cell" data-execution_count="12">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>display(endpoint_response)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-error">
-<pre><code>NameError: name 'endpoint_response' is not defined</code></pre>
+<div id="cell-27" class="cell" data-execution_count="48">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>display(endpoint_response)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<pre><code>{'EndpointArn': 'arn:aws:comprehend:us-east-1:754992829378:document-classifier-endpoint/toxicity-endpoint',
+ 'ResponseMetadata': {'RequestId': '375b1283-0960-46d6-93a6-7cf64927b4db',
+  'HTTPStatusCode': 200,
+  'HTTPHeaders': {'x-amzn-requestid': '375b1283-0960-46d6-93a6-7cf64927b4db',
+   'content-type': 'application/x-amz-json-1.1',
+   'content-length': '106',
+   'date': 'Wed, 27 Mar 2024 10:10:02 GMT'},
+  'RetryAttempts': 0}}</code></pre>
 </div>
 </div>
 <p>Alternatively, use the steps below to create a Comprehend endpoint using the AWS console. - Go to Comprehend on AWS Console and click on Endpoints in the left menu. - Click on “Create endpoint” - Give an Endpoint name; for Custom model type select Custom classification; for version select no version or the latest version of the model. - For Classifier model select from the drop down menu - For Inference Unit select 1 - Check “Acknowledge” - Click “Create endpoint”</p>
 <p><a href="https://console.aws.amazon.com/comprehend/v2/home?region=us-east-1#endpoints">It may take ~10 minutes</a> for the endpoint to get created. The code cell below checks the creation status.</p>
-<div id="cell-26" class="cell">
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>time</span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Loop through and wait for the training to complete . Takes up to 10 mins </span></span>
-<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> IPython.display <span class="im">import</span> clear_output</span>
-<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> time</span>
-<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> datetime <span class="im">import</span> datetime</span>
-<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>ep_arn <span class="op">=</span> endpoint_response[<span class="st">"EndpointArn"</span>]</span>
-<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a>max_time <span class="op">=</span> time.time() <span class="op">+</span> <span class="dv">3</span><span class="op">*</span><span class="dv">60</span><span class="op">*</span><span class="dv">60</span> <span class="co"># 3 hours</span></span>
-<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a><span class="cf">while</span> time.time() <span class="op">&lt;</span> max_time:</span>
-<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a>    now <span class="op">=</span> datetime.now()</span>
-<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a>    current_time <span class="op">=</span> now.strftime(<span class="st">"%H:%M:%S"</span>)</span>
-<span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a>    describe_endpoint_resp <span class="op">=</span> comprehend.describe_endpoint(</span>
-<span id="cb20-14"><a href="#cb20-14" aria-hidden="true" tabindex="-1"></a>        EndpointArn<span class="op">=</span>ep_arn</span>
-<span id="cb20-15"><a href="#cb20-15" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb20-16"><a href="#cb20-16" aria-hidden="true" tabindex="-1"></a>    status <span class="op">=</span> describe_endpoint_resp[<span class="st">"EndpointProperties"</span>][<span class="st">"Status"</span>]</span>
-<span id="cb20-17"><a href="#cb20-17" aria-hidden="true" tabindex="-1"></a>    clear_output(wait<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb20-18"><a href="#cb20-18" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"</span><span class="sc">{</span>current_time<span class="sc">}</span><span class="ss"> : Custom document classifier: </span><span class="sc">{</span>status<span class="sc">}</span><span class="ss">"</span>)</span>
-<span id="cb20-19"><a href="#cb20-19" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb20-20"><a href="#cb20-20" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> status <span class="op">==</span> <span class="st">"IN_SERVICE"</span> <span class="kw">or</span> status <span class="op">==</span> <span class="st">"FAILED"</span>:</span>
-<span id="cb20-21"><a href="#cb20-21" aria-hidden="true" tabindex="-1"></a>        <span class="cf">break</span></span>
-<span id="cb20-22"><a href="#cb20-22" aria-hidden="true" tabindex="-1"></a>        </span>
-<span id="cb20-23"><a href="#cb20-23" aria-hidden="true" tabindex="-1"></a>    time.sleep(<span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="cell-29" class="cell" data-execution_count="49">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>time</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Loop through and wait for the training to complete . Takes up to 10 mins </span></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> IPython.display <span class="im">import</span> clear_output</span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> time</span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> datetime <span class="im">import</span> datetime</span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>ep_arn <span class="op">=</span> endpoint_response[<span class="st">"EndpointArn"</span>]</span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a>max_time <span class="op">=</span> time.time() <span class="op">+</span> <span class="dv">3</span><span class="op">*</span><span class="dv">60</span><span class="op">*</span><span class="dv">60</span> <span class="co"># 3 hours</span></span>
+<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a><span class="cf">while</span> time.time() <span class="op">&lt;</span> max_time:</span>
+<span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a>    now <span class="op">=</span> datetime.now()</span>
+<span id="cb22-12"><a href="#cb22-12" aria-hidden="true" tabindex="-1"></a>    current_time <span class="op">=</span> now.strftime(<span class="st">"%H:%M:%S"</span>)</span>
+<span id="cb22-13"><a href="#cb22-13" aria-hidden="true" tabindex="-1"></a>    describe_endpoint_resp <span class="op">=</span> comprehend.describe_endpoint(</span>
+<span id="cb22-14"><a href="#cb22-14" aria-hidden="true" tabindex="-1"></a>        EndpointArn<span class="op">=</span>ep_arn</span>
+<span id="cb22-15"><a href="#cb22-15" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb22-16"><a href="#cb22-16" aria-hidden="true" tabindex="-1"></a>    status <span class="op">=</span> describe_endpoint_resp[<span class="st">"EndpointProperties"</span>][<span class="st">"Status"</span>]</span>
+<span id="cb22-17"><a href="#cb22-17" aria-hidden="true" tabindex="-1"></a>    clear_output(wait<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb22-18"><a href="#cb22-18" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"</span><span class="sc">{</span>current_time<span class="sc">}</span><span class="ss"> : Custom document classifier: </span><span class="sc">{</span>status<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb22-19"><a href="#cb22-19" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb22-20"><a href="#cb22-20" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> status <span class="op">==</span> <span class="st">"IN_SERVICE"</span> <span class="kw">or</span> status <span class="op">==</span> <span class="st">"FAILED"</span>:</span>
+<span id="cb22-21"><a href="#cb22-21" aria-hidden="true" tabindex="-1"></a>        <span class="cf">break</span></span>
+<span id="cb22-22"><a href="#cb22-22" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb22-23"><a href="#cb22-23" aria-hidden="true" tabindex="-1"></a>    time.sleep(<span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>11:16:22 : Custom document classifier: IN_SERVICE
+CPU times: user 26.5 ms, sys: 8.7 ms, total: 35.2 ms
+Wall time: 533 ms</code></pre>
+</div>
 </div>
 </section>
 <section id="step-5-classify-message-using-the-real-time-endpoint" class="level1">
 <h1>Step 5: Classify message using the real-time endpoint <a id="step5"></a></h1>
 <p>Once the endpoint has been created, we will use some sample text messages to classify them into toxic or non-toxic categories.</p>
-<div id="cell-28" class="cell">
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>response <span class="op">=</span> comprehend.classify_document(</span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>    Text<span class="op">=</span> <span class="st">'Why don''t you shoot him?! I hate you all!'</span>,</span>
-<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>    EndpointArn<span class="op">=</span>ENDPOINT_ARN</span>
-<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>display(response)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="cell-31" class="cell" data-execution_count="50">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>response <span class="op">=</span> comprehend.classify_document(</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>    Text<span class="op">=</span> <span class="st">'Why don''t you shoot him?! I hate you all!'</span>,</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>    EndpointArn<span class="op">=</span>ENDPOINT_ARN</span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>display(response)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<pre><code>{'Classes': [{'Name': 'Toxic', 'Score': 0.9951152801513672},
+  {'Name': 'Not Toxic', 'Score': 0.004884751979261637}],
+ 'ResponseMetadata': {'RequestId': '60078846-5eda-4b85-a6be-8be582564703',
+  'HTTPStatusCode': 200,
+  'HTTPHeaders': {'x-amzn-requestid': '60078846-5eda-4b85-a6be-8be582564703',
+   'content-type': 'application/x-amz-json-1.1',
+   'content-length': '107',
+   'date': 'Wed, 27 Mar 2024 10:16:25 GMT'},
+  'RetryAttempts': 0}}</code></pre>
+</div>
 </div>
 <p>The inference result returned by Comprehend endpoint contains a “Classes” node, a list of labeled classes with a ‘Score’ representing the confidence score of the inference result.</p>
 <p>The above response shows that the text message “Why don’t you shoot him?! I hate you all!” has a high confidence score (&gt; 99%) for the “Toxic” category. You can try different inputs to test the Toxicity classification result.</p>
 </section>
+<section id="step-6-classify-message-using-the-real-time-endpoint-and-capture-metrics-accross-a-random-selection-of-texts" class="level1">
+<h1>Step 6: Classify message using the real-time endpoint <a id="step6"></a> and capture metrics accross a random selection of texts</h1>
+<div id="cell-34" class="cell" data-execution_count="129">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> time</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> display(text, ground_thruth):</span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>    start <span class="op">=</span> time.time()</span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>    response <span class="op">=</span> comprehend.classify_document(</span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a>        Text<span class="op">=</span> text,</span>
+<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a>        EndpointArn<span class="op">=</span>ENDPOINT_ARN</span>
+<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a>    end <span class="op">=</span> time.time()</span>
+<span id="cb26-11"><a href="#cb26-11" aria-hidden="true" tabindex="-1"></a>    elapsed <span class="op">=</span> end <span class="op">-</span> start</span>
+<span id="cb26-12"><a href="#cb26-12" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb26-13"><a href="#cb26-13" aria-hidden="true" tabindex="-1"></a>    <span class="co">#Building the dataframe</span></span>
+<span id="cb26-14"><a href="#cb26-14" aria-hidden="true" tabindex="-1"></a>    scores <span class="op">=</span> [item[<span class="st">'Score'</span>] <span class="cf">for</span> item <span class="kw">in</span> response[<span class="st">'Classes'</span>]]</span>
+<span id="cb26-15"><a href="#cb26-15" aria-hidden="true" tabindex="-1"></a>    max_index <span class="op">=</span> scores.index(<span class="bu">max</span>(scores))</span>
+<span id="cb26-16"><a href="#cb26-16" aria-hidden="true" tabindex="-1"></a>    result <span class="op">=</span> response[<span class="st">'Classes'</span>][max_index]</span>
+<span id="cb26-17"><a href="#cb26-17" aria-hidden="true" tabindex="-1"></a>    name <span class="op">=</span> result[<span class="st">'Name'</span>]</span>
+<span id="cb26-18"><a href="#cb26-18" aria-hidden="true" tabindex="-1"></a>    score <span class="op">=</span> <span class="bu">max</span>(scores)</span>
+<span id="cb26-19"><a href="#cb26-19" aria-hidden="true" tabindex="-1"></a>    content_length <span class="op">=</span> response[<span class="st">'ResponseMetadata'</span>][<span class="st">'HTTPHeaders'</span>].get(<span class="st">'content-length'</span>)</span>
+<span id="cb26-20"><a href="#cb26-20" aria-hidden="true" tabindex="-1"></a>    result <span class="op">=</span> {<span class="st">'Text'</span>: text[:<span class="dv">50</span>], <span class="st">'ground_thruth'</span>: ground_thruth, <span class="st">'Prediction'</span>: name, <span class="st">'Score'</span>: score, <span class="st">'Content Length'</span>: content_length, <span class="st">'elapsed_time_sec'</span>: elapsed}</span>
+<span id="cb26-21"><a href="#cb26-21" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> result</span>
+<span id="cb26-22"><a href="#cb26-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-23"><a href="#cb26-23" aria-hidden="true" tabindex="-1"></a><span class="co"># Get random samples from dataset</span></span>
+<span id="cb26-24"><a href="#cb26-24" aria-hidden="true" tabindex="-1"></a>nsel <span class="op">=</span> <span class="dv">5</span></span>
+<span id="cb26-25"><a href="#cb26-25" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.read_csv(<span class="st">'./toxicity_dataset/toxicity_en.csv'</span>)</span>
+<span id="cb26-26"><a href="#cb26-26" aria-hidden="true" tabindex="-1"></a>df_selection <span class="op">=</span> df.sample(n<span class="op">=</span>nsel).head(nsel)</span>
+<span id="cb26-27"><a href="#cb26-27" aria-hidden="true" tabindex="-1"></a>my_df <span class="op">=</span> pd.DataFrame(columns<span class="op">=</span>[<span class="st">'Text'</span>, <span class="st">'ground_thruth'</span>, <span class="st">'Prediction'</span>, <span class="st">'Score'</span>, <span class="st">'Content Length'</span>, <span class="st">'elapsed_time_sec'</span>])</span>
+<span id="cb26-28"><a href="#cb26-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-29"><a href="#cb26-29" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> index, row <span class="kw">in</span> df_selection.iterrows():</span>
+<span id="cb26-30"><a href="#cb26-30" aria-hidden="true" tabindex="-1"></a>  text <span class="op">=</span> row[<span class="st">'text'</span>]</span>
+<span id="cb26-31"><a href="#cb26-31" aria-hidden="true" tabindex="-1"></a>  ground_thruth <span class="op">=</span> row[<span class="st">'is_toxic'</span>]</span>
+<span id="cb26-32"><a href="#cb26-32" aria-hidden="true" tabindex="-1"></a>  df1 <span class="op">=</span> pd.DataFrame(display(text, ground_thruth), index<span class="op">=</span>[<span class="dv">0</span>])</span>
+<span id="cb26-33"><a href="#cb26-33" aria-hidden="true" tabindex="-1"></a>  my_df <span class="op">=</span> pd.concat([my_df, df1]) </span>
+<span id="cb26-34"><a href="#cb26-34" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb26-35"><a href="#cb26-35" aria-hidden="true" tabindex="-1"></a>my_df.head(nsel)</span>
+<span id="cb26-36"><a href="#cb26-36" aria-hidden="true" tabindex="-1"></a></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>/var/folders/vt/7n9vmpnn1sg9xzf_2z58706r0000gr/T/ipykernel_19577/1421068623.py:30: FutureWarning: The behavior of DataFrame concatenation with empty or all-NA entries is deprecated. In a future version, this will no longer exclude empty or all-NA columns when determining the result dtypes. To retain the old behavior, exclude the relevant entries before the concat operation.
+  my_df = pd.concat([my_df, df1])</code></pre>
+</div>
+<div class="cell-output cell-output-display" data-execution_count="129">
+<div>
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">Text</th>
+<th data-quarto-table-cell-role="th">ground_thruth</th>
+<th data-quarto-table-cell-role="th">Prediction</th>
+<th data-quarto-table-cell-role="th">Score</th>
+<th data-quarto-table-cell-role="th">Content Length</th>
+<th data-quarto-table-cell-role="th">elapsed_time_sec</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>Right!! I was already excited for X Choice, &amp; ...</td>
+<td>Not Toxic</td>
+<td>Not Toxic</td>
+<td>0.999895</td>
+<td>107</td>
+<td>1.273570</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">0</td>
+<td>If I learned anything is those teachers are li...</td>
+<td>Not Toxic</td>
+<td>Not Toxic</td>
+<td>0.999918</td>
+<td>107</td>
+<td>0.197692</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>Save them babies from their murderous mothers</td>
+<td>Toxic</td>
+<td>Toxic</td>
+<td>0.999855</td>
+<td>108</td>
+<td>2.644358</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">0</td>
+<td>FOCH DemoCraps!!! "LET'S GO BRANDON"</td>
+<td>Toxic</td>
+<td>Toxic</td>
+<td>0.999886</td>
+<td>108</td>
+<td>0.234662</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>If you build ap with lethal tempo on him you c...</td>
+<td>Not Toxic</td>
+<td>Not Toxic</td>
+<td>0.999921</td>
+<td>107</td>
+<td>0.270135</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+</div>
+</section>
 <section id="cleanup" class="level1">
 <h1>Cleanup</h1>
 <p>Cleanup is optional if you want to execute subsequent notebooks.</p>
-<div id="cell-31" class="cell">
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Delete the Comprehend Endpoint</span></span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>resp <span class="op">=</span> comprehend.delete_endpoint(EndpointArn<span class="op">=</span>ENDPOINT_ARN)</span>
-<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>display(resp)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="cell-36" class="cell">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Delete the Comprehend Endpoint</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>resp <span class="op">=</span> comprehend.delete_endpoint(EndpointArn<span class="op">=</span>ENDPOINT_ARN)</span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>display(resp)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>You will need to wait a few minutes to run the below cell until the Comprehend endpoint is deleted successfully and the classifier is no longer in use.</p>
-<div id="cell-33" class="cell">
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Delete the Comprehend Custom Classifier </span></span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>resp <span class="op">=</span> comprehend.delete_document_classifier(DocumentClassifierArn<span class="op">=</span>document_classifier_arn)</span>
-<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>display(resp)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="cell-38" class="cell">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Delete the Comprehend Custom Classifier </span></span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>resp <span class="op">=</span> comprehend.delete_document_classifier(DocumentClassifierArn<span class="op">=</span>document_classifier_arn)</span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>display(resp)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="conclusion" class="level1">
 <h1>Conclusion</h1>
 <p>In this lab, we have trained an Amazon Comprehend custom classifier using a sample toxicity dataset. And deploy the Custom Classifier to a Comprehend endpoint to serve real-time inference.</p>
-<div id="cell-35" class="cell" data-execution_count="30">
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> boto3</span>
-<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>region<span class="op">=</span><span class="st">'eu-central-1'</span></span>
-<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>comprehend <span class="op">=</span> boto3.client(<span class="st">'comprehend'</span>, region_name<span class="op">=</span>region)</span>
-<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>THRESHOLD <span class="op">=</span> <span class="fl">0.2</span></span>
-<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>response <span class="op">=</span> comprehend.detect_toxic_content(</span>
-<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>    TextSegments<span class="op">=</span>[</span>
-<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>        {</span>
-<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a>            <span class="st">"Text"</span>: <span class="st">"You can go through the door go, he's waiting for you on the right."</span></span>
-<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a>        },</span>
-<span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a>        {</span>
-<span id="cb24-12"><a href="#cb24-12" aria-hidden="true" tabindex="-1"></a>            <span class="st">"Text"</span>: <span class="st">"***"</span></span>
-<span id="cb24-13"><a href="#cb24-13" aria-hidden="true" tabindex="-1"></a>        },</span>
-<span id="cb24-14"><a href="#cb24-14" aria-hidden="true" tabindex="-1"></a>        {</span>
-<span id="cb24-15"><a href="#cb24-15" aria-hidden="true" tabindex="-1"></a>            <span class="st">"Text"</span>: <span class="st">"***"</span></span>
-<span id="cb24-16"><a href="#cb24-16" aria-hidden="true" tabindex="-1"></a>        },</span>
-<span id="cb24-17"><a href="#cb24-17" aria-hidden="true" tabindex="-1"></a>        {</span>
-<span id="cb24-18"><a href="#cb24-18" aria-hidden="true" tabindex="-1"></a>            <span class="st">"Text"</span>: <span class="st">"Elon Musk is a piece of shit, greedy capitalis"</span></span>
-<span id="cb24-19"><a href="#cb24-19" aria-hidden="true" tabindex="-1"></a>        }</span>
-<span id="cb24-20"><a href="#cb24-20" aria-hidden="true" tabindex="-1"></a>        </span>
-<span id="cb24-21"><a href="#cb24-21" aria-hidden="true" tabindex="-1"></a>    ],</span>
-<span id="cb24-22"><a href="#cb24-22" aria-hidden="true" tabindex="-1"></a>    LanguageCode<span class="op">=</span><span class="st">'en'</span></span>
-<span id="cb24-23"><a href="#cb24-23" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb24-24"><a href="#cb24-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-25"><a href="#cb24-25" aria-hidden="true" tabindex="-1"></a>result_list <span class="op">=</span> response[<span class="st">'ResultList'</span>]</span>
-<span id="cb24-26"><a href="#cb24-26" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-27"><a href="#cb24-27" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i, result <span class="kw">in</span> <span class="bu">enumerate</span>(result_list):</span>
-<span id="cb24-28"><a href="#cb24-28" aria-hidden="true" tabindex="-1"></a>    labels <span class="op">=</span> result[<span class="st">'Labels'</span>]</span>
-<span id="cb24-29"><a href="#cb24-29" aria-hidden="true" tabindex="-1"></a>    detected <span class="op">=</span> [ l <span class="cf">for</span> l <span class="kw">in</span> labels <span class="cf">if</span> l[<span class="st">'Score'</span>] <span class="op">&gt;</span> THRESHOLD ]</span>
-<span id="cb24-30"><a href="#cb24-30" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="bu">len</span>(detected) <span class="op">&gt;</span> <span class="dv">0</span>:</span>
-<span id="cb24-31"><a href="#cb24-31" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="st">"Text segment </span><span class="sc">{}</span><span class="st">"</span>.<span class="bu">format</span>(i <span class="op">+</span> <span class="dv">1</span>))</span>
-<span id="cb24-32"><a href="#cb24-32" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> d <span class="kw">in</span> detected:</span>
-<span id="cb24-33"><a href="#cb24-33" aria-hidden="true" tabindex="-1"></a>            <span class="bu">print</span>(<span class="st">"</span><span class="sc">{}</span><span class="st"> score </span><span class="sc">{:.2f}</span><span class="st">"</span>.<span class="bu">format</span>(d[<span class="st">'Name'</span>], d[<span class="st">'Score'</span>]))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-error">
-<pre><code>InvalidRequestException: An error occurred (InvalidRequestException) when calling the DetectToxicContent operation: UNSUPPORTED_OPERATION: This operation is not supported in this region</code></pre>
-</div>
-</div>
 
 
 </section>
