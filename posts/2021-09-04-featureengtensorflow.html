@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.450">
+<meta name="generator" content="quarto-1.4.552">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -24,7 +24,7 @@ ul.task-list li input[type="checkbox"] {
 }
 /* CSS for syntax highlighting */
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span { line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -59,7 +59,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </style>
 
 
-<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script><script src="../site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="../site_libs/quarto-nav/headroom.min.js"></script>
 <script src="../site_libs/clipboard/clipboard.min.js"></script>
 <script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
@@ -81,7 +81,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   "collapse-after": 3,
   "panel-placement": "end",
   "type": "overlay",
-  "limit": 20,
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
   "language": {
     "search-no-results-text": "No results",
     "search-matching-documents-text": "matching documents",
@@ -90,13 +96,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-more-match-text": "more match in this document",
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
     "search-detached-cancel-button-title": "Cancel",
     "search-submit-button-title": "Submit",
     "search-label": "Search"
   }
 }</script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
+
 <script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
 
 
@@ -106,10 +113,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <body class="nav-fixed">
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top">
-    <nav class="navbar navbar-expand-lg navbar-dark ">
+  <header id="quarto-header" class="headroom fixed-top quarto-banner">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
-      <div class="navbar-brand-container">
+      <div class="navbar-brand-container mx-auto">
     <a class="navbar-brand" href="../index.html">
     <span class="navbar-title">Marcel Castro</span>
     </a>
@@ -121,57 +128,57 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="https://github.com/marcelcastrobr/my_ml_notes" rel="" target="">
- <span class="menu-text">Notes</span></a>
+    <a class="nav-link" href="https://github.com/marcelcastrobr/my_ml_notes"> 
+<span class="menu-text">Notes</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../index.html" rel="" target="">
- <span class="menu-text">Notebooks</span></a>
+    <a class="nav-link" href="../index.html"> 
+<span class="menu-text">Notebooks</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../about.html" rel="" target="">
- <span class="menu-text">About</span></a>
+    <a class="nav-link" href="../about.html"> 
+<span class="menu-text">About</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="https://marcelcastrobr.github.io/my_ml_links/" rel="" target="">
- <span class="menu-text">Links</span></a>
+    <a class="nav-link" href="https://marcelcastrobr.github.io/my_ml_links/"> 
+<span class="menu-text">Links</span></a>
   </li>  
 </ul>
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item compact">
-    <a class="nav-link" href="https://github.com/marcelcastrobr/marcelcastrobr.github.io/blob/main/cv/cv-marcelcastro.pdf" rel="" target=""><i class="bi bi-filetype-pdf" role="img">
+    <a class="nav-link" href="https://github.com/marcelcastrobr/marcelcastrobr.github.io/blob/main/cv/cv-marcelcastro.pdf"> <i class="bi bi-filetype-pdf" role="img">
 </i> 
- <span class="menu-text"></span></a>
+<span class="menu-text"></span></a>
   </li>  
   <li class="nav-item compact">
-    <a class="nav-link" href="https://marcelcastrobr.github.io/my_ml_links/" rel="" target=""><i class="bi bi-diagram-3-fill" role="img">
+    <a class="nav-link" href="https://marcelcastrobr.github.io/my_ml_links/"> <i class="bi bi-diagram-3-fill" role="img">
 </i> 
- <span class="menu-text"></span></a>
+<span class="menu-text"></span></a>
   </li>  
   <li class="nav-item compact">
-    <a class="nav-link" href="https://huggingface.co/marcelcastrobr" rel="" target=""><i class="bi bi-emoji-smile" role="img">
+    <a class="nav-link" href="https://huggingface.co/marcelcastrobr"> <i class="bi bi-emoji-smile" role="img">
 </i> 
- <span class="menu-text"></span></a>
+<span class="menu-text"></span></a>
   </li>  
   <li class="nav-item compact">
-    <a class="nav-link" href="https://github.com/marcelcastrobr" rel="" target=""><i class="bi bi-github" role="img">
+    <a class="nav-link" href="https://github.com/marcelcastrobr"> <i class="bi bi-github" role="img">
 </i> 
- <span class="menu-text"></span></a>
+<span class="menu-text"></span></a>
   </li>  
   <li class="nav-item compact">
-    <a class="nav-link" href="https://www.linkedin.com/in/marcelcastrobr/" rel="" target=""><i class="bi bi-linkedin" role="img">
+    <a class="nav-link" href="https://www.linkedin.com/in/marcelcastrobr/"> <i class="bi bi-linkedin" role="img">
 </i> 
- <span class="menu-text"></span></a>
+<span class="menu-text"></span></a>
   </li>  
 </ul>
-            <div class="quarto-navbar-tools">
+          </div> <!-- /navcollapse -->
+          <div class="quarto-navbar-tools">
   <a href="" class="quarto-reader-toggle quarto-navigation-tool px-1" onclick="window.quartoToggleReader(); return false;" title="Toggle reader mode">
   <div class="quarto-reader-toggle-btn">
   <i class="bi"></i>
   </div>
 </a>
 </div>
-          </div> <!-- /navcollapse -->
       </div> <!-- /container-fluid -->
     </nav>
 </header>
@@ -225,6 +232,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 
+
 <section id="week-1-assignment-data-validation" class="level1">
 <h1>Week 1 Assignment: Data Validation</h1>
 <p><a href="https://cloud.google.com/solutions/machine-learning/analyzing-and-validating-data-at-scale-for-ml-using-tfx">Tensorflow Data Validation (TFDV)</a> is an open-source library that helps to understand, validate, and monitor production machine learning (ML) data at scale. Common use-cases include comparing training, evaluation and serving datasets, as well as checking for training/serving skew. You have seen the core functionalities of this package in the previous ungraded lab and you will get to practice them in this week’s assignment.</p>
@@ -236,7 +244,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ul>
 <p>Let’s begin!</p>
 <p><a name="1"></a> ## 1 - Setup and Imports</p>
-<div class="cell" data-execution_count="1">
+<div id="cell-3" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Import packages</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
@@ -255,13 +263,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><a name="2"></a> ## 2 - Load the Dataset You will be using the <a href="https://archive.ics.uci.edu/ml/datasets/diabetes+130-us+hospitals+for+years+1999-2008">Diabetes 130-US hospitals for years 1999-2008 Data Set</a> donated to the University of California, Irvine (UCI) Machine Learning Repository. The dataset represents 10 years (1999-2008) of clinical care at 130 US hospitals and integrated delivery networks. It includes over 50 features representing patient and hospital outcomes.</p>
 <p>This dataset has already been included in your Jupyter workspace so you can easily load it.</p>
 <p><a name="2-1"></a> ### 2.1 Read and Split the Dataset</p>
-<div class="cell" data-execution_count="2">
+<div id="cell-6" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Read CSV data into a dataframe and recognize the missing data that is encoded with '?' string as NaN</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.read_csv(<span class="st">'dataset_diabetes/diabetic_data.csv'</span>, header<span class="op">=</span><span class="dv">0</span>, na_values <span class="op">=</span> <span class="st">'?'</span>)</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Preview the dataset</span></span>
 <span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>df.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="2">
+<div>
 <div>
 
 
@@ -420,6 +429,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
+</div>
 <p><a name="2-1-1"></a> #### Data splits</p>
 <p>In a production ML system, the model performance can be negatively affected by anomalies and divergence between data splits for training, evaluation, and serving. To emulate a production system, you will split the dataset into:</p>
 <ul>
@@ -432,7 +442,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>This dataset has been prepared to analyze the factors related to readmission outcome. In this notebook, you will treat the <code>readmitted</code> column as the <em>target</em> or label column.</p>
 <p>The target (or label) is important to know while splitting the data into training, evaluation and serving sets. In supervised learning, you need to include the target in the training and evaluation datasets. For the serving set however (i.e.&nbsp;the set that simulates the data coming from your users), the <strong>label column needs to be dropped</strong> since that is the feature that your model will be trying to predict.</p>
 <p>The following function returns the training, evaluation and serving partitions of a given dataset:</p>
-<div class="cell" data-execution_count="3">
+<div id="cell-8" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> prepare_data_splits_from_dataframe(df):</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">'''</span></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co">    Splits a Pandas Dataframe into training, evaluation and serving sets.</span></span>
@@ -468,7 +478,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb3-33"><a href="#cb3-33" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-34"><a href="#cb3-34" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> train_df, eval_df, serving_df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="cell" data-execution_count="4">
+<div id="cell-9" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Split the datasets</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>train_df, eval_df, serving_df <span class="op">=</span> prepare_data_splits_from_dataframe(df)</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'Training dataset has </span><span class="sc">{}</span><span class="st"> records</span><span class="ch">\n</span><span class="st">Validation dataset has </span><span class="sc">{}</span><span class="st"> records</span><span class="ch">\n</span><span class="st">Serving dataset has </span><span class="sc">{}</span><span class="st"> records'</span>.<span class="bu">format</span>(<span class="bu">len</span>(train_df),<span class="bu">len</span>(eval_df),<span class="bu">len</span>(serving_df)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -485,7 +495,7 @@ Serving dataset has 15265 records</code></pre>
 <p>Before you generate the statistics, you may want to drop irrelevant features from your dataset. You can do that with TFDV with the <a href="https://www.tensorflow.org/tfx/data_validation/api_docs/python/tfdv/StatsOptions">tfdv.StatsOptions</a> class. It is usually <strong>not a good idea</strong> to drop features without knowing what information they contain. However there are times when this can be fairly obvious.</p>
 <p>One of the important parameters of the <code>StatsOptions</code> class is <code>feature_whitelist</code>, which defines the features to include while calculating the data statistics. You can check the <a href="https://www.tensorflow.org/tfx/data_validation/api_docs/python/tfdv/StatsOptions#args">documentation</a> to learn more about the class arguments.</p>
 <p>In this case, you will omit the statistics for <code>encounter_id</code> and <code>patient_nbr</code> since they are part of the internal tracking of patients in the hospital and they don’t contain valuable information for the task at hand.</p>
-<div class="cell" data-execution_count="5">
+<div id="cell-12" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Define features to remove</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>features_to_remove <span class="op">=</span> {<span class="st">'encounter_id'</span>, <span class="st">'patient_nbr'</span>}</span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -505,12 +515,12 @@ Serving dataset has 15265 records</code></pre>
 <p>TFDV allows you to generate statistics from different data formats such as CSV or a Pandas DataFrame.</p>
 <p>Since you already have the data stored in a DataFrame you can use the function <a href="https://www.tensorflow.org/tfx/data_validation/api_docs/python/tfdv/generate_statistics_from_dataframe"><code>tfdv.generate_statistics_from_dataframe()</code></a> which, given a DataFrame and <code>stats_options</code>, generates an object of type <code>DatasetFeatureStatisticsList</code>. This object includes the computed statistics of the given dataset.</p>
 <p>Complete the cell below to generate the statistics of the training set. Remember to pass the training dataframe and the <code>stats_options</code> that you defined above as arguments.</p>
-<div class="cell" data-execution_count="6">
+<div id="cell-15" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co">### START CODE HERE</span></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>train_stats <span class="op">=</span> tfdv.generate_statistics_from_dataframe(train_df, stats_options)</span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="co">### </span><span class="re">END</span><span class="co"> CODE HERE</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="cell" data-execution_count="7">
+<div id="cell-16" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># </span><span class="al">TEST</span><span class="co"> CODE</span></span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="co"># get the number of features used to compute statistics</span></span>
@@ -538,7 +548,7 @@ Last feature: readmitted</code></pre>
 <p>Now that you have the computed statistics in the <code>DatasetFeatureStatisticsList</code> instance, you will need a way to <strong>visualize</strong> these to get actual insights. TFDV provides this functionality through the method <a href="https://www.tensorflow.org/tfx/data_validation/api_docs/python/tfdv/visualize_statistics"><code>tfdv.visualize_statistics()</code></a>.</p>
 <p>Using this function in an interactive Python environment such as this one will output a very nice and convenient way to interact with the descriptive statistics you generated earlier.</p>
 <p><strong>Try it out yourself!</strong> Remember to pass in the generated training statistics in the previous exercise as an argument.</p>
-<div class="cell" data-graded="true" data-execution_count="8">
+<div id="cell-19" class="cell" data-graded="true" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co">### START CODE HERE</span></span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>tfdv.visualize_statistics(train_stats)</span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="co">### </span><span class="re">END</span><span class="co"> CODE HERE</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -569,7 +579,7 @@ Last feature: readmitted</code></pre>
 <p>Schema inference is straightforward using <a href="https://www.tensorflow.org/tfx/data_validation/api_docs/python/tfdv/infer_schema"><code>tfdv.infer_schema()</code></a>. This function needs only the <strong>statistics</strong> (an instance of <code>DatasetFeatureStatisticsList</code>) of your data as input. The output will be a Schema <a href="https://developers.google.com/protocol-buffers">protocol buffer</a> containing the results.</p>
 <p>A complimentary function is <a href="https://www.tensorflow.org/tfx/data_validation/api_docs/python/tfdv/display_schema"><code>tfdv.display_schema()</code></a> for displaying the schema in a table. This accepts a <strong>Schema</strong> protocol buffer as input.</p>
 <p>Fill the code below to infer the schema from the training statistics using TFDV and display the result.</p>
-<div class="cell" data-execution_count="9">
+<div id="cell-23" class="cell" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co">### START CODE HERE</span></span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Infer the data schema by using the training statistics that you generated</span></span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>schema <span class="op">=</span> tfdv.infer_schema(statistics<span class="op">=</span>train_stats)</span>
@@ -578,6 +588,7 @@ Last feature: readmitted</code></pre>
 <span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>tfdv.display_schema(schema)</span>
 <span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a><span class="co">### </span><span class="re">END</span><span class="co"> CODE HERE</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
+<div>
 <div>
 
 
@@ -940,7 +951,9 @@ Last feature: readmitted</code></pre>
 
 </div>
 </div>
+</div>
 <div class="cell-output cell-output-display">
+<div>
 <div>
 
 
@@ -1098,7 +1111,8 @@ Last feature: readmitted</code></pre>
 </div>
 </div>
 </div>
-<div class="cell" data-execution_count="10">
+</div>
+<div id="cell-24" class="cell" data-execution_count="10">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># </span><span class="al">TEST</span><span class="co"> CODE</span></span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Check number of features</span></span>
@@ -1130,7 +1144,7 @@ Second feature in schema: gender</code></pre>
 </ul>
 <p>For this case, remember to define the <code>lhs_statistics</code> protocol with the <code>eval_stats</code>, and the optional <code>rhs_statistics</code> protocol with the <code>train_stats</code>.</p>
 <p>Additionally, check the function for the protocol name declaration, and define the lhs and rhs names as <code>'EVAL_DATASET'</code> and <code>'TRAIN_DATASET'</code> respectively.</p>
-<div class="cell" data-graded="true" data-execution_count="11">
+<div id="cell-30" class="cell" data-graded="true" data-execution_count="11">
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co">### START CODE HERE</span></span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Generate evaluation dataset statistics</span></span>
 <span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="co"># HINT: Remember to use the evaluation dataframe and to pass the stats_options (that you defined before) as an argument</span></span>
@@ -1160,7 +1174,7 @@ Second feature in schema: gender</code></pre>
          </script>
 </div>
 </div>
-<div class="cell" data-execution_count="12">
+<div id="cell-31" class="cell" data-execution_count="12">
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># </span><span class="al">TEST</span><span class="co"> CODE</span></span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="co"># get the number of features used to compute statistics</span></span>
@@ -1186,7 +1200,7 @@ First feature: race
 Last feature: readmitted</code></pre>
 <p><a name="ex-5"></a> ### Exercise 5: Detecting Anomalies ###</p>
 <p>At this point, you should ask if your evaluation dataset matches the schema from your training dataset. For instance, if you scroll through the output cell in the previous exercise, you can see that the categorical feature <strong>glimepiride-pioglitazone</strong> has 1 unique value in the training set while the evaluation dataset has 2. You can verify with the built-in Pandas <code>describe()</code> method as well.</p>
-<div class="cell" data-execution_count="16">
+<div id="cell-34" class="cell" data-execution_count="16">
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>train_df[<span class="st">"glimepiride-pioglitazone"</span>].describe()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="16">
 <pre><code>count     71236
@@ -1196,7 +1210,7 @@ freq      71236
 Name: glimepiride-pioglitazone, dtype: object</code></pre>
 </div>
 </div>
-<div class="cell" data-execution_count="24">
+<div id="cell-35" class="cell" data-execution_count="24">
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>eval_df[<span class="st">"glimepiride-pioglitazone"</span>].describe()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="24">
 <pre><code>count     15265
@@ -1210,7 +1224,7 @@ Name: glimepiride-pioglitazone, dtype: object</code></pre>
 <p>You can use the function <a href="https://www.tensorflow.org/tfx/data_validation/api_docs/python/tfdv/validate_statistics"><code>tfdv.validate_statistics()</code></a> for detecting anomalies and <a href="https://www.tensorflow.org/tfx/data_validation/api_docs/python/tfdv/display_anomalies"><code>tfdv.display_anomalies()</code></a> for displaying them.</p>
 <p>The <code>validate_statistics()</code> method has two required arguments: - an instance of <code>DatasetFeatureStatisticsList</code> - an instance of <code>Schema</code></p>
 <p>Fill in the following graded function which, given the statistics and schema, displays the anomalies found.</p>
-<div class="cell" data-execution_count="39">
+<div id="cell-37" class="cell" data-execution_count="39">
 <div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> calculate_and_display_anomalies(statistics, schema):</span>
 <span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">'''</span></span>
 <span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a><span class="co">    Calculate and display anomalies.</span></span>
@@ -1231,7 +1245,7 @@ Name: glimepiride-pioglitazone, dtype: object</code></pre>
 <span id="cb25-18"><a href="#cb25-18" aria-hidden="true" tabindex="-1"></a>    <span class="co">### </span><span class="re">END</span><span class="co"> CODE HERE</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>You should see detected anomalies in the <code>medical_specialty</code> and <code>glimepiride-pioglitazone</code> features by running the cell below.</p>
-<div class="cell" data-graded="true" data-execution_count="35">
+<div id="cell-39" class="cell" data-graded="true" data-execution_count="35">
 <div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Check evaluation data for errors by validating the evaluation data staticss using the previously inferred schema</span></span>
 <span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>calculate_and_display_anomalies(eval_stats, schema<span class="op">=</span>schema)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div id="calculate_and_display_anomalies" class="cell-output cell-output-display">
@@ -1243,7 +1257,7 @@ Name: glimepiride-pioglitazone, dtype: object</code></pre>
 <p>To get the <code>domain</code> of a particular feature you can use <a href="https://www.tensorflow.org/tfx/data_validation/api_docs/python/tfdv/get_domain"><code>tfdv.get_domain()</code></a>.</p>
 <p>You can use the <code>append()</code> method to the <code>value</code> property of the returned <code>domain</code> to add strings to the valid list of values. To be more explicit, given a domain you can do something like:</p>
 <div class="sourceCode" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>domain.value.append(<span class="st">"feature_value"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell" data-execution_count="34">
+<div id="cell-42" class="cell" data-execution_count="34">
 <div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co">### START CODE HERE</span></span>
 <span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Get the domain associated with the input feature, glimepiride-pioglitazone, from the schema</span></span>
@@ -1296,13 +1310,13 @@ value: "Steady"
 <p><a name="ex-7"></a> ### Exercise 7: Check anomalies in the serving set</p>
 <p>Now you are going to check for anomalies in the <strong>serving data</strong>. The process is very similar to the one you previously did for the evaluation data with a little change.</p>
 <p>Let’s create a new <code>StatsOptions</code> that is aware of the information provided by the schema and use it when generating statistics from the serving DataFrame.</p>
-<div class="cell" data-execution_count="36">
+<div id="cell-45" class="cell" data-execution_count="36">
 <div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Define a new statistics options by the tfdv.StatsOptions class for the serving data by passing the previously inferred schema</span></span>
 <span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>options <span class="op">=</span> tfdv.StatsOptions(schema<span class="op">=</span>schema, </span>
 <span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>                            infer_type_from_schema<span class="op">=</span><span class="va">True</span>, </span>
 <span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>                            feature_whitelist<span class="op">=</span>approved_cols)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="cell" data-execution_count="41">
+<div id="cell-46" class="cell" data-execution_count="41">
 <div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="co">### START CODE HERE</span></span>
 <span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Generate serving dataset statistics</span></span>
 <span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a><span class="co"># HINT: Remember to use the serving dataframe and to pass the newly defined statistics options</span></span>
@@ -1314,6 +1328,7 @@ value: "Steady"
 <span id="cb31-9"><a href="#cb31-9" aria-hidden="true" tabindex="-1"></a>calculate_and_display_anomalies(serving_stats, schema<span class="op">=</span>schema)</span>
 <span id="cb31-10"><a href="#cb31-10" aria-hidden="true" tabindex="-1"></a><span class="co">### </span><span class="re">END</span><span class="co"> CODE HERE</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
+<div>
 <div>
 
 
@@ -1362,9 +1377,10 @@ value: "Steady"
 </div>
 </div>
 </div>
+</div>
 <p>You should see that <code>metformin-rosiglitazone</code>, <code>metformin-pioglitazone</code>, <code>payer_code</code> and <code>medical_specialty</code> features have an anomaly (i.e.&nbsp;Unexpected string values) which is less than 1%.</p>
 <p>Let’s <strong>relax the anomaly detection constraints</strong> for the last two of these features by defining the <code>min_domain_mass</code> of the feature’s distribution constraints.</p>
-<div class="cell" data-execution_count="42">
+<div id="cell-48" class="cell" data-execution_count="42">
 <div class="sourceCode cell-code" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="co"># This relaxes the minimum fraction of values that must come from the domain for the feature.</span></span>
 <span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Get the feature and relax to match 90% of the domain</span></span>
@@ -1378,6 +1394,7 @@ value: "Steady"
 <span id="cb32-11"><a href="#cb32-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Detect anomalies with the updated constraints</span></span>
 <span id="cb32-12"><a href="#cb32-12" aria-hidden="true" tabindex="-1"></a>calculate_and_display_anomalies(serving_stats, schema<span class="op">=</span>schema)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
+<div>
 <div>
 
 
@@ -1416,13 +1433,15 @@ value: "Steady"
 </div>
 </div>
 </div>
+</div>
 <p>If the <code>payer_code</code> and <code>medical_specialty</code> are no longer part of the output cell, then the relaxation worked!</p>
 <p><a name="ex-8"></a> ### Exercise 8: Modifying the Domain</p>
 <p>Let’s investigate the possible cause of the anomalies for the other features, namely <code>metformin-pioglitazone</code> and <code>metformin-rosiglitazone</code>. From the output of the previous exercise, you’ll see that the <code>anomaly long description</code> says: “Examples contain values missing from the schema: Steady (&lt;1%)”. You can redisplay the schema and look at the domain of these features to verify this statement.</p>
 <p>When you inferred the schema at the start of this lab, it’s possible that some values were not detected in the training data so it was not included in the expected domain values of the feature’s schema. In the case of <code>metformin-rosiglitazone</code> and <code>metformin-pioglitazone</code>, the value “Steady” is indeed missing. You will just see “No” in the domain of these two features after running the code cell below.</p>
-<div class="cell" data-execution_count="43">
+<div id="cell-51" class="cell" data-execution_count="43">
 <div class="sourceCode cell-code" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>tfdv.display_schema(schema)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
+<div>
 <div>
 
 
@@ -1785,7 +1804,9 @@ value: "Steady"
 
 </div>
 </div>
+</div>
 <div class="cell-output cell-output-display">
+<div>
 <div>
 
 
@@ -1943,6 +1964,7 @@ value: "Steady"
 </div>
 </div>
 </div>
+</div>
 <p>Towards the bottom of the Domain-Values pairs of the cell above, you can see that many features (including <strong>‘metformin’</strong>) have the same values: <code>['Down', 'No', 'Steady', 'Up']</code>. These values are common to many features including the ones with missing values during schema inference.</p>
 <p>TFDV allows you to modify the domains of some features to match an existing domain. To address the detected anomaly, you can <strong>set the domain</strong> of these features to the domain of the <code>metformin</code> feature.</p>
 <p>Complete the function below to set the domain of a feature list to an existing feature domain.</p>
@@ -1952,7 +1974,7 @@ value: "Steady"
 <li><p><code>feature_path</code>: The name of the feature whose domain needs to be set.</p></li>
 <li><p><code>domain</code>: A domain protocol buffer or the name of a global string domain present in the input schema.</p></li>
 </ul>
-<div class="cell" data-execution_count="44">
+<div id="cell-53" class="cell" data-execution_count="44">
 <div class="sourceCode cell-code" id="cb34"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> modify_domain_of_features(features_list, schema, to_domain_name):</span>
 <span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">'''</span></span>
 <span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a><span class="co">    Modify a list of features' domains.</span></span>
@@ -1974,7 +1996,7 @@ value: "Steady"
 </div>
 <p>Using this function, set the domain of the features defined in the <code>domain_change_features</code> list below to be equal to <strong>metformin’s domain</strong> to address the anomalies found.</p>
 <p><strong>Since you are overriding the existing domain of the features, it is normal to get a warning so you don’t do this by accident.</strong></p>
-<div class="cell" data-execution_count="45">
+<div id="cell-55" class="cell" data-execution_count="45">
 <div class="sourceCode cell-code" id="cb35"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>domain_change_features <span class="op">=</span> [<span class="st">'repaglinide'</span>, <span class="st">'nateglinide'</span>, <span class="st">'chlorpropamide'</span>, <span class="st">'glimepiride'</span>, </span>
 <span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>                          <span class="st">'acetohexamide'</span>, <span class="st">'glipizide'</span>, <span class="st">'glyburide'</span>, <span class="st">'tolbutamide'</span>, <span class="st">'pioglitazone'</span>, </span>
 <span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>                          <span class="st">'rosiglitazone'</span>, <span class="st">'acarbose'</span>, <span class="st">'miglitol'</span>, <span class="st">'troglitazone'</span>, <span class="st">'tolazamide'</span>, </span>
@@ -2014,6 +2036,7 @@ WARNING:root:Replacing existing domain of feature "metformin-pioglitazone".</cod
 </div>
 <div class="cell-output cell-output-display">
 <div>
+<div>
 
 
 <table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
@@ -2375,7 +2398,9 @@ WARNING:root:Replacing existing domain of feature "metformin-pioglitazone".</cod
 
 </div>
 </div>
+</div>
 <div class="cell-output cell-output-display">
+<div>
 <div>
 
 
@@ -2533,7 +2558,8 @@ WARNING:root:Replacing existing domain of feature "metformin-pioglitazone".</cod
 </div>
 </div>
 </div>
-<div class="cell" data-execution_count="46">
+</div>
+<div id="cell-56" class="cell" data-execution_count="46">
 <div class="sourceCode cell-code" id="cb37"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="co"># </span><span class="al">TEST</span><span class="co"> CODE</span></span>
 <span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a><span class="co"># check that the domain of some features are now switched to `metformin`</span></span>
@@ -2560,9 +2586,10 @@ Domain values of 'repaglinide': ['Down', 'No', 'Steady', 'Up']
 Domain name of 'nateglinide': metformin
 Domain values of 'nateglinide': ['Down', 'No', 'Steady', 'Up']</code></pre>
 <p>Let’s do a final check of anomalies to see if this solved the issue.</p>
-<div class="cell" data-execution_count="47">
+<div id="cell-59" class="cell" data-execution_count="47">
 <div class="sourceCode cell-code" id="cb40"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>calculate_and_display_anomalies(serving_stats, schema<span class="op">=</span>schema)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
+<div>
 <div>
 
 
@@ -2591,16 +2618,18 @@ Domain values of 'nateglinide': ['Down', 'No', 'Steady', 'Up']</code></pre>
 </div>
 </div>
 </div>
+</div>
 <p>You should now see the <code>metformin-pioglitazone</code> and <code>metformin-rosiglitazone</code> features dropped from the output anomalies.</p>
 <p><a name="ex-9"></a> ### Exercise 9: Detecting anomalies with environments</p>
 <p>There is still one thing to address. The <code>readmitted</code> feature (which is the label column) showed up as an anomaly (‘Column dropped’). Since labels are not expected in the serving data, let’s tell TFDV to ignore this detected anomaly.</p>
 <p>This requirement of introducing slight schema variations can be expressed by using <a href="https://www.tensorflow.org/tfx/data_validation/get_started#schema_environments">environments</a>. In particular, features in the schema can be associated with a set of environments using <code>default_environment</code>, <code>in_environment</code> and <code>not_in_environment</code>.</p>
-<div class="cell" data-execution_count="49">
+<div id="cell-62" class="cell" data-execution_count="49">
 <div class="sourceCode cell-code" id="cb41"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="co"># All features are by default in both TRAINING and SERVING environments.</span></span>
 <span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>schema.default_environment.append(<span class="st">'TRAINING'</span>)</span>
 <span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a>schema.default_environment.append(<span class="st">'SERVING'</span>)</span>
 <span id="cb41-4"><a href="#cb41-4" aria-hidden="true" tabindex="-1"></a>tfdv.display_schema(schema)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
+<div>
 <div>
 
 
@@ -2963,7 +2992,9 @@ Domain values of 'nateglinide': ['Down', 'No', 'Steady', 'Up']</code></pre>
 
 </div>
 </div>
+</div>
 <div class="cell-output cell-output-display">
+<div>
 <div>
 
 
@@ -3121,6 +3152,7 @@ Domain values of 'nateglinide': ['Down', 'No', 'Steady', 'Up']</code></pre>
 </div>
 </div>
 </div>
+</div>
 <p>Complete the code below to exclude the <code>readmitted</code> feature from the <code>SERVING</code> environment.</p>
 <p>To achieve this, you can use the <a href="https://www.tensorflow.org/tfx/data_validation/api_docs/python/tfdv/get_feature"><code>tfdv.get_feature()</code></a> function to get the <code>readmitted</code> feature from the inferred schema and use its <code>not_in_environment</code> attribute to specify that <code>readmitted</code> should be removed from the <code>SERVING</code> environment’s schema. This <strong>attribute is a list</strong> so you will have to <strong>append</strong> the name of the environment that you wish to omit this feature for.</p>
 <p>To be more explicit, given a feature you can do something like:</p>
@@ -3130,7 +3162,7 @@ Domain values of 'nateglinide': ['Down', 'No', 'Steady', 'Up']</code></pre>
 <li><code>schema</code>: The schema.</li>
 <li><code>feature_path</code>: The path of the feature to obtain from the schema. In this case this is equal to the name of the feature.</li>
 </ul>
-<div class="cell" data-execution_count="56">
+<div id="cell-64" class="cell" data-execution_count="56">
 <div class="sourceCode cell-code" id="cb43"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="co">### START CODE HERE</span></span>
 <span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Specify that 'readmitted' feature is not in SERVING environment.</span></span>
 <span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a><span class="co"># HINT: Append the 'SERVING' environmnet to the not_in_environment attribute of the feature</span></span>
@@ -3144,10 +3176,11 @@ Domain values of 'nateglinide': ['Down', 'No', 'Steady', 'Up']</code></pre>
 <span id="cb43-11"><a href="#cb43-11" aria-hidden="true" tabindex="-1"></a><span class="co">### </span><span class="re">END</span><span class="co"> CODE HERE</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>You should see “No anomalies found” by running the cell below.</p>
-<div class="cell" data-execution_count="57">
+<div id="cell-66" class="cell" data-execution_count="57">
 <div class="sourceCode cell-code" id="cb44"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Display anomalies</span></span>
 <span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a>tfdv.display_anomalies(serving_anomalies_with_env)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
+<div>
 <div>
 
 
@@ -3176,13 +3209,14 @@ Domain values of 'nateglinide': ['Down', 'No', 'Steady', 'Up']</code></pre>
 </div>
 </div>
 </div>
+</div>
 <p>Now you have succesfully addressed all anomaly-related issues!</p>
 <p><a name="7"></a> ## 7 - Check for Data Drift and Skew</p>
 <p>During data validation, you also need to check for data drift and data skew between the training and serving data. You can do this by specifying the <a href="https://www.tensorflow.org/tfx/data_validation/get_started#checking_data_skew_and_drift">skew_comparator and drift_comparator</a> in the schema.</p>
 <p>Drift and skew is expressed in terms of <a href="https://en.wikipedia.org/wiki/Chebyshev_distance">L-infinity distance</a> which evaluates the difference between vectors as the greatest of the differences along any coordinate dimension.</p>
 <p>You can set the threshold distance so that you receive warnings when the drift is higher than is acceptable. Setting the correct distance is typically an iterative process requiring domain knowledge and experimentation.</p>
 <p>Let’s check for the skew in the <strong>diabetesMed</strong> feature and drift in the <strong>payer_code</strong> feature.</p>
-<div class="cell" data-execution_count="61">
+<div id="cell-70" class="cell" data-execution_count="61">
 <div class="sourceCode cell-code" id="cb45"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate skew for the diabetesMed feature</span></span>
 <span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a>diabetes_med <span class="op">=</span> tfdv.get_feature(schema, <span class="st">'diabetesMed'</span>)</span>
 <span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a>diabetes_med.skew_comparator.infinity_norm.threshold <span class="op">=</span> <span class="fl">0.035</span> <span class="co"># domain knowledge helps to determine this threshold</span></span>
@@ -3207,7 +3241,7 @@ Domain values of 'nateglinide': ['Down', 'No', 'Steady', 'Up']</code></pre>
 <p><a name="8"></a> ## 8 - Display Stats for Data Slices <a class="anchor" id="fourth-objective"></a></p>
 <p>Finally, you can <a href="https://www.tensorflow.org/tfx/data_validation/get_started#computing_statistics_over_slices_of_data">slice the dataset and calculate the statistics</a> for each unique value of a feature. By default, TFDV computes statistics for the overall dataset in addition to the configured slices. Each slice is identified by a unique name which is set as the dataset name in the <a href="https://github.com/tensorflow/metadata/blob/master/tensorflow_metadata/proto/v0/statistics.proto#L43">DatasetFeatureStatistics</a> protocol buffer. Generating and displaying statistics over different slices of data can help track model and anomaly metrics.</p>
 <p>Let’s first define a few helper functions to make our code in the exercise more neat.</p>
-<div class="cell" data-execution_count="62">
+<div id="cell-74" class="cell" data-execution_count="62">
 <div class="sourceCode cell-code" id="cb46"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> split_datasets(dataset_list):</span>
 <span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">'''</span></span>
 <span id="cb46-3"><a href="#cb46-3" aria-hidden="true" tabindex="-1"></a><span class="co">    split datasets.</span></span>
@@ -3250,7 +3284,7 @@ Domain values of 'nateglinide': ['Down', 'No', 'Steady', 'Up']</code></pre>
 <li><p><code>feature_whitelist</code> set to the approved features.</p></li>
 </ul>
 <p>Remember that <code>slice_functions</code> only work with <a href="https://www.tensorflow.org/tfx/data_validation/api_docs/python/tfdv/generate_statistics_from_csv"><code>generate_statistics_from_csv()</code></a> so you will need to convert the dataframe to CSV.</p>
-<div class="cell" data-execution_count="63">
+<div id="cell-76" class="cell" data-execution_count="63">
 <div class="sourceCode cell-code" id="cb47"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> sliced_stats_for_slice_fn(slice_fn, approved_cols, dataframe, schema):</span>
 <span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">'''</span></span>
 <span id="cb47-3"><a href="#cb47-3" aria-hidden="true" tabindex="-1"></a><span class="co">    generate statistics for the sliced data.</span></span>
@@ -3283,7 +3317,7 @@ Domain values of 'nateglinide': ['Down', 'No', 'Steady', 'Up']</code></pre>
 <span id="cb47-30"><a href="#cb47-30" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> slice_info_datasets</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>With that, you can now use the helper functions to generate and visualize statistics for the sliced datasets.</p>
-<div class="cell" data-execution_count="65">
+<div id="cell-78" class="cell" data-execution_count="65">
 <div class="sourceCode cell-code" id="cb48"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Generate slice function for the `medical_speciality` feature</span></span>
 <span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a>slice_fn <span class="op">=</span> slicing_util.get_feature_value_slicer(features<span class="op">=</span>{<span class="st">'medical_specialty'</span>: <span class="va">None</span>})</span>
 <span id="cb48-3"><a href="#cb48-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -3388,7 +3422,7 @@ medical_specialty_Orthopedics</code></pre>
 <p><a name="9"></a> ## 9 - Freeze the schema</p>
 <p>Now that the schema has been reviewed, you will store the schema in a file in its “frozen” state. This can be used to validate incoming data once your application goes live to your users.</p>
 <p>This is pretty straightforward using Tensorflow’s <code>io</code> utils and TFDV’s <a href="https://www.tensorflow.org/tfx/data_validation/api_docs/python/tfdv/write_schema_text"><code>write_schema_text()</code></a> function.</p>
-<div class="cell" data-execution_count="66">
+<div id="cell-81" class="cell" data-execution_count="66">
 <div class="sourceCode cell-code" id="cb50"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create output directory</span></span>
 <span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a>OUTPUT_DIR <span class="op">=</span> <span class="st">"output"</span></span>
 <span id="cb50-3"><a href="#cb50-3" aria-hidden="true" tabindex="-1"></a>file_io.recursive_create_dir(OUTPUT_DIR)</span>
@@ -3486,10 +3520,27 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     // clear code selection
     e.clearSelection();
   });
-  function tippyHover(el, contentFn) {
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp("https:\/\/marcelcastrobr\.github\.io\/");
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
     const config = {
       allowHTML: true,
-      content: contentFn,
       maxWidth: 500,
       delay: 100,
       arrow: false,
@@ -3499,8 +3550,17 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       interactive: true,
       interactiveBorder: 10,
       theme: 'quarto',
-      placement: 'bottom-start'
+      placement: 'bottom-start',
     };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
     window.tippy(el, config); 
   }
   const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
@@ -3512,7 +3572,130 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       try { href = new URL(href).hash; } catch {}
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
-      return note.innerHTML;
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
     });
   }
       let selectedAnnoteEl;
@@ -3556,6 +3739,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             }
             div.style.top = top - 2 + "px";
             div.style.height = height + 4 + "px";
+            div.style.left = 0;
             let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
             if (gutterDiv === null) {
               gutterDiv = window.document.createElement("div");
@@ -3581,6 +3765,32 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         });
         selectedAnnoteEl = undefined;
       };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
       // Attach click handler to the DT
       const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
       for (const annoteDlNode of annoteDls) {
@@ -3646,12 +3856,15 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     <div class="nav-footer-left">
       &nbsp;
     </div>   
-    <div class="nav-footer-center">Copyright 2023, Marcel Castro</div>
+    <div class="nav-footer-center">
+<p>Copyright 2023, Marcel Castro</p>
+</div>
     <div class="nav-footer-right">
       &nbsp;
     </div>
   </div>
 </footer>
+
 
 
 

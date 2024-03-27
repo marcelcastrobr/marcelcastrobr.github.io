@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.450">
+<meta name="generator" content="quarto-1.4.552">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -24,7 +24,7 @@ ul.task-list li input[type="checkbox"] {
 }
 /* CSS for syntax highlighting */
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span { line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -59,7 +59,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </style>
 
 
-<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script><script src="../site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="../site_libs/quarto-nav/headroom.min.js"></script>
 <script src="../site_libs/clipboard/clipboard.min.js"></script>
 <script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
@@ -81,7 +81,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   "collapse-after": 3,
   "panel-placement": "end",
   "type": "overlay",
-  "limit": 20,
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
   "language": {
     "search-no-results-text": "No results",
     "search-matching-documents-text": "matching documents",
@@ -90,17 +96,45 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-more-match-text": "more match in this document",
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
     "search-detached-cancel-button-title": "Cancel",
     "search-submit-button-title": "Submit",
     "search-label": "Search"
   }
 }</script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
+
 <script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
 
   <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 <link rel="stylesheet" href="../styles.css">
 </head>
@@ -108,10 +142,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <body class="nav-fixed">
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top">
-    <nav class="navbar navbar-expand-lg navbar-dark ">
+  <header id="quarto-header" class="headroom fixed-top quarto-banner">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
-      <div class="navbar-brand-container">
+      <div class="navbar-brand-container mx-auto">
     <a class="navbar-brand" href="../index.html">
     <span class="navbar-title">Marcel Castro</span>
     </a>
@@ -123,57 +157,57 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="https://github.com/marcelcastrobr/my_ml_notes" rel="" target="">
- <span class="menu-text">Notes</span></a>
+    <a class="nav-link" href="https://github.com/marcelcastrobr/my_ml_notes"> 
+<span class="menu-text">Notes</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../index.html" rel="" target="">
- <span class="menu-text">Notebooks</span></a>
+    <a class="nav-link" href="../index.html"> 
+<span class="menu-text">Notebooks</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../about.html" rel="" target="">
- <span class="menu-text">About</span></a>
+    <a class="nav-link" href="../about.html"> 
+<span class="menu-text">About</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="https://marcelcastrobr.github.io/my_ml_links/" rel="" target="">
- <span class="menu-text">Links</span></a>
+    <a class="nav-link" href="https://marcelcastrobr.github.io/my_ml_links/"> 
+<span class="menu-text">Links</span></a>
   </li>  
 </ul>
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item compact">
-    <a class="nav-link" href="https://github.com/marcelcastrobr/marcelcastrobr.github.io/blob/main/cv/cv-marcelcastro.pdf" rel="" target=""><i class="bi bi-filetype-pdf" role="img">
+    <a class="nav-link" href="https://github.com/marcelcastrobr/marcelcastrobr.github.io/blob/main/cv/cv-marcelcastro.pdf"> <i class="bi bi-filetype-pdf" role="img">
 </i> 
- <span class="menu-text"></span></a>
+<span class="menu-text"></span></a>
   </li>  
   <li class="nav-item compact">
-    <a class="nav-link" href="https://marcelcastrobr.github.io/my_ml_links/" rel="" target=""><i class="bi bi-diagram-3-fill" role="img">
+    <a class="nav-link" href="https://marcelcastrobr.github.io/my_ml_links/"> <i class="bi bi-diagram-3-fill" role="img">
 </i> 
- <span class="menu-text"></span></a>
+<span class="menu-text"></span></a>
   </li>  
   <li class="nav-item compact">
-    <a class="nav-link" href="https://huggingface.co/marcelcastrobr" rel="" target=""><i class="bi bi-emoji-smile" role="img">
+    <a class="nav-link" href="https://huggingface.co/marcelcastrobr"> <i class="bi bi-emoji-smile" role="img">
 </i> 
- <span class="menu-text"></span></a>
+<span class="menu-text"></span></a>
   </li>  
   <li class="nav-item compact">
-    <a class="nav-link" href="https://github.com/marcelcastrobr" rel="" target=""><i class="bi bi-github" role="img">
+    <a class="nav-link" href="https://github.com/marcelcastrobr"> <i class="bi bi-github" role="img">
 </i> 
- <span class="menu-text"></span></a>
+<span class="menu-text"></span></a>
   </li>  
   <li class="nav-item compact">
-    <a class="nav-link" href="https://www.linkedin.com/in/marcelcastrobr/" rel="" target=""><i class="bi bi-linkedin" role="img">
+    <a class="nav-link" href="https://www.linkedin.com/in/marcelcastrobr/"> <i class="bi bi-linkedin" role="img">
 </i> 
- <span class="menu-text"></span></a>
+<span class="menu-text"></span></a>
   </li>  
 </ul>
-            <div class="quarto-navbar-tools">
+          </div> <!-- /navcollapse -->
+          <div class="quarto-navbar-tools">
   <a href="" class="quarto-reader-toggle quarto-navigation-tool px-1" onclick="window.quartoToggleReader(); return false;" title="Toggle reader mode">
   <div class="quarto-reader-toggle-btn">
   <i class="bi"></i>
   </div>
 </a>
 </div>
-          </div> <!-- /navcollapse -->
       </div> <!-- /container-fluid -->
     </nav>
 </header>
@@ -245,6 +279,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 
+
 <section id="about" class="level1">
 <h1>About</h1>
 <p>Notebook inspired by the example of Dimensionality Reduction done in the course Machine Learning Modeling Pipelines in Production, by DeepLearning.AI.</p>
@@ -262,7 +297,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="anchored" data-anchor-id="basic-reweighting">Basic reweighting</h2>
 <p>Reweighting of vectors in natural language can amplify the importance and trustworthy of words in a text. The idea is to reveal what is important. Methods for reweighting are: - L2 norming - Probability distribution - Observed/expected - Pointwise Mutual Information (PMI) - Positive PMI. - TF-IDF: Term Frequency - Inverse Document Frequency</p>
 <p>Pointwise Mutual Information (PMI) is observed/expected in the log-space (with log(0) = 0. Based on <a href="https://web.stanford.edu/class/cs224u/2019/materials/cs224u-2019-vsm.pdf">Christopher Potts</a>: - Many weighting schemes end up favoring rare events that may not be trustworthy. - PMI and its variant will amplify the values of counts that are tiny relative to their row and columns. - TF-IDF severly punishes words that appear in many documents - it behaves oddly for dense matrices, which can include word x word matrices.</p>
-<div class="cell" data-execution_count="1">
+<div id="cell-2" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># General use imports</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
@@ -271,12 +306,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> math</span>
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> sys</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="cell" data-tags="[]" data-execution_count="2">
+<div id="cell-3" class="cell" data-tags="[]" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.feature_extraction.text <span class="im">import</span> TfidfVectorizer</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.decomposition <span class="im">import</span> NMF</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.datasets <span class="im">import</span> fetch_20newsgroups</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="cell" data-execution_count="73">
+<div id="cell-4" class="cell" data-execution_count="73">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Helper function from Christopher Potts used on the course CS224u, Stanford, Spring 2021 are used in the notebook.</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Source github link is here: https://github.com/cgpotts/cs224u</span></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Instead of using the word-to-word matrixes from CS224u, we used the dataset from 20newsgroups from sklearn and </span></span>
@@ -286,7 +321,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> vsm</span>
 <span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> utils</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="cell" data-execution_count="74">
+<div id="cell-5" class="cell" data-execution_count="74">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 20newsgroups dataset </span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Test using 20newsgroups dataset from https://scikit-learn.org/stable/datasets/real_world.html#the-20-newsgroups-text-dataset</span></span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Download data</span></span>
@@ -295,13 +330,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Get the actual text data from the sklearn Bunch</span></span>
 <span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> data.get(<span class="st">"data"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="cell" data-execution_count="75">
+<div id="cell-6" class="cell" data-execution_count="75">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(data[:<span class="dv">1</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>['I was wondering if anyone out there could enlighten me on this car I saw\nthe other day. It was a 2-door sports car, looked to be from the late 60s/\nearly 70s. It was called a Bricklin. The doors were really small. In addition,\nthe front bumper was separate from the rest of the body. This is \nall I know. If anyone can tellme a model name, engine specs, years\nof production, where this car is made, history, or whatever info you\nhave on this funky looking car, please e-mail.']</code></pre>
 </div>
 </div>
-<div class="cell" data-execution_count="76">
+<div id="cell-7" class="cell" data-execution_count="76">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Lets generate the co-occurance matrix</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.feature_extraction.text <span class="im">import</span> CountVectorizer</span>
@@ -318,6 +353,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a><span class="co">#df.to_csv('20newsgroups.csv', sep = ',')</span></span>
 <span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>df.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="76">
+<div>
 <div>
 
 
@@ -476,10 +512,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
+</div>
 </section>
 <section id="lets-compare-different-distance-metrics-i.e.-euclidean-pointwise-mutual-information-and-tf-idf" class="level2">
 <h2 class="anchored" data-anchor-id="lets-compare-different-distance-metrics-i.e.-euclidean-pointwise-mutual-information-and-tf-idf">Lets compare different distance metrics (i.e.&nbsp;Euclidean, Pointwise Mutual Information and TF-IDF</h2>
-<div class="cell" data-execution_count="78">
+<div id="cell-9" class="cell" data-execution_count="78">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Check the neighbor distance using Euclidean</span></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>vsm.neighbors(<span class="st">'car'</span>, df, distfunc<span class="op">=</span>vsm.euclidean).head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="78">
@@ -491,7 +528,7 @@ same         540.973197
 dtype: float64</code></pre>
 </div>
 </div>
-<div class="cell" data-execution_count="79">
+<div id="cell-10" class="cell" data-execution_count="79">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Check the neighbor distance using PMI (Pointwise Mutual Information) </span></span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>df_pmi <span class="op">=</span> vsm.pmi(df)</span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>vsm.neighbors(<span class="st">'car'</span>, df_pmi).head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -504,7 +541,7 @@ accidents    0.173207
 dtype: float64</code></pre>
 </div>
 </div>
-<div class="cell" data-execution_count="80">
+<div id="cell-11" class="cell" data-execution_count="80">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Check the neighbor distance using TFIDF - Term Frequency - Inverse Document Frequency</span></span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>df_tfidf <span class="op">=</span> vsm.tfidf(df)</span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>vsm.neighbors(<span class="st">'car'</span>, df_tfidf).head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -517,11 +554,15 @@ corrado           0.369355
 dtype: float64</code></pre>
 </div>
 </div>
-<div class="cell" data-execution_count="68">
+<div id="cell-12" class="cell" data-execution_count="68">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Using the helper function to visualize the PMI results using T-SNE</span></span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>vsm.tsne_viz(df_pmi, output_filename<span class="op">=</span><span class="st">'pmi-test'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
-<p><img src="2021-10-25-NMF_files/figure-html/cell-11-output-1.png" class="img-fluid"></p>
+<div>
+<figure class="figure">
+<p><img src="2021-10-25-NMF_files/figure-html/cell-11-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
 </div>
 </div>
 </section>
@@ -544,7 +585,7 @@ dtype: float64</code></pre>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="./images/NMF.png" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption">NMF</figcaption>
+<figcaption>NMF</figcaption>
 </figure>
 </div>
 <p>References:</p>
@@ -555,7 +596,7 @@ dtype: float64</code></pre>
 </section>
 <section id="helping-functions" class="level1">
 <h1>Helping functions</h1>
-<div class="cell" data-execution_count="10">
+<div id="cell-15" class="cell" data-execution_count="10">
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Define function for plotting top 20 words for each topic</span></span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> plot_words_for_topics(n_comp, nmf, feature_names):</span>
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>  fig, axes <span class="op">=</span> plt.subplots(((n_comp<span class="op">-</span><span class="dv">1</span>)<span class="op">//</span><span class="dv">5</span>)<span class="op">+</span><span class="dv">1</span>, <span class="dv">5</span>, figsize<span class="op">=</span>(<span class="dv">25</span>, <span class="dv">15</span>))</span>
@@ -590,7 +631,7 @@ dtype: float64</code></pre>
 </section>
 <section id="newsgroups-dataset" class="level1">
 <h1>20newsgroups dataset</h1>
-<div class="cell" data-execution_count="11">
+<div id="cell-18" class="cell" data-execution_count="11">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Test using 20newsgroups dataset from https://scikit-learn.org/stable/datasets/real_world.html#the-20-newsgroups-text-dataset</span></span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Download data</span></span>
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> fetch_20newsgroups(remove<span class="op">=</span>(<span class="st">'headers'</span>, <span class="st">'footers'</span>, <span class="st">'quotes'</span>))</span>
@@ -598,7 +639,7 @@ dtype: float64</code></pre>
 <span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Get the actual text data from the sklearn Bunch</span></span>
 <span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> data.get(<span class="st">"data"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="cell" data-execution_count="12">
+<div id="cell-19" class="cell" data-execution_count="12">
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Printing the data in a list format.</span></span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Data has </span><span class="sc">{</span><span class="bu">len</span>(data)<span class="sc">}</span><span class="ss"> elements.</span><span class="ch">\n</span><span class="ss">"</span>)</span>
 <span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"First 2 elements: </span><span class="ch">\n</span><span class="ss">"</span>)</span>
@@ -623,7 +664,7 @@ have on this funky looking car, please e-mail.
 </code></pre>
 </div>
 </div>
-<div class="cell" data-execution_count="13">
+<div id="cell-20" class="cell" data-execution_count="13">
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> get_vector(data):</span>
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Convert a collection of raw documents to a matrix of TF-IDF features.</span></span>
 <span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>    <span class="co">#vectorizer = TfidfVectorizer(max_features=500, stop_words='english')</span></span>
@@ -643,7 +684,7 @@ have on this funky looking car, please e-mail.
 <span id="cb19-17"><a href="#cb19-17" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"Each data point has shape </span><span class="sc">{</span>vect_data[<span class="dv">0</span>]<span class="sc">.</span>shape<span class="sc">}</span><span class="ss"> after vectorization."</span>)</span>
 <span id="cb19-18"><a href="#cb19-18" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> vectorizer, vect_data</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="cell" data-execution_count="14">
+<div id="cell-21" class="cell" data-execution_count="14">
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Function that  </span></span>
 <span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> try_NMF(n_comp, data):</span>
 <span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>  <span class="co">'''</span></span>
@@ -661,7 +702,7 @@ have on this funky looking car, please e-mail.
 <span id="cb20-15"><a href="#cb20-15" aria-hidden="true" tabindex="-1"></a>  feature_names <span class="op">=</span> vectorizer.get_feature_names()</span>
 <span id="cb20-16"><a href="#cb20-16" aria-hidden="true" tabindex="-1"></a>  plot_words_for_topics(n_comp, nmf, feature_names)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="cell" data-execution_count="15">
+<div id="cell-22" class="cell" data-execution_count="15">
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Try NMF for 5 topics</span></span>
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>try_NMF(<span class="dv">5</span>, data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -673,25 +714,29 @@ Each data point has shape (1, 500) after vectorization.</code></pre>
   "'nndsvda' in 1.1 (renaming of 0.26)."), FutureWarning)</code></pre>
 </div>
 <div class="cell-output cell-output-display">
-<p><img src="2021-10-25-NMF_files/figure-html/cell-18-output-3.png" class="img-fluid"></p>
+<div>
+<figure class="figure">
+<p><img src="2021-10-25-NMF_files/figure-html/cell-18-output-3.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
 </div>
 </div>
 <section id="non-conformance-dataset-internal-dataset" class="level2">
 <h2 class="anchored" data-anchor-id="non-conformance-dataset-internal-dataset">Non-conformance dataset (internal dataset)</h2>
-<div class="cell" data-execution_count="9">
+<div id="cell-24" class="cell" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Get from csv to dictionary</span></span>
 <span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>dict_csv <span class="op">=</span> pd.read_csv(<span class="st">'/Users/castrma/Projects/DT/svt-data-processing/others/csv/notification_long_text.csv'</span>, </span>
 <span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>header<span class="op">=</span><span class="va">None</span>, index_col<span class="op">=</span><span class="dv">0</span>, squeeze<span class="op">=</span><span class="va">True</span>).to_dict()</span>
 <span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a><span class="co">#print(dict_csv)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="cell" data-execution_count="10">
+<div id="cell-25" class="cell" data-execution_count="10">
 <div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co">#create a list of non-conformance</span></span>
 <span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>internal_data <span class="op">=</span> dict_csv.values()</span>
 <span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a><span class="co">#Remove NaN from list</span></span>
 <span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>internal_data <span class="op">=</span> [x <span class="cf">for</span> x <span class="kw">in</span> internal_data <span class="cf">if</span> pd.isnull(x) <span class="op">==</span> <span class="va">False</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="cell" data-execution_count="20">
+<div id="cell-26" class="cell" data-execution_count="20">
 <div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Data has </span><span class="sc">{</span><span class="bu">len</span>(internal_data)<span class="sc">}</span><span class="ss"> elements.</span><span class="ch">\n</span><span class="ss">"</span>)</span>
 <span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"First element: </span><span class="ch">\n</span><span class="ss">"</span>)</span>
 <span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a><span class="co">#for n, d in enumerate(internal_data[:1], start=1):</span></span>
@@ -704,23 +749,27 @@ First element:
 </code></pre>
 </div>
 </div>
-<div class="cell" data-execution_count="21">
+<div id="cell-27" class="cell" data-execution_count="21">
 <div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>try_NMF(<span class="dv">5</span>, internal_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Data has shape (386102, 500) after vectorization.
 Each data point has shape (1, 500) after vectorization.</code></pre>
 </div>
 <div class="cell-output cell-output-display">
-<p><img src="2021-10-25-NMF_files/figure-html/cell-22-output-2.png" class="img-fluid"></p>
+<div>
+<figure class="figure">
+<p><img src="2021-10-25-NMF_files/figure-html/cell-22-output-2.png" class="img-fluid figure-img"></p>
+</figure>
 </div>
 </div>
-<div class="cell" data-execution_count="13">
+</div>
+<div id="cell-28" class="cell" data-execution_count="13">
 <div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co">#print(f"Original text:\n{data[0]}\n")</span></span>
 <span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a><span class="co">#print(next(iter(data)))</span></span>
 <span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a><span class="co">#print(f"Representation based on topics:\n{vect_data_internal[0]}")</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="cell" data-execution_count="18">
+<div id="cell-29" class="cell" data-execution_count="18">
 <div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Function that  </span></span>
 <span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> NMFv2(n_comp, data):</span>
 <span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>  <span class="co">'''</span></span>
@@ -745,7 +794,7 @@ Each data point has shape (1, 500) after vectorization.</code></pre>
 <span id="cb31-22"><a href="#cb31-22" aria-hidden="true" tabindex="-1"></a>  feature_names <span class="op">=</span> vectorizer.get_feature_names()</span>
 <span id="cb31-23"><a href="#cb31-23" aria-hidden="true" tabindex="-1"></a>  plot_words_for_topics(n_comp, nmf, feature_names)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="cell" data-execution_count="19">
+<div id="cell-30" class="cell" data-execution_count="19">
 <div class="sourceCode cell-code" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>NMFv2(<span class="dv">5</span>, internal_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Data has shape (386102, 500) after vectorization.
@@ -756,7 +805,11 @@ Each data point has shape (1, 500) after vectorization.</code></pre>
   "'nndsvda' in 1.1 (renaming of 0.26)."), FutureWarning)</code></pre>
 </div>
 <div class="cell-output cell-output-display">
-<p><img src="2021-10-25-NMF_files/figure-html/cell-25-output-3.png" class="img-fluid"></p>
+<div>
+<figure class="figure">
+<p><img src="2021-10-25-NMF_files/figure-html/cell-25-output-3.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
 </div>
 </div>
 
@@ -844,10 +897,27 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     // clear code selection
     e.clearSelection();
   });
-  function tippyHover(el, contentFn) {
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp("https:\/\/marcelcastrobr\.github\.io\/");
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
     const config = {
       allowHTML: true,
-      content: contentFn,
       maxWidth: 500,
       delay: 100,
       arrow: false,
@@ -857,8 +927,17 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       interactive: true,
       interactiveBorder: 10,
       theme: 'quarto',
-      placement: 'bottom-start'
+      placement: 'bottom-start',
     };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
     window.tippy(el, config); 
   }
   const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
@@ -870,7 +949,130 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       try { href = new URL(href).hash; } catch {}
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
-      return note.innerHTML;
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
     });
   }
       let selectedAnnoteEl;
@@ -914,6 +1116,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             }
             div.style.top = top - 2 + "px";
             div.style.height = height + 4 + "px";
+            div.style.left = 0;
             let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
             if (gutterDiv === null) {
               gutterDiv = window.document.createElement("div");
@@ -939,6 +1142,32 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         });
         selectedAnnoteEl = undefined;
       };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
       // Attach click handler to the DT
       const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
       for (const annoteDlNode of annoteDls) {
@@ -1004,12 +1233,15 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     <div class="nav-footer-left">
       &nbsp;
     </div>   
-    <div class="nav-footer-center">Copyright 2023, Marcel Castro</div>
+    <div class="nav-footer-center">
+<p>Copyright 2023, Marcel Castro</p>
+</div>
     <div class="nav-footer-right">
       &nbsp;
     </div>
   </div>
 </footer>
+
 
 
 
