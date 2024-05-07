@@ -6,6 +6,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="dcterms.date" content="2023-06-09">
 
 <title>Marcel Castro - Chat Conversation with Falcon 7B Instruct using Amazon SageMaker JumpStart</title>
 <style>
@@ -189,6 +190,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <div class="quarto-title-meta">
 
       
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">June 9, 2023</p>
+      </div>
+    </div>
     
       
     </div>
@@ -205,9 +212,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 
+<section id="chat-conversation-with-falcon-7b-instruct-using-amazon-sagemaker-jumpstart" class="level1">
+<h1>Chat Conversation with Falcon 7B Instruct using Amazon SageMaker JumpStart</h1>
 <p>This notebook has the objective to test the Langchain chat conversation using the Falcon 7B Instruct LLM model using SageMaker JumpStart.</p>
 <p>The notebook is inspired by the <a href="https://github.com/aws/amazon-sagemaker-examples/blob/main/introduction_to_amazon_algorithms/jumpstart-foundation-models/text-generation-falcon.ipynb">Amazon SageMaker JumpStart notebook on Falcon</a> and <a href="https://learn.deeplearning.ai/langchain/lesson/3/memory">LangChain for LLM Application Development course material by DeepLearning.AI</a>.</p>
 <p>Please consider the following limitation while deploying Falcon models: - Falcon models are mostly trained on English data and may not generalize to other languages. - Falcon carries the stereotypes and biases commonly encountered online and in the training data. Hence, it is recommended to develop guardrails and to take appropriate precautions for any production use. This is a raw, pretrained model, which should be further finetuned for most usecases.</p>
+</section>
 <section id="setup-development-environment" class="level1">
 <h1>1. Setup development environment</h1>
 <div id="75e43d3d-19e3-4e97-8d13-88dc87708f18" class="cell" data-jupyter="{&quot;outputs_hidden&quot;:true}" data-tags="[]" data-execution_count="4">
