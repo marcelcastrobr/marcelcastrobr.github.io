@@ -1,91 +1,95 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://marcelcastrobr.github.io/index.html</loc>
-    <lastmod>2024-03-27T13:20:41.219Z</lastmod>
+    <loc>https://marcelcastrobr.github.io/mindmap.html</loc>
+    <lastmod>2024-05-07T15:26:22.383Z</lastmod>
   </url>
   <url>
     <loc>https://marcelcastrobr.github.io/talks.html</loc>
-    <lastmod>2024-03-27T13:20:41.391Z</lastmod>
-  </url>
-  <url>
-    <loc>https://marcelcastrobr.github.io/posts/2023-06-09-CoversationWithFalconLLM.html</loc>
-    <lastmod>2024-03-27T13:20:41.331Z</lastmod>
-  </url>
-  <url>
-    <loc>https://marcelcastrobr.github.io/posts/2021-10-31-githubactions-snowflake.html</loc>
-    <lastmod>2024-03-27T13:20:41.243Z</lastmod>
-  </url>
-  <url>
-    <loc>https://marcelcastrobr.github.io/posts/2021-12-13-ModelMonitoring.html</loc>
-    <lastmod>2024-03-27T13:20:41.243Z</lastmod>
-  </url>
-  <url>
-    <loc>https://marcelcastrobr.github.io/posts/2024-03-11-SageMakerDataParallel.html</loc>
-    <lastmod>2024-03-27T13:20:41.331Z</lastmod>
-  </url>
-  <url>
-    <loc>https://marcelcastrobr.github.io/posts/2022-11-04-stablediffusionsagemaker.html</loc>
-    <lastmod>2024-03-27T13:20:41.315Z</lastmod>
-  </url>
-  <url>
-    <loc>https://marcelcastrobr.github.io/posts/2021-09-05-kerastuner.html</loc>
-    <lastmod>2024-03-27T13:20:41.223Z</lastmod>
-  </url>
-  <url>
-    <loc>https://marcelcastrobr.github.io/posts/2022-01-04-nlpdeeplearning.html</loc>
-    <lastmod>2024-03-27T13:20:41.295Z</lastmod>
-  </url>
-  <url>
-    <loc>https://marcelcastrobr.github.io/posts/2024-03-26-ContentModeration_Toxicity.html</loc>
-    <lastmod>2024-03-27T13:20:41.331Z</lastmod>
-  </url>
-  <url>
-    <loc>https://marcelcastrobr.github.io/posts/2023-03-24-semanticsearchopenai.html</loc>
-    <lastmod>2024-03-27T13:20:41.319Z</lastmod>
-  </url>
-  <url>
-    <loc>https://marcelcastrobr.github.io/mindmap.html</loc>
-    <lastmod>2024-03-27T13:20:41.219Z</lastmod>
-  </url>
-  <url>
-    <loc>https://marcelcastrobr.github.io/posts/2023-04-10-ChatGPToveryourdata.html</loc>
-    <lastmod>2024-03-27T13:20:41.331Z</lastmod>
+    <lastmod>2024-05-07T15:26:22.555Z</lastmod>
   </url>
   <url>
     <loc>https://marcelcastrobr.github.io/posts/2021-09-04-featureengtensorflow.html</loc>
-    <lastmod>2024-03-27T13:20:41.223Z</lastmod>
+    <lastmod>2024-05-07T15:26:22.383Z</lastmod>
   </url>
   <url>
-    <loc>https://marcelcastrobr.github.io/posts/2021-09-22-generative-deep-learning.html</loc>
-    <lastmod>2024-03-27T13:20:41.227Z</lastmod>
+    <loc>https://marcelcastrobr.github.io/posts/2024-03-11-SageMakerDataParallel.html</loc>
+    <lastmod>2024-05-07T15:26:22.495Z</lastmod>
   </url>
   <url>
-    <loc>https://marcelcastrobr.github.io/posts/image_search_multilingual.html</loc>
-    <lastmod>2024-03-27T13:20:41.295Z</lastmod>
-  </url>
-  <url>
-    <loc>https://marcelcastrobr.github.io/posts/2021-10-25-nmf.html</loc>
-    <lastmod>2024-03-27T13:20:41.235Z</lastmod>
-  </url>
-  <url>
-    <loc>https://marcelcastrobr.github.io/posts/image_search.html</loc>
-    <lastmod>2024-03-27T13:20:41.279Z</lastmod>
-  </url>
-  <url>
-    <loc>https://marcelcastrobr.github.io/posts/2021-09-21-pca.html</loc>
-    <lastmod>2024-03-27T13:20:41.223Z</lastmod>
-  </url>
-  <url>
-    <loc>https://marcelcastrobr.github.io/posts/2023-04-06-promptengineering101.html</loc>
-    <lastmod>2024-03-27T13:20:41.331Z</lastmod>
+    <loc>https://marcelcastrobr.github.io/posts/2023-04-10-ChatGPToveryourdata.html</loc>
+    <lastmod>2024-05-07T15:26:22.491Z</lastmod>
   </url>
   <url>
     <loc>https://marcelcastrobr.github.io/posts/2023-03-27-visualchatgpt.html</loc>
-    <lastmod>2024-03-27T13:20:41.331Z</lastmod>
+    <lastmod>2024-05-07T15:26:22.491Z</lastmod>
+  </url>
+  <url>
+    <loc>https://marcelcastrobr.github.io/posts/2021-09-22-generative-deep-learning.html</loc>
+    <lastmod>2024-05-07T15:26:22.391Z</lastmod>
+  </url>
+  <url>
+    <loc>https://marcelcastrobr.github.io/posts/2023-06-09-CoversationWithFalconLLM.html</loc>
+    <lastmod>2024-05-07T15:26:22.491Z</lastmod>
+  </url>
+  <url>
+    <loc>https://marcelcastrobr.github.io/posts/2021-10-25-nmf.html</loc>
+    <lastmod>2024-05-07T15:26:22.399Z</lastmod>
+  </url>
+  <url>
+    <loc>https://marcelcastrobr.github.io/posts/2024-03-26-ContentModeration_Toxicity.html</loc>
+    <lastmod>2024-05-07T15:26:22.495Z</lastmod>
+  </url>
+  <url>
+    <loc>https://marcelcastrobr.github.io/posts/2021-12-13-ModelMonitoring.html</loc>
+    <lastmod>2024-05-07T15:26:22.403Z</lastmod>
   </url>
   <url>
     <loc>https://marcelcastrobr.github.io/about.html</loc>
-    <lastmod>2024-03-27T13:20:41.147Z</lastmod>
+    <lastmod>2024-05-07T15:26:22.307Z</lastmod>
+  </url>
+  <url>
+    <loc>https://marcelcastrobr.github.io/posts/2021-09-05-kerastuner.html</loc>
+    <lastmod>2024-05-07T15:26:22.387Z</lastmod>
+  </url>
+  <url>
+    <loc>https://marcelcastrobr.github.io/posts/2023-03-24-semanticsearchopenai.html</loc>
+    <lastmod>2024-05-07T15:26:22.479Z</lastmod>
+  </url>
+  <url>
+    <loc>https://marcelcastrobr.github.io/posts/2021-09-21-pca.html</loc>
+    <lastmod>2024-05-07T15:26:22.387Z</lastmod>
+  </url>
+  <url>
+    <loc>https://marcelcastrobr.github.io/posts/2022-01-04-nlpdeeplearning.html</loc>
+    <lastmod>2024-05-07T15:26:22.459Z</lastmod>
+  </url>
+  <url>
+    <loc>https://marcelcastrobr.github.io/posts/2022-11-04-stablediffusionsagemaker.html</loc>
+    <lastmod>2024-05-07T15:26:22.479Z</lastmod>
+  </url>
+  <url>
+    <loc>https://marcelcastrobr.github.io/posts/2023-04-06-promptengineering101.html</loc>
+    <lastmod>2024-05-07T15:26:22.491Z</lastmod>
+  </url>
+  <url>
+    <loc>https://marcelcastrobr.github.io/posts/image_search_multilingual.html</loc>
+    <lastmod>2024-05-07T15:26:22.459Z</lastmod>
+  </url>
+  <url>
+    <loc>https://marcelcastrobr.github.io/posts/image_search.html</loc>
+    <lastmod>2024-05-07T15:26:22.443Z</lastmod>
+  </url>
+  <url>
+    <loc>https://marcelcastrobr.github.io/posts/2024-04-07-flashattention.html</loc>
+    <lastmod>2024-05-07T15:26:22.495Z</lastmod>
+  </url>
+  <url>
+    <loc>https://marcelcastrobr.github.io/posts/2021-10-31-githubactions-snowflake.html</loc>
+    <lastmod>2024-05-07T15:26:22.403Z</lastmod>
+  </url>
+  <url>
+    <loc>https://marcelcastrobr.github.io/index.html</loc>
+    <lastmod>2024-05-07T15:26:22.383Z</lastmod>
   </url>
 </urlset>
