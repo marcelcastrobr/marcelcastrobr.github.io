@@ -3,6 +3,8 @@
     "listing": "/index.html",
     "items": [
       "/posts/2024-04-07-flashattention.html",
+      "/posts/2024-04-01-transformerattentionmechanism.html",
+      "/posts/2024-04-01-TransformerAttentionMechanism.html",
       "/posts/2024-03-26-textmoderation.html",
       "/posts/2024-03-11-sagemakermodelparaleleism.html",
       "/posts/2023-06-09-chatconversation.html",
