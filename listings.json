@@ -2,6 +2,7 @@
   {
     "listing": "/index.html",
     "items": [
+      "/posts/2024-05-19-UnderstandingMistureOfExperts.html",
       "/posts/2024-04-07-flashattention.html",
       "/posts/2024-04-01-TransformerAttentionMechanism.html",
       "/posts/2024-03-26-textmoderation.html",
@@ -21,7 +22,8 @@
       "/posts/2021-09-22-generative-deep-learning.html",
       "/posts/2021-09-21-pca.html",
       "/posts/2021-09-05-kerastuner.html",
-      "/posts/2021-09-04-featureengtensorflow.html"
+      "/posts/2021-09-04-featureengtensorflow.html",
+      "/posts/2020-01-01-template.html"
     ]
   }
 ]
