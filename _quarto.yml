@@ -28,6 +28,7 @@ website:
         href: https://www.linkedin.com/in/marcelcastrobr/
   page-footer: "Copyright 2023, Marcel Castro" 
   reader-mode: true
+  google-analytics: "G-RK1QNXR9TB"
   #repo-url: https://github.com/marcelcastrobr/quarto_notebooks
   #repo-actions: [edit, issue]
 format:
