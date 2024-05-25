@@ -282,19 +282,19 @@ gtag('config', 'G-RK1QNXR9TB', { 'anonymize_ip': true});
 <li>1 SM - 1 Thread block -&gt; Warp (1 warp - 32 threads)</li>
 </ul></li>
 </ul>
-<p><img src="./assets/image-20240506084744829.png" alt="image-20240506084744829" style="zoom:50%;"></p>
+<p><img src="./images/image-20240506084744829.png" alt="image-20240506084744829" style="zoom:50%;"></p>
 <p>Picture By DeepLearning Hero. How does matrix multiplication work inside GPUs - https://www.youtube.com/watch?v=wIPdrbZIeKE</p>
 <p>Operations are executed in threads (a.k.a. kernel). Threads are organized into thread blocks, which are scheduled to run on streaming mutiprocessors (SMs)</p>
 <p>Within each thread blocks, threads are grouped into warps ( 1 warp equal 3 threads). Threads within a warp can communicate by fast shuffe instructions or cooperate to perform matrix multiply.</p>
 <p>Warps within a thread block can communicate by reading from and writing to shared memory. Each kernel loads inputs from HBM to registers and SRAM, computes, then writes outputs to HBM.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="./assets/image-20240506135327900.png" class="img-fluid figure-img"></p>
+<p><img src="./images/image-20240506135327900.png" class="img-fluid figure-img"></p>
 <figcaption>image-20240506135327900</figcaption>
 </figure>
 </div>
 <p>Picture By DeepLearning Hero. How does matrix multiplication work inside GPUs - https://www.youtube.com/watch?v=wIPdrbZIeKE</p>
-<p><img src="./assets/image-20240506094321755.png" alt="image-20240506094321755" style="zoom:50%;"></p>
+<p><img src="./images/image-20240506094321755.png" alt="image-20240506094321755" style="zoom:50%;"></p>
 <p>Picture by Dissecting the Ampere GPU Architecture through Microbenchmarking - https://www.nvidia.com/en-us/on-demand/session/gtcspring21-s33322/</p>
 <p>Table below shows the comparison between certain GPU types across its main characteristics.</p>
 <table class="table">
@@ -345,7 +345,7 @@ gtag('config', 'G-RK1QNXR9TB', { 'anonymize_ip': true});
 <p>On the right you see the speedup over the PyTorch implementation of attention on GPT-2. FlashAttention does not read and write the large 𝑁 × 𝑁 attention matrix to HBM, resulting in an 7.6× speedup on the attention computation according to the paper.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="./assets/image-20240507155528488.png" class="img-fluid figure-img"></p>
+<p><img src="./images/image-20240507155528488.png" class="img-fluid figure-img"></p>
 <figcaption>image-20240507155528488</figcaption>
 </figure>
 </div>
@@ -377,7 +377,7 @@ gtag('config', 'G-RK1QNXR9TB', { 'anonymize_ip': true});
 <p>PageAttention propose to improve the LLM throughput by batching multiple requests together. Thus to process many requests in a batch needs an efficient memory management.</p>
 <p>As discussed in [Ref 0] , approximately 65% of memory is allocated to mode weights which are static parameters during serving (considing a 13B LLM on NVIDIA A100 GPU with 40GB RAM). Close to 30% of the memory is used to store the dynamic states of the requests (a.k.a <strong>KV cache</strong>). The remaining memore is used for other data such as activations.</p>
 <p>Since model weights are constant and the activations only occupy a small fraction of the GPU memory, the way KV cache if managed is critical in determinig the maximum batch size.</p>
-<p><img src="./assets/image-20240513100159526.png" alt="image-20240513100159526" style="zoom:50%;"></p>
+<p><img src="./images/image-20240513100159526.png" alt="image-20240513100159526" style="zoom:50%;"></p>
 <p>Picture from Paper Efficient Memory Management for Large Language Model Serving with PagedAttention. In the Left: Memory layout when serving an LLM with 13B parameters on NVIDIA A100. The parameters (gray) persist in GPU memory throughout serving. The memory for the KV cache (red) is (de)allocated per serving request. A small amount of memory (yellow) is used ephemerally for activation. Right: vLLM smooths out the rapid growth curve of KV cache memory seen in existing systems [31, 60], leading to a notable boost in serving throughput.</p>
 <p>PageAttention solution is inspired by the operating system solution to memory fragmentation and sharing: <em>virtual memory with paging</em>. KV cache is divided into blocks, where the blocks are not necessarly stored in contiguous space (i.e.&nbsp;think blocks as pages, tokens as bytes and requests as processes). This allows PagedAttention to achieve:</p>
 <ul>
@@ -399,7 +399,7 @@ gtag('config', 'G-RK1QNXR9TB', { 'anonymize_ip': true});
 <p>Backgroun problem: Larger models but reduce memory capacity on accelerators.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="./assets/image-20240422115546209.png" class="img-fluid figure-img"></p>
+<p><img src="./images/image-20240422115546209.png" class="img-fluid figure-img"></p>
 <figcaption>image-20240422115546209</figcaption>
 </figure>
 </div>
@@ -411,7 +411,7 @@ gtag('config', 'G-RK1QNXR9TB', { 'anonymize_ip': true});
 <p>Example:</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="./assets/image-20240422120051189.png" class="img-fluid figure-img"></p>
+<p><img src="./images/image-20240422120051189.png" class="img-fluid figure-img"></p>
 <figcaption>image-20240422120051189</figcaption>
 </figure>
 </div>
@@ -442,39 +442,39 @@ gtag('config', 'G-RK1QNXR9TB', { 'anonymize_ip': true});
 <p>For example, the float16 (FP16) data type, 5 bits are reserved for <strong>exponent</strong> (range) and 10 bits are reserved for <strong><a href="https://en.wikibooks.org/wiki/A-level_Computing/AQA/Paper_2/Fundamentals_of_data_representation/Floating_point_numbers">mantissa</a></strong> (precision/fraction) and 1 bit for sign of the number. Compared to FP32, the FP36 has a much lower range exposing it to the risk of <strong>overflowing</strong> (i.e.&nbsp;trying to represent a number that is very large) and <strong>underflowing</strong> (i.e.&nbsp;trying to represent a number that is very small).</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="LLM.assets/image-20230509074147204.png" class="img-fluid figure-img"></p>
+<p><img src="./images/image-20230509074147204.png" class="img-fluid figure-img"></p>
 <figcaption>image-20230509074147204</figcaption>
 </figure>
 </div>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="./assets/image-20240422121320403.png" class="img-fluid figure-img"></p>
+<p><img src="./images/image-20240422121320403.png" class="img-fluid figure-img"></p>
 <figcaption>image-20240422121320403</figcaption>
 </figure>
 </div>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="./assets/image-20240422121351859.png" class="img-fluid figure-img"></p>
+<p><img src="./images/image-20240422121351859.png" class="img-fluid figure-img"></p>
 <figcaption>image-20240422121351859</figcaption>
 </figure>
 </div>
 <p>Example below from Coursera course: Generative AI with LLMs.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="LLM.assets/image-20230702151132607.png" class="img-fluid figure-img"></p>
+<p><img src="./images/image-20230702151132607.png" class="img-fluid figure-img"></p>
 <figcaption>image-20230702151132607</figcaption>
 </figure>
 </div>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="LLM.assets/image-20230702151239388.png" class="img-fluid figure-img"></p>
+<p><img src="./images/image-20230702151239388.png" class="img-fluid figure-img"></p>
 <figcaption>image-20230702151239388</figcaption>
 </figure>
 </div>
 <p>Nice to know: <a href="https://blogs.nvidia.com/blog/2019/11/15/whats-the-difference-between-single-double-multi-and-mixed-precision-computing/">Using the pi constant 3.14 E0</a>, the 3.14 is the precision and E0 the range Thus for FP16 we can have range of 2** 5 and precision of 2 **10.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="LLM.assets/image-20230509081209750.png" class="img-fluid figure-img"></p>
+<p><img src="./images/image-20230509081209750.png" class="img-fluid figure-img"></p>
 <figcaption>image-20230509081209750</figcaption>
 </figure>
 </div>
@@ -489,14 +489,14 @@ gtag('config', 'G-RK1QNXR9TB', { 'anonymize_ip': true});
 <h4 class="anchored" data-anchor-id="model-quantization">Model Quantization</h4>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="./assets/image-20240422123407667.png" class="img-fluid figure-img"></p>
+<p><img src="./images/image-20240422123407667.png" class="img-fluid figure-img"></p>
 <figcaption>image-20240422123407667</figcaption>
 </figure>
 </div>
 <p>Example from fp32 to bf16:</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="./assets/image-20240422124540042.png" class="img-fluid figure-img"></p>
+<p><img src="./images/image-20240422124540042.png" class="img-fluid figure-img"></p>
 <figcaption>image-20240422124540042</figcaption>
 </figure>
 </div>
