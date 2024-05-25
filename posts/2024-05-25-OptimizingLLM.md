@@ -47,7 +47,7 @@ Main components of a modern GPU are:
 
 
 
-<img src="./assets/image-20240506084744829.png" alt="image-20240506084744829" style="zoom:50%;" />
+<img src="./images/image-20240506084744829.png" alt="image-20240506084744829" style="zoom:50%;" />
 
 Picture By DeepLearning Hero. How does matrix multiplication work inside GPUs - https://www.youtube.com/watch?v=wIPdrbZIeKE
 
@@ -61,13 +61,13 @@ Warps within a thread block can communicate by reading from and writing to share
 
 
 
-![image-20240506135327900](./assets/image-20240506135327900.png)
+![image-20240506135327900](./images/image-20240506135327900.png)
 
 Picture By DeepLearning Hero. How does matrix multiplication work inside GPUs - https://www.youtube.com/watch?v=wIPdrbZIeKE
 
 
 
-<img src="./assets/image-20240506094321755.png" alt="image-20240506094321755" style="zoom:50%;" />
+<img src="./images/image-20240506094321755.png" alt="image-20240506094321755" style="zoom:50%;" />
 
 Picture by Dissecting the Ampere GPU Architecture through Microbenchmarking - https://www.nvidia.com/en-us/on-demand/session/gtcspring21-s33322/
 
@@ -91,19 +91,13 @@ Here in the outer loop (red arrows), FlashAttention loops through blocks of the 
 
 On the right you see the speedup over the PyTorch implementation of attention on GPT-2. FlashAttention does not read and write the large 𝑁 × 𝑁 attention matrix to HBM, resulting in an 7.6× speedup on the attention computation according to the paper.
 
-![image-20240507155528488](./assets/image-20240507155528488.png)
+![image-20240507155528488](./images/image-20240507155528488.png)
 
 
 
 ### FlashAttention at PyTorch
 
-PyTorch implements flash attention (https://pytorch.org/docs/stable/generated/torch.nn.functional.scaled_dot_product_attention.html).
-
-
-
-
-
- 
+PyTorch implements flash attention (https://pytorch.org/docs/stable/generated/torch.nn.functional.scaled_dot_product_attention.html). 
 
 Ref. code snipped example below from [DeepLearning Hero](https://github.com/thushv89/tutorials_deeplearninghero/blob/master/llms/flash_attention_torch.ipynb).
 
@@ -140,7 +134,7 @@ Since model weights are constant and the activations only occupy a small fractio
 
 
 
-<img src="./assets/image-20240513100159526.png" alt="image-20240513100159526" style="zoom:50%;" />
+<img src="./images/image-20240513100159526.png" alt="image-20240513100159526" style="zoom:50%;" />
 
 Picture from Paper Efficient Memory Management for Large Language Model Serving with PagedAttention. In the Left: Memory layout when serving an LLM with 13B parameters on NVIDIA A100. The parameters (gray) persist in GPU memory throughout serving. The memory for the KV cache (red) is (de)allocated per serving request. A small amount of memory (yellow) is used ephemerally for activation. Right: vLLM smooths out the rapid growth curve of KV cache memory seen in existing systems [31, 60], leading to a notable boost in serving throughput.
 
@@ -167,7 +161,7 @@ Ref [] Techniques for Efficient Inference of LLMs (II/IV) - https://medium.com/m
 
 Backgroun problem: Larger models but reduce memory capacity on accelerators.
 
-![image-20240422115546209](./assets/image-20240422115546209.png)
+![image-20240422115546209](./images/image-20240422115546209.png)
 
 Source: Deeplearning.ai course [here](https://learn.deeplearning.ai/courses/quantization-fundamentals/lesson/2/handling-big-models)
 
@@ -181,7 +175,7 @@ Key facts:
 
 Example:
 
-![image-20240422120051189](./assets/image-20240422120051189.png)
+![image-20240422120051189](./images/image-20240422120051189.png)
 
 
 
@@ -222,25 +216,25 @@ For example, the float16 (FP16) data type, 5 bits are reserved for **exponent** 
 
 
 
-![image-20230509074147204](LLM.assets/image-20230509074147204.png)
+![image-20230509074147204](./images/image-20230509074147204.png)
 
-![image-20240422121320403](./assets/image-20240422121320403.png)
+![image-20240422121320403](./images/image-20240422121320403.png)
 
-![image-20240422121351859](./assets/image-20240422121351859.png)
+![image-20240422121351859](./images/image-20240422121351859.png)
 
 
 
 Example below from Coursera course: Generative AI with LLMs.
 
-![image-20230702151132607](LLM.assets/image-20230702151132607.png)
+![image-20230702151132607](./images/image-20230702151132607.png)
 
-![image-20230702151239388](LLM.assets/image-20230702151239388.png)
+![image-20230702151239388](./images/image-20230702151239388.png)
 
 
 
 Nice to know: [Using the pi constant 3.14 E0](https://blogs.nvidia.com/blog/2019/11/15/whats-the-difference-between-single-double-multi-and-mixed-precision-computing/), the 3.14 is the precision and E0 the range Thus for FP16 we can have range of 2** 5 and precision of 2 **10.
 
-![image-20230509081209750](LLM.assets/image-20230509081209750.png)
+![image-20230509081209750](./images/image-20230509081209750.png)
 
 #### Full and Half Precision in ML
 
@@ -256,11 +250,11 @@ Thus we need a few GPUs to do inference using Bloom-176B. But, luckily we can st
 
 #### Model Quantization
 
-![image-20240422123407667](./assets/image-20240422123407667.png)
+![image-20240422123407667](./images/image-20240422123407667.png)
 
 Example from fp32 to bf16:
 
-![image-20240422124540042](./assets/image-20240422124540042.png)
+![image-20240422124540042](./images/image-20240422124540042.png)
 
 8-bit quantization method used a quarter precision, then reducing the model to 1/4th of its original size. Quantization is done by "rounding" from one data type to another. However this might lead to information loss (i.e. lossy compression)
 
