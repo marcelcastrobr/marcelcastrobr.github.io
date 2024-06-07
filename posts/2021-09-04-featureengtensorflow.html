@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.554">
+<meta name="generator" content="quarto-1.4.555">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -137,7 +137,7 @@ gtag('config', 'G-RK1QNXR9TB', { 'anonymize_ip': true});
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="https://github.com/marcelcastrobr/my_ml_notes"> 
+    <a class="nav-link" href="https://marcelcastrobr.github.io/my_ml_notes/"> 
 <span class="menu-text">Notes</span></a>
   </li>  
   <li class="nav-item">
@@ -280,10 +280,9 @@ gtag('config', 'G-RK1QNXR9TB', { 'anonymize_ip': true});
 <span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>df.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="2">
 <div>
-<div>
 
 
-<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
 <thead>
 <tr class="header">
 <th data-quarto-table-cell-role="th"></th>
@@ -435,7 +434,6 @@ gtag('config', 'G-RK1QNXR9TB', { 'anonymize_ip': true});
 </table>
 
 <p>5 rows × 50 columns</p>
-</div>
 </div>
 </div>
 </div>
@@ -598,10 +596,9 @@ Last feature: readmitted</code></pre>
 <span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a><span class="co">### </span><span class="re">END</span><span class="co"> CODE HERE</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div>
-<div>
 
 
-<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
 <thead>
 <tr class="header">
 <th data-quarto-table-cell-role="th"></th>
@@ -960,13 +957,11 @@ Last feature: readmitted</code></pre>
 
 </div>
 </div>
-</div>
 <div class="cell-output cell-output-display">
 <div>
-<div>
 
 
-<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
 <thead>
 <tr class="header">
 <th data-quarto-table-cell-role="th"></th>
@@ -1117,7 +1112,6 @@ Last feature: readmitted</code></pre>
 </tbody>
 </table>
 
-</div>
 </div>
 </div>
 </div>
@@ -1338,10 +1332,9 @@ value: "Steady"
 <span id="cb31-10"><a href="#cb31-10" aria-hidden="true" tabindex="-1"></a><span class="co">### </span><span class="re">END</span><span class="co"> CODE HERE</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div>
-<div>
 
 
-<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
 <thead>
 <tr class="header">
 <th data-quarto-table-cell-role="th"></th>
@@ -1386,7 +1379,6 @@ value: "Steady"
 </div>
 </div>
 </div>
-</div>
 <p>You should see that <code>metformin-rosiglitazone</code>, <code>metformin-pioglitazone</code>, <code>payer_code</code> and <code>medical_specialty</code> features have an anomaly (i.e.&nbsp;Unexpected string values) which is less than 1%.</p>
 <p>Let’s <strong>relax the anomaly detection constraints</strong> for the last two of these features by defining the <code>min_domain_mass</code> of the feature’s distribution constraints.</p>
 <div id="cell-48" class="cell" data-execution_count="42">
@@ -1404,10 +1396,9 @@ value: "Steady"
 <span id="cb32-12"><a href="#cb32-12" aria-hidden="true" tabindex="-1"></a>calculate_and_display_anomalies(serving_stats, schema<span class="op">=</span>schema)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div>
-<div>
 
 
-<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
 <thead>
 <tr class="header">
 <th data-quarto-table-cell-role="th"></th>
@@ -1442,7 +1433,6 @@ value: "Steady"
 </div>
 </div>
 </div>
-</div>
 <p>If the <code>payer_code</code> and <code>medical_specialty</code> are no longer part of the output cell, then the relaxation worked!</p>
 <p><a name="ex-8"></a> ### Exercise 8: Modifying the Domain</p>
 <p>Let’s investigate the possible cause of the anomalies for the other features, namely <code>metformin-pioglitazone</code> and <code>metformin-rosiglitazone</code>. From the output of the previous exercise, you’ll see that the <code>anomaly long description</code> says: “Examples contain values missing from the schema: Steady (&lt;1%)”. You can redisplay the schema and look at the domain of these features to verify this statement.</p>
@@ -1451,10 +1441,9 @@ value: "Steady"
 <div class="sourceCode cell-code" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>tfdv.display_schema(schema)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div>
-<div>
 
 
-<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
 <thead>
 <tr class="header">
 <th data-quarto-table-cell-role="th"></th>
@@ -1813,13 +1802,11 @@ value: "Steady"
 
 </div>
 </div>
-</div>
 <div class="cell-output cell-output-display">
 <div>
-<div>
 
 
-<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
 <thead>
 <tr class="header">
 <th data-quarto-table-cell-role="th"></th>
@@ -1970,7 +1957,6 @@ value: "Steady"
 </tbody>
 </table>
 
-</div>
 </div>
 </div>
 </div>
@@ -2045,10 +2031,9 @@ WARNING:root:Replacing existing domain of feature "metformin-pioglitazone".</cod
 </div>
 <div class="cell-output cell-output-display">
 <div>
-<div>
 
 
-<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
 <thead>
 <tr class="header">
 <th data-quarto-table-cell-role="th"></th>
@@ -2407,13 +2392,11 @@ WARNING:root:Replacing existing domain of feature "metformin-pioglitazone".</cod
 
 </div>
 </div>
-</div>
 <div class="cell-output cell-output-display">
 <div>
-<div>
 
 
-<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
 <thead>
 <tr class="header">
 <th data-quarto-table-cell-role="th"></th>
@@ -2564,7 +2547,6 @@ WARNING:root:Replacing existing domain of feature "metformin-pioglitazone".</cod
 </tbody>
 </table>
 
-</div>
 </div>
 </div>
 </div>
@@ -2599,10 +2581,9 @@ Domain values of 'nateglinide': ['Down', 'No', 'Steady', 'Up']</code></pre>
 <div class="sourceCode cell-code" id="cb40"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>calculate_and_display_anomalies(serving_stats, schema<span class="op">=</span>schema)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div>
-<div>
 
 
-<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
 <thead>
 <tr class="header">
 <th data-quarto-table-cell-role="th"></th>
@@ -2627,7 +2608,6 @@ Domain values of 'nateglinide': ['Down', 'No', 'Steady', 'Up']</code></pre>
 </div>
 </div>
 </div>
-</div>
 <p>You should now see the <code>metformin-pioglitazone</code> and <code>metformin-rosiglitazone</code> features dropped from the output anomalies.</p>
 <p><a name="ex-9"></a> ### Exercise 9: Detecting anomalies with environments</p>
 <p>There is still one thing to address. The <code>readmitted</code> feature (which is the label column) showed up as an anomaly (‘Column dropped’). Since labels are not expected in the serving data, let’s tell TFDV to ignore this detected anomaly.</p>
@@ -2639,10 +2619,9 @@ Domain values of 'nateglinide': ['Down', 'No', 'Steady', 'Up']</code></pre>
 <span id="cb41-4"><a href="#cb41-4" aria-hidden="true" tabindex="-1"></a>tfdv.display_schema(schema)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div>
-<div>
 
 
-<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
 <thead>
 <tr class="header">
 <th data-quarto-table-cell-role="th"></th>
@@ -3001,13 +2980,11 @@ Domain values of 'nateglinide': ['Down', 'No', 'Steady', 'Up']</code></pre>
 
 </div>
 </div>
-</div>
 <div class="cell-output cell-output-display">
 <div>
-<div>
 
 
-<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
 <thead>
 <tr class="header">
 <th data-quarto-table-cell-role="th"></th>
@@ -3161,7 +3138,6 @@ Domain values of 'nateglinide': ['Down', 'No', 'Steady', 'Up']</code></pre>
 </div>
 </div>
 </div>
-</div>
 <p>Complete the code below to exclude the <code>readmitted</code> feature from the <code>SERVING</code> environment.</p>
 <p>To achieve this, you can use the <a href="https://www.tensorflow.org/tfx/data_validation/api_docs/python/tfdv/get_feature"><code>tfdv.get_feature()</code></a> function to get the <code>readmitted</code> feature from the inferred schema and use its <code>not_in_environment</code> attribute to specify that <code>readmitted</code> should be removed from the <code>SERVING</code> environment’s schema. This <strong>attribute is a list</strong> so you will have to <strong>append</strong> the name of the environment that you wish to omit this feature for.</p>
 <p>To be more explicit, given a feature you can do something like:</p>
@@ -3190,10 +3166,9 @@ Domain values of 'nateglinide': ['Down', 'No', 'Steady', 'Up']</code></pre>
 <span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a>tfdv.display_anomalies(serving_anomalies_with_env)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div>
-<div>
 
 
-<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
 <thead>
 <tr class="header">
 <th data-quarto-table-cell-role="th"></th>
@@ -3215,7 +3190,6 @@ Domain values of 'nateglinide': ['Down', 'No', 'Steady', 'Up']</code></pre>
 </tbody>
 </table>
 
-</div>
 </div>
 </div>
 </div>
