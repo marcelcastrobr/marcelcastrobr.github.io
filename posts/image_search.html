@@ -2,13 +2,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.555">
+<meta name="generator" content="quarto-1.5.57">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="dcterms.date" content="2022-01-01">
 
-<title>Marcel Castro - Joint Image &amp; Text Embeddings</title>
+<title>Joint Image &amp; Text Embeddings – Marcel Castro</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -34,7 +34,7 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -131,7 +131,7 @@ gtag('config', 'G-RK1QNXR9TB', { 'anonymize_ip': true});
     </a>
   </div>
             <div id="quarto-search" class="" title="Search"></div>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
   <span class="navbar-toggler-icon"></span>
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
@@ -181,7 +181,7 @@ gtag('config', 'G-RK1QNXR9TB', { 'anonymize_ip': true});
   </li>  
 </ul>
           </div> <!-- /navcollapse -->
-          <div class="quarto-navbar-tools">
+            <div class="quarto-navbar-tools">
   <a href="" class="quarto-reader-toggle quarto-navigation-tool px-1" onclick="window.quartoToggleReader(); return false;" title="Toggle reader mode">
   <div class="quarto-reader-toggle-btn">
   <i class="bi"></i>
@@ -446,164 +446,194 @@ Successfully installed huggingface-hub-0.1.2 pyyaml-6.0 sacremoses-0.0.46 senten
 <div id="southeast-pound" class="cell" data-outputid="3ac5994b-dc06-4fcc-9c5a-dd31ab4d1ca5" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>search(<span class="st">"Two cats playing on the street"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Query:
-4mA9_5vbZ_s.jpg
-w6tMRf7kGLA.jpg
-n4pNuXxyIr4.jpg</code></pre>
+<pre><code>Query:</code></pre>
 </div>
 <div class="cell-output cell-output-display">
 <pre><code>'Two cats playing on the street'</code></pre>
 </div>
+<div class="cell-output cell-output-stdout">
+<pre><code>4mA9_5vbZ_s.jpg</code></pre>
+</div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="2022-01-01-ImageSearch_files/figure-html/cell-7-output-3.jpeg" class="img-fluid figure-img"></p>
+<p><img src="2022-01-01-ImageSearch_files/figure-html/cell-7-output-4.jpeg" class="img-fluid figure-img" width="200"></p>
 </figure>
 </div>
 </div>
+<div class="cell-output cell-output-stdout">
+<pre><code>w6tMRf7kGLA.jpg</code></pre>
+</div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="2022-01-01-ImageSearch_files/figure-html/cell-7-output-4.jpeg" class="img-fluid figure-img"></p>
+<p><img src="2022-01-01-ImageSearch_files/figure-html/cell-7-output-6.jpeg" class="img-fluid figure-img" width="200"></p>
 </figure>
 </div>
 </div>
+<div class="cell-output cell-output-stdout">
+<pre><code>n4pNuXxyIr4.jpg</code></pre>
+</div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="2022-01-01-ImageSearch_files/figure-html/cell-7-output-5.jpeg" class="img-fluid figure-img"></p>
+<p><img src="2022-01-01-ImageSearch_files/figure-html/cell-7-output-8.jpeg" class="img-fluid figure-img" width="200"></p>
 </figure>
 </div>
 </div>
 </div>
 <div id="tender-blanket" class="cell" data-outputid="b9540b14-ba61-47ca-88b2-7c1159244c48" data-execution_count="7">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>search(<span class="st">"A sunset on the montain"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>search(<span class="st">"A sunset on the montain"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Query:
-Zf4jpcGEinM.jpg
-G5JDRSKi3uY.jpg
-ig9yVlj5YYg.jpg</code></pre>
+<pre><code>Query:</code></pre>
 </div>
 <div class="cell-output cell-output-display">
 <pre><code>'A sunset on the montain'</code></pre>
 </div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Zf4jpcGEinM.jpg</code></pre>
+</div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="2022-01-01-ImageSearch_files/figure-html/cell-8-output-3.jpeg" class="img-fluid figure-img"></p>
+<p><img src="2022-01-01-ImageSearch_files/figure-html/cell-8-output-4.jpeg" class="img-fluid figure-img" width="200"></p>
 </figure>
 </div>
 </div>
+<div class="cell-output cell-output-stdout">
+<pre><code>G5JDRSKi3uY.jpg</code></pre>
+</div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="2022-01-01-ImageSearch_files/figure-html/cell-8-output-4.jpeg" class="img-fluid figure-img"></p>
+<p><img src="2022-01-01-ImageSearch_files/figure-html/cell-8-output-6.jpeg" class="img-fluid figure-img" width="200"></p>
 </figure>
 </div>
 </div>
+<div class="cell-output cell-output-stdout">
+<pre><code>ig9yVlj5YYg.jpg</code></pre>
+</div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="2022-01-01-ImageSearch_files/figure-html/cell-8-output-5.jpeg" class="img-fluid figure-img"></p>
+<p><img src="2022-01-01-ImageSearch_files/figure-html/cell-8-output-8.jpeg" class="img-fluid figure-img" width="200"></p>
 </figure>
 </div>
 </div>
 </div>
 <div id="genuine-vegetarian" class="cell" data-outputid="12f37d73-efea-45f5-9de1-cf142a5109a5" data-execution_count="10">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>search(<span class="st">"Oslo"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>search(<span class="st">"Oslo"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Query:
-uHsQou9tWTQ.jpg
-0ABCZ9bTsw4.jpg
-d5_hjWQ4NwA.jpg</code></pre>
+<pre><code>Query:</code></pre>
 </div>
 <div class="cell-output cell-output-display">
 <pre><code>'Oslo'</code></pre>
 </div>
+<div class="cell-output cell-output-stdout">
+<pre><code>uHsQou9tWTQ.jpg</code></pre>
+</div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="2022-01-01-ImageSearch_files/figure-html/cell-9-output-3.jpeg" class="img-fluid figure-img"></p>
+<p><img src="2022-01-01-ImageSearch_files/figure-html/cell-9-output-4.jpeg" class="img-fluid figure-img" width="200"></p>
 </figure>
 </div>
 </div>
+<div class="cell-output cell-output-stdout">
+<pre><code>0ABCZ9bTsw4.jpg</code></pre>
+</div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="2022-01-01-ImageSearch_files/figure-html/cell-9-output-4.jpeg" class="img-fluid figure-img"></p>
+<p><img src="2022-01-01-ImageSearch_files/figure-html/cell-9-output-6.jpeg" class="img-fluid figure-img" width="200"></p>
 </figure>
 </div>
 </div>
+<div class="cell-output cell-output-stdout">
+<pre><code>d5_hjWQ4NwA.jpg</code></pre>
+</div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="2022-01-01-ImageSearch_files/figure-html/cell-9-output-5.jpeg" class="img-fluid figure-img"></p>
+<p><img src="2022-01-01-ImageSearch_files/figure-html/cell-9-output-8.jpeg" class="img-fluid figure-img" width="200"></p>
 </figure>
 </div>
 </div>
 </div>
 <div id="nuclear-lexington" class="cell" data-outputid="fe30a0b3-1023-4397-cddf-9f093221a40a">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>search(<span class="st">"A dog in a park"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>search(<span class="st">"A dog in a park"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Query:
-IVyZrLp41D0.jpg
-0O9A0F_d1qA.jpg
-KVeogBZzl4M.jpg</code></pre>
+<pre><code>Query:</code></pre>
 </div>
 <div class="cell-output cell-output-display">
 <pre><code>'A dog in a park'</code></pre>
 </div>
+<div class="cell-output cell-output-stdout">
+<pre><code>IVyZrLp41D0.jpg</code></pre>
+</div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="2022-01-01-ImageSearch_files/figure-html/cell-10-output-3.jpeg" class="img-fluid figure-img"></p>
+<p><img src="2022-01-01-ImageSearch_files/figure-html/cell-10-output-4.jpeg" class="img-fluid figure-img" width="200"></p>
 </figure>
 </div>
 </div>
+<div class="cell-output cell-output-stdout">
+<pre><code>0O9A0F_d1qA.jpg</code></pre>
+</div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="2022-01-01-ImageSearch_files/figure-html/cell-10-output-4.jpeg" class="img-fluid figure-img"></p>
+<p><img src="2022-01-01-ImageSearch_files/figure-html/cell-10-output-6.jpeg" class="img-fluid figure-img" width="200"></p>
 </figure>
 </div>
 </div>
+<div class="cell-output cell-output-stdout">
+<pre><code>KVeogBZzl4M.jpg</code></pre>
+</div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="2022-01-01-ImageSearch_files/figure-html/cell-10-output-5.jpeg" class="img-fluid figure-img"></p>
+<p><img src="2022-01-01-ImageSearch_files/figure-html/cell-10-output-8.jpeg" class="img-fluid figure-img" width="200"></p>
 </figure>
 </div>
 </div>
 </div>
 <div id="divine-omaha" class="cell" data-outputid="8a140e2f-9db9-4d05-c334-6cbe13ff796f">
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>search(<span class="st">"A beach with palm trees"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>search(<span class="st">"A beach with palm trees"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Query:
-7rrgPPljqYU.jpg
-kmihWgpbDEg.jpg
-ZyfOq52b0cs.jpg</code></pre>
+<pre><code>Query:</code></pre>
 </div>
 <div class="cell-output cell-output-display">
 <pre><code>'A beach with palm trees'</code></pre>
 </div>
+<div class="cell-output cell-output-stdout">
+<pre><code>7rrgPPljqYU.jpg</code></pre>
+</div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="2022-01-01-ImageSearch_files/figure-html/cell-11-output-3.jpeg" class="img-fluid figure-img"></p>
+<p><img src="2022-01-01-ImageSearch_files/figure-html/cell-11-output-4.jpeg" class="img-fluid figure-img" width="200"></p>
 </figure>
 </div>
 </div>
+<div class="cell-output cell-output-stdout">
+<pre><code>kmihWgpbDEg.jpg</code></pre>
+</div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="2022-01-01-ImageSearch_files/figure-html/cell-11-output-4.jpeg" class="img-fluid figure-img"></p>
+<p><img src="2022-01-01-ImageSearch_files/figure-html/cell-11-output-6.jpeg" class="img-fluid figure-img" width="200"></p>
 </figure>
 </div>
 </div>
+<div class="cell-output cell-output-stdout">
+<pre><code>ZyfOq52b0cs.jpg</code></pre>
+</div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="2022-01-01-ImageSearch_files/figure-html/cell-11-output-5.jpeg" class="img-fluid figure-img"></p>
+<p><img src="2022-01-01-ImageSearch_files/figure-html/cell-11-output-8.jpeg" class="img-fluid figure-img" width="200"></p>
 </figure>
 </div>
 </div>
@@ -615,15 +645,10 @@ ZyfOq52b0cs.jpg</code></pre>
 <p>To achieve this, you pass <code>Image.open('path/to/image.jpg')</code> to the search method.</p>
 <p>It will then return similar images</p>
 <div id="I1MiS4rd7j40" class="cell" data-outputid="74575e02-df75-43b2-88fa-eb7a6e7f628d" data-execution_count="17">
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>img_test_folder <span class="op">=</span> <span class="st">'test/'</span></span>
-<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>search(Image.<span class="bu">open</span>(os.path.join(img_test_folder, <span class="st">'branca.jpg'</span>)), k<span class="op">=</span><span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>img_test_folder <span class="op">=</span> <span class="st">'test/'</span></span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>search(Image.<span class="bu">open</span>(os.path.join(img_test_folder, <span class="st">'branca.jpg'</span>)), k<span class="op">=</span><span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Query:
-mgOXIPnyIxg.jpg
-L8PkoOGLMSk.jpg
-0T3R-QVgXUg.jpg
-JqwRXYpSMDY.jpg
-gcE6vwqOBjY.jpg</code></pre>
+<pre><code>Query:</code></pre>
 </div>
 <div class="cell-output cell-output-display">
 <div>
@@ -632,38 +657,53 @@ gcE6vwqOBjY.jpg</code></pre>
 </figure>
 </div>
 </div>
+<div class="cell-output cell-output-stdout">
+<pre><code>mgOXIPnyIxg.jpg</code></pre>
+</div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="2022-01-01-ImageSearch_files/figure-html/cell-12-output-3.jpeg" class="img-fluid figure-img"></p>
+<p><img src="2022-01-01-ImageSearch_files/figure-html/cell-12-output-4.jpeg" class="img-fluid figure-img" width="200"></p>
 </figure>
 </div>
 </div>
+<div class="cell-output cell-output-stdout">
+<pre><code>L8PkoOGLMSk.jpg</code></pre>
+</div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="2022-01-01-ImageSearch_files/figure-html/cell-12-output-4.jpeg" class="img-fluid figure-img"></p>
+<p><img src="2022-01-01-ImageSearch_files/figure-html/cell-12-output-6.jpeg" class="img-fluid figure-img" width="200"></p>
 </figure>
 </div>
 </div>
+<div class="cell-output cell-output-stdout">
+<pre><code>0T3R-QVgXUg.jpg</code></pre>
+</div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="2022-01-01-ImageSearch_files/figure-html/cell-12-output-5.jpeg" class="img-fluid figure-img"></p>
+<p><img src="2022-01-01-ImageSearch_files/figure-html/cell-12-output-8.jpeg" class="img-fluid figure-img" width="200"></p>
 </figure>
 </div>
 </div>
+<div class="cell-output cell-output-stdout">
+<pre><code>JqwRXYpSMDY.jpg</code></pre>
+</div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="2022-01-01-ImageSearch_files/figure-html/cell-12-output-6.jpeg" class="img-fluid figure-img"></p>
+<p><img src="2022-01-01-ImageSearch_files/figure-html/cell-12-output-10.jpeg" class="img-fluid figure-img" width="200"></p>
 </figure>
 </div>
 </div>
+<div class="cell-output cell-output-stdout">
+<pre><code>gcE6vwqOBjY.jpg</code></pre>
+</div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="2022-01-01-ImageSearch_files/figure-html/cell-12-output-7.jpeg" class="img-fluid figure-img"></p>
+<p><img src="2022-01-01-ImageSearch_files/figure-html/cell-12-output-12.jpeg" class="img-fluid figure-img" width="200"></p>
 </figure>
 </div>
 </div>
@@ -711,18 +751,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
     return false;
   }
-  const clipboard = new window.ClipboardJS('.code-copy-button', {
-    text: function(trigger) {
-      const codeEl = trigger.previousElementSibling.cloneNode(true);
-      for (const childEl of codeEl.children) {
-        if (isCodeAnnotation(childEl)) {
-          childEl.remove();
-        }
-      }
-      return codeEl.innerText;
-    }
-  });
-  clipboard.on('success', function(e) {
+  const onCopySuccess = function(e) {
     // button target
     const button = e.trigger;
     // don't keep focus
@@ -754,7 +783,29 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }, 1000);
     // clear code selection
     e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
   });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
     var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
     var mailtoRegex = new RegExp(/^mailto:/);
       var filterRegex = new RegExp("https:\/\/marcelcastrobr\.github\.io\/");
@@ -762,7 +813,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
     }
     // Inspect non-navigation links and adorn them if external
- 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
     for (var i=0; i<links.length; i++) {
       const link = links[i];
       if (!isInternal(link.href)) {
