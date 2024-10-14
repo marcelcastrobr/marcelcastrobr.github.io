@@ -181,6 +181,12 @@ gtag('config', 'G-RK1QNXR9TB', { 'anonymize_ip': true});
       </div>
     </div>
     
+      <div>
+      <div class="quarto-title-meta-heading">Modified</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date-modified">October 14, 2024</p>
+      </div>
+    </div>
       
     </div>
     
@@ -195,7 +201,10 @@ gtag('config', 'G-RK1QNXR9TB', { 'anonymize_ip': true});
   <ul>
   <li><a href="#thinking-tokens" id="toc-thinking-tokens" class="nav-link active" data-scroll-target="#thinking-tokens">Thinking Tokens</a>
   <ul class="collapse">
+  <li><a href="#related-work" id="toc-related-work" class="nav-link" data-scroll-target="#related-work">Related Work:</a>
+  <ul class="collapse">
   <li><a href="#chain-of-thought-cot-differences" id="toc-chain-of-thought-cot-differences" class="nav-link" data-scroll-target="#chain-of-thought-cot-differences">Chain of Thought (CoT) Differences</a></li>
+  </ul></li>
   <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References:</a></li>
   </ul></li>
   </ul>
@@ -211,7 +220,7 @@ gtag('config', 'G-RK1QNXR9TB', { 'anonymize_ip': true});
 <section id="thinking-tokens" class="level1">
 <h1>Thinking Tokens</h1>
 <p><strong>Thinking tokens</strong> concept (also known as reasoning tokens) enables more intelligence to large models during inference. Until now, the rule to get more intelligent models was only possible through pre-training large model following the “scaling laws”, i.e.&nbsp;adding more training data and computing to pretrain large models.</p>
-<p>Now with the concept of “thinking tokens” you can achieve more inteligence with the introduction of an internal model reasoning while doing the next token prediction.</p>
+<p>Now with the concept of “thinking tokens” you can achieve more intelligence with the introduction of an internal model reasoning while doing the next token prediction.</p>
 <blockquote class="blockquote">
 <p>&lt;|startofthought|&gt; and &lt;|endofthought|&gt;</p>
 </blockquote>
@@ -253,8 +262,33 @@ gtag('config', 'G-RK1QNXR9TB', { 'anonymize_ip': true});
 <figcaption>image-20241002100915950</figcaption>
 </figure>
 </div>
-<section id="chain-of-thought-cot-differences" class="level2">
-<h2 class="anchored" data-anchor-id="chain-of-thought-cot-differences">Chain of Thought (CoT) Differences</h2>
+<section id="related-work" class="level2">
+<h2 class="anchored" data-anchor-id="related-work">Related Work:</h2>
+<p><strong><a href="https://docs.google.com/presentation/d/1GmZmoWOa2O92BPrncRcTKa15xvQGhq7g4I4hJSNlC0M/edit?pli=1#slide=id.g3058058dd40_3_90">Can LLMs learn to think before they speak</a></strong> is a question that several researchers are exploring in order to generate robust internal reasoning processes <strong>targeting both training and inference</strong> (ref. OpenAI o1-model).</p>
+<p><img src="./assets/image-20241014104857732.png" alt="image-20241014104857732" style="zoom:50%;"></p>
+<p>Based on <a href="https://github.com/GAIR-NLP/O1-Journey?tab=readme-ov-file">O1 Replication Journey: A Strategic Progress Report by Qin et. al</a>, the following approaches are relevant when trying to answer the question.</p>
+<p><strong>Process-level Reward Model:</strong> provide fine-grained evaluations of responses from LLMs, specially in mathematical reasoning. The PRMs technique assess model correctness while enhancing post-training quality through search methods such as Monte Carlo Tree Search.</p>
+<p><strong>Chain of Thought (CoT) Theory</strong>: CoT has advanced reasoning capabilities of LLMs, as intermediate reasoning steps has enhanced LLM performance on tasks such as arithmetic and common sense reasoning. According to researchers, CoT empowers decoder-only models as it enabled inherently serial computations.</p>
+<p><strong>Internal Thought</strong>: Represents the capability of LLMs to reflect on their reasoning and refinement of its outputs. <strong>Quiet-STaR</strong> is an approach which following the “Internal Thought” solution by training language models to generate rationales after each token, helping them predict and explain future text more effectively. The work of <a href="https://arxiv.org/pdf/2406.12050">Zhang et. al (2024)</a> introduces the embedding reflection within each training instance, which encourage the models to review their decisions and consider alternatives paths.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="./assets/image-20241014101904756.png" class="img-fluid figure-img"></p>
+<figcaption>image-20241014101904756</figcaption>
+</figure>
+</div>
+<p>Source: <a href="https://arxiv.org/pdf/2406.12050">Zhang et. al (2024)</a></p>
+<p><strong>Inference Time Scaling:</strong> the idea is that scaling inference time can provide more efficient model performance in comparison the current scaling laws theorem (i.e.&nbsp;increase of number of parameters and training data volume to increase model intelligence). By allowing model more time to process and refine their outputs during inference an alternative scaling dimension appears providing resource efficiency and adaptable computation and consequently reasoning improvements through step-by-step interactive refinement.</p>
+<p><strong>Search-to-thought</strong>: CoT has gained attention as it improve performance by generating intermediate reasoning steps without search. <a href="https://arxiv.org/pdf/2311.01460">Implicit Chain-of-Thought Reasoning</a> bypass the need for generating explicit reasoning steps as it can relies on internal hidden states of the model. This is done by using knowledge distilled from a teacher model - training to generate intermediate steps, and allowing student models to solve tasks more efficiently by reasoning vertically through their internal layers (Ref. <a href="https://github.com/GAIR-NLP/O1-Journey?tab=readme-ov-file">O1 Replication Journey: A Strategic Progress Report by Qin et. al</a>).</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="./assets/image-20241014103154723.png" class="img-fluid figure-img"></p>
+<figcaption>image-20241014103154723</figcaption>
+</figure>
+</div>
+<p><strong>Source</strong>: <a href="https://arxiv.org/pdf/2311.01460">Implicit Chain-of-Thought Reasoning</a></p>
+<p><strong>Self-improvement in LLM:</strong> those methods rely on model learning from its outputs without human intervention. Examples are Supervised Fine Tunning (SFT) and preference optimization such as DPO. Here the quality of the model is a function of the external reward system in the form of a reward model, human evaluator or LLM-as-a-Judge prompting. However, <em>finding has suggested that LLM-generated texts often exhibit truncated “tails” - i.e.&nbsp;the distribution of generated output lacks variability found in human-generated content, and can lead to model collapse phenomenon (model converging to a narrower range of behaviors and harming performance</em>) (ref. <a href="https://arxiv.org/pdf/2305.17493">Shumailov, et. al.&nbsp;(2024)</a>).</p>
+<section id="chain-of-thought-cot-differences" class="level3">
+<h3 class="anchored" data-anchor-id="chain-of-thought-cot-differences">Chain of Thought (CoT) Differences</h3>
 <p>Some differences highlighted by Quiet-STaR authors (<a href="https://community.openai.com/t/papers-quiet-star-language-models-can-teach-themselves-to-think-before-speaking/686158/3">here</a>) while comparing thinking tokens to CoT are:</p>
 <ul>
 <li>Different from CoT, model is trained using RL (reinforcement learning) to generate more useful thoughts.</li>
@@ -266,10 +300,13 @@ gtag('config', 'G-RK1QNXR9TB', { 'anonymize_ip': true});
 <li><strong>Limit additional context in retrieval-augmented generation (RAG):</strong> When providing additional context or documents, include only the most relevant information to prevent the model from overcomplicating its response.</li>
 </ul>
 </section>
+</section>
 <section id="references" class="level2">
 <h2 class="anchored" data-anchor-id="references">References:</h2>
 <p><a href="https://arxiv.org/abs/2403.09629">Quiet-STaR: Language Models Can Teach Themselves to Think Before Speaking</a></p>
 <p><a href="https://platform.openai.com/docs/guides/reasoning">Reasoning Models by OpenAI</a></p>
+<p><a href="https://github.com/GAIR-NLP/O1-Journey?tab=readme-ov-file">O1 Replication Journey: A Strategic Progress Report by Qin et. al</a></p>
+<p><a href="https://www.stateof.ai/">State of AI Report 2024 by Nathan Benaich</a></p>
 
 
 </section>
