@@ -1,5 +1,5 @@
 ---
-title:  ":baby: AI Agents Revolution"
+title:  "AI Agents Revolution"
 date:   2024-10-23 07:00:07 +0200
 date-modified: last-modified
 categories: LLM, Agents
@@ -15,7 +15,7 @@ from: markdown+emoji
 
 # :baby: AI Agents Revolution
 
-![image-20241023112100724](./assets/image-20241023112100724.png)
+![AI Agents](./assets/image-20241023112100724.png)
 
 In the context of Large Language Models (LLMs), AI Agents are autonomous software entities designed to extend the capabilities of LLMs. 
 
@@ -32,7 +32,7 @@ These steps make AI agents powerful as they extend the functionality of LLMs bey
 
 
 
-![image-20241023090742241](./assets/image-20241023090742241.png)
+![ReAct](./assets/image-20241023090742241.png)
 
 Picture by [Shunyu Yao - LLM Agents - Brief History and Overview](https://rdi.berkeley.edu/llm-agents-mooc/slides/llm_agent_history.pdf)
 
@@ -60,7 +60,7 @@ Examples of Anthropic's computer use capability include:
 
 Figure below shows the prompt for the example "Using data from user's computer and online data to fill out forms"  from [youtube video: Computer use for automating operations](https://youtu.be/ODaHJzOyVCQ).
 
-![image-20241023083751146](./assets/image-20241023083751146.png)
+![Anthropic's Computer Use](./assets/image-20241023083751146.png)
 
 Picture by Anthropic's new computer use tool from [Youtube Computer use for automating operations video](https://youtu.be/ODaHJzOyVCQ).
 
