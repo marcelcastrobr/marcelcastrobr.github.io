@@ -31,6 +31,10 @@ website:
   google-analytics: "G-RK1QNXR9TB"
   #repo-url: https://github.com/marcelcastrobr/quarto_notebooks
   #repo-actions: [edit, issue]
+  comments:
+    giscus:
+      repo: marcelcastrobr/marcelcastrobr.github.io
+
 format:
   html:
     theme: default
