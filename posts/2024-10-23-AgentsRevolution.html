@@ -6,10 +6,10 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="dcterms.date" content="2024-10-01">
-<meta name="description" content="Concept of thinking tokens to improve model performance while reasoning.">
+<meta name="dcterms.date" content="2024-10-23">
+<meta name="description" content="High level overview of AI Agents and evolutions.">
 
-<title>Thinking Tokens – Marcel Castro</title>
+<title>AI Agents Revolution – Marcel Castro</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -158,14 +158,14 @@ gtag('config', 'G-RK1QNXR9TB', { 'anonymize_ip': true});
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
-      <h1 class="title">Thinking Tokens</h1>
+      <h1 class="title">AI Agents Revolution</h1>
                   <div>
         <div class="description">
-          Concept of thinking tokens to improve model performance while reasoning.
+          High level overview of AI Agents and evolutions.
         </div>
       </div>
                           <div class="quarto-categories">
-                <div class="quarto-category">LLM, transformers, Tokens</div>
+                <div class="quarto-category">LLM, Agents</div>
               </div>
                   </div>
   </div>
@@ -177,7 +177,7 @@ gtag('config', 'G-RK1QNXR9TB', { 'anonymize_ip': true});
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">October 1, 2024</p>
+        <p class="date">October 23, 2024</p>
       </div>
     </div>
     
@@ -199,12 +199,9 @@ gtag('config', 'G-RK1QNXR9TB', { 'anonymize_ip': true});
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#thinking-tokens" id="toc-thinking-tokens" class="nav-link active" data-scroll-target="#thinking-tokens">Thinking Tokens</a>
+  <li><a href="#baby-ai-agents-revolution" id="toc-baby-ai-agents-revolution" class="nav-link active" data-scroll-target="#baby-ai-agents-revolution">:baby: AI Agents Revolution</a>
   <ul class="collapse">
-  <li><a href="#related-work" id="toc-related-work" class="nav-link" data-scroll-target="#related-work">Related Work:</a>
-  <ul class="collapse">
-  <li><a href="#chain-of-thought-cot-differences" id="toc-chain-of-thought-cot-differences" class="nav-link" data-scroll-target="#chain-of-thought-cot-differences">Chain of Thought (CoT) Differences</a></li>
-  </ul></li>
+  <li><a href="#question-what-has-changed" id="toc-question-what-has-changed" class="nav-link" data-scroll-target="#question-what-has-changed">:question: What has changed?</a></li>
   <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References:</a></li>
   </ul></li>
   </ul>
@@ -217,96 +214,56 @@ gtag('config', 'G-RK1QNXR9TB', { 'anonymize_ip': true});
 
 
 
-<section id="thinking-tokens" class="level1">
-<h1>Thinking Tokens</h1>
-<p><strong>Thinking tokens</strong> concept (also known as reasoning tokens) enables more intelligence to large models during inference. Until now, the rule to get more intelligent models was only possible through pre-training large model following the “scaling laws”, i.e.&nbsp;adding more training data and computing to pretrain large models.</p>
-<p>Now with the concept of “thinking tokens” you can achieve more intelligence with the introduction of an internal model reasoning while doing the next token prediction.</p>
-<blockquote class="blockquote">
-<p>&lt;|startofthought|&gt; and &lt;|endofthought|&gt;</p>
-</blockquote>
-<p>The idea of thinking tokens has been introduced by some authors such as <a href="https://arxiv.org/abs/2403.09629">Quiet-STaR: Language Models Can Teach Themselves to Think Before Speaking</a> and latest <a href="https://platform.openai.com/docs/guides/reasoning">o1 model</a> from OpenAI. Thinking tokens are named reasoning tokens by OpenAI.</p>
-<p>The basic concept is to generate “thinking tokens” at inference time to help model to predict next token. A key challenge is to efficiently generate rationales at each token position in the input sequence. However, as pointed out by simply creating a separate forward pass for each token would be computationally intractable for longer sentences.</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="./assets/image-20241002100759413.png" class="img-fluid figure-img"></p>
-<figcaption>image-20241002100759413</figcaption>
-</figure>
-</div>
-<p>Picture: <a href="https://arxiv.org/abs/2403.09629">Quiet-STaR</a></p>
-<p>According to authors, this is done at the inference pass of a language model, when it produces the probability distribution over the next tokens for all input tokens. The solution in Quiet-STaR implements it by <em>caching each forward pass and concatenating a diagonal attention mask to the previous attention mask. Thus each generated token attends to all of the tokens that were used to generate it, as well as itself.</em> But it does not consider the token on the other “counterfactual” paths.</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="./assets/image-20241002101133078.png" class="img-fluid figure-img"></p>
-<figcaption>image-20241002101133078</figcaption>
-</figure>
-</div>
-<blockquote class="blockquote">
-<p>Interestingly, not all tokens requires equal amount of thought .</p>
-</blockquote>
-<p>Interestingly, not all tokens requires equal amount of thought . Thus the thinking token technique does not benefit all tokens equally. For example the sentence “<strong>the person is run-</strong>”, the “<strong>ing</strong>” is most probably the token with highest probability and there the additional thinking is unlike to improve a well-trained prediction model.</p>
-<p>Thus complex reasoning task such as GSM8K are the ones that would benefit more from the thinking token technique.</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="./assets/image-20241002101210020.png" class="img-fluid figure-img"></p>
-<figcaption>image-20241002101210020</figcaption>
-</figure>
-</div>
-<p>Results:</p>
-<blockquote class="blockquote">
-<p>Amount of thinking tokens increase the accuracy of the models.</p>
-</blockquote>
-<p>As show in figure below, more thinking tokens improve the GSM8K accuracy as the training steps icreases.</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="./assets/image-20241002100915950.png" class="img-fluid figure-img"></p>
-<figcaption>image-20241002100915950</figcaption>
-</figure>
-</div>
-<section id="related-work" class="level2">
-<h2 class="anchored" data-anchor-id="related-work">Related Work:</h2>
-<p><strong><a href="https://docs.google.com/presentation/d/1GmZmoWOa2O92BPrncRcTKa15xvQGhq7g4I4hJSNlC0M/edit?pli=1#slide=id.g3058058dd40_3_90">Can LLMs learn to think before they speak</a></strong> is a question that several researchers are exploring in order to generate robust internal reasoning processes <strong>targeting both training and inference</strong> (ref. OpenAI o1-model).</p>
-<p><img src="./assets/image-20241014104857732.png" alt="image-20241014104857732" style="zoom:50%;"></p>
-<p>Based on <a href="https://github.com/GAIR-NLP/O1-Journey?tab=readme-ov-file">O1 Replication Journey: A Strategic Progress Report by Qin et. al</a>, the following approaches are relevant when trying to answer the question.</p>
-<p><strong>Process-level Reward Model:</strong> provide fine-grained evaluations of responses from LLMs, specially in mathematical reasoning. The PRMs technique assess model correctness while enhancing post-training quality through search methods such as Monte Carlo Tree Search.</p>
-<p><strong>Chain of Thought (CoT) Theory</strong>: CoT has advanced reasoning capabilities of LLMs, as intermediate reasoning steps has enhanced LLM performance on tasks such as arithmetic and common sense reasoning. According to researchers, CoT empowers decoder-only models as it enabled inherently serial computations.</p>
-<p><strong>Internal Thought</strong>: Represents the capability of LLMs to reflect on their reasoning and refinement of its outputs. <strong>Quiet-STaR</strong> is an approach which following the “Internal Thought” solution by training language models to generate rationales after each token, helping them predict and explain future text more effectively. The work of <a href="https://arxiv.org/pdf/2406.12050">Zhang et. al (2024)</a> introduces the embedding reflection within each training instance, which encourage the models to review their decisions and consider alternatives paths.</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="./assets/image-20241014101904756.png" class="img-fluid figure-img"></p>
-<figcaption>image-20241014101904756</figcaption>
-</figure>
-</div>
-<p>Source: <a href="https://arxiv.org/pdf/2406.12050">Zhang et. al (2024)</a></p>
-<p><strong>Inference Time Scaling:</strong> the idea is that scaling inference time can provide more efficient model performance in comparison the current scaling laws theorem (i.e.&nbsp;increase of number of parameters and training data volume to increase model intelligence). By allowing model more time to process and refine their outputs during inference an alternative scaling dimension appears providing resource efficiency and adaptable computation and consequently reasoning improvements through step-by-step interactive refinement.</p>
-<p><strong>Search-to-thought</strong>: CoT has gained attention as it improve performance by generating intermediate reasoning steps without search. <a href="https://arxiv.org/pdf/2311.01460">Implicit Chain-of-Thought Reasoning</a> bypass the need for generating explicit reasoning steps as it can relies on internal hidden states of the model. This is done by using knowledge distilled from a teacher model - training to generate intermediate steps, and allowing student models to solve tasks more efficiently by reasoning vertically through their internal layers (Ref. <a href="https://github.com/GAIR-NLP/O1-Journey?tab=readme-ov-file">O1 Replication Journey: A Strategic Progress Report by Qin et. al</a>).</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="./assets/image-20241014103154723.png" class="img-fluid figure-img"></p>
-<figcaption>image-20241014103154723</figcaption>
-</figure>
-</div>
-<p><strong>Source</strong>: <a href="https://arxiv.org/pdf/2311.01460">Implicit Chain-of-Thought Reasoning</a></p>
-<p><strong>Self-improvement in LLM:</strong> those methods rely on model learning from its outputs without human intervention. Examples are Supervised Fine Tunning (SFT) and preference optimization such as DPO. Here the quality of the model is a function of the external reward system in the form of a reward model, human evaluator or LLM-as-a-Judge prompting. However, <em>finding has suggested that LLM-generated texts often exhibit truncated “tails” - i.e.&nbsp;the distribution of generated output lacks variability found in human-generated content, and can lead to model collapse phenomenon (model converging to a narrower range of behaviors and harming performance</em>) (ref. <a href="https://arxiv.org/pdf/2305.17493">Shumailov, et. al.&nbsp;(2024)</a>).</p>
-<section id="chain-of-thought-cot-differences" class="level3">
-<h3 class="anchored" data-anchor-id="chain-of-thought-cot-differences">Chain of Thought (CoT) Differences</h3>
-<p>Some differences highlighted by Quiet-STaR authors (<a href="https://community.openai.com/t/papers-quiet-star-language-models-can-teach-themselves-to-think-before-speaking/686158/3">here</a>) while comparing thinking tokens to CoT are:</p>
+<section id="baby-ai-agents-revolution" class="level1">
+<h1>:baby: AI Agents Revolution</h1>
+<p>In the context of Large Language Models (LLMs), AI Agents are autonomous software entities designed to extend the capabilities of LLMs.</p>
+<p>Lately, we have seen several agents frameworks such as AutoGen, CrewAI and LangGraph and examples such as AutoGPT and BabyAGI.</p>
+<p>So far those solutions leverage LLM capabilities and normally are composed by the following steps:</p>
 <ul>
-<li>Different from CoT, model is trained using RL (reinforcement learning) to generate more useful thoughts.</li>
-<li>Rewards model used to generate inner monologues that helps to predict text instead of answers to specific questions - less domain specific.</li>
+<li>:page_facing_up: <strong>Task decomposition</strong>: break complex tasks into smaller, manageable steps</li>
+<li>:hammer_and_pick: <strong>Tool integration</strong>: LLM interacting with various tools and APIs to gather data from the environment, such as web scraping tools, calculator and python interpreter</li>
+<li>:books: <strong>Memory</strong>: used to retain information from past interactions, allowing to provide more context information.</li>
+<li>:currency_exchange: <strong>Autonomous execution</strong>: once plan is established, the agent can execute the steps autonomously.</li>
 </ul>
-<p>As pointed by OpenAI <a href="https://platform.openai.com/docs/guides/reasoning/advice-on-prompting">here</a> CoT might undermine “thinking tokens”. Thus a best practice are:</p>
+<p>Those steps make AI agents powerful as it extend the functionality of LLMs beyond simple generation tasks towards autonomous task execution. For example, ReAct (Reasoning and Acting) is a common methodology applied to AI agents to improve performance by leveraging reasoning and acting capabilities.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="./assets/image-20241023090742241.png" class="img-fluid figure-img"></p>
+<figcaption>image-20241023090742241</figcaption>
+</figure>
+</div>
+<p>Picture by <a href="https://rdi.berkeley.edu/llm-agents-mooc/slides/llm_agent_history.pdf">Shunyu Yao - LLM Agents - Brief History and Overview</a></p>
+<section id="question-what-has-changed" class="level2">
+<h2 class="anchored" data-anchor-id="question-what-has-changed">:question: What has changed?</h2>
+<p>So far, the AI agent frameworks needed to talk to the outside world through <strong>tool integration</strong> in the form of APIs. But today Anthropic announced a new way - LLM doing tasks on your computer for you.</p>
+<p>This is possible using <strong><a href="https://www.anthropic.com/news/3-5-models-and-computer-use">computer use capability</a></strong> available in Claude 3.5 sonnet and Claude 3.5 Haiku.</p>
+<blockquote class="blockquote">
+<p>Available <a href="https://docs.anthropic.com/en/docs/build-with-claude/computer-use?ref=platformer.news">today on the API</a>, developers can direct Claude to use computers the way people do—by looking at a screen, moving a cursor, clicking buttons, and typing text. Claude 3.5 Sonnet is the first frontier AI model to offer computer use in public beta. At this stage, it is still <a href="https://www.anthropic.com/news/developing-computer-use?ref=platformer.news">experimental</a> — at times cumbersome and error-prone. We’re releasing computer use early for feedback from developers, and expect the capability to improve rapidly over time.</p>
+</blockquote>
+<p>According to <a href="https://www.anthropic.com/news/3-5-models-and-computer-use">Anthropic</a>, <em>instead of making specific tools to help Claude complete individual tasks, we’re <strong>teaching it general computer skills</strong>—allowing it to use a wide range of standard tools and software programs designed for people.</em></p>
+<p>Examples of computer use capability by Anthropic are for example:</p>
 <ul>
-<li><strong>Avoid chain-of-thought prompts:</strong> Since these models perform reasoning internally, prompting them to “think step by step” or “explain your reasoning” is unnecessary.</li>
-<li><strong>Limit additional context in retrieval-augmented generation (RAG):</strong> When providing additional context or documents, include only the most relevant information to prevent the model from overcomplicating its response.</li>
+<li>creation of an entire website on the user’s computer and even fixes bugs in the code [<a href="https://www.youtube.com/watch?v=vH2f7cjXjKI">here</a>].</li>
+<li>Use data from user’s computer and online data to fill out forms [<a href="https://www.youtube.com/watch?v=ODaHJzOyVCQ&amp;feature=youtu.be">here</a>].</li>
+<li>Be able to orchestrate a multi-step task by searching the web, using native applications, and creating a plan with the resulting information [<a href="https://www.youtube.com/watch?v=jqx18KgIzAE">here</a>].</li>
 </ul>
-</section>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="./assets/image-20241023083751146.png" class="img-fluid figure-img"></p>
+<figcaption>image-20241023083751146</figcaption>
+</figure>
+</div>
+<p>Picture by Anthropic’s new computer use tool from <a href="https://youtu.be/ODaHJzOyVCQ">Youtube Computer use for automating operations video</a>.</p>
 </section>
 <section id="references" class="level2">
 <h2 class="anchored" data-anchor-id="references">References:</h2>
-<p><a href="https://arxiv.org/abs/2403.09629">Quiet-STaR: Language Models Can Teach Themselves to Think Before Speaking</a></p>
-<p><a href="https://platform.openai.com/docs/guides/reasoning">Reasoning Models by OpenAI</a></p>
-<p><a href="https://github.com/GAIR-NLP/O1-Journey?tab=readme-ov-file">O1 Replication Journey: A Strategic Progress Report by Qin et. al</a></p>
-<p><a href="https://www.stateof.ai/">State of AI Report 2024 by Nathan Benaich</a></p>
+<ul>
+<li><a href="[AI Agents: Key Concepts and How They Overcome LLM Limitations - The New Stack](https://thenewstack.io/ai-agents-key-concepts-and-how-they-overcome-llm-limitations/)">AI Agents: Key Concepts and How They Overcome LLM Limitations by TheNewStack</a></li>
+<li><a href="https://www.anthropic.com/news/3-5-models-and-computer-use">Introducing computer use, a new Claude 3.5 Sonnet, and Claude 3.5 Haiku by Anthropic</a> (20241022)</li>
+<li><a href="https://llmagents-learning.org/f24">Berkley Course: Large Language Model Agents by</a> <a href="https://people.eecs.berkeley.edu/~dawnsong/">Dawn Song</a></li>
+<li><a href="https://www.platformer.news/anthropic-ai-agents-computer-use-consequences/?ref=platformer-newsletter">The AI agents have arrived by Casey Newton</a></li>
+<li><a href="https://www.oneusefulthing.org/p/when-you-give-a-claude-a-mouse?utm_campaign=post&amp;utm_medium=web&amp;ref=platformer.news">When you give a Claude a mouse by Ethan Mollick</a></li>
+</ul>
 
 
 </section>
