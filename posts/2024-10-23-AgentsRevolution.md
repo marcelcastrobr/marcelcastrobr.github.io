@@ -66,6 +66,16 @@ Picture by Anthropic's new computer use tool from [Youtube Computer use for auto
 
 
 
+## :woman_teacher:  How good are those agents today?
+
+
+
+![Agent Evaluations](./assets/image-20241023120005090.png)
+
+Picture by [Philipp Schimid](https://www.linkedin.com/posts/philipp-schmid-a6a2bb196_can-llms-now-control-computers-like-we-do-activity-7254766392921460736-Bx1y?utm_source=share&utm_medium=member_desktop) 
+
+
+
 ## References:
 
 - [AI Agents: Key Concepts and How They Overcome LLM Limitations by TheNewStack]([AI Agents: Key Concepts and How They Overcome LLM Limitations - The New Stack](https://thenewstack.io/ai-agents-key-concepts-and-how-they-overcome-llm-limitations/))
