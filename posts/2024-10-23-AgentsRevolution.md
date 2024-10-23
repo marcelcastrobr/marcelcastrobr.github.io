@@ -15,7 +15,7 @@ from: markdown+emoji
 
 # :baby: AI Agents Revolution
 
-
+![image-20241023112100724](./assets/image-20241023112100724.png)
 
 In the context of Large Language Models (LLMs), AI Agents are autonomous software entities designed to extend the capabilities of LLMs. 
 
@@ -73,4 +73,5 @@ Picture by Anthropic's new computer use tool from [Youtube Computer use for auto
 - [Berkley Course: Large Language Model Agents by](https://llmagents-learning.org/f24) [Dawn Song](https://people.eecs.berkeley.edu/~dawnsong/)
 - [The AI agents have arrived by Casey Newton](https://www.platformer.news/anthropic-ai-agents-computer-use-consequences/?ref=platformer-newsletter)
 - [When you give a Claude a mouse by Ethan Mollick](https://www.oneusefulthing.org/p/when-you-give-a-claude-a-mouse?utm_campaign=post&utm_medium=web&ref=platformer.news)
+- [LLM Powered Autonomous Agents | Lil'Log](https://lilianweng.github.io/posts/2023-06-23-agent/)
 
