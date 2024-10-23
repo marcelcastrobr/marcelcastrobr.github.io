@@ -9,7 +9,7 @@
 <meta name="dcterms.date" content="2024-10-23">
 <meta name="description" content="High level overview of AI Agents and evolutions.">
 
-<title>AI Agents Revolution – Marcel Castro</title>
+<title>👶 AI Agents Revolution – Marcel Castro</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -158,7 +158,7 @@ gtag('config', 'G-RK1QNXR9TB', { 'anonymize_ip': true});
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
-      <h1 class="title">AI Agents Revolution</h1>
+      <h1 class="title">:baby: AI Agents Revolution</h1>
                   <div>
         <div class="description">
           High level overview of AI Agents and evolutions.
@@ -216,16 +216,22 @@ gtag('config', 'G-RK1QNXR9TB', { 'anonymize_ip': true});
 
 <section id="ai-agents-revolution" class="level1">
 <h1><span class="emoji" data-emoji="baby">👶</span> AI Agents Revolution</h1>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="./assets/image-20241023112100724.png" class="img-fluid figure-img"></p>
+<figcaption>image-20241023112100724</figcaption>
+</figure>
+</div>
 <p>In the context of Large Language Models (LLMs), AI Agents are autonomous software entities designed to extend the capabilities of LLMs.</p>
-<p>Lately, we have seen several agents frameworks such as AutoGen, CrewAI and LangGraph and examples such as AutoGPT and BabyAGI.</p>
-<p>So far those solutions leverage LLM capabilities and normally are composed by the following steps:</p>
+<p>Recently , we have seen several agent frameworks such as <a href="https://microsoft.github.io/autogen/0.2/">AutoGen</a>, <a href="https://www.crewai.com/">CrewAI</a> and <a href="https://langchain-ai.github.io/langgraph/">LangGraph</a> and examples such as <a href="https://github.com/Significant-Gravitas/AutoGPT">AutoGPT</a> and <a href="https://github.com/yoheinakajima/babyagi">BabyAGI</a>.</p>
+<p>These solutions leverage LLM capabilities and typically consist of the following steps:</p>
 <ul>
-<li><span class="emoji" data-emoji="page_facing_up">📄</span> <strong>Task decomposition</strong>: break complex tasks into smaller, manageable steps</li>
-<li><span class="emoji" data-emoji="hammer_and_pick">⚒️</span> <strong>Tool integration</strong>: LLM interacting with various tools and APIs to gather data from the environment, such as web scraping tools, calculator and python interpreter</li>
+<li><span class="emoji" data-emoji="page_facing_up">📄</span> <strong>Task decomposition</strong>: break complex tasks into smaller, manageable steps.</li>
+<li><span class="emoji" data-emoji="hammer_and_pick">⚒️</span> <strong>Tool integration</strong>: LLM interacting with various tools and APIs to gather data from the environment, such as web scraping tools, calculator and python interpreter.</li>
 <li><span class="emoji" data-emoji="books">📚</span> <strong>Memory</strong>: used to retain information from past interactions, allowing to provide more context information.</li>
 <li><span class="emoji" data-emoji="currency_exchange">💱</span> <strong>Autonomous execution</strong>: once plan is established, the agent can execute the steps autonomously.</li>
 </ul>
-<p>Those steps make AI agents powerful as it extend the functionality of LLMs beyond simple generation tasks towards autonomous task execution. For example, ReAct (Reasoning and Acting) is a common methodology applied to AI agents to improve performance by leveraging reasoning and acting capabilities.</p>
+<p>These steps make AI agents powerful as they extend the functionality of LLMs beyond simple generation tasks towards autonomous task execution. For example, <a href="https://arxiv.org/abs/2210.03629">ReAct</a> (Reasoning and Acting) is a common methodology applied to AI agents to improve performance by leveraging reasoning and acting capabilities.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="./assets/image-20241023090742241.png" class="img-fluid figure-img"></p>
@@ -235,18 +241,19 @@ gtag('config', 'G-RK1QNXR9TB', { 'anonymize_ip': true});
 <p>Picture by <a href="https://rdi.berkeley.edu/llm-agents-mooc/slides/llm_agent_history.pdf">Shunyu Yao - LLM Agents - Brief History and Overview</a></p>
 <section id="what-has-changed" class="level2">
 <h2 class="anchored" data-anchor-id="what-has-changed"><span class="emoji" data-emoji="question">❓</span> What has changed?</h2>
-<p>So far, the AI agent frameworks needed to talk to the outside world through <strong>tool integration</strong> in the form of APIs. But today Anthropic announced a new way - LLM doing tasks on your computer for you.</p>
+<p>So far, AI agent frameworks have needed to communicate with the outside world through tool integration in the form of APIs. However, today Anthropic announced a new approach—<strong>LLMs performing tasks directly on your computer</strong>.</p>
 <p>This is possible using <strong><a href="https://www.anthropic.com/news/3-5-models-and-computer-use">computer use capability</a></strong> available in Claude 3.5 sonnet and Claude 3.5 Haiku.</p>
 <blockquote class="blockquote">
 <p>Available <a href="https://docs.anthropic.com/en/docs/build-with-claude/computer-use?ref=platformer.news">today on the API</a>, developers can direct Claude to use computers the way people do—by looking at a screen, moving a cursor, clicking buttons, and typing text. Claude 3.5 Sonnet is the first frontier AI model to offer computer use in public beta. At this stage, it is still <a href="https://www.anthropic.com/news/developing-computer-use?ref=platformer.news">experimental</a> — at times cumbersome and error-prone. We’re releasing computer use early for feedback from developers, and expect the capability to improve rapidly over time.</p>
 </blockquote>
-<p>According to <a href="https://www.anthropic.com/news/3-5-models-and-computer-use">Anthropic</a>, <em>instead of making specific tools to help Claude complete individual tasks, we’re <strong>teaching it general computer skills</strong>—allowing it to use a wide range of standard tools and software programs designed for people.</em></p>
-<p>Examples of computer use capability by Anthropic are for example:</p>
+<p>According to <a href="https://www.anthropic.com/news/3-5-models-and-computer-use">Anthropic</a>, instead of creating specific tools to help Claude complete individual tasks, we’re <strong>teaching it general computer skills</strong>—allowing it to use a wide range of standard tools and software programs designed for people.</p>
+<p>Examples of Anthropic’s computer use capability include:</p>
 <ul>
-<li>creation of an entire website on the user’s computer and even fixes bugs in the code [<a href="https://www.youtube.com/watch?v=vH2f7cjXjKI">here</a>].</li>
-<li>Use data from user’s computer and online data to fill out forms [<a href="https://www.youtube.com/watch?v=ODaHJzOyVCQ&amp;feature=youtu.be">here</a>].</li>
-<li>Be able to orchestrate a multi-step task by searching the web, using native applications, and creating a plan with the resulting information [<a href="https://www.youtube.com/watch?v=jqx18KgIzAE">here</a>].</li>
+<li>Creating an entire website on the user’s computer and even fixes bugs in the code [<a href="https://www.youtube.com/watch?v=vH2f7cjXjKI">here</a>].</li>
+<li>Using data from user’s computer and online data to fill out forms [<a href="https://www.youtube.com/watch?v=ODaHJzOyVCQ&amp;feature=youtu.be">here</a>].</li>
+<li>Orchestrating a multi-step task by searching the web, using native applications, and creating a plan with the resulting information [<a href="https://www.youtube.com/watch?v=jqx18KgIzAE">here</a>].</li>
 </ul>
+<p>Figure below shows the prompt for the example “Using data from user’s computer and online data to fill out forms” from <a href="https://youtu.be/ODaHJzOyVCQ">youtube video: Computer use for automating operations</a>.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="./assets/image-20241023083751146.png" class="img-fluid figure-img"></p>
@@ -263,6 +270,7 @@ gtag('config', 'G-RK1QNXR9TB', { 'anonymize_ip': true});
 <li><a href="https://llmagents-learning.org/f24">Berkley Course: Large Language Model Agents by</a> <a href="https://people.eecs.berkeley.edu/~dawnsong/">Dawn Song</a></li>
 <li><a href="https://www.platformer.news/anthropic-ai-agents-computer-use-consequences/?ref=platformer-newsletter">The AI agents have arrived by Casey Newton</a></li>
 <li><a href="https://www.oneusefulthing.org/p/when-you-give-a-claude-a-mouse?utm_campaign=post&amp;utm_medium=web&amp;ref=platformer.news">When you give a Claude a mouse by Ethan Mollick</a></li>
+<li><a href="https://lilianweng.github.io/posts/2023-06-23-agent/">LLM Powered Autonomous Agents | Lil’Log</a></li>
 </ul>
 
 
