@@ -9,7 +9,7 @@
 <meta name="dcterms.date" content="2025-01-03">
 <meta name="description" content="Large Language Model Optimization techniques - an overview of attention mechanisms">
 
-<title>Overview of LLM Optimizations Techniques – Marcel Castro</title>
+<title>The Power of Focus: Understanding Attention Mechanisms in LLM – Marcel Castro</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -192,7 +192,7 @@ gtag('config', 'G-RK1QNXR9TB', { 'anonymize_ip': true});
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
-      <h1 class="title">Overview of LLM Optimizations Techniques</h1>
+      <h1 class="title">The Power of Focus: Understanding Attention Mechanisms in LLM</h1>
                   <div>
         <div class="description">
           Large Language Model Optimization techniques - an overview of attention mechanisms
@@ -227,9 +227,9 @@ gtag('config', 'G-RK1QNXR9TB', { 'anonymize_ip': true});
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#the-power-of-focus-understanding-attention-mechanisms-in-llm" id="toc-the-power-of-focus-understanding-attention-mechanisms-in-llm" class="nav-link active" data-scroll-target="#the-power-of-focus-understanding-attention-mechanisms-in-llm">The Power of Focus: Understanding Attention Mechanisms in LLM</a></li>
-  <li><a href="#background" id="toc-background" class="nav-link" data-scroll-target="#background">Background</a>
+  <li><a href="#the-power-of-focus-understanding-attention-mechanisms-in-llm" id="toc-the-power-of-focus-understanding-attention-mechanisms-in-llm" class="nav-link active" data-scroll-target="#the-power-of-focus-understanding-attention-mechanisms-in-llm">The Power of Focus: Understanding Attention Mechanisms in LLM</a>
   <ul class="collapse">
+  <li><a href="#background" id="toc-background" class="nav-link" data-scroll-target="#background">Background</a></li>
   <li><a href="#attention-mechanism---a-short-introduction" id="toc-attention-mechanism---a-short-introduction" class="nav-link" data-scroll-target="#attention-mechanism---a-short-introduction">Attention Mechanism - A Short Introduction</a></li>
   <li><a href="#flashattention" id="toc-flashattention" class="nav-link" data-scroll-target="#flashattention">FlashAttention</a>
   <ul class="collapse">
@@ -239,7 +239,7 @@ gtag('config', 'G-RK1QNXR9TB', { 'anonymize_ip': true});
   <li><a href="#pagedattention" id="toc-pagedattention" class="nav-link" data-scroll-target="#pagedattention">PagedAttention</a></li>
   <li><a href="#multi-head-latent-attention" id="toc-multi-head-latent-attention" class="nav-link" data-scroll-target="#multi-head-latent-attention">Multi-Head Latent Attention</a></li>
   </ul></li>
-  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References:</a></li>
+  <li><a href="#more-references" id="toc-more-references" class="nav-link" data-scroll-target="#more-references">More References:</a></li>
   </ul>
 </nav>
     </div>
@@ -253,14 +253,14 @@ gtag('config', 'G-RK1QNXR9TB', { 'anonymize_ip': true});
 <section id="the-power-of-focus-understanding-attention-mechanisms-in-llm" class="level1">
 <h1>The Power of Focus: Understanding Attention Mechanisms in LLM</h1>
 <p>[TOC]</p>
-</section>
-<section id="background" class="level1">
-<h1>Background</h1>
+<section id="background" class="level2">
+<h2 class="anchored" data-anchor-id="background">Background</h2>
 <p>Nowadays, there are several fronts on improving Large Language Models at both inference and training. Techniques such as quantization, distillation and optimizations at the attention mechanism are continuously been improved to either reduce model size or memory footprint.</p>
 <p>For example, in quantization the use of <strong><a href="https://arxiv.org/abs/2208.07339">Int8</a></strong> type at inference can reduce memory footprint of large models by a factor of 2x.</p>
 <p>The sequential generation process of autoregressive transformer which generates words (tokens) one at a time based on the input prompt and previous sequence, makes the GPU workload <strong>memory-bound</strong>, underutilizing the computation power of GPUs and limiting the serving throughput.</p>
 <p>In order to make sure workloads are predominantly <strong>compute-bound</strong> at GPUs (and not memory-bound) several solutions have been proposed to optimize the attention mechanism commonly used by autoregressive transformer, which includes <strong>FlashAttention</strong>, <strong>PagedAttention</strong> and <strong>Multi-Head Latent Attention</strong> discussed below.</p>
 <p>But before diving into those mechanism, let have a quick overview of attention mechanism. In this article we are focusing on autoregressive attention mechanism (i.e.&nbsp;attention for decoder-only models).</p>
+</section>
 <section id="attention-mechanism---a-short-introduction" class="level2">
 <h2 class="anchored" data-anchor-id="attention-mechanism---a-short-introduction">Attention Mechanism - A Short Introduction</h2>
 <p><strong>A Brief history…</strong></p>
@@ -280,11 +280,11 @@ gtag('config', 'G-RK1QNXR9TB', { 'anonymize_ip': true});
 <p>Other efficient adaptation of the multi-head attention is for example the <a href="https://arxiv.org/pdf/2305.13245v3">Grouped-Query Attention</a> and <a href="https://arxiv.org/pdf/1911.02150">Multi-Query Attention</a>. Grouped-query attention is used by models like Llama 3.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://production-media.paperswithcode.com/methods/b0e96a0e-e3ad-4832-be7d-2fdce5f21352.png" class="img-fluid figure-img"></p>
-<figcaption>img</figcaption>
+<p><img src="./assets/image-20250103143203890.png" class="img-fluid figure-img"></p>
+<figcaption>image-20250103143203890</figcaption>
 </figure>
 </div>
-<p>Picture from <a href="https://arxiv.org/abs/1911.02150">Fast Transformer Decoding: One Write-Head is All You Need by N. Shazeer</a></p>
+<p>Picture by <a href="https://arxiv.org/pdf/1911.02150">Multi-Query Attention</a></p>
 <p><strong>Reference:</strong></p>
 <ul>
 <li><a href="https://en.wikipedia.org/wiki/Attention_%28machine_learning%29">Attention (machine learning) by Wikipedia</a></li>
@@ -444,8 +444,8 @@ gtag('config', 'G-RK1QNXR9TB', { 'anonymize_ip': true});
 </ul>
 </section>
 </section>
-<section id="references" class="level1">
-<h1>References:</h1>
+<section id="more-references" class="level1">
+<h1>More References:</h1>
 <ul>
 <li><a href="https://www.youtube.com/watch?v=QQceTDjA4f4">GTC 2022 - How CUDA Programming Works - Stephen Jones, CUDA Architect, NVIDIA.</a></li>
 <li><a href="https://huggingface.co/blog/hf-bitsandbytes-integration">A Gentle Introduction to 8-bit Matrix Multiplication for transformers at scale using Hugging Face Transformers, Accelerate and bitsandbytes</a></li>
