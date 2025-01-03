@@ -212,9 +212,7 @@ MLA proposes a low-rank joint compression for the attention keys and values in o
 
 Picture by [DeepSeek-AI](https://arxiv.org/pdf/2405.04434)
 
-
-
-Reference:
+**References:**
 
 - [DeepSeek-V2: A Strong, Economical, and Efficient Mixture-of-Experts Language Mode, by DeepSeek-AI](https://arxiv.org/pdf/2405.04434)
 
