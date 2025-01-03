@@ -1,5 +1,5 @@
 ---
-title:  "Overview of LLM Optimizations Techniques"
+title:  "The Power of Focus: Understanding Attention Mechanisms in LLM"
 date:   2025-01-03 10:04:07 +0200
 categories: transformers, LLM
 draft: false
@@ -11,7 +11,7 @@ toc: true
 
 [TOC]
 
-# Background
+## Background
 
 Nowadays, there are several fronts on improving Large Language Models at both inference and training. Techniques such as quantization, distillation and optimizations at the attention mechanism are continuously been improved to either reduce model size or memory footprint.
 
@@ -49,11 +49,9 @@ Multi-head attention contains multiple self-attention blocks in order to encapsu
 
 Other efficient adaptation of the multi-head attention is for example the [Grouped-Query Attention](https://arxiv.org/pdf/2305.13245v3) and [Multi-Query Attention](https://arxiv.org/pdf/1911.02150). Grouped-query attention is used by models like Llama 3. 
 
+![image-20250103143203890](./assets/image-20250103143203890.png)
 
-
-![img](https://production-media.paperswithcode.com/methods/b0e96a0e-e3ad-4832-be7d-2fdce5f21352.png)
-
-Picture from [Fast Transformer Decoding: One Write-Head is All You Need by N. Shazeer](https://arxiv.org/abs/1911.02150)
+Picture by [Multi-Query Attention](https://arxiv.org/pdf/1911.02150)
 
 
 
@@ -216,7 +214,7 @@ Picture by [DeepSeek-AI](https://arxiv.org/pdf/2405.04434)
 
 
 
-# References:
+# More References:
 
 - [GTC 2022 - How CUDA Programming Works - Stephen Jones, CUDA Architect, NVIDIA.](https://www.youtube.com/watch?v=QQceTDjA4f4)
 - [A Gentle Introduction to 8-bit Matrix Multiplication for transformers at scale using Hugging  Face Transformers, Accelerate and bitsandbytes](https://huggingface.co/blog/hf-bitsandbytes-integration) 
