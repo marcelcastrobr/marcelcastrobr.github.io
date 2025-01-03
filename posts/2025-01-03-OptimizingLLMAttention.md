@@ -3,11 +3,9 @@ title:  "Overview of LLM Optimizations Techniques"
 date:   2025-01-03 10:04:07 +0200
 categories: transformers, LLM
 draft: false
-description: Large Language Model Optimization techniques: an overview of attention mechanisms
+description: Large Language Model Optimization techniques - an overview of attention mechanisms
 toc: true
 ---
-
-
 
 # The Power of Focus: Understanding Attention Mechanisms in LLM
 
