@@ -84,4 +84,5 @@ Picture by [Philipp Schimid](https://www.linkedin.com/posts/philipp-schmid-a6a2b
 - [The AI agents have arrived by Casey Newton](https://www.platformer.news/anthropic-ai-agents-computer-use-consequences/?ref=platformer-newsletter)
 - [When you give a Claude a mouse by Ethan Mollick](https://www.oneusefulthing.org/p/when-you-give-a-claude-a-mouse?utm_campaign=post&utm_medium=web&ref=platformer.news)
 - [LLM Powered Autonomous Agents | Lil'Log](https://lilianweng.github.io/posts/2023-06-23-agent/)
+- [Agents by Chip Huyen](https://huyenchip.com//2025/01/07/agents.html)
 
