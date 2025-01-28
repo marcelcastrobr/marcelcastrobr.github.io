@@ -1,0 +1,58 @@
+<mxfile host="Electron" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/26.0.7 Chrome/128.0.6613.186 Electron/32.2.5 Safari/537.36" version="26.0.7">
+  <diagram name="Page-1" id="n5Z_WVNR6zsx5J8S5riX">
+    <mxGraphModel dx="701" dy="765" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="0HTlofnM-JYt4xZOAmG0-10" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=none;dashed=1;align=left;" vertex="1" parent="1">
+          <mxGeometry x="129" y="340" width="440" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="0HTlofnM-JYt4xZOAmG0-3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="0HTlofnM-JYt4xZOAmG0-1" target="0HTlofnM-JYt4xZOAmG0-2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="0HTlofnM-JYt4xZOAmG0-1" value="DeepSeek-R1-Zero" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="150" y="230" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="0HTlofnM-JYt4xZOAmG0-2" value="DeepSeek-R1" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="470" y="230" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="0HTlofnM-JYt4xZOAmG0-5" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="0HTlofnM-JYt4xZOAmG0-4" target="0HTlofnM-JYt4xZOAmG0-1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="0HTlofnM-JYt4xZOAmG0-4" value="DeepSeek-v3-base" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="150" y="40" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="0HTlofnM-JYt4xZOAmG0-6" value="+ Large Scale RL" style="shape=document;whiteSpace=wrap;html=1;boundedLbl=1;" vertex="1" parent="1">
+          <mxGeometry x="100" y="170" width="80" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="0HTlofnM-JYt4xZOAmG0-7" value="cold-start&lt;div&gt;data&lt;/div&gt;" style="shape=step;perimeter=stepPerimeter;whiteSpace=wrap;html=1;fixedSize=1;" vertex="1" parent="1">
+          <mxGeometry x="159" y="370" width="100" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="0HTlofnM-JYt4xZOAmG0-8" value="RL" style="shape=step;perimeter=stepPerimeter;whiteSpace=wrap;html=1;fixedSize=1;" vertex="1" parent="1">
+          <mxGeometry x="259" y="370" width="100" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="0HTlofnM-JYt4xZOAmG0-9" value="Rejection Sampling&amp;nbsp;&lt;div&gt;+&amp;nbsp;&amp;nbsp;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;SFT&lt;/span&gt;&lt;/div&gt;" style="shape=step;perimeter=stepPerimeter;whiteSpace=wrap;html=1;fixedSize=1;" vertex="1" parent="1">
+          <mxGeometry x="359" y="370" width="100" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="0HTlofnM-JYt4xZOAmG0-11" value="" style="endArrow=classic;html=1;rounded=0;entryX=0.516;entryY=-0.036;entryDx=0;entryDy=0;entryPerimeter=0;dashed=1;" edge="1" parent="1" target="0HTlofnM-JYt4xZOAmG0-10">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="355" y="260" as="sourcePoint" />
+            <mxPoint x="360" y="250" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="0HTlofnM-JYt4xZOAmG0-12" value="&lt;span style=&quot;color: rgb(0, 0, 0); font-family: Helvetica; font-size: 12px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: left; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; white-space: normal; background-color: rgb(251, 251, 251); text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial; float: none; display: inline !important;&quot;&gt;DeepSeek-R1 - multi-stage pipeline&lt;/span&gt;" style="text;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="129" y="340" width="220" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="0HTlofnM-JYt4xZOAmG0-14" value="SFT" style="shape=document;whiteSpace=wrap;html=1;boundedLbl=1;" vertex="1" parent="1">
+          <mxGeometry x="100" y="120" width="80" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="0HTlofnM-JYt4xZOAmG0-15" value="" style="shape=mxgraph.mockup.markup.redX;fillColor=#ff0000;html=1;shadow=0;whiteSpace=wrap;strokeColor=none;" vertex="1" parent="1">
+          <mxGeometry x="90" y="120" width="50" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="0HTlofnM-JYt4xZOAmG0-16" value="RL for all scenarios" style="shape=step;perimeter=stepPerimeter;whiteSpace=wrap;html=1;fixedSize=1;" vertex="1" parent="1">
+          <mxGeometry x="459" y="370" width="100" height="50" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

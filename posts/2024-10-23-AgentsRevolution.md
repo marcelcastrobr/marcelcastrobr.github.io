@@ -66,6 +66,71 @@ Picture by Anthropic's new computer use tool from [Youtube Computer use for auto
 
 
 
+## :telescope: Things to Consider while building AI Agents that works
+
+> This section is based on my notes from the presentation given by [Manjeet Singh, Salesforce](https://www.youtube.com/watch?v=BAL5QzWmt2I&list=PL_lyFNnob30vw-q0_Kttx1DrKOSXoDnwU&t=11s) on the [SMALLCON](https://eur01.safelinks.protection.outlook.com/?url=https%3A%2F%2Fgo.predibase.com%2Fe3t%2FCtc%2FL0%2B113%2Fd2BmB904%2FVVV0pL45txbtN3W8GY5VDQS-VXkGBG5qDK5DN6-TNZ82-ZVTW5BW0B06lZ3kLN6MyJC5L0v21W4qC8S25HQZPRW431hQ95y2hDTN4pDp4N_RqkrW3bpGmk5PMNdqN7pQ1kbXJFr8W80-y-S1KH_-WW8-X96d16zTjDW2zT-nS8pZsv6W3Cc1203_xn19W58MR6c7yCYkTV6vxMf2H9zDNW5zkmbx1lkw-GN5h3tWGS6sTwN7RR6d6wPzK9MNJdB1KSffvW7q23Gb5xdPHTW27QSw-2RLQ8Gf5-dw5K04&data=05%7C02%7Cmarcel.castro%40km.kongsberg.com%7C73954d3f37b449172bc308dd3140a066%7Ca113bc9e1024489c902e5ac8b5fd41ce%7C0%7C0%7C638720875811932030%7CUnknown%7CTWFpbGZsb3d8eyJFbXB0eU1hcGkiOnRydWUsIlYiOiIwLjAuMDAwMCIsIlAiOiJXaW4zMiIsIkFOIjoiTWFpbCIsIldUIjoyfQ%3D%3D%7C0%7C%7C%7C&sdata=MeUEEQcmVYUVDzmrWGwmiQNYXGXbjaVs4dce1TwZQT0%3D&reserved=0) conference by Predibase in Dec. 2024.
+
+Important things to consider while building Production-ready AI agents based on steps provided above:
+
+- :page_facing_up: **Task decomposition**: Topics
+- :hammer_and_pick: **Tool integration**: Sources, knowledge quality, guardrails
+- :books: **Memory**: User context, page context
+- :currency_exchange: **Autonomous execution**: actions, intent, latency
+
+In addition, as highlight by [Manjeet Singh, Salesforce](https://www.youtube.com/watch?v=BAL5QzWmt2I&list=PL_lyFNnob30vw-q0_Kttx1DrKOSXoDnwU&t=11s) customer trust on the agent is important, and common points below need to be considered:
+
+:exclamation: Data privacy and security concerns: e.g. legal
+
+:exclamation: ​lack of confidence in accuracy: "*how this will behave in production?* *I am getting different answer each time*"
+
+:exclamation: ​negative past experience: "*I tried before and it did not work*"
+
+:exclamation: ​ROI and cost concerns: "*how to calculate business value*?"
+
+![image-20250110082320573](./assets/image-20250110082320573.png)
+
+Picture by [Manjeet Singh, Salesforce](https://www.youtube.com/watch?v=BAL5QzWmt2I&list=PL_lyFNnob30vw-q0_Kttx1DrKOSXoDnwU&t=11s)
+
+As in in software development best practice, the agent development follows similar steps, which are: 
+
+:arrow_right: Ideate :arrow_right:  Setup :arrow_right:  Configure :arrow_right:  Test :arrow_right:  Deploy :arrow_right:  Monitor :repeat:
+
+
+
+![image-20250110083443875](./assets/image-20250110083443875.png)
+
+Picture by [Manjeet Singh, Salesforce](https://www.youtube.com/watch?v=BAL5QzWmt2I&list=PL_lyFNnob30vw-q0_Kttx1DrKOSXoDnwU&t=11s)
+
+### :hammer_and_pick: Test: toolset you need
+
+Testing and evaluation during agent application development  is very important. 
+
+As in all generative AI usecase, the journey normally looks like this:
+
+:arrow_right: Select a pre-trained LLM (e.g. gpt-4o or claude 3.5)
+
+:arrow_right:  Prompt Engineering (improve prompt with few shots) 
+
+:arrow_right:  Prompt Engineering + RAG (longer prompts, slower inference) 
+
+:arrow_right:  Advanced techniques (advanced RAG, finetuning - improve speed, quality and cost) 
+
+
+
+Here is an example from [Manjeet Singh, Salesforce](https://www.youtube.com/watch?v=BAL5QzWmt2I&list=PL_lyFNnob30vw-q0_Kttx1DrKOSXoDnwU&t=11s) to atomate agent evaluation.
+
+![image-20250110084935905](./assets/image-20250110084935905.png)
+
+Picture by [Manjeet Singh, Salesforce](https://www.youtube.com/watch?v=BAL5QzWmt2I&list=PL_lyFNnob30vw-q0_Kttx1DrKOSXoDnwU&t=11s)
+
+Below is an example of evaluation while considering a RAG (Retrieval Augmented Generation) pipeline.
+
+![image-20250110085416224](./assets/image-20250110085416224.png)
+
+Picture by [Manjeet Singh, Salesforce](https://www.youtube.com/watch?v=BAL5QzWmt2I&list=PL_lyFNnob30vw-q0_Kttx1DrKOSXoDnwU&t=11s)
+
+
+
 ## :woman_teacher:  How good are those agents today?
 
 
