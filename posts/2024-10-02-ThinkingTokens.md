@@ -16,11 +16,11 @@ toc: true
 
 **Thinking tokens** concept (also known as reasoning tokens) enables more intelligence to large models during inference. Until now, the rule to get more intelligent models was only possible through pre-training large model following the "scaling laws", i.e. adding more training data and computing to pretrain large models.
 
-Now with the concept of "thinking tokens" you can achieve more intelligence with the introduction of an internal model reasoning while doing the next token prediction.  
+Now with the concept of "thinking tokens" you can achieve more intelligence with the introduction of a model reasoning while doing the next token prediction.  
 
 > <|startofthought|> and <|endofthought|>
 
-The idea of thinking tokens has been introduced by some authors such as [Quiet-STaR: Language Models Can Teach Themselves to Think Before Speaking](https://arxiv.org/abs/2403.09629) and latest [o1 model](https://platform.openai.com/docs/guides/reasoning) from OpenAI. Thinking tokens are named reasoning tokens by OpenAI.
+The idea of thinking tokens has been introduced by some authors such as [Quiet-STaR: Language Models Can Teach Themselves to Think Before Speaking](https://arxiv.org/abs/2403.09629),  [o1 model](https://platform.openai.com/docs/guides/reasoning) from OpenAI and latest [DeepSeek-R1](https://arxiv.org/abs/2501.12948). Thinking tokens are named reasoning tokens by OpenAI.
 
 The basic concept is to generate "thinking tokens" at inference time to help model to predict next token. A key challenge is to efficiently generate rationales at each token position in the input sequence. However, as pointed out by simply creating a separate forward pass for each token would be computationally intractable for longer sentences.
 
@@ -60,7 +60,7 @@ As show in figure below, more  thinking tokens improve the GSM8K accuracy as the
 
 Based on [O1 Replication Journey: A Strategic Progress Report by Qin et. al ](https://github.com/GAIR-NLP/O1-Journey?tab=readme-ov-file), the following approaches are relevant when trying to answer the question.
 
-**Process-level Reward Model:** provide fine-grained evaluations of responses from LLMs, specially in mathematical reasoning. The PRMs technique assess model correctness while enhancing post-training quality through search methods such as Monte Carlo Tree Search.
+**Process-level Reward (PRM) Model:** provide fine-grained evaluations of responses from LLMs, specially in mathematical reasoning. The PRMs technique assess model correctness while enhancing post-training quality through search methods such as Monte Carlo Tree Search.
 
 **Chain of Thought (CoT) Theory**: CoT has advanced reasoning capabilities of LLMs, as intermediate reasoning steps has enhanced LLM performance on tasks such as arithmetic and common sense reasoning. According to researchers, CoT empowers decoder-only models as it enabled inherently serial computations.
 
@@ -101,75 +101,6 @@ As pointed by OpenAI [here](https://platform.openai.com/docs/guides/reasoning/ad
 
 
 ## Latest Developments:
-
-
-
-### DeepSeek-R1 by DeepSeek AI lab 
-
-> DeepSeek-R1: more intelligence via inference-time scaling through increasing the length of the Chain-of-Though reasining process.
-
-#### Introduction
-
-**DeepSeek-R1** demonstrates that reasoning capabilities can be improved through large-scale Reinforcement Learning (RL) even without using supervised fine-tuning (SFT) as a cold start.
-
-By incorporating multi-stage training and cold-start data before RL, DeepSeek-R1 has achieved performance comparable to latest top closed-models such as OpenAI-o1-1217 on reasoning tasks.
-
-#### What is DeepSeek-R1
-
-DeepSeek-R1 is the based on the DeepSeek-R1-Zero model which is the DeepSeek-v3-base model with large scale RL without SFT. DeepSeek-R1-Zero encountered challenges in relation to poor readability and language mixing. DeepSeek-R1 address this issue by incorporating multi-stage training and cold-start data before RL.
-
- ![image-20250128141446714](./assets/image-20250128141446714.png)
-
-The **multi-stage pipeline** is composed by the following steps:
-
-1. Several thousands of cold-start Chain of Thought (CoT) data to fine-tune the base model
-2. Reinforcement Learning stage using GPRO and similar to DeepSeek-R1-Zero.
-3. A SFT through rejection sampling data plus supervised data from DeepSeek-v3 in domains such as writing, factual QA and self-cognition  -> ~600k data points
-4. Additional RL with prompts in order to make the model harmless/helpful, etc.
-
-The **cold-start** are long Chain-of-through data used to to fine-tune the model. Cold-start data brings readability advantages by including a summary at the end of each response and filtering out responses that are no reader-friendly following the pattern: |speacial_token | <reasoning_process> | special_token | < summary >.
-
- The **Reinforced Learning** (RL) technique used is named GRPO ([Group Relative Policy Optimization](https://arxiv.org/abs/2402.03300)) which unlike traditional RL methods which rely heavily on external evaluators (critics) to guide learning, GRPO optimizes the model by evaluating groups of responses relative to one another. More information on GRPO on the paper [DeepSeekMath: Pushing the Limits of Mathematical Reasoning in Open Language Models](https://arxiv.org/abs/2402.03300).  
-
-GRPO mainly uses 2 reward functions:
-
-- accuracy rewards: which evaluates whether the response is correct. (e.g. math problem with deterministic results and final answer, unit tests for code as accuracy computation).
-
-- format rewards: which enforces thinking process by rewarding model if it separates the "thinking" and the "answer" parts by <think> tags.
-
-> The self-evolution process of DeepSeek-R1 is fascinating as it demonstrate how RL can drive the model to improve its reasoning capabilities autonomously. By initiating RL directly from the base model,a authors can monitor model progression without the influence of the supervised fine -tuning stage - indicating how model evolves overtime and its ability to handle complex reasoning tasks by leveraging extended **test-time computing**.
-
-The **"aha moment"**: The model self-evolution through RL indicates its capability to reflect by revisiting and reevaluating previous steps and exploring alternative approaches through problem solving by using extended test-time computing during reasoning.
-
-In addition to RL, DeepSeek-R1-Zero can be further augmented through the application of majority voting.
-
-**Rejection sampling and SFT** is applied using data from other domains to enhance the model's capability in writing, role-playing and other general-purpose tasks. For reasoning data this is done using generative reward model with ground-truth and DeepSeek-v3 as a judge (i.e. 600k reasoning training samples in total). For non-reasoning data such as writing, factual QA, self-cognition and translation, the DeepSeek-v3 pipeline is used including reuse of portions of the SFT dataset of DeepSeek-v3 (200k training samples in total). 
-
-**RL for all scenarios** is used to further align the model with human preferences through a secondary RL stage to improve model helpfulness and harmlessness. Rule-based rewards is used to guide the learn process in math, code and logical reasoning domains, using the same distribution of preference pairs and training prompts used by DeepSeek-v3 pipeline.
-
-**Distilled Models**
-
-Fine-tuning is used as a distillation method to empower small models with reason capabilities like DeepSeek-R1. DeepSeek released 6 dense models (1.5B - 70B range) based on Qwen/Llama and distilled from DeepSeek-R1 using 800k curated samples. For distilled modes only SFT is applied (no RL stage included).
-
-
-
-**Other interesting points:**
-
-- Despite advocating that model distillation are both economical and effective methods, the authors highlight that advancements beyond the boundaries of intelligence may still require **powerful base models** and **large-scale RL**.
-- Monte Carlo Tree Search (MCTS), which is used by AlphaGo and AlphaZero, has also been proposed as a technique to enhance test-time compute scalability. But DeepSeek authors has show scaling limitation during training as token generation presents an exponentially large search space compared to chess. 
-- DeepSeek-v3-base is used as the base model for DeepSeek-R1 and follows a Mixture of Expert (MoE) architecture. It has 671 billion parameters where 37 billion is activated for each token. See my previous post [Understanding Mixture of Expert](https://marcelcastrobr.github.io/posts/2024-05-19-UnderstandingMistureOfExperts.html) for additional information.
-- DeepSeek-v3-base uses Multi-Head Latent Attention (MLA) as its attention mechanism. MLA proposes a low-rank joint compression for the attention keys and values in order to reduce KV(Key-Value) cache during inference. See the Multi-Head Latent Attention section in my post [The Power of Focus: Understanding Attention Mechanisms in LLM](https://marcelcastrobr.github.io/posts/2025-01-03-OptimizingLLMAttention.html#multi-head-latent-attention) for more information and references.
-
-
-
-#### **References:**
-
-- [DeepSeek-R1 Technical Report](https://github.com/deepseek-ai/DeepSeek-R1/blob/main/DeepSeek_R1.pdf)
-- [DeepSeek-R1: Incentivizing Reasoning Capability in LLMs via Reinforcement Learning by DeepSeek-AI](https://arxiv.org/abs/2501.12948) 
-- [The Math Behind DeepSeek: A Deep Dive into Group Relative Policy Optimization (GRPO) by Ahmed](https://medium.com/@sahin.samia/the-math-behind-deepseek-a-deep-dive-into-group-relative-policy-optimization-grpo-8a75007491ba) 
-- [The Ilustrated DeepSeek-R1 by Jay Alammar](https://newsletter.languagemodels.co/p/the-illustrated-deepseek-r1)
-
-By the way you can use the [DeepSeek’s AI assistant](https://cdn.deepseek.com/download-app/index.html) app in the Apple App Store.
 
 
 
@@ -245,21 +176,21 @@ To verify it, I used the QnQ model deployed in HuggingFace [here](https://huggin
 
 ## References:
 
-[Quiet-STaR: Language Models Can Teach Themselves to Think Before Speaking](https://arxiv.org/abs/2403.09629)
+- [Quiet-STaR: Language Models Can Teach Themselves to Think Before Speaking](https://arxiv.org/abs/2403.09629)
 
-[Reasoning Models by OpenAI](https://platform.openai.com/docs/guides/reasoning)
+- [Reasoning Models by OpenAI](https://platform.openai.com/docs/guides/reasoning)
 
- [O1 Replication Journey: A Strategic Progress Report by Qin et. al ](https://github.com/GAIR-NLP/O1-Journey?tab=readme-ov-file)
+-  [O1 Replication Journey: A Strategic Progress Report by Qin et. al ](https://github.com/GAIR-NLP/O1-Journey?tab=readme-ov-file)
 
-[State of AI Report 2024 by Nathan Benaich](https://www.stateof.ai/)
+- [State of AI Report 2024 by Nathan Benaich](https://www.stateof.ai/)
 
-**Model:** [Marco-o1: Towards Open Reasoning Models for Open-Ended Solutions](https://arxiv.org/pdf/2411.14405v2)
+- **Model:** [Marco-o1: Towards Open Reasoning Models for Open-Ended Solutions](https://arxiv.org/pdf/2411.14405v2)
 
-**Model:** [Open O1: A Model Matching Proprietary Power with Open-Source Innovation](https://github.com/Open-Source-O1/Open-O1)
+- **Model:** [Open O1: A Model Matching Proprietary Power with Open-Source Innovation](https://github.com/Open-Source-O1/Open-O1)
 
-**Dataset:** [Open O1 SFT](https://huggingface.co/datasets/O1-OPEN/OpenO1-SFT?row=14) 
+- **Dataset:** [Open O1 SFT](https://huggingface.co/datasets/O1-OPEN/OpenO1-SFT?row=14) 
 
-[Awesome-LLM-Strawberry -OpenAI Strawberry(o1) and Reasoning](https://github.com/hijkzzz/Awesome-LLM-Strawberry)
+- [Awesome-LLM-Strawberry -OpenAI Strawberry(o1) and Reasoning](https://github.com/hijkzzz/Awesome-LLM-Strawberry)
 
-[Teaching Machines to Reason by Diamantai](https://diamantai.substack.com/p/teaching-machines-to-reason?r=336pe4&utm_campaign=post&utm_medium=web&triedRedirect=true)
+- [Teaching Machines to Reason by Diamantai](https://diamantai.substack.com/p/teaching-machines-to-reason?r=336pe4&utm_campaign=post&utm_medium=web&triedRedirect=true)
 
