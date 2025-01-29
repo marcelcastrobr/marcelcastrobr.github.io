@@ -2,6 +2,7 @@
   {
     "listing": "/index.html",
     "items": [
+      "/posts/2025-01-29-DeepSeekR1.html",
       "/posts/2025-01-03-OptimizingLLMAttention.html",
       "/posts/2024-11-04-KLDivergence.html",
       "/posts/2024-10-23-AgentsRevolution.html",

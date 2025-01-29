@@ -6,10 +6,10 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="dcterms.date" content="2024-10-01">
-<meta name="description" content="Concept of thinking tokens to improve model performance while reasoning.">
+<meta name="dcterms.date" content="2025-01-29">
+<meta name="description" content="DeepSeek-R1 and the aha-moment - a brief description of DeepSeek-R1 achievements.">
 
-<title>Thinking Tokens – Marcel Castro</title>
+<title>DeepSeek-R1 and the aha-moment – Marcel Castro</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -78,35 +78,6 @@ gtag('js', new Date());
 gtag('config', 'G-RK1QNXR9TB', { 'anonymize_ip': true});
 </script>
 
-  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
-
-<script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN") {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
-      }
-    }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
-</script>
 
 <link rel="stylesheet" href="../styles.css">
 </head>
@@ -187,14 +158,14 @@ window.Quarto = {
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
-      <h1 class="title">Thinking Tokens</h1>
+      <h1 class="title">DeepSeek-R1 and the aha-moment</h1>
                   <div>
         <div class="description">
-          Concept of thinking tokens to improve model performance while reasoning.
+          DeepSeek-R1 and the aha-moment - a brief description of DeepSeek-R1 achievements.
         </div>
       </div>
                           <div class="quarto-categories">
-                <div class="quarto-category">LLM, transformers, Tokens</div>
+                <div class="quarto-category">LLM, RL, Reasoning</div>
               </div>
                   </div>
   </div>
@@ -206,7 +177,7 @@ window.Quarto = {
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">October 1, 2024</p>
+        <p class="date">January 29, 2025</p>
       </div>
     </div>
     
@@ -228,18 +199,17 @@ window.Quarto = {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#thinking-tokens" id="toc-thinking-tokens" class="nav-link active" data-scroll-target="#thinking-tokens">Thinking Tokens</a>
+  <li><a href="#deepseek-r1-and-the-aha-moment" id="toc-deepseek-r1-and-the-aha-moment" class="nav-link active" data-scroll-target="#deepseek-r1-and-the-aha-moment">✨ DeepSeek-R1 and the “aha-moment” ✨</a>
   <ul class="collapse">
-  <li><a href="#related-work" id="toc-related-work" class="nav-link" data-scroll-target="#related-work">Related Work:</a>
-  <ul class="collapse">
-  <li><a href="#chain-of-thought-cot-differences" id="toc-chain-of-thought-cot-differences" class="nav-link" data-scroll-target="#chain-of-thought-cot-differences">Chain of Thought (CoT) Differences</a></li>
-  </ul></li>
-  <li><a href="#latest-developments" id="toc-latest-developments" class="nav-link" data-scroll-target="#latest-developments">Latest Developments:</a>
-  <ul class="collapse">
-  <li><a href="#marco-o1-by-macopolo-team-in-alibaba" id="toc-marco-o1-by-macopolo-team-in-alibaba" class="nav-link" data-scroll-target="#marco-o1-by-macopolo-team-in-alibaba">Marco-o1 by MacoPolo Team in Alibaba</a></li>
-  <li><a href="#experiences-with-qnq" id="toc-experiences-with-qnq" class="nav-link" data-scroll-target="#experiences-with-qnq">Experiences with QnQ:</a></li>
-  </ul></li>
-  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References:</a></li>
+  <li><a href="#the-art-of-reasoning-tokens" id="toc-the-art-of-reasoning-tokens" class="nav-link" data-scroll-target="#the-art-of-reasoning-tokens">🧠 <strong>The art of reasoning tokens</strong></a></li>
+  <li><a href="#what-is-deepseek-r1" id="toc-what-is-deepseek-r1" class="nav-link" data-scroll-target="#what-is-deepseek-r1">🤔 What is DeepSeek-R1</a></li>
+  <li><a href="#the-aha-moment" id="toc-the-aha-moment" class="nav-link" data-scroll-target="#the-aha-moment">💡 <strong>The “aha moment”</strong> :</a></li>
+  <li><a href="#rejection-sampling-and-sft" id="toc-rejection-sampling-and-sft" class="nav-link" data-scroll-target="#rejection-sampling-and-sft">📝 <strong>Rejection sampling and SFT</strong></a></li>
+  <li><a href="#rl-for-all-scenarios" id="toc-rl-for-all-scenarios" class="nav-link" data-scroll-target="#rl-for-all-scenarios">🌐 <strong>RL for all scenarios</strong></a></li>
+  <li><a href="#distilled-models" id="toc-distilled-models" class="nav-link" data-scroll-target="#distilled-models">🧪 <strong>Distilled Models: </strong></a></li>
+  <li><a href="#other-interesting-points" id="toc-other-interesting-points" class="nav-link" data-scroll-target="#other-interesting-points">🔍 <strong>Other interesting points:</strong></a></li>
+  <li><a href="#conclusion-the-future-implications-of-deepseek-r1-in-ai" id="toc-conclusion-the-future-implications-of-deepseek-r1-in-ai" class="nav-link" data-scroll-target="#conclusion-the-future-implications-of-deepseek-r1-in-ai">🚀 Conclusion: The Future Implications of DeepSeek-R1 in AI</a></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">📚<strong>References:</strong></a></li>
   </ul></li>
   </ul>
 </nav>
@@ -251,177 +221,119 @@ window.Quarto = {
 
 
 
-<section id="thinking-tokens" class="level1">
-<h1>Thinking Tokens</h1>
-<p><strong>Thinking tokens</strong> concept (also known as reasoning tokens) enables more intelligence to large models during inference. Until now, the rule to get more intelligent models was only possible through pre-training large model following the “scaling laws”, i.e.&nbsp;adding more training data and computing to pretrain large models.</p>
-<p>Now with the concept of “thinking tokens” you can achieve more intelligence with the introduction of a model reasoning while doing the next token prediction.</p>
+<section id="deepseek-r1-and-the-aha-moment" class="level1">
+<h1>✨ DeepSeek-R1 and the “aha-moment” ✨</h1>
+<p><a href="https://arxiv.org/abs/2501.12948">DeepSeek-R1</a> is the latest large language model from the Chinese company DeepSeek. This model showcase a significant leap in AI capabilities. Unlike traditional models that rely heavily on supervised fine-tuning (SFT) to get started, DeepSeek-R1 uses large-scale Reinforcement Learning (RL) to boost its reasoning skills. This innovative approach allows DeepSeek-R1 to perform on par with top closed models like OpenAI-o1-1217, without needing extensive pre-training.</p>
+<p>DeepSeek-R1’s multi-stage training pipeline, which includes using cold-start data before RL, sets it apart from its predecessors. By incorporating reasoning tokens during inference, DeepSeek-R1 can generate smarter responses, making it a powerful tool for tackling complex reasoning tasks. This model not only shows the potential of RL in enhancing AI performance but also paves the way for future advancements in the field.</p>
 <blockquote class="blockquote">
-<p>&lt;|startofthought|&gt; and &lt;|endofthought|&gt;</p>
+<p><em>DeepSeek-R1: more intelligence via inference-time scaling through increasing the length of the Chain-of-Though reasoning process.</em></p>
 </blockquote>
-<p>The idea of thinking tokens has been introduced by some authors such as <a href="https://arxiv.org/abs/2403.09629">Quiet-STaR: Language Models Can Teach Themselves to Think Before Speaking</a>, <a href="https://platform.openai.com/docs/guides/reasoning">o1 model</a> from OpenAI and latest <a href="https://arxiv.org/abs/2501.12948">DeepSeek-R1</a>. Thinking tokens are named reasoning tokens by OpenAI.</p>
-<p>The basic concept is to generate “thinking tokens” at inference time to help model to predict next token. A key challenge is to efficiently generate rationales at each token position in the input sequence. However, as pointed out by simply creating a separate forward pass for each token would be computationally intractable for longer sentences.</p>
+<p>The figure below illustrates DeepSeek-R1’s ability to solve complex reasoning tasks by leveraging extended test-time computation. More steps represent more thinking, allowing the model to explore and refine its thought process in greater depth.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="./assets/image-20241002100759413.png" class="img-fluid figure-img"></p>
-<figcaption>image-20241002100759413</figcaption>
+<p><img src="./assets/image-20250129080442881.png" class="img-fluid figure-img"></p>
+<figcaption>DeepSeek-R1</figcaption>
 </figure>
 </div>
-<p>Picture: <a href="https://arxiv.org/abs/2403.09629">Quiet-STaR</a></p>
-<p>According to authors, this is done at the inference pass of a language model, when it produces the probability distribution over the next tokens for all input tokens. The solution in Quiet-STaR implements it by <em>caching each forward pass and concatenating a diagonal attention mask to the previous attention mask. Thus each generated token attends to all of the tokens that were used to generate it, as well as itself.</em> But it does not consider the token on the other “counterfactual” paths.</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="./assets/image-20241002101133078.png" class="img-fluid figure-img"></p>
-<figcaption>image-20241002101133078</figcaption>
-</figure>
-</div>
+<section id="the-art-of-reasoning-tokens" class="level3">
+<h3 class="anchored" data-anchor-id="the-art-of-reasoning-tokens">🧠 <strong>The art of reasoning tokens</strong></h3>
+<p>Reasoning tokens (also named <a href="https://marcelcastrobr.github.io/posts/2024-10-02-ThinkingTokens.html">thinking tokens</a>) enables more intelligence to large models during inference. Until now, the rule to get more intelligent models was only possible through pre-training large model following the “<a href="https://arxiv.org/pdf/2203.15556">scaling laws</a>”, i.e.&nbsp;adding more training data and computing to pretrain large models.</p>
+<p>Now with the concept of “reasoning tokens” you can achieve more intelligence with the introduction of a model reasoning while doing the next token prediction. This concept has been introduced by <a href="https://arxiv.org/abs/2403.09629">Quiet-STaR</a>, <a href="https://platform.openai.com/docs/guides/reasoning">OpenAI o1</a>, <a href="https://qwenlm.github.io/blog/qwq-32b-preview/">QnQ</a> and latest <a href="https://arxiv.org/abs/2501.12948">DeepSeek-R1</a>.</p>
 <blockquote class="blockquote">
-<p>Interestingly, not all tokens requires equal amount of thought .</p>
+<p>&lt;|startofthought|&gt; and &lt;|endofthought|&gt; or <reasoning_process> as in DeepSeek-R1</reasoning_process></p>
 </blockquote>
-<p>Interestingly, not all tokens requires equal amount of thought . Thus the thinking token technique does not benefit all tokens equally. For example the sentence “<strong>the person is run-</strong>”, the “<strong>ing</strong>” is most probably the token with highest probability and there the additional thinking is unlike to improve a well-trained prediction model.</p>
-<p>Thus complex reasoning task such as GSM8K are the ones that would benefit more from the thinking token technique.</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="./assets/image-20241002101210020.png" class="img-fluid figure-img"></p>
-<figcaption>image-20241002101210020</figcaption>
-</figure>
-</div>
-<p>Results:</p>
+<p>The basic concept is to generate “thinking tokens” at inference time to help model to predict next token. A key challenge is to efficiently generate rationales at each token position in the input sequence.</p>
 <blockquote class="blockquote">
-<p>Amount of thinking tokens increase the accuracy of the models.</p>
+
 </blockquote>
-<p>As show in figure below, more thinking tokens improve the GSM8K accuracy as the training steps icreases.</p>
+</section>
+<section id="what-is-deepseek-r1" class="level3">
+<h3 class="anchored" data-anchor-id="what-is-deepseek-r1">🤔 What is DeepSeek-R1</h3>
+<p>DeepSeek-R1 is the based on the DeepSeek-R1-Zero model which is the <a href="https://arxiv.org/pdf/2412.19437v1">DeepSeek-v3-base</a> model with large scale RL without SFT. DeepSeek-R1-Zero encountered challenges in relation to poor readability and language mixing. DeepSeek-R1 address this issue by incorporating multi-stage training and cold-start data before RL. The figure below illustrate the main building locks used to derive DeepSeek-R1.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="./assets/image-20241002100915950.png" class="img-fluid figure-img"></p>
-<figcaption>image-20241002100915950</figcaption>
+<p><img src="./assets/image-20250128141446714.png" class="img-fluid figure-img"></p>
+<figcaption>DeepSeek-R1 building blocks</figcaption>
 </figure>
 </div>
-<section id="related-work" class="level2">
-<h2 class="anchored" data-anchor-id="related-work">Related Work:</h2>
-<p><strong><a href="https://docs.google.com/presentation/d/1GmZmoWOa2O92BPrncRcTKa15xvQGhq7g4I4hJSNlC0M/edit?pli=1#slide=id.g3058058dd40_3_90">Can LLMs learn to think before they speak</a></strong> is a question that several researchers are exploring in order to generate robust internal reasoning processes <strong>targeting both training and inference</strong> (ref. OpenAI o1-model).</p>
-<p><img src="./assets/image-20241014104857732.png" alt="image-20241014104857732" style="zoom:50%;"></p>
-<p>Based on <a href="https://github.com/GAIR-NLP/O1-Journey?tab=readme-ov-file">O1 Replication Journey: A Strategic Progress Report by Qin et. al</a>, the following approaches are relevant when trying to answer the question.</p>
-<p><strong>Process-level Reward (PRM) Model:</strong> provide fine-grained evaluations of responses from LLMs, specially in mathematical reasoning. The PRMs technique assess model correctness while enhancing post-training quality through search methods such as Monte Carlo Tree Search.</p>
-<p><strong>Chain of Thought (CoT) Theory</strong>: CoT has advanced reasoning capabilities of LLMs, as intermediate reasoning steps has enhanced LLM performance on tasks such as arithmetic and common sense reasoning. According to researchers, CoT empowers decoder-only models as it enabled inherently serial computations.</p>
-<p><strong>Internal Thought</strong>: Represents the capability of LLMs to reflect on their reasoning and refinement of its outputs. <strong>Quiet-STaR</strong> is an approach which following the “Internal Thought” solution by training language models to generate rationales after each token, helping them predict and explain future text more effectively. The work of <a href="https://arxiv.org/pdf/2406.12050">Zhang et. al (2024)</a> introduces the embedding reflection within each training instance, which encourage the models to review their decisions and consider alternatives paths.</p>
+<p>The <strong>multi-stage pipeline</strong> is composed by the following steps:</p>
+<ol type="1">
+<li>Several thousands of cold-start Chain of Thought (CoT) data to fine-tune the base model</li>
+<li>Reinforcement Learning stage using GPRO and similar to DeepSeek-R1-Zero.</li>
+<li>A SFT through rejection sampling data plus supervised data from DeepSeek-v3 in domains such as writing, factual QA and self-cognition -&gt; ~600k data points</li>
+<li>Additional RL with prompts in order to make the model harmless and helpful.</li>
+</ol>
+<p>The <strong>cold-start</strong> are long Chain-of-through data used to to fine-tune the model. Cold-start data brings readability advantages by including a summary at the end of each response and filtering out responses that are no reader-friendly following the pattern: <em>|speacial_token | <reasoning_process> | special_token | &lt; summary &gt;.</reasoning_process></em></p>
+<p>The <strong>Reinforced Learning</strong> (RL) technique used is named GRPO (<a href="https://arxiv.org/abs/2402.03300">Group Relative Policy Optimization</a>). Unlike traditional RL methods which rely heavily on external evaluators (critics) to guide learning, GRPO optimizes the model by evaluating groups of responses relative to one another.</p>
+<p>GRPO mainly uses 2 reward functions:</p>
+<ul>
+<li><p>accuracy rewards: which evaluates whether the response is correct. (e.g.&nbsp;math problem with deterministic results and final answer, unit tests for code as accuracy computation).</p></li>
+<li><p>format rewards: which enforces thinking process by rewarding model if it separates the “thinking” and the “answer” parts by <think> tags.</think></p></li>
+</ul>
+<p>The figure below by <a href="https://newsletter.languagemodels.co/p/the-illustrated-deepseek-r1">Jay Alammar</a>, provides an excellent illustration example of such RL technique using reward signals. More information on GRPO on the paper <a href="https://arxiv.org/abs/2402.03300">DeepSeekMath: Pushing the Limits of Mathematical Reasoning in Open Language Models</a>.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="./assets/image-20241014101904756.png" class="img-fluid figure-img"></p>
-<figcaption>image-20241014101904756</figcaption>
-</figure>
-</div>
-<p>Source: <a href="https://arxiv.org/pdf/2406.12050">Zhang et. al (2024)</a></p>
-<p><strong>Inference Time Scaling:</strong> the idea is that scaling inference time can provide more efficient model performance in comparison the current scaling laws theorem (i.e.&nbsp;increase of number of parameters and training data volume to increase model intelligence). By allowing model more time to process and refine their outputs during inference an alternative scaling dimension appears providing resource efficiency and adaptable computation and consequently reasoning improvements through step-by-step interactive refinement.</p>
-<p><strong>Search-to-thought</strong>: CoT has gained attention as it improve performance by generating intermediate reasoning steps without search. <a href="https://arxiv.org/pdf/2311.01460">Implicit Chain-of-Thought Reasoning</a> bypass the need for generating explicit reasoning steps as it can relies on internal hidden states of the model. This is done by using knowledge distilled from a teacher model - training to generate intermediate steps, and allowing student models to solve tasks more efficiently by reasoning vertically through their internal layers (Ref. <a href="https://github.com/GAIR-NLP/O1-Journey?tab=readme-ov-file">O1 Replication Journey: A Strategic Progress Report by Qin et. al</a>).</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="./assets/image-20241014103154723.png" class="img-fluid figure-img"></p>
-<figcaption>image-20241014103154723</figcaption>
-</figure>
-</div>
-<p><strong>Source</strong>: <a href="https://arxiv.org/pdf/2311.01460">Implicit Chain-of-Thought Reasoning</a></p>
-<p><strong>Self-improvement in LLM:</strong> those methods rely on model learning from its outputs without human intervention. Examples are Supervised Fine Tunning (SFT) and preference optimization such as DPO. Here the quality of the model is a function of the external reward system in the form of a reward model, human evaluator or LLM-as-a-Judge prompting. However, <em>finding has suggested that LLM-generated texts often exhibit truncated “tails” - i.e.&nbsp;the distribution of generated output lacks variability found in human-generated content, and can lead to model collapse phenomenon (model converging to a narrower range of behaviors and harming performance</em>) (ref. <a href="https://arxiv.org/pdf/2305.17493">Shumailov, et. al.&nbsp;(2024)</a>).</p>
-<section id="chain-of-thought-cot-differences" class="level3">
-<h3 class="anchored" data-anchor-id="chain-of-thought-cot-differences">Chain of Thought (CoT) Differences</h3>
-<p>Some differences highlighted by Quiet-STaR authors (<a href="https://community.openai.com/t/papers-quiet-star-language-models-can-teach-themselves-to-think-before-speaking/686158/3">here</a>) while comparing thinking tokens to CoT are:</p>
-<ul>
-<li>Different from CoT, model is trained using RL (reinforcement learning) to generate more useful thoughts.</li>
-<li>Rewards model used to generate inner monologues that helps to predict text instead of answers to specific questions - less domain specific.</li>
-</ul>
-<p>As pointed by OpenAI <a href="https://platform.openai.com/docs/guides/reasoning/advice-on-prompting">here</a> CoT might undermine “thinking tokens”. Thus a best practice are:</p>
-<ul>
-<li><strong>Avoid chain-of-thought prompts:</strong> Since these models perform reasoning internally, prompting them to “think step by step” or “explain your reasoning” is unnecessary.</li>
-<li><strong>Limit additional context in retrieval-augmented generation (RAG):</strong> When providing additional context or documents, include only the most relevant information to prevent the model from overcomplicating its response.</li>
-</ul>
-</section>
-</section>
-<section id="latest-developments" class="level2">
-<h2 class="anchored" data-anchor-id="latest-developments">Latest Developments:</h2>
-<section id="marco-o1-by-macopolo-team-in-alibaba" class="level3">
-<h3 class="anchored" data-anchor-id="marco-o1-by-macopolo-team-in-alibaba">Marco-o1 by MacoPolo Team in Alibaba</h3>
-<p>Marco-o1 is inspired by OpenAI o1 and leverages different techniques such as:</p>
-<ul>
-<li><strong>CoT (Chain of Thought) fine-tuning</strong></li>
-<li><strong>MCTS (Monte Carlo Tree Search):</strong> allow exploration of multiple reasoning paths using confidence scores derived from softmax-applied log probability of the top-k alternative tokens.</li>
-<li><strong>Reasoning Action Strategies:</strong> allow to vary granularity of actions within steps and mini-steps to optimize search efficiency and accuracy -</li>
-</ul>
-<p>Marco-o1 is a fine tuning of Qwen2-7B-Instruct with a combination of filtered Open-O1 CoT dataset, Marco-o1 CoT dataset and Marco-o1 instruction dataset.</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="./assets/image-20241202094701319.png" class="img-fluid figure-img"></p>
-<figcaption>image-20241202094701319</figcaption>
-</figure>
-</div>
-<p>Picture from <a href="https://arxiv.org/pdf/2411.14405v2">Marco-o1</a></p>
-<section id="mcts-monte-carlo-tree-search" class="level4">
-<h4 class="anchored" data-anchor-id="mcts-monte-carlo-tree-search">**MCTS (Monte Carlo Tree Search):</h4>
-<p>The Monte Carlo Tree Search enhance the reasoning capability of the model and it is integrated in the model as following:</p>
-<ul>
-<li><strong>Nodes as reasoning states:</strong> each node represents a reasoning state of the problem-solving process.</li>
-<li><strong>Actions as LLM outputs</strong>: the possible actions from a node are the LLM generated outputs. Each output is a potential step or mini-step in the reasoning chain.</li>
-<li><strong>Rollout and reward calculation</strong>: during rollout, the LLM continues the reasoning to a terminal state.</li>
-<li><strong>Guiding MCTS</strong>: the reward score R is used to evaluate and select promising paths within the MCTS, guiding the search towards a reliable reasoning chains.</li>
-</ul>
-<p>Figure above show <strong><em>v</em></strong>, the average confidence score across all tokens to derive the overall <strong>reward score</strong>. Where n is the total number of tokens in the rollout sequence. A higher v indicates a more confident and accurate reasoning path.</p>
-<p>The confidence score of each state <em>c</em> is calculated by applying a softmax function to its log probability and the log probabilities of the top 5 alternative tokens. Thus <em>ci</em> is the confidence score for the ith token in the rollout. <span class="math display">\[
-c_{i} = \frac{exp(p(t_{i}))}{\sum_{k=1}^{5}{exp(p(t_{k}))}}
-\]</span></p>
-</section>
-<section id="reasoning-action-strategies" class="level4">
-<h4 class="anchored" data-anchor-id="reasoning-action-strategies">Reasoning Action Strategies:</h4>
-<p>Reasoning action strategies is implemented to allow different levels of granularity in the MCTS search. For example, the concept of <strong>mini-steps</strong> represents a search space in MCTS in steps composed by smaller units of 64 or 32 tokens. According to authors, it is impractical due to computational resources to execute token level search.</p>
-<ul>
-<li><strong>step as action</strong>: model generate complete reasoning steps as actions, where each MCTS node represents an entire thought or action label.</li>
-<li><strong>Mini-step as action</strong>: mini-steps of 32 or 64 tokens used as action giving finer granularity to expand the solution space and improve model ability to reasoning tasks by considering mode nuances steps in the search process.</li>
-</ul>
-<p>A reflection mechanism “<strong><em>Wait! Maybe I made some mistakes! I need to rethink from scratch.</em></strong>” is added at the end of each though process. This allow the model to self reflect and reevaluate its reasoning steps. As described by <a href="https://arxiv.org/pdf/2411.14405v2">authors</a>, the reflection step serves as an internal feedback loop allowing the model to self correct without external intervention.</p>
-</section>
-</section>
-<section id="experiences-with-qnq" class="level3">
-<h3 class="anchored" data-anchor-id="experiences-with-qnq">Experiences with <a href="https://huggingface.co/spaces/Qwen/QwQ-32B-preview">QnQ</a>:</h3>
-<p><strong>Qwen with Questions (QwQ)</strong> from Alibaba is a strong open-source competitor to OpenAI’s GPT-o1 reasoning model. QwQ is available in a 32-billion-parameter preview version with a 32,000-token context.</p>
-<p>Based on the blog <a href="https://qwenlm.github.io/blog/qwq-32b-preview/">QwQ: Reflect Deeply on the Boundaries of the Unknown</a>, QnQ has provided important capabilities in challenging mathematical and programming datasets, like:</p>
-<ul>
-<li><strong>GPQA</strong>: A Graduate-Level Google-Proof Q&amp;A Benchmark, a challenging benchmark for evaluating scientific problem-solving abilities through grade school level questions.</li>
-<li><strong>AIME</strong>: American Invitation Mathematics Evaluation, which tests mathematical problem solving with arithmetic, algebra, counting, geometry, number theory, and probability and other secondary school math topics.</li>
-<li><strong>MATH-500</strong>: The 500 test cases of the MATH benchmark, a comprehensive dataset testing mathematical problem-solving.</li>
-<li><strong>LiveCodeBench</strong>: A challenging benchmark for evaluating code generation and problem solving abilities in real-world programming scenarios.</li>
-</ul>
-<p>Results below show QnQ graduate-level scientific reasoning.</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="./assets/image-20241202092445198.png" class="img-fluid figure-img"></p>
-<figcaption>image-20241202092445198</figcaption>
-</figure>
-</div>
-<p>To verify it, I used the QnQ model deployed in HuggingFace <a href="https://huggingface.co/spaces/Qwen/QwQ-32B-preview">here</a> and prompted the same question as in the blog. See section below the “not-so-great” results, which does not follow the results shown by the blog.</p>
-<section id="experiments-with-qnq-32b-preview" class="level4">
-<h4 class="anchored" data-anchor-id="experiments-with-qnq-32b-preview">Experiments with QnQ 32B preview</h4>
-<p><strong>Prompt</strong>: Please add a pair of parentheses to the incorrect equation: 1 + 2 * 3 + 4 * 5 + 6 * 7 + 8 * 9 = 479, to make the equation true.</p>
-<p><strong>Answer</strong>: No</p>
-<p><strong>Date:</strong> 02.12.2024</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="./assets/image-20241202091019004.png" class="img-fluid figure-img"></p>
-<figcaption>image-20241202091019004</figcaption>
+<p><img src="./assets/image-20250129083112616.png" class="img-fluid figure-img"></p>
+<figcaption>Large-scale RL by Jay Alammar</figcaption>
 </figure>
 </div>
 </section>
+<section id="the-aha-moment" class="level3">
+<h3 class="anchored" data-anchor-id="the-aha-moment">💡 <strong>The “aha moment”</strong> :</h3>
+<p>The model self-evolution through RL indicates its capability to reflect by revisiting and reevaluating previous steps and exploring alternative approaches through problem solving by using extended test-time computing during reasoning.</p>
+<blockquote class="blockquote">
+<p>The self-evolution process of DeepSeek-R1 is fascinating as it demonstrate how RL can drive the model to improve its reasoning capabilities autonomously. By initiating RL directly from the base model, the author could monitor model progression without the influence of the supervised fine -tuning stage - indicating how model evolves overtime and its ability to handle complex reasoning tasks by leveraging extended <strong>test-time computing</strong>.</p>
+</blockquote>
+<p>In addition to RL, DeepSeek-R1-Zero can be further augmented through the application of majority voting.</p>
 </section>
+<section id="rejection-sampling-and-sft" class="level3">
+<h3 class="anchored" data-anchor-id="rejection-sampling-and-sft">📝 <strong>Rejection sampling and SFT</strong></h3>
+<p>Rejection sampling and SFT is applied using data from other domains to enhance the model’s capability in writing, role-playing and other general-purpose tasks. For reasoning data this is done using generative reward model with ground-truth and DeepSeek-v3 as a judge (i.e.&nbsp;600k reasoning training samples in total). For non-reasoning data such as writing, factual QA, self-cognition and translation, the DeepSeek-v3 pipeline is used including reuse of portions of the SFT dataset of DeepSeek-v3 (200k training samples in total).</p>
 </section>
-<section id="references" class="level2">
-<h2 class="anchored" data-anchor-id="references">References:</h2>
+<section id="rl-for-all-scenarios" class="level3">
+<h3 class="anchored" data-anchor-id="rl-for-all-scenarios">🌐 <strong>RL for all scenarios</strong></h3>
+<p>RL is used to further align the model with human preferences through a secondary RL stage to improve model helpfulness and harmlessness. Rule-based rewards is used to guide the learn process in math, code and logical reasoning domains, using the same distribution of preference pairs and training prompts used by <a href="https://arxiv.org/pdf/2412.19437v1">DeepSeek-v3</a> pipeline.</p>
+</section>
+<section id="distilled-models" class="level3">
+<h3 class="anchored" data-anchor-id="distilled-models">🧪 <strong>Distilled Models: </strong></h3>
+<p>Fine-tuning is used as a distillation method to empower small models with reason capabilities like DeepSeek-R1. DeepSeek released 6 dense models (1.5B - 70B range) based on Qwen/Llama and distilled from DeepSeek-R1 using 800k curated samples. For distilled modes only SFT is applied (no RL stage included).</p>
+</section>
+<section id="other-interesting-points" class="level3">
+<h3 class="anchored" data-anchor-id="other-interesting-points">🔍 <strong>Other interesting points:</strong></h3>
 <ul>
-<li><p><a href="https://arxiv.org/abs/2403.09629">Quiet-STaR: Language Models Can Teach Themselves to Think Before Speaking</a></p></li>
-<li><p><a href="https://platform.openai.com/docs/guides/reasoning">Reasoning Models by OpenAI</a></p></li>
-<li><p><a href="https://github.com/GAIR-NLP/O1-Journey?tab=readme-ov-file">O1 Replication Journey: A Strategic Progress Report by Qin et. al</a></p></li>
-<li><p><a href="https://www.stateof.ai/">State of AI Report 2024 by Nathan Benaich</a></p></li>
-<li><p><strong>Model:</strong> <a href="https://arxiv.org/pdf/2411.14405v2">Marco-o1: Towards Open Reasoning Models for Open-Ended Solutions</a></p></li>
-<li><p><strong>Model:</strong> <a href="https://github.com/Open-Source-O1/Open-O1">Open O1: A Model Matching Proprietary Power with Open-Source Innovation</a></p></li>
-<li><p><strong>Dataset:</strong> <a href="https://huggingface.co/datasets/O1-OPEN/OpenO1-SFT?row=14">Open O1 SFT</a></p></li>
-<li><p><a href="https://github.com/hijkzzz/Awesome-LLM-Strawberry">Awesome-LLM-Strawberry -OpenAI Strawberry(o1) and Reasoning</a></p></li>
-<li><p><a href="https://diamantai.substack.com/p/teaching-machines-to-reason?r=336pe4&amp;utm_campaign=post&amp;utm_medium=web&amp;triedRedirect=true">Teaching Machines to Reason by Diamantai</a></p></li>
+<li>Despite advocating that model distillation are both economical and effective methods, the DeepSeek’s authors highlight that advancements beyond the boundaries of intelligence may still require <strong>powerful base models</strong> and <strong>large-scale RL</strong>.</li>
+<li>Monte Carlo Tree Search (MCTS), which is used by AlphaGo and AlphaZero, has also been proposed as a technique to enhance test-time compute scalability. But DeepSeek’s authors has seen scaling limitation during training as token generation presents an exponentially large search space compared to chess.</li>
+<li><a href="https://arxiv.org/pdf/2412.19437v1">DeepSeek-v3-base</a> is used as the base model for DeepSeek-R1 and follows a Mixture of Expert (MoE) architecture. It has 671 billion parameters where 37 billion is activated for each token. See my previous post <a href="https://marcelcastrobr.github.io/posts/2024-05-19-UnderstandingMistureOfExperts.html">Understanding Mixture of Expert</a> for additional information on MoE architectures.</li>
+<li>DeepSeek-v3-base uses Multi-Head Latent Attention (MLA) as its attention mechanism. MLA proposes a low-rank joint compression for the attention keys and values in order to reduce KV (Key-Value) cache during inference. See the Multi-Head Latent Attention section in my post <a href="https://marcelcastrobr.github.io/posts/2025-01-03-OptimizingLLMAttention.html#multi-head-latent-attention">The Power of Focus: Understanding Attention Mechanisms in LLM</a> for more information and references.</li>
 </ul>
+</section>
+<section id="conclusion-the-future-implications-of-deepseek-r1-in-ai" class="level3">
+<h3 class="anchored" data-anchor-id="conclusion-the-future-implications-of-deepseek-r1-in-ai">🚀 Conclusion: The Future Implications of DeepSeek-R1 in AI</h3>
+<p>DeepSeek-R1 shows how large-scale Reinforcement Learning (RL) can improve reasoning without extensive supervised fine-tuning (SFT). By using multi-stage training and cold-start data, DeepSeek-R1 matches the performance of top models.</p>
+<p>Key points highlighted in this article include:</p>
+<ul>
+<li><strong>Multi-stage Training</strong>: Combining cold-start data, RL, and SFT to enhance the model.</li>
+<li><strong>Reinforcement Learning</strong>: Using Group Relative Policy Optimization (GRPO) to improve responses.</li>
+<li><strong>Reasoning Tokens</strong>: Generating “thinking tokens” to boost reasoning.</li>
+<li><strong>Self-Evolution</strong>: The model improves itself through RL.</li>
+<li><strong>Distilled Models</strong>: Smaller models gain similar reasoning abilities through fine-tuning.</li>
+</ul>
+<p>DeepSeek-R1’s success highlights the potential of RL and reasoning tokens for creating smarter AI. This model opens new possibilities for AI applications in various fields, from language processing to decision-making.</p>
+</section>
+<section id="references" class="level3">
+<h3 class="anchored" data-anchor-id="references">📚<strong>References:</strong></h3>
+<ul>
+<li><a href="https://github.com/deepseek-ai/DeepSeek-R1/blob/main/DeepSeek_R1.pdf">DeepSeek-R1 Technical Report</a></li>
+<li><a href="https://arxiv.org/abs/2501.12948">DeepSeek-R1: Incentivizing Reasoning Capability in LLMs via Reinforcement Learning by DeepSeek-AI</a></li>
+<li><a href="https://medium.com/@sahin.samia/the-math-behind-deepseek-a-deep-dive-into-group-relative-policy-optimization-grpo-8a75007491ba">The Math Behind DeepSeek: A Deep Dive into Group Relative Policy Optimization (GRPO) by Ahmed</a></li>
+<li><a href="https://newsletter.languagemodels.co/p/the-illustrated-deepseek-r1">The Ilustrated DeepSeek-R1 by Jay Alammar</a></li>
+<li><a href="https://arxiv.org/abs/2403.09629">Quiet-STaR: Language Models Can Teach Themselves to Think Before Speaking</a></li>
+</ul>
+<blockquote class="blockquote">
+<p>[!TIP]</p>
+<p>For a fully open reproduction of DeepSeek-R1, check <a href="https://github.com/huggingface/open-r1">Open R1 project by Hugging Face</a>.</p>
+<p>By the way you can use the <a href="https://apps.apple.com/in/app/deepseek-ai-assistant/id6737597349">DeepSeek’s AI assistant</a> app in the Apple App Store.</p>
+</blockquote>
 
 
 </section>
