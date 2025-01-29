@@ -249,7 +249,8 @@ gtag('config', 'G-RK1QNXR9TB', { 'anonymize_ip': true});
 </section>
 <section id="what-is-deepseek-r1" class="level3">
 <h3 class="anchored" data-anchor-id="what-is-deepseek-r1">🤔 What is DeepSeek-R1</h3>
-<p>DeepSeek-R1 is the based on the DeepSeek-R1-Zero model which is the <a href="https://arxiv.org/pdf/2412.19437v1">DeepSeek-v3-base</a> model with large scale RL without SFT. DeepSeek-R1-Zero encountered challenges in relation to poor readability and language mixing. DeepSeek-R1 address this issue by incorporating multi-stage training and cold-start data before RL. The figure below illustrate the main building locks used to derive DeepSeek-R1.</p>
+<p>DeepSeek-R1 is the based on the DeepSeek-R1-Zero model which is the <a href="https://arxiv.org/pdf/2412.19437v1">DeepSeek-v3-base</a> model with large scale RL without SFT. DeepSeek-R1-Zero encountered challenges in relation to poor readability and language mixing. DeepSeek-R1 address this issue by incorporating multi-stage training and cold-start data before RL.</p>
+<p>The figure below illustrate the main building blocks used to derive DeepSeek-R1.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="./assets/image-20250128141446714.png" class="img-fluid figure-img"></p>
@@ -258,12 +259,12 @@ gtag('config', 'G-RK1QNXR9TB', { 'anonymize_ip': true});
 </div>
 <p>The <strong>multi-stage pipeline</strong> is composed by the following steps:</p>
 <ol type="1">
-<li>Several thousands of cold-start Chain of Thought (CoT) data to fine-tune the base model</li>
+<li>Several thousands of cold-start Chain of Thought (CoT) data to fine-tune the base model.</li>
 <li>Reinforcement Learning stage using GPRO and similar to DeepSeek-R1-Zero.</li>
-<li>A SFT through rejection sampling data plus supervised data from DeepSeek-v3 in domains such as writing, factual QA and self-cognition -&gt; ~600k data points</li>
+<li>A SFT through rejection sampling data plus supervised data from DeepSeek-v3 in domains such as writing, factual QA and self-cognition -&gt; ~600k data points.</li>
 <li>Additional RL with prompts in order to make the model harmless and helpful.</li>
 </ol>
-<p>The <strong>cold-start</strong> are long Chain-of-through data used to to fine-tune the model. Cold-start data brings readability advantages by including a summary at the end of each response and filtering out responses that are no reader-friendly following the pattern: <em>|speacial_token | <reasoning_process> | special_token | &lt; summary &gt;.</reasoning_process></em></p>
+<p>The <strong>cold-start</strong> are long Chain-of-through data used to fine-tune the model. Cold-start data brings readability advantages by including a summary at the end of each response and filtering out responses that are no reader-friendly following the pattern: <em>|speacial_token | <reasoning_process> | special_token | &lt; summary &gt;.</reasoning_process></em></p>
 <p>The <strong>Reinforced Learning</strong> (RL) technique used is named GRPO (<a href="https://arxiv.org/abs/2402.03300">Group Relative Policy Optimization</a>). Unlike traditional RL methods which rely heavily on external evaluators (critics) to guide learning, GRPO optimizes the model by evaluating groups of responses relative to one another.</p>
 <p>GRPO mainly uses 2 reward functions:</p>
 <ul>
@@ -282,7 +283,7 @@ gtag('config', 'G-RK1QNXR9TB', { 'anonymize_ip': true});
 <h3 class="anchored" data-anchor-id="the-aha-moment">💡 <strong>The “aha moment”</strong> :</h3>
 <p>The model self-evolution through RL indicates its capability to reflect by revisiting and reevaluating previous steps and exploring alternative approaches through problem solving by using extended test-time computing during reasoning.</p>
 <blockquote class="blockquote">
-<p>The self-evolution process of DeepSeek-R1 is fascinating as it demonstrate how RL can drive the model to improve its reasoning capabilities autonomously. By initiating RL directly from the base model, the author could monitor model progression without the influence of the supervised fine -tuning stage - indicating how model evolves overtime and its ability to handle complex reasoning tasks by leveraging extended <strong>test-time computing</strong>.</p>
+<p>“The self-evolution process of DeepSeek-R1 is fascinating as it demonstrate how RL can drive the model to improve its reasoning capabilities autonomously. By initiating RL directly from the base model, the author could monitor model progression without the influence of the supervised fine -tuning stage - indicating how model evolves overtime and its ability to handle complex reasoning tasks by leveraging extended <strong>test-time computing</strong>.”</p>
 </blockquote>
 <p>In addition to RL, DeepSeek-R1-Zero can be further augmented through the application of majority voting.</p>
 </section>
@@ -303,8 +304,8 @@ gtag('config', 'G-RK1QNXR9TB', { 'anonymize_ip': true});
 <ul>
 <li>Despite advocating that model distillation are both economical and effective methods, the DeepSeek’s authors highlight that advancements beyond the boundaries of intelligence may still require <strong>powerful base models</strong> and <strong>large-scale RL</strong>.</li>
 <li>Monte Carlo Tree Search (MCTS), which is used by AlphaGo and AlphaZero, has also been proposed as a technique to enhance test-time compute scalability. But DeepSeek’s authors has seen scaling limitation during training as token generation presents an exponentially large search space compared to chess.</li>
-<li><a href="https://arxiv.org/pdf/2412.19437v1">DeepSeek-v3-base</a> is used as the base model for DeepSeek-R1 and follows a Mixture of Expert (MoE) architecture. It has 671 billion parameters where 37 billion is activated for each token. See my previous post <a href="https://marcelcastrobr.github.io/posts/2024-05-19-UnderstandingMistureOfExperts.html">Understanding Mixture of Expert</a> for additional information on MoE architectures.</li>
-<li>DeepSeek-v3-base uses Multi-Head Latent Attention (MLA) as its attention mechanism. MLA proposes a low-rank joint compression for the attention keys and values in order to reduce KV (Key-Value) cache during inference. See the Multi-Head Latent Attention section in my post <a href="https://marcelcastrobr.github.io/posts/2025-01-03-OptimizingLLMAttention.html#multi-head-latent-attention">The Power of Focus: Understanding Attention Mechanisms in LLM</a> for more information and references.</li>
+<li><a href="https://arxiv.org/pdf/2412.19437v1">DeepSeek-v3-base</a> is used as the base model for DeepSeek-R1 and follows a <strong>Mixture of Expert (MoE)</strong> architecture. It has 671 billion parameters where 37 billion is activated for each token. See my previous post <a href="https://marcelcastrobr.github.io/posts/2024-05-19-UnderstandingMistureOfExperts.html">Understanding Mixture of Expert</a> for additional information on MoE architectures.</li>
+<li>DeepSeek-v3-base uses <strong>Multi-Head Latent Attention (MLA)</strong> as its attention mechanism. MLA proposes a low-rank joint compression for the attention keys and values in order to reduce KV (Key-Value) cache during inference. See the Multi-Head Latent Attention section in my post <a href="https://marcelcastrobr.github.io/posts/2025-01-03-OptimizingLLMAttention.html#multi-head-latent-attention">The Power of Focus: Understanding Attention Mechanisms in LLM</a> for more information and references.</li>
 </ul>
 </section>
 <section id="conclusion-the-future-implications-of-deepseek-r1-in-ai" class="level3">
