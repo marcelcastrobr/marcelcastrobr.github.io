@@ -6,10 +6,10 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="dcterms.date" content="2024-10-01">
-<meta name="description" content="Concept of thinking tokens to improve model performance while reasoning.">
+<meta name="dcterms.date" content="2025-05-29">
+<meta name="description" content="Introduction to MCP and how to run it in Snowflake.">
 
-<title>Thinking Tokens – Marcel Castro</title>
+<title>The Model Context Protocol - What and How to run in Snowflake – Marcel Castro</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -21,6 +21,41 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -79,35 +114,6 @@ gtag('js', new Date());
 gtag('config', 'G-RK1QNXR9TB', { 'anonymize_ip': true});
 </script>
 
-  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
-
-<script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN") {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
-      }
-    }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
-</script>
 
 <link rel="stylesheet" href="../styles.css">
 </head>
@@ -188,14 +194,14 @@ window.Quarto = {
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
-      <h1 class="title">Thinking Tokens</h1>
+      <h1 class="title">The Model Context Protocol - What and How to run in Snowflake</h1>
                   <div>
         <div class="description">
-          Concept of thinking tokens to improve model performance while reasoning.
+          Introduction to MCP and how to run it in Snowflake.
         </div>
       </div>
                           <div class="quarto-categories">
-                <div class="quarto-category">LLM, transformers, Tokens</div>
+                <div class="quarto-category">LLM, MCP, Snowflake</div>
               </div>
                   </div>
   </div>
@@ -207,7 +213,7 @@ window.Quarto = {
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">October 1, 2024</p>
+        <p class="date">May 29, 2025</p>
       </div>
     </div>
     
@@ -229,18 +235,22 @@ window.Quarto = {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#thinking-tokens" id="toc-thinking-tokens" class="nav-link active" data-scroll-target="#thinking-tokens">Thinking Tokens</a>
+  <li><a href="#computer---snowflake-the-model-context-protocol-mcp---what-and-how-to-run-in-snowflake" id="toc-computer---snowflake-the-model-context-protocol-mcp---what-and-how-to-run-in-snowflake" class="nav-link active" data-scroll-target="#computer---snowflake-the-model-context-protocol-mcp---what-and-how-to-run-in-snowflake">:computer: -&gt; :snowflake: The Model Context Protocol (MCP) - What and How to run in Snowflake</a></li>
+  <li><a href="#section" id="toc-section" class="nav-link" data-scroll-target="#section"></a>
   <ul class="collapse">
-  <li><a href="#related-work" id="toc-related-work" class="nav-link" data-scroll-target="#related-work">Related Work:</a>
+  <li><a href="#what-is-mcp-model-context-protocol" id="toc-what-is-mcp-model-context-protocol" class="nav-link" data-scroll-target="#what-is-mcp-model-context-protocol">What is MCP (Model Context Protocol)</a></li>
+  <li><a href="#why-mcp-the-mxn-integration-challenge" id="toc-why-mcp-the-mxn-integration-challenge" class="nav-link" data-scroll-target="#why-mcp-the-mxn-integration-challenge">Why MCP: The MxN Integration Challenge</a></li>
+  <li><a href="#mcp-components" id="toc-mcp-components" class="nav-link" data-scroll-target="#mcp-components">MCP Components</a></li>
+  <li><a href="#mcp-architecture" id="toc-mcp-architecture" class="nav-link" data-scroll-target="#mcp-architecture">MCP Architecture</a></li>
+  <li><a href="#the-mcp-communication-protocol" id="toc-the-mcp-communication-protocol" class="nav-link" data-scroll-target="#the-mcp-communication-protocol">The MCP Communication Protocol</a>
   <ul class="collapse">
-  <li><a href="#chain-of-thought-cot-differences" id="toc-chain-of-thought-cot-differences" class="nav-link" data-scroll-target="#chain-of-thought-cot-differences">Chain of Thought (CoT) Differences</a></li>
+  <li><a href="#the-mcp-communication-protocol-message-types" id="toc-the-mcp-communication-protocol-message-types" class="nav-link" data-scroll-target="#the-mcp-communication-protocol-message-types">The MCP Communication Protocol: Message Types</a></li>
   </ul></li>
-  <li><a href="#latest-developments" id="toc-latest-developments" class="nav-link" data-scroll-target="#latest-developments">Latest Developments:</a>
-  <ul class="collapse">
-  <li><a href="#marco-o1-by-macopolo-team-in-alibaba" id="toc-marco-o1-by-macopolo-team-in-alibaba" class="nav-link" data-scroll-target="#marco-o1-by-macopolo-team-in-alibaba">Marco-o1 by MacoPolo Team in Alibaba</a></li>
-  <li><a href="#experiences-with-qnq" id="toc-experiences-with-qnq" class="nav-link" data-scroll-target="#experiences-with-qnq">Experiences with QnQ:</a></li>
-  </ul></li>
-  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References:</a></li>
+  <li><a href="#mcp-sdk---software-defined-kit" id="toc-mcp-sdk---software-defined-kit" class="nav-link" data-scroll-target="#mcp-sdk---software-defined-kit">MCP SDK - Software Defined Kit</a></li>
+  <li><a href="#when-to-use-mcp-to-be-done" id="toc-when-to-use-mcp-to-be-done" class="nav-link" data-scroll-target="#when-to-use-mcp-to-be-done"><strong>When to use MCP </strong>(To Be Done)</a></li>
+  <li><a href="#how-to-use-mcp-in-snowflake-to-be-done" id="toc-how-to-use-mcp-in-snowflake-to-be-done" class="nav-link" data-scroll-target="#how-to-use-mcp-in-snowflake-to-be-done">How to use MCP in Snowflake (To Be Done)</a></li>
+  <li><a href="#things-to-consider" id="toc-things-to-consider" class="nav-link" data-scroll-target="#things-to-consider">🤔 Things to Consider</a></li>
+  <li><a href="#reference" id="toc-reference" class="nav-link" data-scroll-target="#reference">📚 Reference:</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -252,177 +262,183 @@ window.Quarto = {
 
 
 
-<section id="thinking-tokens" class="level1">
-<h1>Thinking Tokens</h1>
-<p><strong>Thinking tokens</strong> concept (also known as reasoning tokens) enables more intelligence to large models during inference. Until now, the rule to get more intelligent models was only possible through pre-training large model following the “scaling laws”, i.e.&nbsp;adding more training data and computing to pretrain large models.</p>
-<p>Now with the concept of “thinking tokens” you can achieve more intelligence with the introduction of a model reasoning while doing the next token prediction.</p>
+<section id="computer---snowflake-the-model-context-protocol-mcp---what-and-how-to-run-in-snowflake" class="level1">
+<h1>:computer: -&gt; :snowflake: The Model Context Protocol (MCP) - What and How to run in Snowflake</h1>
+</section>
+<section id="section" class="level1">
+<h1></h1>
+<p>This article provides my atempt to describe what is MCP (Model Context Protocol) and how you can use it. It will also provide examples of how to use it torwards <a href="https://docs.snowflake.com/en/user-guide/snowflake-cortex/cortex-agents">Snowflake Cortex Agent.</a></p>
+<section id="what-is-mcp-model-context-protocol" class="level2">
+<h2 class="anchored" data-anchor-id="what-is-mcp-model-context-protocol">What is MCP (Model Context Protocol)</h2>
+<p>Often described as the “<strong>USB-C for AI Applications</strong>”. Why? Just as USB-C provides standardized interface for connecting various devices, MCP offers a protocol for connecting AI model to external capabilities, like databases, APIs, etc.</p>
+</section>
+<section id="why-mcp-the-mxn-integration-challenge" class="level2">
+<h2 class="anchored" data-anchor-id="why-mcp-the-mxn-integration-challenge">Why MCP: The MxN Integration Challenge</h2>
+<p>With the increasing numbers of AI tools and data providers, the lack of single implementation that works with multiple AI applications becomes the <strong>MxN intregation challenge</strong>: M different AI applications tha needs to talk to N different external tools or data sources.</p>
+<p><img src="./assets/image-20250529102319923.png" alt="image-20250529102319923" style="zoom:50%;"></p>
+<p>Picture by: Author</p>
+<p>With MCP, AI applications implements the <strong>MCP client</strong> and the tools and data sources implements the <strong>MCP server</strong>.</p>
+<p><img src="./assets/image-20250529102939406.png" alt="image-20250529102939406" style="zoom:80%;"></p>
+<p>Picture by: Author</p>
+</section>
+<section id="mcp-components" class="level2">
+<h2 class="anchored" data-anchor-id="mcp-components">MCP Components</h2>
+<p>MCP follows the distributed system principle where devices (mcp clients and mcp servers) cooperate to achieve a common goal, often coodidating through a network protocol (ref. <a href="https://en.wikipedia.org/wiki/Distributed_computing#:~:text=Distributed%20systems%20are%20groups%20of,coupled%20form%20of%20parallel%20computing.">Distributed computing by Wikepedia</a>).</p>
+<p>Thus MCP components and its tasks are:</p>
+<ul>
+<li><strong>Host AI application:</strong> user AI application where users interact with such as Claude Desktop, Cursor or customer applications built with libraries like LangChain and LlammaIndex.</li>
+<li><strong>MCP client</strong>: component which is part of the host AI application managing the communication with the MCP server(s) in a 1-to-1 connection client-server.</li>
+<li><strong>MCP server</strong>: remote server exposing capabilities such as resources, tools and prompts via the MCP protocol. It can run locally or remotely.</li>
+<li><strong>MCP Protocol</strong>: the open protocol enabling integration between client and server based on JSON-RPC message format and stateful connections (ref. <a href="https://modelcontextprotocol.io/specification/2025-03-26">MCP protocol specification</a>).</li>
+</ul>
+</section>
+<section id="mcp-architecture" class="level2">
+<h2 class="anchored" data-anchor-id="mcp-architecture">MCP Architecture</h2>
+<p>MCP follows the client-server architecture as described below. It is a modular architecture where clients can connect to multiple servers. Given the distributed system principle in this architecture, important features such as <strong>safety</strong>, <strong>extensibility</strong> and <strong>interoperability</strong> is very important.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="./assets/image-20250529112047828.png" class="img-fluid figure-img"></p>
+<figcaption>image-20250529112047828</figcaption>
+</figure>
+</div>
+<p>Picture by: <a href="https://modelcontextprotocol.io/introduction">modelcontextprotocol.io</a></p>
+<section id="capabilities" class="level4">
+<h4 class="anchored" data-anchor-id="capabilities"><strong>Capabilities:</strong></h4>
+<p>In MCP client and server run discovery message to understand which capabilities the server contains. Currently in MCP the capabilities are:</p>
+<ul>
+<li><strong>Tools</strong>: Functions that can be called by the LLM (with user approval).
+<ul>
+<li>Usecases are sending messages, creating tickets, querying APIs, performing calculations.</li>
+</ul></li>
+<li><strong>Resource</strong>: File-like data that can be read by clients (like GET API responses or file contents).
+<ul>
+<li>Usecases are accessing file contents, retrieving database records, reading configuration information.</li>
+</ul></li>
+<li><strong>Prompts</strong>: Pre-written templates that help users accomplish specific tasks.
+<ul>
+<li>Usecases are common workflows, specialized task templates, guided interactions.</li>
+</ul></li>
+</ul>
+<p>Clients can offer <strong>sampling</strong>, a server-initiated agentic behaviour and recursive LLM interactions, as a feature to servers. Common usecases here are complex multi-step tasks, autonomous agent workflows, and interactive processes.</p>
+<p>See here an example of a simple <a href="https://github.com/modelcontextprotocol/quickstart-resources/tree/main/weather-server-python">MCP weather server in python</a>.</p>
+</section>
+</section>
+<section id="the-mcp-communication-protocol" class="level2">
+<h2 class="anchored" data-anchor-id="the-mcp-communication-protocol">The MCP Communication Protocol</h2>
+<p>The <a href="https://modelcontextprotocol.io/">Model Context Protocol</a> (MCP) is an open protocol that enables seamless integration between LLM applications and external data sources and tools.</p>
+<p>MCP uses JSON-RPC 2.0 message format for client-server communication, which is a remote procedure call protocol encoded in JSON, making it human readable and language agnostic.</p>
+<p>The transport mechanisms are <strong>stdio</strong> (standard input/ouput) or <strong>HTTP+SSE / Streamable HTTP</strong>.</p>
+<p><strong>stdio</strong> is used for local communication where client and server run on the same host.</p>
+<p><strong>HTTP+SSE ( Server-Sent Events) / Streamable HTTP</strong> is used for remote communication.</p>
 <blockquote class="blockquote">
-<p>&lt;|startofthought|&gt; and &lt;|endofthought|&gt;</p>
+<p>[!NOTE]</p>
+<p>Streamable HTTP replaces the <a href="https://modelcontextprotocol.io/specification/2024-11-05/basic/transports#http-with-sse">HTTP+SSE transport</a> from protocol version 2024-11-05. See the <a href="https://modelcontextprotocol.io/specification/2025-03-26/basic/transports#backwards-compatibility">backwards compatibility</a> guide.</p>
 </blockquote>
-<p>The idea of thinking tokens has been introduced by some authors such as <a href="https://arxiv.org/abs/2403.09629">Quiet-STaR: Language Models Can Teach Themselves to Think Before Speaking</a>, <a href="https://platform.openai.com/docs/guides/reasoning">o1 model</a> from OpenAI and latest <a href="https://arxiv.org/abs/2501.12948">DeepSeek-R1</a>. Thinking tokens are named reasoning tokens by OpenAI.</p>
-<p>The basic concept is to generate “thinking tokens” at inference time to help model to predict next token. A key challenge is to efficiently generate rationales at each token position in the input sequence. However, as pointed out by simply creating a separate forward pass for each token would be computationally intractable for longer sentences.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="./assets/image-20241002100759413.png" class="img-fluid figure-img"></p>
-<figcaption>image-20241002100759413</figcaption>
+<p><img src="./assets/image-20250529121314460.png" class="img-fluid figure-img"></p>
+<figcaption>image-20250529121314460</figcaption>
 </figure>
 </div>
-<p>Picture: <a href="https://arxiv.org/abs/2403.09629">Quiet-STaR</a></p>
-<p>According to authors, this is done at the inference pass of a language model, when it produces the probability distribution over the next tokens for all input tokens. The solution in Quiet-STaR implements it by <em>caching each forward pass and concatenating a diagonal attention mask to the previous attention mask. Thus each generated token attends to all of the tokens that were used to generate it, as well as itself.</em> But it does not consider the token on the other “counterfactual” paths.</p>
+<p>Picture by: <a href="https://modelcontextprotocol.io/introduction">modelcontextprotocol.io</a></p>
+<section id="the-mcp-communication-protocol-message-types" class="level3">
+<h3 class="anchored" data-anchor-id="the-mcp-communication-protocol-message-types">The MCP Communication Protocol: Message Types</h3>
+<p>The messages type defined by the protocol (2025-03-26 (Latest)) are:</p>
+<section id="requests" class="level4">
+<h4 class="anchored" data-anchor-id="requests">Requests</h4>
+<div class="sourceCode" id="cb1"><pre class="sourceCode json code-with-copy"><code class="sourceCode json"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">{</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="er">jsonrpc</span><span class="fu">:</span> <span class="st">"2.0"</span><span class="er">;</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="er">id:</span> <span class="er">string</span> <span class="er">|</span> <span class="er">number;</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  <span class="er">method:</span> <span class="er">string;</span> <span class="er">-&gt;</span> <span class="er">e.g.:</span>  <span class="er">tools/calls</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  <span class="er">params?:</span> <span class="fu">{</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    <span class="er">[key</span><span class="fu">:</span> <span class="er">string]:</span> <span class="er">unknown;</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">}</span><span class="er">;</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="fu">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="responses" class="level4">
+<h4 class="anchored" data-anchor-id="responses">Responses</h4>
+<div class="sourceCode" id="cb2"><pre class="sourceCode json code-with-copy"><code class="sourceCode json"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">{</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="er">jsonrpc</span><span class="fu">:</span> <span class="st">"2.0"</span><span class="er">;</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="er">id:</span> <span class="er">string</span> <span class="er">|</span> <span class="er">number;</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="er">result?:</span> <span class="fu">{</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    <span class="er">[key</span><span class="fu">:</span> <span class="er">string]:</span> <span class="er">unknown;</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">}</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>  <span class="er">error?:</span> <span class="fu">{</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>    <span class="er">code</span><span class="fu">:</span> <span class="er">number;</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>    <span class="er">message:</span> <span class="er">string;</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>    <span class="er">data?:</span> <span class="er">unknown;</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">}</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="fu">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="notifications" class="level4">
+<h4 class="anchored" data-anchor-id="notifications">Notifications</h4>
+<div class="sourceCode" id="cb3"><pre class="sourceCode json code-with-copy"><code class="sourceCode json"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">{</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="er">jsonrpc</span><span class="fu">:</span> <span class="st">"2.0"</span><span class="er">;</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="er">method:</span> <span class="er">string;</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="er">params?:</span> <span class="fu">{</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    <span class="er">[key</span><span class="fu">:</span> <span class="er">string]:</span> <span class="er">unknown;</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">}</span><span class="er">;</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="fu">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Notifications are one-way message that do not require response as it is tipically sent from server to client to provide updates and/or notifications about events.</p>
+<p>See below the interaction between client and server using the MCP protocol message types (inspired by <a href="https://huggingface.co/learn/mcp-course/unit1/communication-protocol">MCP course by HuggingFace</a>).</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="./assets/image-20241002101133078.png" class="img-fluid figure-img"></p>
-<figcaption>image-20241002101133078</figcaption>
+<p><img src="./assets/image-20250529115757008.png" class="img-fluid figure-img"></p>
+<figcaption>image-20250529115757008</figcaption>
 </figure>
 </div>
+<p>The full specification of the protocol is defined as a <a href="https://github.com/modelcontextprotocol/specification/blob/main/schema/2025-03-26/schema.ts">TypeScript schema</a>.</p>
+</section>
+</section>
+</section>
+<section id="mcp-sdk---software-defined-kit" class="level2">
+<h2 class="anchored" data-anchor-id="mcp-sdk---software-defined-kit">MCP SDK - Software Defined Kit</h2>
+<p>Currently the MCP SDK is available for <a href="https://github.com/modelcontextprotocol/python-sdk">Python</a>, TypeScript, Java, Kotlin, C# and Swift.</p>
+<p>The code example below from the <a href="https://github.com/modelcontextprotocol/python-sdk">MCP Python SDK</a> presents a simple MCP server that expose a calculator tool and some data example .</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># server.py</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> mcp.server.fastmcp <span class="im">import</span> FastMCP</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Create an MCP server</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>mcp <span class="op">=</span> FastMCP(<span class="st">"Demo"</span>)</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Add an addition tool</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="at">@mcp.tool</span>()</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> add(a: <span class="bu">int</span>, b: <span class="bu">int</span>) <span class="op">-&gt;</span> <span class="bu">int</span>:</span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Add two numbers"""</span></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> a <span class="op">+</span> b</span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Add a dynamic greeting resource</span></span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a><span class="at">@mcp.resource</span>(<span class="st">"greeting://</span><span class="sc">{name}</span><span class="st">"</span>)</span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> get_greeting(name: <span class="bu">str</span>) <span class="op">-&gt;</span> <span class="bu">str</span>:</span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Get a personalized greeting"""</span></span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="ss">f"Hello, </span><span class="sc">{</span>name<span class="sc">}</span><span class="ss">!"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="when-to-use-mcp-to-be-done" class="level2">
+<h2 class="anchored" data-anchor-id="when-to-use-mcp-to-be-done"><strong>When to use MCP </strong>(To Be Done)</h2>
+<p>When you need a single AI assistant to access external data or tools - like searching documents, scheduling meetings, or querying databases.</p>
+</section>
+<section id="how-to-use-mcp-in-snowflake-to-be-done" class="level2">
+<h2 class="anchored" data-anchor-id="how-to-use-mcp-in-snowflake-to-be-done">How to use MCP in Snowflake (To Be Done)</h2>
+<p>Quickstart: https://quickstarts.snowflake.com/guide/mcp-server-for-cortex-agents/index.html Repo: https://github.com/Snowflake-Labs/sfguide-mcp-cortex-agents</p>
+</section>
+<section id="things-to-consider" class="level2">
+<h2 class="anchored" data-anchor-id="things-to-consider">🤔 Things to Consider</h2>
+</section>
+<section id="reference" class="level2">
+<h2 class="anchored" data-anchor-id="reference">📚 Reference:</h2>
+<ul>
+<li><a href="https://www.linkedin.com/posts/eordax_ai-agentic-llm-activity-7323622305232744451-Ui2r?utm_source=share&amp;utm_medium=member_desktop&amp;rcm=ACoAAAMLrWgBHLbSh09-i54JZEgS64XZCzcR5H0">Workflow behind MCP and A2A</a></li>
+<li>Course: <a href="https://learn.deeplearning.ai/courses/mcp-build-rich-context-ai-apps-with-anthropic/lesson/f4wo9/appendix-%E2%80%93-tips-and-help">MCP: Build Rich-Context AI Apps with Anthropic</a></li>
+<li>Course: <a href="https://huggingface.co/learn/mcp-course">MCP Course by HuggingFace</a></li>
+<li><a href="https://github.com/daveebbelaar/ai-cookbook/tree/main/mcp/crash-course/6-run-with-docker">MCP server with Docker</a></li>
+<li><a href="https://auth0.com/blog/an-introduction-to-mcp-and-authorization/">An Introduction to MCP and Authorization by Martinez</a></li>
+</ul>
 <blockquote class="blockquote">
-<p>Interestingly, not all tokens requires equal amount of thought .</p>
+<p>[!TIP]</p>
+<p>Get started with your first MCP server using Snowflake using the Snowflake Quickstart <a href="https://quickstarts.snowflake.com/guide/mcp-server-for-cortex-agents/index.html#0">Build an MCP Server for Cortex Agents</a></p>
 </blockquote>
-<p>Interestingly, not all tokens requires equal amount of thought . Thus the thinking token technique does not benefit all tokens equally. For example the sentence “<strong>the person is run-</strong>”, the “<strong>ing</strong>” is most probably the token with highest probability and there the additional thinking is unlike to improve a well-trained prediction model.</p>
-<p>Thus complex reasoning task such as GSM8K are the ones that would benefit more from the thinking token technique.</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="./assets/image-20241002101210020.png" class="img-fluid figure-img"></p>
-<figcaption>image-20241002101210020</figcaption>
-</figure>
-</div>
-<p>Results:</p>
-<blockquote class="blockquote">
-<p>Amount of thinking tokens increase the accuracy of the models.</p>
-</blockquote>
-<p>As show in figure below, more thinking tokens improve the GSM8K accuracy as the training steps icreases.</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="./assets/image-20241002100915950.png" class="img-fluid figure-img"></p>
-<figcaption>image-20241002100915950</figcaption>
-</figure>
-</div>
-<section id="related-work" class="level2">
-<h2 class="anchored" data-anchor-id="related-work">Related Work:</h2>
-<p><strong><a href="https://docs.google.com/presentation/d/1GmZmoWOa2O92BPrncRcTKa15xvQGhq7g4I4hJSNlC0M/edit?pli=1#slide=id.g3058058dd40_3_90">Can LLMs learn to think before they speak</a></strong> is a question that several researchers are exploring in order to generate robust internal reasoning processes <strong>targeting both training and inference</strong> (ref. OpenAI o1-model).</p>
-<p><img src="./assets/image-20241014104857732.png" alt="image-20241014104857732" style="zoom:50%;"></p>
-<p>Based on <a href="https://github.com/GAIR-NLP/O1-Journey?tab=readme-ov-file">O1 Replication Journey: A Strategic Progress Report by Qin et. al</a>, the following approaches are relevant when trying to answer the question.</p>
-<p><strong>Process-level Reward (PRM) Model:</strong> provide fine-grained evaluations of responses from LLMs, specially in mathematical reasoning. The PRMs technique assess model correctness while enhancing post-training quality through search methods such as Monte Carlo Tree Search.</p>
-<p><strong>Chain of Thought (CoT) Theory</strong>: CoT has advanced reasoning capabilities of LLMs, as intermediate reasoning steps has enhanced LLM performance on tasks such as arithmetic and common sense reasoning. According to researchers, CoT empowers decoder-only models as it enabled inherently serial computations.</p>
-<p><strong>Internal Thought</strong>: Represents the capability of LLMs to reflect on their reasoning and refinement of its outputs. <strong>Quiet-STaR</strong> is an approach which following the “Internal Thought” solution by training language models to generate rationales after each token, helping them predict and explain future text more effectively. The work of <a href="https://arxiv.org/pdf/2406.12050">Zhang et. al (2024)</a> introduces the embedding reflection within each training instance, which encourage the models to review their decisions and consider alternatives paths.</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="./assets/image-20241014101904756.png" class="img-fluid figure-img"></p>
-<figcaption>image-20241014101904756</figcaption>
-</figure>
-</div>
-<p>Source: <a href="https://arxiv.org/pdf/2406.12050">Zhang et. al (2024)</a></p>
-<p><strong>Inference Time Scaling:</strong> the idea is that scaling inference time can provide more efficient model performance in comparison the current scaling laws theorem (i.e.&nbsp;increase of number of parameters and training data volume to increase model intelligence). By allowing model more time to process and refine their outputs during inference an alternative scaling dimension appears providing resource efficiency and adaptable computation and consequently reasoning improvements through step-by-step interactive refinement.</p>
-<p><strong>Search-to-thought</strong>: CoT has gained attention as it improve performance by generating intermediate reasoning steps without search. <a href="https://arxiv.org/pdf/2311.01460">Implicit Chain-of-Thought Reasoning</a> bypass the need for generating explicit reasoning steps as it can relies on internal hidden states of the model. This is done by using knowledge distilled from a teacher model - training to generate intermediate steps, and allowing student models to solve tasks more efficiently by reasoning vertically through their internal layers (Ref. <a href="https://github.com/GAIR-NLP/O1-Journey?tab=readme-ov-file">O1 Replication Journey: A Strategic Progress Report by Qin et. al</a>).</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="./assets/image-20241014103154723.png" class="img-fluid figure-img"></p>
-<figcaption>image-20241014103154723</figcaption>
-</figure>
-</div>
-<p><strong>Source</strong>: <a href="https://arxiv.org/pdf/2311.01460">Implicit Chain-of-Thought Reasoning</a></p>
-<p><strong>Self-improvement in LLM:</strong> those methods rely on model learning from its outputs without human intervention. Examples are Supervised Fine Tunning (SFT) and preference optimization such as DPO. Here the quality of the model is a function of the external reward system in the form of a reward model, human evaluator or LLM-as-a-Judge prompting. However, <em>finding has suggested that LLM-generated texts often exhibit truncated “tails” - i.e.&nbsp;the distribution of generated output lacks variability found in human-generated content, and can lead to model collapse phenomenon (model converging to a narrower range of behaviors and harming performance</em>) (ref. <a href="https://arxiv.org/pdf/2305.17493">Shumailov, et. al.&nbsp;(2024)</a>).</p>
-<section id="chain-of-thought-cot-differences" class="level3">
-<h3 class="anchored" data-anchor-id="chain-of-thought-cot-differences">Chain of Thought (CoT) Differences</h3>
-<p>Some differences highlighted by Quiet-STaR authors (<a href="https://community.openai.com/t/papers-quiet-star-language-models-can-teach-themselves-to-think-before-speaking/686158/3">here</a>) while comparing thinking tokens to CoT are:</p>
-<ul>
-<li>Different from CoT, model is trained using RL (reinforcement learning) to generate more useful thoughts.</li>
-<li>Rewards model used to generate inner monologues that helps to predict text instead of answers to specific questions - less domain specific.</li>
-</ul>
-<p>As pointed by OpenAI <a href="https://platform.openai.com/docs/guides/reasoning/advice-on-prompting">here</a> CoT might undermine “thinking tokens”. Thus a best practice are:</p>
-<ul>
-<li><strong>Avoid chain-of-thought prompts:</strong> Since these models perform reasoning internally, prompting them to “think step by step” or “explain your reasoning” is unnecessary.</li>
-<li><strong>Limit additional context in retrieval-augmented generation (RAG):</strong> When providing additional context or documents, include only the most relevant information to prevent the model from overcomplicating its response.</li>
-</ul>
-</section>
-</section>
-<section id="latest-developments" class="level2">
-<h2 class="anchored" data-anchor-id="latest-developments">Latest Developments:</h2>
-<section id="marco-o1-by-macopolo-team-in-alibaba" class="level3">
-<h3 class="anchored" data-anchor-id="marco-o1-by-macopolo-team-in-alibaba">Marco-o1 by MacoPolo Team in Alibaba</h3>
-<p>Marco-o1 is inspired by OpenAI o1 and leverages different techniques such as:</p>
-<ul>
-<li><strong>CoT (Chain of Thought) fine-tuning</strong></li>
-<li><strong>MCTS (Monte Carlo Tree Search):</strong> allow exploration of multiple reasoning paths using confidence scores derived from softmax-applied log probability of the top-k alternative tokens.</li>
-<li><strong>Reasoning Action Strategies:</strong> allow to vary granularity of actions within steps and mini-steps to optimize search efficiency and accuracy -</li>
-</ul>
-<p>Marco-o1 is a fine tuning of Qwen2-7B-Instruct with a combination of filtered Open-O1 CoT dataset, Marco-o1 CoT dataset and Marco-o1 instruction dataset.</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="./assets/image-20241202094701319.png" class="img-fluid figure-img"></p>
-<figcaption>image-20241202094701319</figcaption>
-</figure>
-</div>
-<p>Picture from <a href="https://arxiv.org/pdf/2411.14405v2">Marco-o1</a></p>
-<section id="mcts-monte-carlo-tree-search" class="level4">
-<h4 class="anchored" data-anchor-id="mcts-monte-carlo-tree-search">**MCTS (Monte Carlo Tree Search):</h4>
-<p>The Monte Carlo Tree Search enhance the reasoning capability of the model and it is integrated in the model as following:</p>
-<ul>
-<li><strong>Nodes as reasoning states:</strong> each node represents a reasoning state of the problem-solving process.</li>
-<li><strong>Actions as LLM outputs</strong>: the possible actions from a node are the LLM generated outputs. Each output is a potential step or mini-step in the reasoning chain.</li>
-<li><strong>Rollout and reward calculation</strong>: during rollout, the LLM continues the reasoning to a terminal state.</li>
-<li><strong>Guiding MCTS</strong>: the reward score R is used to evaluate and select promising paths within the MCTS, guiding the search towards a reliable reasoning chains.</li>
-</ul>
-<p>Figure above show <strong><em>v</em></strong>, the average confidence score across all tokens to derive the overall <strong>reward score</strong>. Where n is the total number of tokens in the rollout sequence. A higher v indicates a more confident and accurate reasoning path.</p>
-<p>The confidence score of each state <em>c</em> is calculated by applying a softmax function to its log probability and the log probabilities of the top 5 alternative tokens. Thus <em>ci</em> is the confidence score for the ith token in the rollout. <span class="math display">\[
-c_{i} = \frac{exp(p(t_{i}))}{\sum_{k=1}^{5}{exp(p(t_{k}))}}
-\]</span></p>
-</section>
-<section id="reasoning-action-strategies" class="level4">
-<h4 class="anchored" data-anchor-id="reasoning-action-strategies">Reasoning Action Strategies:</h4>
-<p>Reasoning action strategies is implemented to allow different levels of granularity in the MCTS search. For example, the concept of <strong>mini-steps</strong> represents a search space in MCTS in steps composed by smaller units of 64 or 32 tokens. According to authors, it is impractical due to computational resources to execute token level search.</p>
-<ul>
-<li><strong>step as action</strong>: model generate complete reasoning steps as actions, where each MCTS node represents an entire thought or action label.</li>
-<li><strong>Mini-step as action</strong>: mini-steps of 32 or 64 tokens used as action giving finer granularity to expand the solution space and improve model ability to reasoning tasks by considering mode nuances steps in the search process.</li>
-</ul>
-<p>A reflection mechanism “<strong><em>Wait! Maybe I made some mistakes! I need to rethink from scratch.</em></strong>” is added at the end of each though process. This allow the model to self reflect and reevaluate its reasoning steps. As described by <a href="https://arxiv.org/pdf/2411.14405v2">authors</a>, the reflection step serves as an internal feedback loop allowing the model to self correct without external intervention.</p>
-</section>
-</section>
-<section id="experiences-with-qnq" class="level3">
-<h3 class="anchored" data-anchor-id="experiences-with-qnq">Experiences with <a href="https://huggingface.co/spaces/Qwen/QwQ-32B-preview">QnQ</a>:</h3>
-<p><strong>Qwen with Questions (QwQ)</strong> from Alibaba is a strong open-source competitor to OpenAI’s GPT-o1 reasoning model. QwQ is available in a 32-billion-parameter preview version with a 32,000-token context.</p>
-<p>Based on the blog <a href="https://qwenlm.github.io/blog/qwq-32b-preview/">QwQ: Reflect Deeply on the Boundaries of the Unknown</a>, QnQ has provided important capabilities in challenging mathematical and programming datasets, like:</p>
-<ul>
-<li><strong>GPQA</strong>: A Graduate-Level Google-Proof Q&amp;A Benchmark, a challenging benchmark for evaluating scientific problem-solving abilities through grade school level questions.</li>
-<li><strong>AIME</strong>: American Invitation Mathematics Evaluation, which tests mathematical problem solving with arithmetic, algebra, counting, geometry, number theory, and probability and other secondary school math topics.</li>
-<li><strong>MATH-500</strong>: The 500 test cases of the MATH benchmark, a comprehensive dataset testing mathematical problem-solving.</li>
-<li><strong>LiveCodeBench</strong>: A challenging benchmark for evaluating code generation and problem solving abilities in real-world programming scenarios.</li>
-</ul>
-<p>Results below show QnQ graduate-level scientific reasoning.</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="./assets/image-20241202092445198.png" class="img-fluid figure-img"></p>
-<figcaption>image-20241202092445198</figcaption>
-</figure>
-</div>
-<p>To verify it, I used the QnQ model deployed in HuggingFace <a href="https://huggingface.co/spaces/Qwen/QwQ-32B-preview">here</a> and prompted the same question as in the blog. See section below the “not-so-great” results, which does not follow the results shown by the blog.</p>
-<section id="experiments-with-qnq-32b-preview" class="level4">
-<h4 class="anchored" data-anchor-id="experiments-with-qnq-32b-preview">Experiments with QnQ 32B preview</h4>
-<p><strong>Prompt</strong>: Please add a pair of parentheses to the incorrect equation: 1 + 2 * 3 + 4 * 5 + 6 * 7 + 8 * 9 = 479, to make the equation true.</p>
-<p><strong>Answer</strong>: No</p>
-<p><strong>Date:</strong> 02.12.2024</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="./assets/image-20241202091019004.png" class="img-fluid figure-img"></p>
-<figcaption>image-20241202091019004</figcaption>
-</figure>
-</div>
-</section>
-</section>
-</section>
-<section id="references" class="level2">
-<h2 class="anchored" data-anchor-id="references">References:</h2>
-<ul>
-<li><p><a href="https://arxiv.org/abs/2403.09629">Quiet-STaR: Language Models Can Teach Themselves to Think Before Speaking</a></p></li>
-<li><p><a href="https://platform.openai.com/docs/guides/reasoning">Reasoning Models by OpenAI</a></p></li>
-<li><p><a href="https://github.com/GAIR-NLP/O1-Journey?tab=readme-ov-file">O1 Replication Journey: A Strategic Progress Report by Qin et. al</a></p></li>
-<li><p><a href="https://www.stateof.ai/">State of AI Report 2024 by Nathan Benaich</a></p></li>
-<li><p><strong>Model:</strong> <a href="https://arxiv.org/pdf/2411.14405v2">Marco-o1: Towards Open Reasoning Models for Open-Ended Solutions</a></p></li>
-<li><p><strong>Model:</strong> <a href="https://github.com/Open-Source-O1/Open-O1">Open O1: A Model Matching Proprietary Power with Open-Source Innovation</a></p></li>
-<li><p><strong>Dataset:</strong> <a href="https://huggingface.co/datasets/O1-OPEN/OpenO1-SFT?row=14">Open O1 SFT</a></p></li>
-<li><p><a href="https://github.com/hijkzzz/Awesome-LLM-Strawberry">Awesome-LLM-Strawberry -OpenAI Strawberry(o1) and Reasoning</a></p></li>
-<li><p><a href="https://diamantai.substack.com/p/teaching-machines-to-reason?r=336pe4&amp;utm_campaign=post&amp;utm_medium=web&amp;triedRedirect=true">Teaching Machines to Reason by Diamantai</a></p></li>
-</ul>
 
 
 </section>

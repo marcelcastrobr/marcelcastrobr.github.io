@@ -2,6 +2,7 @@
   {
     "listing": "/index.html",
     "items": [
+      "/posts/2025-05-29-MCPSnowflake.html",
       "/posts/2025-01-29-DeepSeekR1.html",
       "/posts/2025-01-03-OptimizingLLMAttention.html",
       "/posts/2024-11-04-KLDivergence.html",
@@ -20,8 +21,8 @@
       "/posts/2023-03-24-semanticsearchopenai.html",
       "/posts/2022-11-04-stablediffusionsagemaker.html",
       "/posts/2022-01-04-nlpdeeplearning.html",
-      "/posts/image_search.html",
       "/posts/image_search_multilingual.html",
+      "/posts/image_search.html",
       "/posts/2021-12-13-ModelMonitoring.html",
       "/posts/2021-10-31-githubactions-snowflake.html",
       "/posts/2021-10-25-nmf.html",
