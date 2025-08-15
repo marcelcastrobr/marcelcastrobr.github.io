@@ -1,0 +1,803 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.7.33">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="dcterms.date" content="2024-10-23">
+<meta name="description" content="High level overview of AI Agents and evolutions.">
+
+<title>AI Agents Revolution – Marcel Castro</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-ea385d0e468b0dd5ea5bf0780b1290d9.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-d521dac1687b568bac4cd80e48eb8185.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-RK1QNXR9TB"></script>
+
+<script type="text/javascript">
+
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-RK1QNXR9TB', { 'anonymize_ip': true});
+</script>
+
+
+<link rel="stylesheet" href="../styles.css">
+</head>
+
+<body class="nav-fixed quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top quarto-banner">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">Marcel Castro</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="https://marcelcastrobr.github.io/my_ml_notes/"> 
+<span class="menu-text">Notes</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../index.html"> 
+<span class="menu-text">Notebooks</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../about.html"> 
+<span class="menu-text">About</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="https://marcelcastrobr.github.io/my_ml_links/"> 
+<span class="menu-text">Links</span></a>
+  </li>  
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/marcelcastrobr/marcelcastrobr.github.io/blob/main/cv/cv-marcelcastro.pdf"> <i class="bi bi-filetype-pdf" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://marcelcastrobr.github.io/my_ml_links/"> <i class="bi bi-diagram-3-fill" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://huggingface.co/marcelcastrobr"> <i class="bi bi-emoji-smile" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/marcelcastrobr"> <i class="bi bi-github" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://www.linkedin.com/in/marcelcastrobr/"> <i class="bi bi-linkedin" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+  <a href="" class="quarto-reader-toggle quarto-navigation-tool px-1" onclick="window.quartoToggleReader(); return false;" title="Toggle reader mode">
+  <div class="quarto-reader-toggle-btn">
+  <i class="bi"></i>
+  </div>
+</a>
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">AI Agents Revolution</h1>
+                  <div>
+        <div class="description">
+          High level overview of AI Agents and evolutions.
+        </div>
+      </div>
+                          <div class="quarto-categories">
+                <div class="quarto-category">LLM, Agents</div>
+              </div>
+                  </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">October 23, 2024</p>
+      </div>
+    </div>
+    
+      <div>
+      <div class="quarto-title-meta-heading">Modified</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date-modified">May 15, 2025</p>
+      </div>
+    </div>
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#ai-agents-revolution" id="toc-ai-agents-revolution" class="nav-link active" data-scroll-target="#ai-agents-revolution"><span class="emoji" data-emoji="baby">👶</span> AI Agents Revolution</a>
+  <ul class="collapse">
+  <li><a href="#what-has-changed" id="toc-what-has-changed" class="nav-link" data-scroll-target="#what-has-changed"><span class="emoji" data-emoji="question">❓</span> What has changed?</a></li>
+  <li><a href="#things-to-consider-while-building-ai-agents-that-works" id="toc-things-to-consider-while-building-ai-agents-that-works" class="nav-link" data-scroll-target="#things-to-consider-while-building-ai-agents-that-works"><span class="emoji" data-emoji="telescope">🔭</span> Things to Consider while building AI Agents that works</a>
+  <ul class="collapse">
+  <li><a href="#test-toolset-you-need" id="toc-test-toolset-you-need" class="nav-link" data-scroll-target="#test-toolset-you-need"><span class="emoji" data-emoji="hammer_and_pick">⚒️</span> Test: toolset you need</a></li>
+  </ul></li>
+  <li><a href="#how-good-are-those-agents-today" id="toc-how-good-are-those-agents-today" class="nav-link" data-scroll-target="#how-good-are-those-agents-today"><span class="emoji" data-emoji="woman_teacher">👩‍🏫</span> How good are those agents today?</a></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References:</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content quarto-banner-title-block" id="quarto-document-content">
+
+
+
+
+
+<section id="ai-agents-revolution" class="level1">
+<h1><span class="emoji" data-emoji="baby">👶</span> AI Agents Revolution</h1>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="./assets/image-20241023112100724.png" class="img-fluid figure-img"></p>
+<figcaption>AI Agents</figcaption>
+</figure>
+</div>
+<p>In the context of Large Language Models (LLMs), AI Agents are autonomous software entities designed to extend the capabilities of LLMs.</p>
+<p>Recently , we have seen several agent frameworks such as <a href="https://microsoft.github.io/autogen/0.2/">AutoGen</a>, <a href="https://www.crewai.com/">CrewAI</a> and <a href="https://langchain-ai.github.io/langgraph/">LangGraph</a> and examples such as <a href="https://github.com/Significant-Gravitas/AutoGPT">AutoGPT</a> and <a href="https://github.com/yoheinakajima/babyagi">BabyAGI</a>.</p>
+<p>These solutions leverage LLM capabilities and typically consist of the following steps:</p>
+<ul>
+<li><span class="emoji" data-emoji="page_facing_up">📄</span> <strong>Task decomposition</strong>: break complex tasks into smaller, manageable steps.</li>
+<li><span class="emoji" data-emoji="hammer_and_pick">⚒️</span> <strong>Tool integration</strong>: LLM interacting with various tools and APIs to gather data from the environment, such as web scraping tools, calculator and python interpreter.</li>
+<li><span class="emoji" data-emoji="books">📚</span> <strong>Memory</strong>: used to retain information from past interactions, allowing to provide more context information.</li>
+<li><span class="emoji" data-emoji="currency_exchange">💱</span> <strong>Autonomous execution</strong>: once plan is established, the agent can execute the steps autonomously.</li>
+</ul>
+<p>These steps make AI agents powerful as they extend the functionality of LLMs beyond simple generation tasks towards autonomous task execution. For example, <a href="https://arxiv.org/abs/2210.03629">ReAct</a> (Reasoning and Acting) is a common methodology applied to AI agents to improve performance by leveraging reasoning and acting capabilities.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="./assets/image-20241023090742241.png" class="img-fluid figure-img"></p>
+<figcaption>ReAct</figcaption>
+</figure>
+</div>
+<p>Picture by <a href="https://rdi.berkeley.edu/llm-agents-mooc/slides/llm_agent_history.pdf">Shunyu Yao - LLM Agents - Brief History and Overview</a></p>
+<section id="what-has-changed" class="level2">
+<h2 class="anchored" data-anchor-id="what-has-changed"><span class="emoji" data-emoji="question">❓</span> What has changed?</h2>
+<p>So far, AI agent frameworks have needed to communicate with the outside world through tool integration in the form of APIs. However, today Anthropic announced a new approach—<strong>LLMs performing tasks directly on your computer</strong>.</p>
+<p>This is possible using <strong><a href="https://www.anthropic.com/news/3-5-models-and-computer-use">computer use capability</a></strong> available in Claude 3.5 sonnet and Claude 3.5 Haiku.</p>
+<blockquote class="blockquote">
+<p>Available <a href="https://docs.anthropic.com/en/docs/build-with-claude/computer-use?ref=platformer.news">today on the API</a>, developers can direct Claude to use computers the way people do—by looking at a screen, moving a cursor, clicking buttons, and typing text. Claude 3.5 Sonnet is the first frontier AI model to offer computer use in public beta. At this stage, it is still <a href="https://www.anthropic.com/news/developing-computer-use?ref=platformer.news">experimental</a> — at times cumbersome and error-prone. We’re releasing computer use early for feedback from developers, and expect the capability to improve rapidly over time.</p>
+</blockquote>
+<p>According to <a href="https://www.anthropic.com/news/3-5-models-and-computer-use">Anthropic</a>, instead of creating specific tools to help Claude complete individual tasks, we’re <strong>teaching it general computer skills</strong>—allowing it to use a wide range of standard tools and software programs designed for people.</p>
+<p>Examples of Anthropic’s computer use capability include:</p>
+<ul>
+<li>Creating an entire website on the user’s computer and even fixes bugs in the code [<a href="https://www.youtube.com/watch?v=vH2f7cjXjKI">here</a>].</li>
+<li>Using data from user’s computer and online data to fill out forms [<a href="https://www.youtube.com/watch?v=ODaHJzOyVCQ&amp;feature=youtu.be">here</a>].</li>
+<li>Orchestrating a multi-step task by searching the web, using native applications, and creating a plan with the resulting information [<a href="https://www.youtube.com/watch?v=jqx18KgIzAE">here</a>].</li>
+</ul>
+<p>Figure below shows the prompt for the example “Using data from user’s computer and online data to fill out forms” from <a href="https://youtu.be/ODaHJzOyVCQ">youtube video: Computer use for automating operations</a>.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="./assets/image-20241023083751146.png" class="img-fluid figure-img"></p>
+<figcaption>Anthropic’s Computer Use</figcaption>
+</figure>
+</div>
+<p>Picture by Anthropic’s new computer use tool from <a href="https://youtu.be/ODaHJzOyVCQ">Youtube Computer use for automating operations video</a>.</p>
+</section>
+<section id="things-to-consider-while-building-ai-agents-that-works" class="level2">
+<h2 class="anchored" data-anchor-id="things-to-consider-while-building-ai-agents-that-works"><span class="emoji" data-emoji="telescope">🔭</span> Things to Consider while building AI Agents that works</h2>
+<blockquote class="blockquote">
+<p>This section is based on my notes from the presentation given by <a href="https://www.youtube.com/watch?v=BAL5QzWmt2I&amp;list=PL_lyFNnob30vw-q0_Kttx1DrKOSXoDnwU&amp;t=11s">Manjeet Singh, Salesforce</a> on the <a href="https://eur01.safelinks.protection.outlook.com/?url=https%3A%2F%2Fgo.predibase.com%2Fe3t%2FCtc%2FL0%2B113%2Fd2BmB904%2FVVV0pL45txbtN3W8GY5VDQS-VXkGBG5qDK5DN6-TNZ82-ZVTW5BW0B06lZ3kLN6MyJC5L0v21W4qC8S25HQZPRW431hQ95y2hDTN4pDp4N_RqkrW3bpGmk5PMNdqN7pQ1kbXJFr8W80-y-S1KH_-WW8-X96d16zTjDW2zT-nS8pZsv6W3Cc1203_xn19W58MR6c7yCYkTV6vxMf2H9zDNW5zkmbx1lkw-GN5h3tWGS6sTwN7RR6d6wPzK9MNJdB1KSffvW7q23Gb5xdPHTW27QSw-2RLQ8Gf5-dw5K04&amp;data=05%7C02%7Cmarcel.castro%40km.kongsberg.com%7C73954d3f37b449172bc308dd3140a066%7Ca113bc9e1024489c902e5ac8b5fd41ce%7C0%7C0%7C638720875811932030%7CUnknown%7CTWFpbGZsb3d8eyJFbXB0eU1hcGkiOnRydWUsIlYiOiIwLjAuMDAwMCIsIlAiOiJXaW4zMiIsIkFOIjoiTWFpbCIsIldUIjoyfQ%3D%3D%7C0%7C%7C%7C&amp;sdata=MeUEEQcmVYUVDzmrWGwmiQNYXGXbjaVs4dce1TwZQT0%3D&amp;reserved=0">SMALLCON</a> conference by Predibase in Dec.&nbsp;2024.</p>
+</blockquote>
+<p>Important things to consider while building Production-ready AI agents based on steps provided above:</p>
+<ul>
+<li><span class="emoji" data-emoji="page_facing_up">📄</span> <strong>Task decomposition</strong>: Topics</li>
+<li><span class="emoji" data-emoji="hammer_and_pick">⚒️</span> <strong>Tool integration</strong>: Sources, knowledge quality, guardrails</li>
+<li><span class="emoji" data-emoji="books">📚</span> <strong>Memory</strong>: User context, page context</li>
+<li><span class="emoji" data-emoji="currency_exchange">💱</span> <strong>Autonomous execution</strong>: actions, intent, latency</li>
+</ul>
+<p>In addition, as highlight by <a href="https://www.youtube.com/watch?v=BAL5QzWmt2I&amp;list=PL_lyFNnob30vw-q0_Kttx1DrKOSXoDnwU&amp;t=11s">Manjeet Singh, Salesforce</a> customer trust on the agent is important, and common points below need to be considered:</p>
+<p><span class="emoji" data-emoji="exclamation">❗</span> Data privacy and security concerns: e.g.&nbsp;legal</p>
+<p><span class="emoji" data-emoji="exclamation">❗</span> ​lack of confidence in accuracy: “<em>how this will behave in production?</em> <em>I am getting different answer each time</em>”</p>
+<p><span class="emoji" data-emoji="exclamation">❗</span> ​negative past experience: “<em>I tried before and it did not work</em>”</p>
+<p><span class="emoji" data-emoji="exclamation">❗</span> ​ROI and cost concerns: “<em>how to calculate business value</em>?”</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="./assets/image-20250110082320573.png" class="img-fluid figure-img"></p>
+<figcaption>image-20250110082320573</figcaption>
+</figure>
+</div>
+<p>Picture by <a href="https://www.youtube.com/watch?v=BAL5QzWmt2I&amp;list=PL_lyFNnob30vw-q0_Kttx1DrKOSXoDnwU&amp;t=11s">Manjeet Singh, Salesforce</a></p>
+<p>As in in software development best practice, the agent development follows similar steps, which are:</p>
+<p><span class="emoji" data-emoji="arrow_right">➡️</span> Ideate <span class="emoji" data-emoji="arrow_right">➡️</span> Setup <span class="emoji" data-emoji="arrow_right">➡️</span> Configure <span class="emoji" data-emoji="arrow_right">➡️</span> Test <span class="emoji" data-emoji="arrow_right">➡️</span> Deploy <span class="emoji" data-emoji="arrow_right">➡️</span> Monitor <span class="emoji" data-emoji="repeat">🔁</span></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="./assets/image-20250110083443875.png" class="img-fluid figure-img"></p>
+<figcaption>image-20250110083443875</figcaption>
+</figure>
+</div>
+<p>Picture by <a href="https://www.youtube.com/watch?v=BAL5QzWmt2I&amp;list=PL_lyFNnob30vw-q0_Kttx1DrKOSXoDnwU&amp;t=11s">Manjeet Singh, Salesforce</a></p>
+<section id="test-toolset-you-need" class="level3">
+<h3 class="anchored" data-anchor-id="test-toolset-you-need"><span class="emoji" data-emoji="hammer_and_pick">⚒️</span> Test: toolset you need</h3>
+<p>Testing and evaluation during agent application development is very important.</p>
+<p>As in all generative AI usecase, the journey normally looks like this:</p>
+<p><span class="emoji" data-emoji="arrow_right">➡️</span> Select a pre-trained LLM (e.g.&nbsp;gpt-4o or claude 3.5)</p>
+<p><span class="emoji" data-emoji="arrow_right">➡️</span> Prompt Engineering (improve prompt with few shots)</p>
+<p><span class="emoji" data-emoji="arrow_right">➡️</span> Prompt Engineering + RAG (longer prompts, slower inference)</p>
+<p><span class="emoji" data-emoji="arrow_right">➡️</span> Advanced techniques (advanced RAG, finetuning - improve speed, quality and cost)</p>
+<p>Here is an example from <a href="https://www.youtube.com/watch?v=BAL5QzWmt2I&amp;list=PL_lyFNnob30vw-q0_Kttx1DrKOSXoDnwU&amp;t=11s">Manjeet Singh, Salesforce</a> to atomate agent evaluation.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="./assets/image-20250110084935905.png" class="img-fluid figure-img"></p>
+<figcaption>image-20250110084935905</figcaption>
+</figure>
+</div>
+<p>Picture by <a href="https://www.youtube.com/watch?v=BAL5QzWmt2I&amp;list=PL_lyFNnob30vw-q0_Kttx1DrKOSXoDnwU&amp;t=11s">Manjeet Singh, Salesforce</a></p>
+<p>Below is an example of evaluation while considering a RAG (Retrieval Augmented Generation) pipeline.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="./assets/image-20250110085416224.png" class="img-fluid figure-img"></p>
+<figcaption>image-20250110085416224</figcaption>
+</figure>
+</div>
+<p>Picture by <a href="https://www.youtube.com/watch?v=BAL5QzWmt2I&amp;list=PL_lyFNnob30vw-q0_Kttx1DrKOSXoDnwU&amp;t=11s">Manjeet Singh, Salesforce</a></p>
+</section>
+</section>
+<section id="how-good-are-those-agents-today" class="level2">
+<h2 class="anchored" data-anchor-id="how-good-are-those-agents-today"><span class="emoji" data-emoji="woman_teacher">👩‍🏫</span> How good are those agents today?</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="./assets/image-20241023120005090.png" class="img-fluid figure-img"></p>
+<figcaption>Agent Evaluations</figcaption>
+</figure>
+</div>
+<p>Picture by <a href="https://www.linkedin.com/posts/philipp-schmid-a6a2bb196_can-llms-now-control-computers-like-we-do-activity-7254766392921460736-Bx1y?utm_source=share&amp;utm_medium=member_desktop">Philipp Schimid</a></p>
+</section>
+<section id="references" class="level2">
+<h2 class="anchored" data-anchor-id="references">References:</h2>
+<ul>
+<li><a href="[AI Agents: Key Concepts and How They Overcome LLM Limitations - The New Stack](https://thenewstack.io/ai-agents-key-concepts-and-how-they-overcome-llm-limitations/)">AI Agents: Key Concepts and How They Overcome LLM Limitations by TheNewStack</a></li>
+<li><a href="https://www.anthropic.com/news/3-5-models-and-computer-use">Introducing computer use, a new Claude 3.5 Sonnet, and Claude 3.5 Haiku by Anthropic</a> (20241022)</li>
+<li><a href="https://llmagents-learning.org/f24">Berkley Course: Large Language Model Agents by</a> <a href="https://people.eecs.berkeley.edu/~dawnsong/">Dawn Song</a></li>
+<li><a href="https://www.platformer.news/anthropic-ai-agents-computer-use-consequences/?ref=platformer-newsletter">The AI agents have arrived by Casey Newton</a></li>
+<li><a href="https://www.oneusefulthing.org/p/when-you-give-a-claude-a-mouse?utm_campaign=post&amp;utm_medium=web&amp;ref=platformer.news">When you give a Claude a mouse by Ethan Mollick</a></li>
+<li><a href="https://lilianweng.github.io/posts/2023-06-23-agent/">LLM Powered Autonomous Agents | Lil’Log</a></li>
+<li><a href="https://huyenchip.com//2025/01/07/agents.html">Agents by Chip Huyen</a></li>
+</ul>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+        const codeEl = trigger.previousElementSibling.cloneNode(true);
+        for (const childEl of codeEl.children) {
+          if (isCodeAnnotation(childEl)) {
+            childEl.remove();
+          }
+        }
+        return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<input type="hidden" id="giscus-base-theme" value="light">
+<input type="hidden" id="giscus-alt-theme" value="dark">
+<script>
+  function loadGiscus() {
+    // Function to get the theme based on body class
+    const getTheme = () => {
+      let baseTheme = document.getElementById('giscus-base-theme').value;
+      let altTheme = document.getElementById('giscus-alt-theme').value;
+      return document.body.classList.contains('quarto-dark') ? altTheme : baseTheme;
+    };
+    const script = document.createElement("script");
+    script.src = "https://giscus.app/client.js";
+    script.async = true;
+    script.dataset.repo = "marcelcastrobr/marcelcastrobr.github.io";
+    script.dataset.repoId = "R_kgDOIwFH3A";
+    script.dataset.category = "General";
+    script.dataset.categoryId = "DIC_kwDOIwFH3M4Cjnq1";
+    script.dataset.mapping = "title";
+    script.dataset.reactionsEnabled = "1";
+    script.dataset.emitMetadata = "0";
+    script.dataset.inputPosition = "top";
+    script.dataset.theme = getTheme();
+    script.dataset.lang = "en";
+    script.crossOrigin = "anonymous";
+    // Append the script to the desired div instead of at the end of the body
+    document.getElementById("quarto-content").appendChild(script);
+  }
+  loadGiscus();
+</script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">
+<p>Copyright 2023, Marcel Castro</p>
+</div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+
+
+
+
+</body></html>

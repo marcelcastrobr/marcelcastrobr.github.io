@@ -1,0 +1,878 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.7.33">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="dcterms.date" content="2024-10-01">
+<meta name="description" content="Concept of thinking tokens to improve model performance while reasoning.">
+
+<title>Thinking Tokens – Marcel Castro</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-ea385d0e468b0dd5ea5bf0780b1290d9.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-d521dac1687b568bac4cd80e48eb8185.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-RK1QNXR9TB"></script>
+
+<script type="text/javascript">
+
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-RK1QNXR9TB', { 'anonymize_ip': true});
+</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="../styles.css">
+</head>
+
+<body class="nav-fixed quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top quarto-banner">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">Marcel Castro</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="https://marcelcastrobr.github.io/my_ml_notes/"> 
+<span class="menu-text">Notes</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../index.html"> 
+<span class="menu-text">Notebooks</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../about.html"> 
+<span class="menu-text">About</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="https://marcelcastrobr.github.io/my_ml_links/"> 
+<span class="menu-text">Links</span></a>
+  </li>  
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/marcelcastrobr/marcelcastrobr.github.io/blob/main/cv/cv-marcelcastro.pdf"> <i class="bi bi-filetype-pdf" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://marcelcastrobr.github.io/my_ml_links/"> <i class="bi bi-diagram-3-fill" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://huggingface.co/marcelcastrobr"> <i class="bi bi-emoji-smile" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/marcelcastrobr"> <i class="bi bi-github" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://www.linkedin.com/in/marcelcastrobr/"> <i class="bi bi-linkedin" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+  <a href="" class="quarto-reader-toggle quarto-navigation-tool px-1" onclick="window.quartoToggleReader(); return false;" title="Toggle reader mode">
+  <div class="quarto-reader-toggle-btn">
+  <i class="bi"></i>
+  </div>
+</a>
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">Thinking Tokens</h1>
+                  <div>
+        <div class="description">
+          Concept of thinking tokens to improve model performance while reasoning.
+        </div>
+      </div>
+                          <div class="quarto-categories">
+                <div class="quarto-category">LLM, transformers, Tokens</div>
+              </div>
+                  </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">October 1, 2024</p>
+      </div>
+    </div>
+    
+      <div>
+      <div class="quarto-title-meta-heading">Modified</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date-modified">May 15, 2025</p>
+      </div>
+    </div>
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#thinking-tokens" id="toc-thinking-tokens" class="nav-link active" data-scroll-target="#thinking-tokens">Thinking Tokens</a>
+  <ul class="collapse">
+  <li><a href="#related-work" id="toc-related-work" class="nav-link" data-scroll-target="#related-work">Related Work:</a>
+  <ul class="collapse">
+  <li><a href="#chain-of-thought-cot-differences" id="toc-chain-of-thought-cot-differences" class="nav-link" data-scroll-target="#chain-of-thought-cot-differences">Chain of Thought (CoT) Differences</a></li>
+  </ul></li>
+  <li><a href="#latest-developments" id="toc-latest-developments" class="nav-link" data-scroll-target="#latest-developments">Latest Developments:</a>
+  <ul class="collapse">
+  <li><a href="#marco-o1-by-macopolo-team-in-alibaba" id="toc-marco-o1-by-macopolo-team-in-alibaba" class="nav-link" data-scroll-target="#marco-o1-by-macopolo-team-in-alibaba">Marco-o1 by MacoPolo Team in Alibaba</a></li>
+  <li><a href="#experiences-with-qnq" id="toc-experiences-with-qnq" class="nav-link" data-scroll-target="#experiences-with-qnq">Experiences with QnQ:</a></li>
+  </ul></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References:</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content quarto-banner-title-block" id="quarto-document-content">
+
+
+
+
+
+<section id="thinking-tokens" class="level1">
+<h1>Thinking Tokens</h1>
+<p><strong>Thinking tokens</strong> concept (also known as reasoning tokens) enables more intelligence to large models during inference. Until now, the rule to get more intelligent models was only possible through pre-training large model following the “scaling laws”, i.e.&nbsp;adding more training data and computing to pretrain large models.</p>
+<p>Now with the concept of “thinking tokens” you can achieve more intelligence with the introduction of a model reasoning while doing the next token prediction.</p>
+<blockquote class="blockquote">
+<p>&lt;|startofthought|&gt; and &lt;|endofthought|&gt;</p>
+</blockquote>
+<p>The idea of thinking tokens has been introduced by some authors such as <a href="https://arxiv.org/abs/2403.09629">Quiet-STaR: Language Models Can Teach Themselves to Think Before Speaking</a>, <a href="https://platform.openai.com/docs/guides/reasoning">o1 model</a> from OpenAI and latest <a href="https://arxiv.org/abs/2501.12948">DeepSeek-R1</a>. Thinking tokens are named reasoning tokens by OpenAI.</p>
+<p>The basic concept is to generate “thinking tokens” at inference time to help model to predict next token. A key challenge is to efficiently generate rationales at each token position in the input sequence. However, as pointed out by simply creating a separate forward pass for each token would be computationally intractable for longer sentences.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="./assets/image-20241002100759413.png" class="img-fluid figure-img"></p>
+<figcaption>image-20241002100759413</figcaption>
+</figure>
+</div>
+<p>Picture: <a href="https://arxiv.org/abs/2403.09629">Quiet-STaR</a></p>
+<p>According to authors, this is done at the inference pass of a language model, when it produces the probability distribution over the next tokens for all input tokens. The solution in Quiet-STaR implements it by <em>caching each forward pass and concatenating a diagonal attention mask to the previous attention mask. Thus each generated token attends to all of the tokens that were used to generate it, as well as itself.</em> But it does not consider the token on the other “counterfactual” paths.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="./assets/image-20241002101133078.png" class="img-fluid figure-img"></p>
+<figcaption>image-20241002101133078</figcaption>
+</figure>
+</div>
+<blockquote class="blockquote">
+<p>Interestingly, not all tokens requires equal amount of thought .</p>
+</blockquote>
+<p>Interestingly, not all tokens requires equal amount of thought . Thus the thinking token technique does not benefit all tokens equally. For example the sentence “<strong>the person is run-</strong>”, the “<strong>ing</strong>” is most probably the token with highest probability and there the additional thinking is unlike to improve a well-trained prediction model.</p>
+<p>Thus complex reasoning task such as GSM8K are the ones that would benefit more from the thinking token technique.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="./assets/image-20241002101210020.png" class="img-fluid figure-img"></p>
+<figcaption>image-20241002101210020</figcaption>
+</figure>
+</div>
+<p>Results:</p>
+<blockquote class="blockquote">
+<p>Amount of thinking tokens increase the accuracy of the models.</p>
+</blockquote>
+<p>As show in figure below, more thinking tokens improve the GSM8K accuracy as the training steps icreases.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="./assets/image-20241002100915950.png" class="img-fluid figure-img"></p>
+<figcaption>image-20241002100915950</figcaption>
+</figure>
+</div>
+<section id="related-work" class="level2">
+<h2 class="anchored" data-anchor-id="related-work">Related Work:</h2>
+<p><strong><a href="https://docs.google.com/presentation/d/1GmZmoWOa2O92BPrncRcTKa15xvQGhq7g4I4hJSNlC0M/edit?pli=1#slide=id.g3058058dd40_3_90">Can LLMs learn to think before they speak</a></strong> is a question that several researchers are exploring in order to generate robust internal reasoning processes <strong>targeting both training and inference</strong> (ref. OpenAI o1-model).</p>
+<p><img src="./assets/image-20241014104857732.png" alt="image-20241014104857732" style="zoom:50%;"></p>
+<p>Based on <a href="https://github.com/GAIR-NLP/O1-Journey?tab=readme-ov-file">O1 Replication Journey: A Strategic Progress Report by Qin et. al</a>, the following approaches are relevant when trying to answer the question.</p>
+<p><strong>Process-level Reward (PRM) Model:</strong> provide fine-grained evaluations of responses from LLMs, specially in mathematical reasoning. The PRMs technique assess model correctness while enhancing post-training quality through search methods such as Monte Carlo Tree Search.</p>
+<p><strong>Chain of Thought (CoT) Theory</strong>: CoT has advanced reasoning capabilities of LLMs, as intermediate reasoning steps has enhanced LLM performance on tasks such as arithmetic and common sense reasoning. According to researchers, CoT empowers decoder-only models as it enabled inherently serial computations.</p>
+<p><strong>Internal Thought</strong>: Represents the capability of LLMs to reflect on their reasoning and refinement of its outputs. <strong>Quiet-STaR</strong> is an approach which following the “Internal Thought” solution by training language models to generate rationales after each token, helping them predict and explain future text more effectively. The work of <a href="https://arxiv.org/pdf/2406.12050">Zhang et. al (2024)</a> introduces the embedding reflection within each training instance, which encourage the models to review their decisions and consider alternatives paths.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="./assets/image-20241014101904756.png" class="img-fluid figure-img"></p>
+<figcaption>image-20241014101904756</figcaption>
+</figure>
+</div>
+<p>Source: <a href="https://arxiv.org/pdf/2406.12050">Zhang et. al (2024)</a></p>
+<p><strong>Inference Time Scaling:</strong> the idea is that scaling inference time can provide more efficient model performance in comparison the current scaling laws theorem (i.e.&nbsp;increase of number of parameters and training data volume to increase model intelligence). By allowing model more time to process and refine their outputs during inference an alternative scaling dimension appears providing resource efficiency and adaptable computation and consequently reasoning improvements through step-by-step interactive refinement.</p>
+<p><strong>Search-to-thought</strong>: CoT has gained attention as it improve performance by generating intermediate reasoning steps without search. <a href="https://arxiv.org/pdf/2311.01460">Implicit Chain-of-Thought Reasoning</a> bypass the need for generating explicit reasoning steps as it can relies on internal hidden states of the model. This is done by using knowledge distilled from a teacher model - training to generate intermediate steps, and allowing student models to solve tasks more efficiently by reasoning vertically through their internal layers (Ref. <a href="https://github.com/GAIR-NLP/O1-Journey?tab=readme-ov-file">O1 Replication Journey: A Strategic Progress Report by Qin et. al</a>).</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="./assets/image-20241014103154723.png" class="img-fluid figure-img"></p>
+<figcaption>image-20241014103154723</figcaption>
+</figure>
+</div>
+<p><strong>Source</strong>: <a href="https://arxiv.org/pdf/2311.01460">Implicit Chain-of-Thought Reasoning</a></p>
+<p><strong>Self-improvement in LLM:</strong> those methods rely on model learning from its outputs without human intervention. Examples are Supervised Fine Tunning (SFT) and preference optimization such as DPO. Here the quality of the model is a function of the external reward system in the form of a reward model, human evaluator or LLM-as-a-Judge prompting. However, <em>finding has suggested that LLM-generated texts often exhibit truncated “tails” - i.e.&nbsp;the distribution of generated output lacks variability found in human-generated content, and can lead to model collapse phenomenon (model converging to a narrower range of behaviors and harming performance</em>) (ref. <a href="https://arxiv.org/pdf/2305.17493">Shumailov, et. al.&nbsp;(2024)</a>).</p>
+<section id="chain-of-thought-cot-differences" class="level3">
+<h3 class="anchored" data-anchor-id="chain-of-thought-cot-differences">Chain of Thought (CoT) Differences</h3>
+<p>Some differences highlighted by Quiet-STaR authors (<a href="https://community.openai.com/t/papers-quiet-star-language-models-can-teach-themselves-to-think-before-speaking/686158/3">here</a>) while comparing thinking tokens to CoT are:</p>
+<ul>
+<li>Different from CoT, model is trained using RL (reinforcement learning) to generate more useful thoughts.</li>
+<li>Rewards model used to generate inner monologues that helps to predict text instead of answers to specific questions - less domain specific.</li>
+</ul>
+<p>As pointed by OpenAI <a href="https://platform.openai.com/docs/guides/reasoning/advice-on-prompting">here</a> CoT might undermine “thinking tokens”. Thus a best practice are:</p>
+<ul>
+<li><strong>Avoid chain-of-thought prompts:</strong> Since these models perform reasoning internally, prompting them to “think step by step” or “explain your reasoning” is unnecessary.</li>
+<li><strong>Limit additional context in retrieval-augmented generation (RAG):</strong> When providing additional context or documents, include only the most relevant information to prevent the model from overcomplicating its response.</li>
+</ul>
+</section>
+</section>
+<section id="latest-developments" class="level2">
+<h2 class="anchored" data-anchor-id="latest-developments">Latest Developments:</h2>
+<section id="marco-o1-by-macopolo-team-in-alibaba" class="level3">
+<h3 class="anchored" data-anchor-id="marco-o1-by-macopolo-team-in-alibaba">Marco-o1 by MacoPolo Team in Alibaba</h3>
+<p>Marco-o1 is inspired by OpenAI o1 and leverages different techniques such as:</p>
+<ul>
+<li><strong>CoT (Chain of Thought) fine-tuning</strong></li>
+<li><strong>MCTS (Monte Carlo Tree Search):</strong> allow exploration of multiple reasoning paths using confidence scores derived from softmax-applied log probability of the top-k alternative tokens.</li>
+<li><strong>Reasoning Action Strategies:</strong> allow to vary granularity of actions within steps and mini-steps to optimize search efficiency and accuracy -</li>
+</ul>
+<p>Marco-o1 is a fine tuning of Qwen2-7B-Instruct with a combination of filtered Open-O1 CoT dataset, Marco-o1 CoT dataset and Marco-o1 instruction dataset.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="./assets/image-20241202094701319.png" class="img-fluid figure-img"></p>
+<figcaption>image-20241202094701319</figcaption>
+</figure>
+</div>
+<p>Picture from <a href="https://arxiv.org/pdf/2411.14405v2">Marco-o1</a></p>
+<section id="mcts-monte-carlo-tree-search" class="level4">
+<h4 class="anchored" data-anchor-id="mcts-monte-carlo-tree-search">**MCTS (Monte Carlo Tree Search):</h4>
+<p>The Monte Carlo Tree Search enhance the reasoning capability of the model and it is integrated in the model as following:</p>
+<ul>
+<li><strong>Nodes as reasoning states:</strong> each node represents a reasoning state of the problem-solving process.</li>
+<li><strong>Actions as LLM outputs</strong>: the possible actions from a node are the LLM generated outputs. Each output is a potential step or mini-step in the reasoning chain.</li>
+<li><strong>Rollout and reward calculation</strong>: during rollout, the LLM continues the reasoning to a terminal state.</li>
+<li><strong>Guiding MCTS</strong>: the reward score R is used to evaluate and select promising paths within the MCTS, guiding the search towards a reliable reasoning chains.</li>
+</ul>
+<p>Figure above show <strong><em>v</em></strong>, the average confidence score across all tokens to derive the overall <strong>reward score</strong>. Where n is the total number of tokens in the rollout sequence. A higher v indicates a more confident and accurate reasoning path.</p>
+<p>The confidence score of each state <em>c</em> is calculated by applying a softmax function to its log probability and the log probabilities of the top 5 alternative tokens. Thus <em>ci</em> is the confidence score for the ith token in the rollout. <span class="math display">\[
+c_{i} = \frac{exp(p(t_{i}))}{\sum_{k=1}^{5}{exp(p(t_{k}))}}
+\]</span></p>
+</section>
+<section id="reasoning-action-strategies" class="level4">
+<h4 class="anchored" data-anchor-id="reasoning-action-strategies">Reasoning Action Strategies:</h4>
+<p>Reasoning action strategies is implemented to allow different levels of granularity in the MCTS search. For example, the concept of <strong>mini-steps</strong> represents a search space in MCTS in steps composed by smaller units of 64 or 32 tokens. According to authors, it is impractical due to computational resources to execute token level search.</p>
+<ul>
+<li><strong>step as action</strong>: model generate complete reasoning steps as actions, where each MCTS node represents an entire thought or action label.</li>
+<li><strong>Mini-step as action</strong>: mini-steps of 32 or 64 tokens used as action giving finer granularity to expand the solution space and improve model ability to reasoning tasks by considering mode nuances steps in the search process.</li>
+</ul>
+<p>A reflection mechanism “<strong><em>Wait! Maybe I made some mistakes! I need to rethink from scratch.</em></strong>” is added at the end of each though process. This allow the model to self reflect and reevaluate its reasoning steps. As described by <a href="https://arxiv.org/pdf/2411.14405v2">authors</a>, the reflection step serves as an internal feedback loop allowing the model to self correct without external intervention.</p>
+</section>
+</section>
+<section id="experiences-with-qnq" class="level3">
+<h3 class="anchored" data-anchor-id="experiences-with-qnq">Experiences with <a href="https://huggingface.co/spaces/Qwen/QwQ-32B-preview">QnQ</a>:</h3>
+<p><strong>Qwen with Questions (QwQ)</strong> from Alibaba is a strong open-source competitor to OpenAI’s GPT-o1 reasoning model. QwQ is available in a 32-billion-parameter preview version with a 32,000-token context.</p>
+<p>Based on the blog <a href="https://qwenlm.github.io/blog/qwq-32b-preview/">QwQ: Reflect Deeply on the Boundaries of the Unknown</a>, QnQ has provided important capabilities in challenging mathematical and programming datasets, like:</p>
+<ul>
+<li><strong>GPQA</strong>: A Graduate-Level Google-Proof Q&amp;A Benchmark, a challenging benchmark for evaluating scientific problem-solving abilities through grade school level questions.</li>
+<li><strong>AIME</strong>: American Invitation Mathematics Evaluation, which tests mathematical problem solving with arithmetic, algebra, counting, geometry, number theory, and probability and other secondary school math topics.</li>
+<li><strong>MATH-500</strong>: The 500 test cases of the MATH benchmark, a comprehensive dataset testing mathematical problem-solving.</li>
+<li><strong>LiveCodeBench</strong>: A challenging benchmark for evaluating code generation and problem solving abilities in real-world programming scenarios.</li>
+</ul>
+<p>Results below show QnQ graduate-level scientific reasoning.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="./assets/image-20241202092445198.png" class="img-fluid figure-img"></p>
+<figcaption>image-20241202092445198</figcaption>
+</figure>
+</div>
+<p>To verify it, I used the QnQ model deployed in HuggingFace <a href="https://huggingface.co/spaces/Qwen/QwQ-32B-preview">here</a> and prompted the same question as in the blog. See section below the “not-so-great” results, which does not follow the results shown by the blog.</p>
+<section id="experiments-with-qnq-32b-preview" class="level4">
+<h4 class="anchored" data-anchor-id="experiments-with-qnq-32b-preview">Experiments with QnQ 32B preview</h4>
+<p><strong>Prompt</strong>: Please add a pair of parentheses to the incorrect equation: 1 + 2 * 3 + 4 * 5 + 6 * 7 + 8 * 9 = 479, to make the equation true.</p>
+<p><strong>Answer</strong>: No</p>
+<p><strong>Date:</strong> 02.12.2024</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="./assets/image-20241202091019004.png" class="img-fluid figure-img"></p>
+<figcaption>image-20241202091019004</figcaption>
+</figure>
+</div>
+</section>
+</section>
+</section>
+<section id="references" class="level2">
+<h2 class="anchored" data-anchor-id="references">References:</h2>
+<ul>
+<li><p><a href="https://arxiv.org/abs/2403.09629">Quiet-STaR: Language Models Can Teach Themselves to Think Before Speaking</a></p></li>
+<li><p><a href="https://platform.openai.com/docs/guides/reasoning">Reasoning Models by OpenAI</a></p></li>
+<li><p><a href="https://github.com/GAIR-NLP/O1-Journey?tab=readme-ov-file">O1 Replication Journey: A Strategic Progress Report by Qin et. al</a></p></li>
+<li><p><a href="https://www.stateof.ai/">State of AI Report 2024 by Nathan Benaich</a></p></li>
+<li><p><strong>Model:</strong> <a href="https://arxiv.org/pdf/2411.14405v2">Marco-o1: Towards Open Reasoning Models for Open-Ended Solutions</a></p></li>
+<li><p><strong>Model:</strong> <a href="https://github.com/Open-Source-O1/Open-O1">Open O1: A Model Matching Proprietary Power with Open-Source Innovation</a></p></li>
+<li><p><strong>Dataset:</strong> <a href="https://huggingface.co/datasets/O1-OPEN/OpenO1-SFT?row=14">Open O1 SFT</a></p></li>
+<li><p><a href="https://github.com/hijkzzz/Awesome-LLM-Strawberry">Awesome-LLM-Strawberry -OpenAI Strawberry(o1) and Reasoning</a></p></li>
+<li><p><a href="https://diamantai.substack.com/p/teaching-machines-to-reason?r=336pe4&amp;utm_campaign=post&amp;utm_medium=web&amp;triedRedirect=true">Teaching Machines to Reason by Diamantai</a></p></li>
+</ul>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+        const codeEl = trigger.previousElementSibling.cloneNode(true);
+        for (const childEl of codeEl.children) {
+          if (isCodeAnnotation(childEl)) {
+            childEl.remove();
+          }
+        }
+        return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<input type="hidden" id="giscus-base-theme" value="light">
+<input type="hidden" id="giscus-alt-theme" value="dark">
+<script>
+  function loadGiscus() {
+    // Function to get the theme based on body class
+    const getTheme = () => {
+      let baseTheme = document.getElementById('giscus-base-theme').value;
+      let altTheme = document.getElementById('giscus-alt-theme').value;
+      return document.body.classList.contains('quarto-dark') ? altTheme : baseTheme;
+    };
+    const script = document.createElement("script");
+    script.src = "https://giscus.app/client.js";
+    script.async = true;
+    script.dataset.repo = "marcelcastrobr/marcelcastrobr.github.io";
+    script.dataset.repoId = "R_kgDOIwFH3A";
+    script.dataset.category = "General";
+    script.dataset.categoryId = "DIC_kwDOIwFH3M4Cjnq1";
+    script.dataset.mapping = "title";
+    script.dataset.reactionsEnabled = "1";
+    script.dataset.emitMetadata = "0";
+    script.dataset.inputPosition = "top";
+    script.dataset.theme = getTheme();
+    script.dataset.lang = "en";
+    script.crossOrigin = "anonymous";
+    // Append the script to the desired div instead of at the end of the body
+    document.getElementById("quarto-content").appendChild(script);
+  }
+  loadGiscus();
+</script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">
+<p>Copyright 2023, Marcel Castro</p>
+</div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+
+
+
+
+</body></html>

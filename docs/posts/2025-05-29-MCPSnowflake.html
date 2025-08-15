@@ -1,0 +1,894 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.7.33">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="dcterms.date" content="2025-05-29">
+<meta name="description" content="Introduction to MCP and how to run it in Snowflake.">
+
+<title>The Model Context Protocol - What and How to run in Snowflake – Marcel Castro</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-ea385d0e468b0dd5ea5bf0780b1290d9.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-d521dac1687b568bac4cd80e48eb8185.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-RK1QNXR9TB"></script>
+
+<script type="text/javascript">
+
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-RK1QNXR9TB', { 'anonymize_ip': true});
+</script>
+
+
+<link rel="stylesheet" href="../styles.css">
+</head>
+
+<body class="nav-fixed quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top quarto-banner">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">Marcel Castro</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="https://marcelcastrobr.github.io/my_ml_notes/"> 
+<span class="menu-text">Notes</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../index.html"> 
+<span class="menu-text">Notebooks</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../about.html"> 
+<span class="menu-text">About</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="https://marcelcastrobr.github.io/my_ml_links/"> 
+<span class="menu-text">Links</span></a>
+  </li>  
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/marcelcastrobr/marcelcastrobr.github.io/blob/main/cv/cv-marcelcastro.pdf"> <i class="bi bi-filetype-pdf" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://marcelcastrobr.github.io/my_ml_links/"> <i class="bi bi-diagram-3-fill" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://huggingface.co/marcelcastrobr"> <i class="bi bi-emoji-smile" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/marcelcastrobr"> <i class="bi bi-github" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://www.linkedin.com/in/marcelcastrobr/"> <i class="bi bi-linkedin" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+  <a href="" class="quarto-reader-toggle quarto-navigation-tool px-1" onclick="window.quartoToggleReader(); return false;" title="Toggle reader mode">
+  <div class="quarto-reader-toggle-btn">
+  <i class="bi"></i>
+  </div>
+</a>
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">The Model Context Protocol - What and How to run in Snowflake</h1>
+                  <div>
+        <div class="description">
+          Introduction to MCP and how to run it in Snowflake.
+        </div>
+      </div>
+                          <div class="quarto-categories">
+                <div class="quarto-category">LLM, MCP, Snowflake</div>
+              </div>
+                  </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">May 29, 2025</p>
+      </div>
+    </div>
+    
+      <div>
+      <div class="quarto-title-meta-heading">Modified</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date-modified">August 15, 2025</p>
+      </div>
+    </div>
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#computer---snowflake-the-model-context-protocol-mcp---what-and-how-to-run-in-snowflake" id="toc-computer---snowflake-the-model-context-protocol-mcp---what-and-how-to-run-in-snowflake" class="nav-link active" data-scroll-target="#computer---snowflake-the-model-context-protocol-mcp---what-and-how-to-run-in-snowflake">:computer: -&gt; :snowflake: The Model Context Protocol (MCP) - What and How to run in Snowflake</a></li>
+  <li><a href="#section" id="toc-section" class="nav-link" data-scroll-target="#section"></a>
+  <ul class="collapse">
+  <li><a href="#what-is-mcp-model-context-protocol" id="toc-what-is-mcp-model-context-protocol" class="nav-link" data-scroll-target="#what-is-mcp-model-context-protocol">What is MCP (Model Context Protocol)</a></li>
+  <li><a href="#why-mcp-the-mxn-integration-challenge" id="toc-why-mcp-the-mxn-integration-challenge" class="nav-link" data-scroll-target="#why-mcp-the-mxn-integration-challenge">Why MCP: The MxN Integration Challenge</a></li>
+  <li><a href="#mcp-components" id="toc-mcp-components" class="nav-link" data-scroll-target="#mcp-components">MCP Components</a></li>
+  <li><a href="#mcp-architecture" id="toc-mcp-architecture" class="nav-link" data-scroll-target="#mcp-architecture">MCP Architecture</a></li>
+  <li><a href="#the-mcp-communication-protocol" id="toc-the-mcp-communication-protocol" class="nav-link" data-scroll-target="#the-mcp-communication-protocol">The MCP Communication Protocol</a>
+  <ul class="collapse">
+  <li><a href="#the-mcp-communication-protocol-message-types" id="toc-the-mcp-communication-protocol-message-types" class="nav-link" data-scroll-target="#the-mcp-communication-protocol-message-types">The MCP Communication Protocol: Message Types</a></li>
+  </ul></li>
+  <li><a href="#mcp-sdk---software-defined-kit" id="toc-mcp-sdk---software-defined-kit" class="nav-link" data-scroll-target="#mcp-sdk---software-defined-kit">MCP SDK - Software Defined Kit</a></li>
+  <li><a href="#when-to-use-mcp-to-be-done" id="toc-when-to-use-mcp-to-be-done" class="nav-link" data-scroll-target="#when-to-use-mcp-to-be-done"><strong>When to use MCP </strong>(To Be Done)</a></li>
+  <li><a href="#how-to-use-mcp-in-snowflake-to-be-done" id="toc-how-to-use-mcp-in-snowflake-to-be-done" class="nav-link" data-scroll-target="#how-to-use-mcp-in-snowflake-to-be-done">How to use MCP in Snowflake (To Be Done)</a></li>
+  <li><a href="#things-to-consider" id="toc-things-to-consider" class="nav-link" data-scroll-target="#things-to-consider">🤔 Things to Consider</a></li>
+  <li><a href="#reference" id="toc-reference" class="nav-link" data-scroll-target="#reference">📚 Reference:</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content quarto-banner-title-block" id="quarto-document-content">
+
+
+
+
+
+<section id="computer---snowflake-the-model-context-protocol-mcp---what-and-how-to-run-in-snowflake" class="level1">
+<h1>:computer: -&gt; :snowflake: The Model Context Protocol (MCP) - What and How to run in Snowflake</h1>
+</section>
+<section id="section" class="level1">
+<h1></h1>
+<p>This article provides my atempt to describe what is MCP (Model Context Protocol) and how you can use it. It will also provide examples of how to use it torwards <a href="https://docs.snowflake.com/en/user-guide/snowflake-cortex/cortex-agents">Snowflake Cortex Agent.</a></p>
+<section id="what-is-mcp-model-context-protocol" class="level2">
+<h2 class="anchored" data-anchor-id="what-is-mcp-model-context-protocol">What is MCP (Model Context Protocol)</h2>
+<p>Often described as the “<strong>USB-C for AI Applications</strong>”. Why? Just as USB-C provides standardized interface for connecting various devices, MCP offers a protocol for connecting AI model to external capabilities, like databases, APIs, etc.</p>
+</section>
+<section id="why-mcp-the-mxn-integration-challenge" class="level2">
+<h2 class="anchored" data-anchor-id="why-mcp-the-mxn-integration-challenge">Why MCP: The MxN Integration Challenge</h2>
+<p>With the increasing numbers of AI tools and data providers, the lack of single implementation that works with multiple AI applications becomes the <strong>MxN intregation challenge</strong>: M different AI applications tha needs to talk to N different external tools or data sources.</p>
+<p><img src="./assets/image-20250529102319923.png" alt="image-20250529102319923" style="zoom:50%;"></p>
+<p>Picture by: Author</p>
+<p>With MCP, AI applications implements the <strong>MCP client</strong> and the tools and data sources implements the <strong>MCP server</strong>.</p>
+<p><img src="./assets/image-20250529102939406.png" alt="image-20250529102939406" style="zoom:80%;"></p>
+<p>Picture by: Author</p>
+</section>
+<section id="mcp-components" class="level2">
+<h2 class="anchored" data-anchor-id="mcp-components">MCP Components</h2>
+<p>MCP follows the distributed system principle where devices (mcp clients and mcp servers) cooperate to achieve a common goal, often coodidating through a network protocol (ref. <a href="https://en.wikipedia.org/wiki/Distributed_computing#:~:text=Distributed%20systems%20are%20groups%20of,coupled%20form%20of%20parallel%20computing.">Distributed computing by Wikepedia</a>).</p>
+<p>Thus MCP components and its tasks are:</p>
+<ul>
+<li><strong>Host AI application:</strong> user AI application where users interact with such as Claude Desktop, Cursor or customer applications built with libraries like LangChain and LlammaIndex.</li>
+<li><strong>MCP client</strong>: component which is part of the host AI application managing the communication with the MCP server(s) in a 1-to-1 connection client-server.</li>
+<li><strong>MCP server</strong>: remote server exposing capabilities such as resources, tools and prompts via the MCP protocol. It can run locally or remotely.</li>
+<li><strong>MCP Protocol</strong>: the open protocol enabling integration between client and server based on JSON-RPC message format and stateful connections (ref. <a href="https://modelcontextprotocol.io/specification/2025-03-26">MCP protocol specification</a>).</li>
+</ul>
+</section>
+<section id="mcp-architecture" class="level2">
+<h2 class="anchored" data-anchor-id="mcp-architecture">MCP Architecture</h2>
+<p>MCP follows the client-server architecture as described below. It is a modular architecture where clients can connect to multiple servers. Given the distributed system principle in this architecture, important features such as <strong>safety</strong>, <strong>extensibility</strong> and <strong>interoperability</strong> is very important.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="./assets/image-20250529112047828.png" class="img-fluid figure-img"></p>
+<figcaption>image-20250529112047828</figcaption>
+</figure>
+</div>
+<p>Picture by: <a href="https://modelcontextprotocol.io/introduction">modelcontextprotocol.io</a></p>
+<section id="capabilities" class="level4">
+<h4 class="anchored" data-anchor-id="capabilities"><strong>Capabilities:</strong></h4>
+<p>In MCP client and server run discovery message to understand which capabilities the server contains. Currently in MCP the capabilities are:</p>
+<ul>
+<li><strong>Tools</strong>: Functions that can be called by the LLM (with user approval).
+<ul>
+<li>Usecases are sending messages, creating tickets, querying APIs, performing calculations.</li>
+</ul></li>
+<li><strong>Resource</strong>: File-like data that can be read by clients (like GET API responses or file contents).
+<ul>
+<li>Usecases are accessing file contents, retrieving database records, reading configuration information.</li>
+</ul></li>
+<li><strong>Prompts</strong>: Pre-written templates that help users accomplish specific tasks.
+<ul>
+<li>Usecases are common workflows, specialized task templates, guided interactions.</li>
+</ul></li>
+</ul>
+<p>Clients can offer <strong>sampling</strong>, a server-initiated agentic behaviour and recursive LLM interactions, as a feature to servers. Common usecases here are complex multi-step tasks, autonomous agent workflows, and interactive processes.</p>
+<p>See here an example of a simple <a href="https://github.com/modelcontextprotocol/quickstart-resources/tree/main/weather-server-python">MCP weather server in python</a>.</p>
+</section>
+</section>
+<section id="the-mcp-communication-protocol" class="level2">
+<h2 class="anchored" data-anchor-id="the-mcp-communication-protocol">The MCP Communication Protocol</h2>
+<p>The <a href="https://modelcontextprotocol.io/">Model Context Protocol</a> (MCP) is an open protocol that enables seamless integration between LLM applications and external data sources and tools.</p>
+<p>MCP uses JSON-RPC 2.0 message format for client-server communication, which is a remote procedure call protocol encoded in JSON, making it human readable and language agnostic.</p>
+<p>The transport mechanisms are <strong>stdio</strong> (standard input/ouput) or <strong>HTTP+SSE / Streamable HTTP</strong>.</p>
+<p><strong>stdio</strong> is used for local communication where client and server run on the same host.</p>
+<p><strong>HTTP+SSE ( Server-Sent Events) / Streamable HTTP</strong> is used for remote communication.</p>
+<blockquote class="blockquote">
+<p>[!NOTE]</p>
+<p>Streamable HTTP replaces the <a href="https://modelcontextprotocol.io/specification/2024-11-05/basic/transports#http-with-sse">HTTP+SSE transport</a> from protocol version 2024-11-05. See the <a href="https://modelcontextprotocol.io/specification/2025-03-26/basic/transports#backwards-compatibility">backwards compatibility</a> guide.</p>
+</blockquote>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="./assets/image-20250529121314460.png" class="img-fluid figure-img"></p>
+<figcaption>image-20250529121314460</figcaption>
+</figure>
+</div>
+<p>Picture by: <a href="https://modelcontextprotocol.io/introduction">modelcontextprotocol.io</a></p>
+<section id="the-mcp-communication-protocol-message-types" class="level3">
+<h3 class="anchored" data-anchor-id="the-mcp-communication-protocol-message-types">The MCP Communication Protocol: Message Types</h3>
+<p>The messages type defined by the protocol (2025-03-26 (Latest)) are:</p>
+<section id="requests" class="level4">
+<h4 class="anchored" data-anchor-id="requests">Requests</h4>
+<div class="sourceCode" id="cb1"><pre class="sourceCode json code-with-copy"><code class="sourceCode json"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">{</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="er">jsonrpc</span><span class="fu">:</span> <span class="st">"2.0"</span><span class="er">;</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="er">id:</span> <span class="er">string</span> <span class="er">|</span> <span class="er">number;</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  <span class="er">method:</span> <span class="er">string;</span> <span class="er">-&gt;</span> <span class="er">e.g.:</span>  <span class="er">tools/calls</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  <span class="er">params?:</span> <span class="fu">{</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    <span class="er">[key</span><span class="fu">:</span> <span class="er">string]:</span> <span class="er">unknown;</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">}</span><span class="er">;</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="fu">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="responses" class="level4">
+<h4 class="anchored" data-anchor-id="responses">Responses</h4>
+<div class="sourceCode" id="cb2"><pre class="sourceCode json code-with-copy"><code class="sourceCode json"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">{</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="er">jsonrpc</span><span class="fu">:</span> <span class="st">"2.0"</span><span class="er">;</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="er">id:</span> <span class="er">string</span> <span class="er">|</span> <span class="er">number;</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="er">result?:</span> <span class="fu">{</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    <span class="er">[key</span><span class="fu">:</span> <span class="er">string]:</span> <span class="er">unknown;</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">}</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>  <span class="er">error?:</span> <span class="fu">{</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>    <span class="er">code</span><span class="fu">:</span> <span class="er">number;</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>    <span class="er">message:</span> <span class="er">string;</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>    <span class="er">data?:</span> <span class="er">unknown;</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">}</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="fu">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="notifications" class="level4">
+<h4 class="anchored" data-anchor-id="notifications">Notifications</h4>
+<div class="sourceCode" id="cb3"><pre class="sourceCode json code-with-copy"><code class="sourceCode json"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">{</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="er">jsonrpc</span><span class="fu">:</span> <span class="st">"2.0"</span><span class="er">;</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="er">method:</span> <span class="er">string;</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="er">params?:</span> <span class="fu">{</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    <span class="er">[key</span><span class="fu">:</span> <span class="er">string]:</span> <span class="er">unknown;</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">}</span><span class="er">;</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="fu">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Notifications are one-way message that do not require response as it is tipically sent from server to client to provide updates and/or notifications about events.</p>
+<p>See below the interaction between client and server using the MCP protocol message types (inspired by <a href="https://huggingface.co/learn/mcp-course/unit1/communication-protocol">MCP course by HuggingFace</a>).</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="./assets/image-20250529115757008.png" class="img-fluid figure-img"></p>
+<figcaption>image-20250529115757008</figcaption>
+</figure>
+</div>
+<p>The full specification of the protocol is defined as a <a href="https://github.com/modelcontextprotocol/specification/blob/main/schema/2025-03-26/schema.ts">TypeScript schema</a>.</p>
+</section>
+</section>
+</section>
+<section id="mcp-sdk---software-defined-kit" class="level2">
+<h2 class="anchored" data-anchor-id="mcp-sdk---software-defined-kit">MCP SDK - Software Defined Kit</h2>
+<p>Currently the MCP SDK is available for <a href="https://github.com/modelcontextprotocol/python-sdk">Python</a>, TypeScript, Java, Kotlin, C# and Swift.</p>
+<p>The code example below from the <a href="https://github.com/modelcontextprotocol/python-sdk">MCP Python SDK</a> presents a simple MCP server that expose a calculator tool and some data example .</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># server.py</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> mcp.server.fastmcp <span class="im">import</span> FastMCP</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Create an MCP server</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>mcp <span class="op">=</span> FastMCP(<span class="st">"Demo"</span>)</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Add an addition tool</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="at">@mcp.tool</span>()</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> add(a: <span class="bu">int</span>, b: <span class="bu">int</span>) <span class="op">-&gt;</span> <span class="bu">int</span>:</span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Add two numbers"""</span></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> a <span class="op">+</span> b</span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Add a dynamic greeting resource</span></span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a><span class="at">@mcp.resource</span>(<span class="st">"greeting://</span><span class="sc">{name}</span><span class="st">"</span>)</span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> get_greeting(name: <span class="bu">str</span>) <span class="op">-&gt;</span> <span class="bu">str</span>:</span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Get a personalized greeting"""</span></span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="ss">f"Hello, </span><span class="sc">{</span>name<span class="sc">}</span><span class="ss">!"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="when-to-use-mcp-to-be-done" class="level2">
+<h2 class="anchored" data-anchor-id="when-to-use-mcp-to-be-done"><strong>When to use MCP </strong>(To Be Done)</h2>
+<p>When you need a single AI assistant to access external data or tools - like searching documents, scheduling meetings, or querying databases.</p>
+</section>
+<section id="how-to-use-mcp-in-snowflake-to-be-done" class="level2">
+<h2 class="anchored" data-anchor-id="how-to-use-mcp-in-snowflake-to-be-done">How to use MCP in Snowflake (To Be Done)</h2>
+<p>Quickstart: https://quickstarts.snowflake.com/guide/mcp-server-for-cortex-agents/index.html Repo: https://github.com/Snowflake-Labs/sfguide-mcp-cortex-agents</p>
+</section>
+<section id="things-to-consider" class="level2">
+<h2 class="anchored" data-anchor-id="things-to-consider">🤔 Things to Consider</h2>
+</section>
+<section id="reference" class="level2">
+<h2 class="anchored" data-anchor-id="reference">📚 Reference:</h2>
+<ul>
+<li><a href="https://www.linkedin.com/posts/eordax_ai-agentic-llm-activity-7323622305232744451-Ui2r?utm_source=share&amp;utm_medium=member_desktop&amp;rcm=ACoAAAMLrWgBHLbSh09-i54JZEgS64XZCzcR5H0">Workflow behind MCP and A2A</a></li>
+<li>Course: <a href="https://learn.deeplearning.ai/courses/mcp-build-rich-context-ai-apps-with-anthropic/lesson/f4wo9/appendix-%E2%80%93-tips-and-help">MCP: Build Rich-Context AI Apps with Anthropic</a></li>
+<li>Course: <a href="https://huggingface.co/learn/mcp-course">MCP Course by HuggingFace</a></li>
+<li><a href="https://github.com/daveebbelaar/ai-cookbook/tree/main/mcp/crash-course/6-run-with-docker">MCP server with Docker</a></li>
+<li><a href="https://auth0.com/blog/an-introduction-to-mcp-and-authorization/">An Introduction to MCP and Authorization by Martinez</a></li>
+</ul>
+<blockquote class="blockquote">
+<p>[!TIP]</p>
+<p>Get started with your first MCP server using Snowflake using the Snowflake Quickstart <a href="https://quickstarts.snowflake.com/guide/mcp-server-for-cortex-agents/index.html#0">Build an MCP Server for Cortex Agents</a></p>
+</blockquote>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+        const codeEl = trigger.previousElementSibling.cloneNode(true);
+        for (const childEl of codeEl.children) {
+          if (isCodeAnnotation(childEl)) {
+            childEl.remove();
+          }
+        }
+        return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<input type="hidden" id="giscus-base-theme" value="light">
+<input type="hidden" id="giscus-alt-theme" value="dark">
+<script>
+  function loadGiscus() {
+    // Function to get the theme based on body class
+    const getTheme = () => {
+      let baseTheme = document.getElementById('giscus-base-theme').value;
+      let altTheme = document.getElementById('giscus-alt-theme').value;
+      return document.body.classList.contains('quarto-dark') ? altTheme : baseTheme;
+    };
+    const script = document.createElement("script");
+    script.src = "https://giscus.app/client.js";
+    script.async = true;
+    script.dataset.repo = "marcelcastrobr/marcelcastrobr.github.io";
+    script.dataset.repoId = "R_kgDOIwFH3A";
+    script.dataset.category = "General";
+    script.dataset.categoryId = "DIC_kwDOIwFH3M4Cjnq1";
+    script.dataset.mapping = "title";
+    script.dataset.reactionsEnabled = "1";
+    script.dataset.emitMetadata = "0";
+    script.dataset.inputPosition = "top";
+    script.dataset.theme = getTheme();
+    script.dataset.lang = "en";
+    script.crossOrigin = "anonymous";
+    // Append the script to the desired div instead of at the end of the body
+    document.getElementById("quarto-content").appendChild(script);
+  }
+  loadGiscus();
+</script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">
+<p>Copyright 2023, Marcel Castro</p>
+</div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+
+
+
+
+</body></html>
