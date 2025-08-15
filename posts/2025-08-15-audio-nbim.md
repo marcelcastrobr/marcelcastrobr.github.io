@@ -16,18 +16,12 @@ In today's rapidly evolving business landscape, organizations face a critical de
 
 ## 🎧 Listen to the Full Presentation
 
-::: {.audio-container}
-<audio controls preload="metadata" style="width: 100%; margin: 20px 0; background: #f8f9fa; border-radius: 8px; padding: 10px;">
-  <source src="assets/Win_or_Vanish_AI_Implementation.mp3" type="audio/mpeg">
-  <source src="assets/Win_or_Vanish_AI_Implementation.mp3" type="audio/mp3">
-  Your browser does not support the audio element.
-</audio>
-:::
-
-**Alternative Options:**
-- 📥 [**Download MP3 file**](assets/Win_or_Vanish_AI_Implementation.mp3) (21MB)
-- 🎵 [**Play in new tab**](assets/Win_or_Vanish_AI_Implementation.mp3) (Right-click → Open in new tab)
-- 🔗 [**Direct audio link**](https://github.com/marcelcastrobr/marcelcastrobr.github.io/blob/main/posts/assets/Win_or_Vanish_AI_Implementation.mp3)
+> **🎵 Audio Presentation Available:**
+> 
+> - **🎧 [▶️ PLAY AUDIO](https://marcelcastrobr.github.io/posts/assets/Win_or_Vanish_AI_Implementation.mp3)** - Click to listen (opens in browser player)
+> - **📥 [Download MP3 (21MB)](assets/Win_or_Vanish_AI_Implementation.mp3)** - Save to your device
+> 
+> **💡 Tip**: The audio link works best when clicked directly. If issues persist, try the download option.
 
 *Duration: Full presentation covering strategic AI implementation frameworks and practical guidance for organizational transformation.*
 
