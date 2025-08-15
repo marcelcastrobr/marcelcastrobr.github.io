@@ -16,10 +16,16 @@ In today's rapidly evolving business landscape, organizations face a critical de
 
 ## 🎧 Listen to the Full Presentation
 
+```{=html}
 <audio controls preload="metadata" style="width: 100%; margin: 20px 0; background: #f8f9fa; border-radius: 8px; padding: 10px;">
   <source src="assets/Win_or_Vanish_AI_Implementation.mp3" type="audio/mpeg">
-  Your browser does not support the audio element. Please <a href="assets/Win_or_Vanish_AI_Implementation.mp3">download the audio file</a> to listen.
+  Your browser does not support the audio element.
 </audio>
+```
+
+**Alternative Options:**
+- 📥 [**Download MP3 file**](assets/Win_or_Vanish_AI_Implementation.mp3) (21MB)
+- 🎵 [**Play in new tab**](assets/Win_or_Vanish_AI_Implementation.mp3) (Right-click → Open in new tab)
 
 *Duration: Full presentation covering strategic AI implementation frameworks and practical guidance for organizational transformation.*
 
