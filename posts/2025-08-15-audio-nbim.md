@@ -19,11 +19,13 @@ In today's rapidly evolving business landscape, organizations face a critical de
 
 ## 🎧 Listen to the Full Presentation
 
-{{< audio "assets/Win_or_Vanish_AI_Implementation.mp3" >}}
+<iframe width="100%" height="166" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/marcel-castro-893370175/win_or_vanish_ai_implementatio&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true"></iframe>
+
+**🎵 Listen on SoundCloud**: [Win or Vanish: AI Implementation](https://soundcloud.com/marcel-castro-893370175/win_or_vanish_ai_implementatio)
 
 **Alternative Options:**
-- 📥 [**Download MP3 file**](assets/Win_or_Vanish_AI_Implementation.mp3) (21MB)
-- 🎵 [**Play in new tab**](https://marcelcastrobr.github.io/posts/assets/Win_or_Vanish_AI_Implementation.mp3) (Right-click → Open in new tab)
+- 📥 [**Download MP3 file**](assets/Win_or_Vanish_AI_Implementation.mp3) (21MB) - Local backup
+- 🔗 [**SoundCloud Direct Link**](https://soundcloud.com/marcel-castro-893370175/win_or_vanish_ai_implementatio) - Full SoundCloud experience
 
 *Duration: Full presentation covering strategic AI implementation frameworks and practical guidance for organizational transformation.*
 
@@ -100,6 +102,7 @@ After listening to this presentation, consider:
 - **Technology**: Google's AI-powered research and synthesis platform
 - **Format**: AI-generated podcast-style conversation
 - **Processing**: Automated content analysis and audio synthesis
+- **Hosting**: [SoundCloud](https://soundcloud.com/marcel-castro-893370175/win_or_vanish_ai_implementatio) for reliable audio streaming
 
 **Content Curation**: Marcel Castro ([@marcelcastrobr](https://github.com/marcelcastrobr))
 - **Blog Integration**: Quarto-based presentation and analysis
