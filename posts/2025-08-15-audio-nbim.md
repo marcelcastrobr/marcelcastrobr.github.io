@@ -6,6 +6,9 @@ categories: AI, Strategy, Implementation, Business, NotebookLM
 draft: false
 description: An AI-generated audio overview exploring the critical need for strategic AI adoption to remain competitive in today's rapidly evolving business landscape. Created using Google's NotebookLM.
 toc: true
+format:
+  html:
+    keep-md: true
 ---
 
 # 🎯 Win or Vanish: The Urgent Blueprint for AI Implementation
@@ -16,12 +19,19 @@ In today's rapidly evolving business landscape, organizations face a critical de
 
 ## 🎧 Listen to the Full Presentation
 
-> **🎵 Audio Presentation Available:**
-> 
-> - **🎧 [▶️ PLAY AUDIO](https://marcelcastrobr.github.io/posts/assets/Win_or_Vanish_AI_Implementation.mp3)** - Click to listen (opens in browser player)
-> - **📥 [Download MP3 (21MB)](assets/Win_or_Vanish_AI_Implementation.mp3)** - Save to your device
-> 
-> **💡 Tip**: The audio link works best when clicked directly. If issues persist, try the download option.
+```{=html}
+<div class="audio-player-container" style="margin: 20px 0; padding: 15px; background: #f8f9fa; border-radius: 8px; border: 1px solid #dee2e6;">
+  <audio controls preload="metadata" style="width: 100%;">
+    <source src="assets/Win_or_Vanish_AI_Implementation.mp3" type="audio/mpeg">
+    <source src="assets/Win_or_Vanish_AI_Implementation.mp3" type="audio/mp4">
+    <p>Your browser does not support the audio element. Please <a href="assets/Win_or_Vanish_AI_Implementation.mp3">download the audio file</a> to listen.</p>
+  </audio>
+</div>
+```
+
+**Alternative Options:**
+- 📥 [**Download MP3 file**](assets/Win_or_Vanish_AI_Implementation.mp3) (21MB)
+- 🎵 [**Play in new tab**](https://marcelcastrobr.github.io/posts/assets/Win_or_Vanish_AI_Implementation.mp3) (Right-click → Open in new tab)
 
 *Duration: Full presentation covering strategic AI implementation frameworks and practical guidance for organizational transformation.*
 
