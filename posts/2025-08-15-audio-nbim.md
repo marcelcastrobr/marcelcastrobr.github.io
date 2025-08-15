@@ -22,8 +22,8 @@ In today's rapidly evolving business landscape, organizations face a critical de
 ```{=html}
 <div class="audio-player-container" style="margin: 20px 0; padding: 15px; background: #f8f9fa; border-radius: 8px; border: 1px solid #dee2e6;">
   <audio controls preload="metadata" style="width: 100%;">
-    <source src="assets/Win_or_Vanish_AI_Implementation.mp3" type="audio/mpeg">
-    <source src="assets/Win_or_Vanish_AI_Implementation.mp3" type="audio/mp4">
+    <source src="../assets/Win_or_Vanish_AI_Implementation.mp3" type="audio/mpeg">
+    <source src="../assets/Win_or_Vanish_AI_Implementation.mp3" type="audio/mp4">
     <p>Your browser does not support the audio element. Please <a href="assets/Win_or_Vanish_AI_Implementation.mp3">download the audio file</a> to listen.</p>
   </audio>
 </div>
