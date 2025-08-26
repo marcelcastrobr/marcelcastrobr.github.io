@@ -247,21 +247,7 @@ gtag('config', 'G-RK1QNXR9TB', { 'anonymize_ip': true});
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Set up the env for Java libraries and enable the Spark Connect Modeimport osimport tracebackos.environ['JAVA_HOME'] = os.environ["CONDA_PREFIX"]os.environ['JAVA_LD_LIBRARY_PATH'] = os.path.join(os.environ["CONDA_PREFIX"], 'lib', 'server')os.environ["SPARK_LOCAL_HOSTNAME"] = "127.0.0.1"os.environ["SPARK_CONNECT_MODE_ENABLED"] = "1"from snowflake import snowpark_connectfrom snowflake.snowpark.context import get_active_sessionsession = get_active_session()snowpark_connect.start_session(snowpark_session = session)# Here is your normal pyspark code. You can of course have them in other Python Cellsspark = snowpark_connect.get_session()df = spark.sql("show schemas").limit(10)df.show()</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div id="create_dataframe" class="cell" data-codecollapsed="false">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a DataFrame with sample data using Snowpark</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> snowflake.snowpark.types <span class="im">import</span> StructType, StructField, IntegerType, StringType</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> [[<span class="dv">2021</span>, <span class="st">"test"</span>, <span class="st">"Albany"</span>, <span class="st">"M"</span>, <span class="dv">42</span>]]</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>schema <span class="op">=</span> StructType([</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    StructField(<span class="st">"Year"</span>, IntegerType()),</span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    StructField(<span class="st">"First_Name"</span>, StringType()),</span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>    StructField(<span class="st">"County"</span>, StringType()),</span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>    StructField(<span class="st">"Sex"</span>, StringType()),</span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>    StructField(<span class="st">"Count"</span>, IntegerType())</span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>])</span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>df1 <span class="op">=</span> session.create_dataframe(data, schema<span class="op">=</span>schema)</span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>df1.show()  <span class="co"># Snowpark DataFrame show() method</span></span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a DataFrame with sample data using Snowparkfrom snowflake.snowpark.types import StructType, StructField, IntegerType, StringTypedata = [[2021, "test", "Albany", "M", 42]]schema = StructType([    StructField("Year", IntegerType()),    StructField("First Name", StringType()),    StructField("County", StringType()),    StructField("Sex", StringType()),    StructField("Count", IntegerType())])df1 = session.create_dataframe(data, schema=schema)df1.show()  # Snowpark DataFrame show() method</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div id="load_csv" class="cell" data-codecollapsed="false">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Read CSV file using Snowpark</span></span>
@@ -305,18 +291,17 @@ gtag('config', 'G-RK1QNXR9TB', { 'anonymize_ip': true});
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>df.where(df[<span class="st">"Count"</span>] <span class="op">&gt;</span> <span class="dv">50</span>).show()</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="select_column" class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pyspark.sql.functions <span class="im">import</span> desc</span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>df.select(<span class="st">"First_Name"</span>, <span class="st">"Count"</span>).orderBy(desc(<span class="st">"Count"</span>)).show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="select_column" class="cell" data-codecollapsed="false">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pyspark.sql.functions <span class="im">import</span> descdf.select(<span class="st">"First_Name"</span>, <span class="st">"Count"</span>).orderBy(desc(<span class="st">"Count"</span>)).show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div id="subset_df" class="cell" data-codecollapsed="false">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>subsetDF <span class="op">=</span> df.<span class="bu">filter</span>((df[<span class="st">"Year"</span>] <span class="op">==</span> <span class="dv">2009</span>) <span class="op">&amp;</span> (df[<span class="st">"Count"</span>] <span class="op">&gt;</span> <span class="dv">100</span>) <span class="op">&amp;</span> (df[<span class="st">"Sex"</span>] <span class="op">==</span> <span class="st">"F"</span>)).select(<span class="st">"First_Name"</span>, <span class="st">"County"</span>, <span class="st">"Count"</span>).orderBy(desc(<span class="st">"Count"</span>))</span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>subsetDF.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="save_df" class="cell">
+<div id="save_df" class="cell" data-codecollapsed="false">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>df.write.mode(<span class="st">"overwrite"</span>).saveAsTable(<span class="st">"AICOLLEGE.PUBLIC.MYFIRSTSPARK"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="save_to_json" class="cell">
+<div id="save_to_json" class="cell" data-codecollapsed="false">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>df.write.<span class="bu">format</span>(<span class="st">"json"</span>).mode(<span class="st">"overwrite"</span>).save(<span class="ss">f"@aicollege.public.setup/myfirstspark"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div id="read_json" class="cell" data-codecollapsed="false">
