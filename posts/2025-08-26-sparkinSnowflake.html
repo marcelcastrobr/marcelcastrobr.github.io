@@ -230,7 +230,7 @@ gtag('config', 'G-RK1QNXR9TB', { 'anonymize_ip': true});
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#running-apache-spark-in-snowflakedataset-httpshealth.data.ny.govapiviewsjxy9-yhdkrows.csvimage-20240507155528488" id="toc-running-apache-spark-in-snowflakedataset-httpshealth.data.ny.govapiviewsjxy9-yhdkrows.csvimage-20240507155528488" class="nav-link active" data-scroll-target="#running-apache-spark-in-snowflakedataset-httpshealth.data.ny.govapiviewsjxy9-yhdkrows.csvimage-20240507155528488">Running Apache Spark in SnowflakeDataset: https://health.data.ny.gov/api/views/jxy9-yhdk/rows.csv<img src="./images/image-sparksnowflake.png" class="img-fluid" alt="image-20240507155528488"></a></li>
+  <li><a href="#running-apache-spark-in-snowflakedataset-httpshealth.data.ny.govapiviewsjxy9-yhdkrows.csv" id="toc-running-apache-spark-in-snowflakedataset-httpshealth.data.ny.govapiviewsjxy9-yhdkrows.csv" class="nav-link active" data-scroll-target="#running-apache-spark-in-snowflakedataset-httpshealth.data.ny.govapiviewsjxy9-yhdkrows.csv">Running Apache Spark in SnowflakeDataset: https://health.data.ny.gov/api/views/jxy9-yhdk/rows.csv</a></li>
   </ul>
 </nav>
     </div>
@@ -241,8 +241,14 @@ gtag('config', 'G-RK1QNXR9TB', { 'anonymize_ip': true});
 
 
 
-<section id="running-apache-spark-in-snowflakedataset-httpshealth.data.ny.govapiviewsjxy9-yhdkrows.csvimage-20240507155528488" class="level1">
-<h1>Running Apache Spark in SnowflakeDataset: https://health.data.ny.gov/api/views/jxy9-yhdk/rows.csv<img src="./images/image-sparksnowflake.png" class="img-fluid" alt="image-20240507155528488"></h1>
+<section id="running-apache-spark-in-snowflakedataset-httpshealth.data.ny.govapiviewsjxy9-yhdkrows.csv" class="level1">
+<h1>Running Apache Spark in SnowflakeDataset: https://health.data.ny.gov/api/views/jxy9-yhdk/rows.csv</h1>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="./images/image-sparksnowflake.png" class="img-fluid figure-img"></p>
+<figcaption>image-20240507155528488</figcaption>
+</figure>
+</div>
 <div id="setup" class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Set up the env for Java libraries and enable the Spark Connect Modeimport osimport tracebackos.environ['JAVA_HOME'] = os.environ["CONDA_PREFIX"]os.environ['JAVA_LD_LIBRARY_PATH'] = os.path.join(os.environ["CONDA_PREFIX"], 'lib', 'server')os.environ["SPARK_LOCAL_HOSTNAME"] = "127.0.0.1"os.environ["SPARK_CONNECT_MODE_ENABLED"] = "1"from snowflake import snowpark_connectfrom snowflake.snowpark.context import get_active_sessionsession = get_active_session()snowpark_connect.start_session(snowpark_session = session)# Here is your normal pyspark code. You can of course have them in other Python Cellsspark = snowpark_connect.get_session()df = spark.sql("show schemas").limit(10)df.show()</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
