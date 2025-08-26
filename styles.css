@@ -1,1 +1,9 @@
 /* css styles */
+
+.audio-container audio {
+  width: 100%;
+  margin: 20px 0;
+  background: #f8f9fa;
+  border-radius: 8px;
+  padding: 10px;
+}
