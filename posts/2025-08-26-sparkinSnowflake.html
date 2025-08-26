@@ -6,10 +6,10 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="dcterms.date" content="2025-08-15">
-<meta name="description" content="An AI-generated audio overview exploring the critical need for strategic AI adoption to remain competitive in today’s rapidly evolving business landscape. Created using Google’s NotebookLM.">
+<meta name="dcterms.date" content="2025-08-26">
+<meta name="description" content="Details on how to run Apache Spark in Snowflake.">
 
-<title>Win or Vanish: The Urgent Blueprint for AI Implementation in Your Organization – Marcel Castro</title>
+<title>Running Apache Spark in Snowflake – Marcel Castro</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -21,6 +21,41 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -159,14 +194,15 @@ gtag('config', 'G-RK1QNXR9TB', { 'anonymize_ip': true});
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
-      <h1 class="title">Win or Vanish: The Urgent Blueprint for AI Implementation in Your Organization</h1>
+      <h1 class="title">Running Apache Spark in Snowflake</h1>
                   <div>
         <div class="description">
-          An AI-generated audio overview exploring the critical need for strategic AI adoption to remain competitive in today’s rapidly evolving business landscape. Created using Google’s NotebookLM.
+          Details on how to run Apache Spark in Snowflake.
         </div>
       </div>
                           <div class="quarto-categories">
-                <div class="quarto-category">AI, Strategy, Implementation, Business, NotebookLM</div>
+                <div class="quarto-category">spark</div>
+                <div class="quarto-category">snowflake</div>
               </div>
                   </div>
   </div>
@@ -178,16 +214,10 @@ gtag('config', 'G-RK1QNXR9TB', { 'anonymize_ip': true});
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">August 15, 2025</p>
+        <p class="date">August 26, 2025</p>
       </div>
     </div>
     
-      <div>
-      <div class="quarto-title-meta-heading">Modified</div>
-      <div class="quarto-title-meta-contents">
-        <p class="date-modified">August 26, 2025</p>
-      </div>
-    </div>
       
     </div>
     
@@ -200,22 +230,7 @@ gtag('config', 'G-RK1QNXR9TB', { 'anonymize_ip': true});
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#win-or-vanish-the-urgent-blueprint-for-ai-implementation" id="toc-win-or-vanish-the-urgent-blueprint-for-ai-implementation" class="nav-link active" data-scroll-target="#win-or-vanish-the-urgent-blueprint-for-ai-implementation">🎯 Win or Vanish: The Urgent Blueprint for AI Implementation</a>
-  <ul class="collapse">
-  <li><a href="#listen-to-the-full-presentation" id="toc-listen-to-the-full-presentation" class="nav-link" data-scroll-target="#listen-to-the-full-presentation">🎧 Listen to the Full Presentation</a></li>
-  <li><a href="#about-this-audio-overview" id="toc-about-this-audio-overview" class="nav-link" data-scroll-target="#about-this-audio-overview">🎙️ About This Audio Overview</a></li>
-  <li><a href="#key-topics-covered" id="toc-key-topics-covered" class="nav-link" data-scroll-target="#key-topics-covered">🚀 Key Topics Covered</a>
-  <ul class="collapse">
-  <li><a href="#strategic-imperatives" id="toc-strategic-imperatives" class="nav-link" data-scroll-target="#strategic-imperatives">Strategic Imperatives</a></li>
-  <li><a href="#implementation-framework" id="toc-implementation-framework" class="nav-link" data-scroll-target="#implementation-framework">Implementation Framework</a></li>
-  <li><a href="#practical-guidance" id="toc-practical-guidance" class="nav-link" data-scroll-target="#practical-guidance">Practical Guidance</a></li>
-  </ul></li>
-  <li><a href="#why-this-matters-now" id="toc-why-this-matters-now" class="nav-link" data-scroll-target="#why-this-matters-now">💡 Why This Matters Now</a></li>
-  <li><a href="#target-audience" id="toc-target-audience" class="nav-link" data-scroll-target="#target-audience">🎯 Target Audience</a></li>
-  <li><a href="#next-steps" id="toc-next-steps" class="nav-link" data-scroll-target="#next-steps">📈 Next Steps</a></li>
-  <li><a href="#related-resources" id="toc-related-resources" class="nav-link" data-scroll-target="#related-resources">🔗 Related Resources</a></li>
-  <li><a href="#credits-and-accreditations" id="toc-credits-and-accreditations" class="nav-link" data-scroll-target="#credits-and-accreditations">📋 Credits and Accreditations</a></li>
-  </ul></li>
+  <li><a href="#running-apache-spark-in-snowflake" id="toc-running-apache-spark-in-snowflake" class="nav-link active" data-scroll-target="#running-apache-spark-in-snowflake">Running Apache Spark in Snowflake</a></li>
   </ul>
 </nav>
     </div>
@@ -226,111 +241,105 @@ gtag('config', 'G-RK1QNXR9TB', { 'anonymize_ip': true});
 
 
 
-<section id="win-or-vanish-the-urgent-blueprint-for-ai-implementation" class="level1">
-<h1>🎯 Win or Vanish: The Urgent Blueprint for AI Implementation</h1>
-<p>In today’s rapidly evolving business landscape, organizations face a critical decision: embrace AI transformation or risk becoming obsolete. This AI-generated audio presentation explores the urgent need for strategic AI implementation and provides a comprehensive blueprint for organizations looking to thrive in the AI-driven future.</p>
-<blockquote class="blockquote">
-<p><strong>🤖 AI-Generated Content</strong>: This audio overview was created using <a href="https://notebooklm.google.com/">Google’s NotebookLM</a> Audio Overview feature, based on content from the original YouTube video: <a href="https://www.youtube.com/watch?v=NwuHxEw80gA&amp;t=1827s">Win or Vanish: The Urgent Blueprint for AI Implementation</a>.</p>
-</blockquote>
-<section id="listen-to-the-full-presentation" class="level2">
-<h2 class="anchored" data-anchor-id="listen-to-the-full-presentation">🎧 Listen to the Full Presentation</h2>
-<iframe width="100%" height="300" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/2153687667&amp;color=%23ff5500&amp;auto_play=false&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false&amp;show_teaser=true&amp;visual=true">
-</iframe>
-<div style="font-size: 10px; color: #cccccc;line-break: anywhere;word-break: normal;overflow: hidden;white-space: nowrap;text-overflow: ellipsis; font-family: Interstate,Lucida Grande,Lucida Sans Unicode,Lucida Sans,Garuda,Verdana,Tahoma,sans-serif;font-weight: 100;">
-<p><a href="https://soundcloud.com/marcel-castro-893370175" title="Marcel Castro" target="_blank" style="color: #cccccc; text-decoration: none;">Marcel Castro</a> · <a href="https://soundcloud.com/marcel-castro-893370175/win_or_vanish_ai_implementatio" title="Win_or_Vanish_AI_Implementation" target="_blank" style="color: #cccccc; text-decoration: none;">Win_or_Vanish_AI_Implementation</a></p>
+<section id="running-apache-spark-in-snowflake" class="level1">
+<h1>Running Apache Spark in Snowflake</h1>
+<p>Dataset: https://health.data.ny.gov/api/views/jxy9-yhdk/rows.csv</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="./images/image-sparksnowflake.png" class="img-fluid figure-img"></p>
+<figcaption>image-20240507155528488</figcaption>
+</figure>
 </div>
-<p><strong>🎵 Listen on SoundCloud</strong>: <a href="https://soundcloud.com/marcel-castro-893370175/win_or_vanish_ai_implementatio">Win or Vanish: AI Implementation</a></p>
-<p><strong>Alternative Options:</strong> - 📥 <a href="assets/Win_or_Vanish_AI_Implementation.mp3"><strong>Download MP3 file</strong></a> (21MB) - Local backup - 🔗 <a href="https://soundcloud.com/marcel-castro-893370175/win_or_vanish_ai_implementatio"><strong>SoundCloud Direct Link</strong></a> - Full SoundCloud experience</p>
-<p><em>Duration: Full presentation covering strategic AI implementation frameworks and practical guidance for organizational transformation.</em></p>
-</section>
-<section id="about-this-audio-overview" class="level2">
-<h2 class="anchored" data-anchor-id="about-this-audio-overview">🎙️ About This Audio Overview</h2>
-<p>This audio content was generated using <strong>Google’s NotebookLM Audio Overview</strong> feature, which creates engaging, podcast-style conversations from source materials. NotebookLM’s AI hosts analyze and synthesize information to create natural-sounding discussions that make complex topics more accessible and engaging.</p>
-<p><strong>Source Material</strong>: <a href="https://www.youtube.com/watch?v=NwuHxEw80gA&amp;t=1827s">YouTube Video - Win or Vanish: The Urgent Blueprint for AI Implementation</a></p>
-<p><strong>Generation Tool</strong>: <a href="https://notebooklm.google.com/">Google NotebookLM</a> - An AI-powered research and writing assistant that can transform documents, videos, and other sources into various formats including audio overviews.</p>
-</section>
-<section id="key-topics-covered" class="level2">
-<h2 class="anchored" data-anchor-id="key-topics-covered">🚀 Key Topics Covered</h2>
-<p>This presentation addresses critical aspects of AI implementation in modern organizations:</p>
-<section id="strategic-imperatives" class="level3">
-<h3 class="anchored" data-anchor-id="strategic-imperatives">Strategic Imperatives</h3>
-<ul>
-<li><strong>Competitive Advantage</strong>: How AI creates sustainable competitive advantages</li>
-<li><strong>Market Disruption</strong>: Understanding the pace of AI-driven market changes</li>
-<li><strong>Risk Assessment</strong>: Identifying the costs of inaction vs.&nbsp;implementation</li>
-</ul>
-</section>
-<section id="implementation-framework" class="level3">
-<h3 class="anchored" data-anchor-id="implementation-framework">Implementation Framework</h3>
-<ul>
-<li><strong>Organizational Readiness</strong>: Assessing your current AI maturity</li>
-<li><strong>Technology Stack</strong>: Choosing the right AI tools and platforms</li>
-<li><strong>Change Management</strong>: Leading successful AI transformation initiatives</li>
-</ul>
-</section>
-<section id="practical-guidance" class="level3">
-<h3 class="anchored" data-anchor-id="practical-guidance">Practical Guidance</h3>
-<ul>
-<li><strong>Resource Allocation</strong>: Budgeting and staffing for AI projects</li>
-<li><strong>Timeline Planning</strong>: Realistic implementation schedules</li>
-<li><strong>Success Metrics</strong>: Measuring ROI and impact of AI initiatives</li>
-</ul>
-</section>
-</section>
-<section id="why-this-matters-now" class="level2">
-<h2 class="anchored" data-anchor-id="why-this-matters-now">💡 Why This Matters Now</h2>
-<p>The window for strategic AI adoption is narrowing rapidly. Organizations that delay implementation risk:</p>
-<ul>
-<li><strong>Competitive Displacement</strong>: Being outpaced by AI-enabled competitors</li>
-<li><strong>Talent Drain</strong>: Losing skilled workers to more innovative companies<br>
-</li>
-<li><strong>Market Irrelevance</strong>: Failing to meet evolving customer expectations</li>
-<li><strong>Operational Inefficiency</strong>: Missing cost reduction and productivity gains</li>
-</ul>
-</section>
-<section id="target-audience" class="level2">
-<h2 class="anchored" data-anchor-id="target-audience">🎯 Target Audience</h2>
-<p>This presentation is designed for:</p>
-<ul>
-<li><strong>C-Suite Executives</strong> planning organizational AI strategy</li>
-<li><strong>Technology Leaders</strong> responsible for AI implementation</li>
-<li><strong>Business Strategists</strong> evaluating competitive positioning</li>
-<li><strong>Change Management Professionals</strong> leading digital transformation</li>
-</ul>
-</section>
-<section id="next-steps" class="level2">
-<h2 class="anchored" data-anchor-id="next-steps">📈 Next Steps</h2>
-<p>After listening to this presentation, consider:</p>
-<ol type="1">
-<li><strong>Assessment</strong>: Evaluate your organization’s current AI readiness</li>
-<li><strong>Strategy Development</strong>: Create a comprehensive AI implementation roadmap</li>
-<li><strong>Team Building</strong>: Assemble the right mix of technical and business expertise</li>
-<li><strong>Pilot Projects</strong>: Start with focused, high-impact AI initiatives</li>
-<li><strong>Scaling</strong>: Expand successful pilots across the organization</li>
-</ol>
-<hr>
-<p><em>The urgency for AI implementation has never been greater. Organizations that act decisively today will be the winners of tomorrow’s business landscape.</em></p>
-</section>
-<section id="related-resources" class="level2">
-<h2 class="anchored" data-anchor-id="related-resources">🔗 Related Resources</h2>
-<ul>
-<li><a href="https://marcelcastrobr.github.io/posts/2024-10-23-AgentsRevolution.html">AI Strategy Planning</a></li>
-<li><a href="https://marcelcastrobr.github.io/posts/">Understanding AI Implementation Challenges</a></li>
-<li><a href="https://marcelcastrobr.github.io/">Building AI-Ready Organizations</a></li>
-</ul>
-</section>
-<section id="credits-and-accreditations" class="level2">
-<h2 class="anchored" data-anchor-id="credits-and-accreditations">📋 Credits and Accreditations</h2>
-<p><strong>Original Content</strong>: <a href="https://www.youtube.com/watch?v=NwuHxEw80gA&amp;t=1827s">Win or Vanish: The Urgent Blueprint for AI Implementation in Your Organization</a> - YouTube Video</p>
-<p><strong>Audio Generation</strong>: Created using <a href="https://notebooklm.google.com/">Google NotebookLM</a> Audio Overview feature - <strong>Technology</strong>: Google’s AI-powered research and synthesis platform - <strong>Format</strong>: AI-generated podcast-style conversation - <strong>Processing</strong>: Automated content analysis and audio synthesis - <strong>Hosting</strong>: <a href="https://soundcloud.com/marcel-castro-893370175/win_or_vanish_ai_implementatio">SoundCloud</a> for reliable audio streaming</p>
-<p><strong>Content Curation</strong>: Marcel Castro (<a href="https://github.com/marcelcastrobr"><span class="citation" data-cites="marcelcastrobr">@marcelcastrobr</span></a>) - <strong>Blog Integration</strong>: Quarto-based presentation and analysis - <strong>Platform</strong>: GitHub Pages hosting - <strong>Additional Context</strong>: Strategic analysis and implementation guidance - <strong>Markdown Generation</strong>: Created using <a href="https://cursor.sh/">Cursor</a> AI-powered code editor</p>
-<p><strong>Disclaimer</strong>: This audio overview is an AI-generated interpretation of the original video content. While efforts have been made to maintain accuracy, listeners are encouraged to reference the original source material for complete information.</p>
-<blockquote class="blockquote">
-<p>[!IMPORTANT] The time for AI implementation is now. Every day of delay is a competitive advantage given to your competitors who are already moving forward with AI transformation.</p>
-</blockquote>
+<div id="setup" class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Set up the env for Java libraries and enable the Spark Connect Mode</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> traceback</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>os.environ[<span class="st">'JAVA_HOME'</span>] <span class="op">=</span> os.environ[<span class="st">"CONDA_PREFIX"</span>]</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>os.environ[<span class="st">'JAVA_LD_LIBRARY_PATH'</span>] <span class="op">=</span> os.path.join(os.environ[<span class="st">"CONDA_PREFIX"</span>], <span class="st">'lib'</span>, <span class="st">'server'</span>)</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>os.environ[<span class="st">"SPARK_LOCAL_HOSTNAME"</span>] <span class="op">=</span> <span class="st">"127.0.0.1"</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>os.environ[<span class="st">"SPARK_CONNECT_MODE_ENABLED"</span>] <span class="op">=</span> <span class="st">"1"</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> snowflake <span class="im">import</span> snowpark_connect</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> snowflake.snowpark.context <span class="im">import</span> get_active_session</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>session <span class="op">=</span> get_active_session()</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>snowpark_connect.start_session(snowpark_session <span class="op">=</span> session)</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Here is your normal pyspark code. You can of course have them in other Python Cells</span></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>spark <span class="op">=</span> snowpark_connect.get_session()</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> spark.sql(<span class="st">"show schemas"</span>).limit(<span class="dv">10</span>)</span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>df.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="create_dataframe" class="cell" data-codecollapsed="false">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> [[<span class="dv">2021</span>, <span class="st">"test"</span>, <span class="st">"Albany"</span>, <span class="st">"M"</span>, <span class="dv">42</span>]]</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>columns <span class="op">=</span> [<span class="st">"Year"</span>, <span class="st">"First_Name"</span>, <span class="st">"County"</span>, <span class="st">"Sex"</span>, <span class="st">"Count"</span>]</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>df1 <span class="op">=</span> spark.createDataFrame(data, schema<span class="op">=</span><span class="st">"Year int, First_Name STRING, County STRING, Sex STRING, Count int"</span>)</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="co">#display(df1) # The display() method is specific to Databricks notebooks and provides a richer visualization.</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>df1.show() <span class="co">#The show() method is a part of the Apache Spark DataFrame API and provides basic visualization.</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="load_csv" class="cell" data-codecollapsed="false">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>df_csv <span class="op">=</span> spark.read.csv(<span class="ss">f"@aicollege.public.setup/row.csv"</span>,</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    header<span class="op">=</span><span class="va">True</span>,</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    inferSchema<span class="op">=</span><span class="va">True</span>,</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    sep<span class="op">=</span><span class="st">","</span>)</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="co">#display(df_csv)</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>df_csv.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="interact_with_dataframe" class="cell" data-codecollapsed="false">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>df_csv.printSchema()</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>df1.printSchema()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="rename" class="cell" data-codecollapsed="false">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>df_csv <span class="op">=</span> df_csv.withColumnRenamed(<span class="st">"First Name"</span>, <span class="st">"First_Name"</span>)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>df_csv.printSchema()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="combine" class="cell" data-codecollapsed="false">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> df1.union(df_csv)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>df.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="filter" class="cell" data-codecollapsed="false">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>df.<span class="bu">filter</span>(df[<span class="st">"Count"</span>] <span class="op">&gt;</span> <span class="dv">50</span>).show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="where" class="cell" data-codecollapsed="false">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>df.where(df[<span class="st">"Count"</span>] <span class="op">&gt;</span> <span class="dv">50</span>).show()</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="select_column" class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pyspark.sql.functions <span class="im">import</span> desc</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>df.select(<span class="st">"First_Name"</span>, <span class="st">"Count"</span>).orderBy(desc(<span class="st">"Count"</span>)).show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="subset_df" class="cell" data-codecollapsed="false">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>subsetDF <span class="op">=</span> df.<span class="bu">filter</span>((df[<span class="st">"Year"</span>] <span class="op">==</span> <span class="dv">2009</span>) <span class="op">&amp;</span> (df[<span class="st">"Count"</span>] <span class="op">&gt;</span> <span class="dv">100</span>) <span class="op">&amp;</span> (df[<span class="st">"Sex"</span>] <span class="op">==</span> <span class="st">"F"</span>)).select(<span class="st">"First_Name"</span>, <span class="st">"County"</span>, <span class="st">"Count"</span>).orderBy(desc(<span class="st">"Count"</span>))</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>subsetDF.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="save_df" class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>df.write.mode(<span class="st">"overwrite"</span>).saveAsTable(<span class="st">"AICOLLEGE.PUBLIC.MYFIRSTSPARK"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="save_to_json" class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>df.write.<span class="bu">format</span>(<span class="st">"json"</span>).mode(<span class="st">"overwrite"</span>).save(<span class="ss">f"@aicollege.public.setup/myfirstspark"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="read_json" class="cell" data-codecollapsed="false">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co">#spark.read.format("json").json(f"@aicollege.public.setup/myfirstspark")</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="selectexpr" class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>df.selectExpr(<span class="st">"Count"</span>, <span class="st">"upper(County) as big_name"</span>).show()</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="expr" class="cell" data-codecollapsed="false">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pyspark.sql.functions <span class="im">import</span> expr</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>df.select(<span class="st">"Count"</span>, expr(<span class="st">"lower(County) as little_name"</span>)).show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="spark_sql" class="cell" data-codecollapsed="false">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>spark.sql(<span class="ss">f"SELECT * FROM AICOLLEGE.PUBLIC.MYFIRSTSPARK"</span>).show()</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 
 
-</section>
 </section>
 
 </main> <!-- /main -->
