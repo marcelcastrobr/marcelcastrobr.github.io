@@ -230,7 +230,7 @@ gtag('config', 'G-RK1QNXR9TB', { 'anonymize_ip': true});
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#running-apache-spark-in-snowflake" id="toc-running-apache-spark-in-snowflake" class="nav-link active" data-scroll-target="#running-apache-spark-in-snowflake">Running Apache Spark in Snowflake</a></li>
+  <li><a href="#running-apache-spark-in-snowflakedataset-httpshealth.data.ny.govapiviewsjxy9-yhdkrows.csvimage-20240507155528488" id="toc-running-apache-spark-in-snowflakedataset-httpshealth.data.ny.govapiviewsjxy9-yhdkrows.csvimage-20240507155528488" class="nav-link active" data-scroll-target="#running-apache-spark-in-snowflakedataset-httpshealth.data.ny.govapiviewsjxy9-yhdkrows.csvimage-20240507155528488">Running Apache Spark in SnowflakeDataset: https://health.data.ny.gov/api/views/jxy9-yhdk/rows.csv<img src="./images/image-sparksnowflake.png" class="img-fluid" alt="image-20240507155528488"></a></li>
   </ul>
 </nav>
     </div>
@@ -241,68 +241,65 @@ gtag('config', 'G-RK1QNXR9TB', { 'anonymize_ip': true});
 
 
 
-<section id="running-apache-spark-in-snowflake" class="level1">
-<h1>Running Apache Spark in Snowflake</h1>
-<p>Dataset: https://health.data.ny.gov/api/views/jxy9-yhdk/rows.csv</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="./images/image-sparksnowflake.png" class="img-fluid figure-img"></p>
-<figcaption>image-20240507155528488</figcaption>
-</figure>
-</div>
+<section id="running-apache-spark-in-snowflakedataset-httpshealth.data.ny.govapiviewsjxy9-yhdkrows.csvimage-20240507155528488" class="level1">
+<h1>Running Apache Spark in SnowflakeDataset: https://health.data.ny.gov/api/views/jxy9-yhdk/rows.csv<img src="./images/image-sparksnowflake.png" class="img-fluid" alt="image-20240507155528488"></h1>
 <div id="setup" class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Set up the env for Java libraries and enable the Spark Connect Mode</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> traceback</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>os.environ[<span class="st">'JAVA_HOME'</span>] <span class="op">=</span> os.environ[<span class="st">"CONDA_PREFIX"</span>]</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>os.environ[<span class="st">'JAVA_LD_LIBRARY_PATH'</span>] <span class="op">=</span> os.path.join(os.environ[<span class="st">"CONDA_PREFIX"</span>], <span class="st">'lib'</span>, <span class="st">'server'</span>)</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>os.environ[<span class="st">"SPARK_LOCAL_HOSTNAME"</span>] <span class="op">=</span> <span class="st">"127.0.0.1"</span></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>os.environ[<span class="st">"SPARK_CONNECT_MODE_ENABLED"</span>] <span class="op">=</span> <span class="st">"1"</span></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> snowflake <span class="im">import</span> snowpark_connect</span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> snowflake.snowpark.context <span class="im">import</span> get_active_session</span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>session <span class="op">=</span> get_active_session()</span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>snowpark_connect.start_session(snowpark_session <span class="op">=</span> session)</span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Here is your normal pyspark code. You can of course have them in other Python Cells</span></span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>spark <span class="op">=</span> snowpark_connect.get_session()</span>
-<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> spark.sql(<span class="st">"show schemas"</span>).limit(<span class="dv">10</span>)</span>
-<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>df.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Set up the env for Java libraries and enable the Spark Connect Modeimport osimport tracebackos.environ['JAVA_HOME'] = os.environ["CONDA_PREFIX"]os.environ['JAVA_LD_LIBRARY_PATH'] = os.path.join(os.environ["CONDA_PREFIX"], 'lib', 'server')os.environ["SPARK_LOCAL_HOSTNAME"] = "127.0.0.1"os.environ["SPARK_CONNECT_MODE_ENABLED"] = "1"from snowflake import snowpark_connectfrom snowflake.snowpark.context import get_active_sessionsession = get_active_session()snowpark_connect.start_session(snowpark_session = session)# Here is your normal pyspark code. You can of course have them in other Python Cellsspark = snowpark_connect.get_session()df = spark.sql("show schemas").limit(10)df.show()</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div id="create_dataframe" class="cell" data-codecollapsed="false">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> [[<span class="dv">2021</span>, <span class="st">"test"</span>, <span class="st">"Albany"</span>, <span class="st">"M"</span>, <span class="dv">42</span>]]</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>columns <span class="op">=</span> [<span class="st">"Year"</span>, <span class="st">"First_Name"</span>, <span class="st">"County"</span>, <span class="st">"Sex"</span>, <span class="st">"Count"</span>]</span>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a DataFrame with sample data using Snowpark</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> snowflake.snowpark.types <span class="im">import</span> StructType, StructField, IntegerType, StringType</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>df1 <span class="op">=</span> spark.createDataFrame(data, schema<span class="op">=</span><span class="st">"Year int, First_Name STRING, County STRING, Sex STRING, Count int"</span>)</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="co">#display(df1) # The display() method is specific to Databricks notebooks and provides a richer visualization.</span></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>df1.show() <span class="co">#The show() method is a part of the Apache Spark DataFrame API and provides basic visualization.</span></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> [[<span class="dv">2021</span>, <span class="st">"test"</span>, <span class="st">"Albany"</span>, <span class="st">"M"</span>, <span class="dv">42</span>]]</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>schema <span class="op">=</span> StructType([</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    StructField(<span class="st">"Year"</span>, IntegerType()),</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    StructField(<span class="st">"First_Name"</span>, StringType()),</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>    StructField(<span class="st">"County"</span>, StringType()),</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>    StructField(<span class="st">"Sex"</span>, StringType()),</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>    StructField(<span class="st">"Count"</span>, IntegerType())</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>])</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>df1 <span class="op">=</span> session.create_dataframe(data, schema<span class="op">=</span>schema)</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>df1.show()  <span class="co"># Snowpark DataFrame show() method</span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div id="load_csv" class="cell" data-codecollapsed="false">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>df_csv <span class="op">=</span> spark.read.csv(<span class="ss">f"@aicollege.public.setup/row.csv"</span>,</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    header<span class="op">=</span><span class="va">True</span>,</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    inferSchema<span class="op">=</span><span class="va">True</span>,</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    sep<span class="op">=</span><span class="st">","</span>)</span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="co">#display(df_csv)</span></span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>df_csv.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Read CSV file using Snowpark</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> snowflake.snowpark.types <span class="im">import</span> <span class="op">*</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Option 1: Read from stage using Snowpark</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>df_csv <span class="op">=</span> session.read.option(<span class="st">"FIELD_DELIMITER"</span>, <span class="st">","</span>).option(<span class="st">"SKIP_HEADER"</span>, <span class="dv">1</span>).csv(<span class="st">"@aicollege.public.setup/row.csv"</span>)</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Option 2: If the CSV is already loaded as a table, use SQL</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="co"># df_csv = session.table("your_table_name")</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>df_csv.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div id="interact_with_dataframe" class="cell" data-codecollapsed="false">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>df_csv.printSchema()</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>df1.printSchema()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Print schema information for both DataFrames</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"CSV DataFrame schema:"</span>)</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>df_csv.show(<span class="dv">1</span>)  <span class="co"># Show first row to see column structure</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">Sample DataFrame schema:"</span>)</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>df1.show(<span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div id="rename" class="cell" data-codecollapsed="false">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>df_csv <span class="op">=</span> df_csv.withColumnRenamed(<span class="st">"First Name"</span>, <span class="st">"First_Name"</span>)</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>df_csv.printSchema()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Rename column using Snowpark</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> snowflake.snowpark.functions <span class="im">import</span> col</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>df_csv <span class="op">=</span> df_csv.with_column_renamed(<span class="st">"First Name"</span>, <span class="st">"First_Name"</span>)</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"After renaming column:"</span>)</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>df_csv.show(<span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div id="combine" class="cell" data-codecollapsed="false">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> df1.union(df_csv)</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>df.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Union DataFrames using Snowpark</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> df1.union_all(df_csv)  <span class="co"># union_all is the Snowpark equivalent</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>df.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div id="filter" class="cell" data-codecollapsed="false">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>df.<span class="bu">filter</span>(df[<span class="st">"Count"</span>] <span class="op">&gt;</span> <span class="dv">50</span>).show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Filter using Snowpark</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> snowflake.snowpark.functions <span class="im">import</span> col</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>df.<span class="bu">filter</span>(col(<span class="st">"Count"</span>) <span class="op">&gt;</span> <span class="dv">50</span>).show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div id="where" class="cell" data-codecollapsed="false">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>df.where(df[<span class="st">"Count"</span>] <span class="op">&gt;</span> <span class="dv">50</span>).show()</span>
