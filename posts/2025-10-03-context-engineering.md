@@ -18,7 +18,11 @@ toc: true
 
 As intelligent agents handle multi-turn, long-horizon tasks, we face a critical challenge: managing the growing volume of system instructions, history, and data efficiently. **The bottleneck isn't just LLM size—it's signal efficiency**
 
+## 
 
+![image-20251003082709799](./assets/image-20251003082709799.png)
+
+Source: ["Effective context engineering for AI agents"](https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents) by Anthropic
 
 ### **Key Definitions:**
 
