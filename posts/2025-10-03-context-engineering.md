@@ -1,10 +1,10 @@
 ---
-title:  "The Next Frontier: Moving from Perfect Prompts to Optimized Context Curation"
+title:  "The Next Frontier Moving from Perfect Prompts to Optimized Context Curation"
 date:   2025-10-03 15:04:07 +0200
 date-modified: last-modified
 categories: LLM, Context Engineering
 draft: false
-description: The Next Frontier: Moving from Perfect Prompts to Optimized Context Curation.
+description: The Next Frontier Moving from Perfect Prompts to Optimized Context Curation.
 toc: true
 ---
 
