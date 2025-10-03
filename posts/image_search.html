@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.7.33">
+<meta name="generator" content="quarto-1.8.25">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -59,7 +59,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </style>
 
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script><script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" integrity="sha384-ZvpUoO/+PpLXR1lu4jmpXWu80pZlYUAfxl5NsBMWOEPSjUn/6Z/hRTt8+pR6L4N2" crossorigin="anonymous"></script><script src="../site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="../site_libs/quarto-nav/headroom.min.js"></script>
 <script src="../site_libs/clipboard/clipboard.min.js"></script>
 <script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
@@ -68,14 +68,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <meta name="quarto:offset" content="../">
 <script src="../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-ea385d0e468b0dd5ea5bf0780b1290d9.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-2f9bc8108cc5788f896f6d8ac1f323a2.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-ee47912cae73dc7932e3cc93c52697b6.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -112,10 +113,10 @@ function gtag(){dataLayer.push(arguments);}
 gtag('js', new Date());
 gtag('config', 'G-RK1QNXR9TB', { 'anonymize_ip': true});
 </script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/requirejs@2.3.6/require.min.js" integrity="sha384-c9c+LnTbwQ3aujuU7ULEPVvgLs+Fn6fJUvIGTsuu1ZcCf11fiEubah0ttpca4ntM sha384-6V1/AdqZRWk1KAlWbKBlGhN7VG4iE/yAZcO6NZPMF8od0vukrvr0tg4qY6NSrItx" crossorigin="anonymous"></script>
 
 <script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
-<script src="https://unpkg.com/@jupyter-widgets/html-manager@*/dist/embed-amd.js" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/@jupyter-widgets/html-manager@*/dist/embed-amd.js" crossorigin="anonymous"></script>
 
 
 <link rel="stylesheet" href="../styles.css">
@@ -128,6 +129,8 @@ gtag('config', 'G-RK1QNXR9TB', { 'anonymize_ip': true});
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
+    <a href="../index.html" class="navbar-brand navbar-brand-logo">
+    </a>
     <a class="navbar-brand" href="../index.html">
     <span class="navbar-title">Marcel Castro</span>
     </a>
@@ -232,7 +235,7 @@ gtag('config', 'G-RK1QNXR9TB', { 'anonymize_ip': true});
 <h2 class="anchored" data-anchor-id="installation">Installation</h2>
 <p>First we need to install sentence-transformers</p>
 <div id="xTFNbzmG3erx" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;}}" data-outputid="318c895a-aedc-483f-9702-d4b4fde42722" data-execution_count="1">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="op">!</span>pip install sentence<span class="op">-</span>transformers</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="op">!</span>pip install sentence<span class="op">-</span>transformers</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Collecting sentence-transformers
   Downloading sentence-transformers-2.1.0.tar.gz (78 kB)
@@ -297,7 +300,7 @@ Successfully installed huggingface-hub-0.1.2 pyyaml-6.0 sacremoses-0.0.46 senten
 <h2 class="anchored" data-anchor-id="load-clip-model">Load CLIP Model</h2>
 <p>Next we load the CLIP model using SentenceTransformer. The model is downloaded automatically.</p>
 <div id="indonesian-yemen" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;,&quot;height&quot;:386,&quot;referenced_widgets&quot;:[&quot;47ae35ceb1df4bf5bc10939e87fc12fe&quot;,&quot;2957981d539e4f4b8fb642f31d4541d1&quot;,&quot;4179d37351d948cc9f570e009a1bf960&quot;,&quot;85bdf75b1874465eb1dc30a9ab80d107&quot;,&quot;1ecc7a6eedc84ae0b037a202c1f93845&quot;,&quot;b302e0f4ea8a486db5f6e52b19c87173&quot;,&quot;81288b8736d04e66b7837d03d0668a31&quot;,&quot;f3583995d00a49b89ef46aeef24ff17c&quot;,&quot;c94af18a348248ac899db9dbaa0e6968&quot;,&quot;7e4e08fc27fe4e3eaf91fc1284312037&quot;,&quot;60d164ac2030486cbc0ebbe88abfb1c9&quot;,&quot;bcb139b4c6d04a82898671042d098494&quot;,&quot;a4ab99aed7984480a2dea48c8871b92d&quot;,&quot;8956ba302d7042ec828249e2909b4983&quot;,&quot;62f9d5bd42274060887ab5bfe2673566&quot;,&quot;2433f4825e2449949f1a9d0b233fff6e&quot;,&quot;c655c4eb431a470797de01e5a81c284c&quot;,&quot;b0c2f978d3b946f7a4931557868f50e2&quot;,&quot;72fce5ae0ca84265a1a35f9d409ba6d4&quot;,&quot;9a82be2b9ea44c8da34918ad33a3360e&quot;,&quot;409b33167f464bffaf9ba6ca401e9afc&quot;,&quot;5b0770e364dd48aba3b90d6932950f7b&quot;,&quot;d6a250dafa794aa9a22ad9e2b4258ad8&quot;,&quot;c13fcd21562646b3bd660600cd7a1a6b&quot;,&quot;5ed1032e19004fd4adcefc664eaa7c51&quot;,&quot;237f8c37ff884b878992938a0964e882&quot;,&quot;866f150339324447a2a02cb9ba4c75c1&quot;,&quot;aa7a7db2b63447dd9890d1679b6c77fe&quot;,&quot;71b580f897194346880f30a9b6fe6a8b&quot;,&quot;b5dc2292324141bbbb1792c88498e493&quot;,&quot;77d909b5940e4b8eb985656d7e760450&quot;,&quot;0332774608b6464fb244a00abbb6a2d5&quot;,&quot;6d8b7e0e0767492988fbf0d7573fc05a&quot;,&quot;efe2534dca074f0a8475f6e078e846bf&quot;,&quot;d14d3124a4154171a8e4f94c0eb02aa3&quot;,&quot;4ecfa43a6c274ff2b0a3dd1c567dfa80&quot;,&quot;02d193e6a3664946a7a9c8e46298e087&quot;,&quot;40180a5f6b324d71abcfcedd20aeda59&quot;,&quot;55bce055bdda4c489aa791fd70841b0f&quot;,&quot;77858e30413a493181db9bf2e3424fcc&quot;,&quot;f7c63b7178754427838ed0e9ef2f1387&quot;,&quot;3e7d933a48e647419c683d2051715270&quot;,&quot;61887cc12b7c4026abec279dc84b25f5&quot;,&quot;882326295851437a9a9881bd0de3b59f&quot;,&quot;c16e40a06280416389674c8d0870d400&quot;,&quot;983e6be6ad044536a4acaf65f897cb55&quot;,&quot;eebfba0e44c342ebb6810300d660d8a1&quot;,&quot;51fd16be7ecb44b8890fb285dcde837c&quot;,&quot;649b1ae576ce4ce0ba861a7ef7749705&quot;,&quot;0ff72bceb7bf449da8a637210e68d574&quot;,&quot;f2a306c1040f498bae1cbff66fea456a&quot;,&quot;c7ce698667c041e08ec70ee57ad3ebd8&quot;,&quot;eb09f884f0744fbf9ca4d5e82f911702&quot;,&quot;7f3f7ca26fe249f1bb403ea87ffe4974&quot;,&quot;02e35f8850e2432bb1576a3bd77aa582&quot;,&quot;8dcfe69c5ff04418aeb14779691fcddc&quot;,&quot;d10acdf5862949a3890b013e4b039d1e&quot;,&quot;29d22f08b65a496b9860faf327dd5343&quot;,&quot;e4f59b75f06543db9c4b1619e4bbecf8&quot;,&quot;5585cc71e9e3496fade8f4069f76a6d3&quot;,&quot;09a8301613cc419e9d185557e30d3965&quot;,&quot;450c87ce76434d6586e986c3fa1d7310&quot;,&quot;7a437571b00b43eb8f526615485d15a3&quot;,&quot;1b0c7b2575f44ef0ad0b341edb3f7be9&quot;,&quot;f2b1b0ff7fc0415eb5ca40e7172d1817&quot;,&quot;5e51795a34b24939a53e3180a76694c3&quot;,&quot;2607b44ed4a440cca33d098619d2e750&quot;,&quot;6d832ec43d9a4f589609df5ec6aef440&quot;,&quot;c2cc42de23f3452da5f222bf66cd4590&quot;,&quot;cf73c290ed854931883a6e350fe494e1&quot;,&quot;9585e237f2ad41a79e669cb14c33102e&quot;,&quot;e2f5f11f260c4d7990bfdc32c6df07b5&quot;,&quot;96a964cf848348dbabb55934a523d4eb&quot;,&quot;8432781698b14d0799318d3fe4b01ac4&quot;,&quot;4cd5d79988a94f4f8d40efbc42de24a6&quot;,&quot;63d45e18e310409e9090c2cd7c025605&quot;,&quot;67e8d35470f344edb60b2cfeec4964c3&quot;,&quot;e9abb7bcf363403aa12914281a81cb36&quot;,&quot;12ae75cc12234ba89749ee591e6c734b&quot;,&quot;97daa9d7896b4f11a2ea52b228f9b821&quot;,&quot;f0b632b65d06441ab822e46d8af05592&quot;,&quot;52f4d502849640b2a0011a8134c7afd0&quot;,&quot;a7ef0d84d113498682cb847615f2b288&quot;,&quot;73af40137c0b460b836c841d78b71692&quot;,&quot;7a11e14d4f9748f09e1431f99b2e8634&quot;,&quot;da82e3db0f8e4b87b4b2b911925ce78d&quot;,&quot;6a86a7f8ef47464188cfd5554af343f0&quot;,&quot;db8101aeb3674171a60a9bc5f8f0502f&quot;,&quot;38c078e192414ba69094743d57131aa8&quot;,&quot;7e066bb1db2944ad9d560d13111dfbbc&quot;,&quot;771acc46b2a441539b89939a3d4ebbe8&quot;,&quot;8e9587c4e3a441c7a88f251879cced6a&quot;,&quot;4526f9171acd458b8da34121a474effb&quot;,&quot;1cca21bf886c4d2c896229b9c9c14c4d&quot;,&quot;6051a2e765e64b8ea871ceaf23b9d6ed&quot;,&quot;e40010dd9516490f897fa7a3e9e3f1e5&quot;,&quot;2881a7bdf514458f95ee7d15c3615588&quot;,&quot;5861edba30e54e77b374d58227672f34&quot;,&quot;1f71c66fbecd43bf994cdeca6e062aac&quot;,&quot;211d1ba12b7c47f8bfa916c06cdb9e4e&quot;,&quot;a3c8f24d55c542149a6b5559f437af26&quot;,&quot;039a3f4925ae4355b7de8269b8be26ed&quot;,&quot;1587615c7bbc43b3ae4bdd21de55d34d&quot;,&quot;36e9f704d07c4abb8bc867161778c723&quot;,&quot;8f141501c9b94a619ee4fcb2bc1713c0&quot;,&quot;c9e275efbe4547768b49ab4afc23f9f7&quot;,&quot;f7991e0e0ea14ae9be03f3c8c6aea039&quot;,&quot;5291ca9d53184ba29d24be59379ea982&quot;,&quot;bd34ab900343418c817ad0659e936ea0&quot;,&quot;959486ba586f4c05815d94925fe8577d&quot;,&quot;84dc7e1fd8fe495688e86d1ae70688cb&quot;,&quot;f29da35de3084cbdb4da7e67f9f719e0&quot;,&quot;d1b7d09b567d46b693a6476f61f161a4&quot;,&quot;b9cd4bad674a442187db0e3c356c05d8&quot;,&quot;632bf122b8784da58b2ee8b8358aed29&quot;,&quot;399f79d340af4a698d64ce71e67e2ecf&quot;,&quot;f6ac6bd5bfa74e19874ad00e58e173eb&quot;,&quot;580c63cf41804e4499310deb9bbce605&quot;,&quot;c346e1a28a9d438294b7748a76ce2e65&quot;,&quot;c668936f99fb444d8c0e43e28072cabf&quot;,&quot;8c18a5b480c1443da352c7d814d243da&quot;]}}" data-outputid="1b558509-2b4d-440a-976a-ecbbafd88890" data-execution_count="2">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> sentence_transformers</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> sentence_transformers</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sentence_transformers <span class="im">import</span> SentenceTransformer, util</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> PIL <span class="im">import</span> Image</span>
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> glob</span>
@@ -311,7 +314,7 @@ Successfully installed huggingface-hub-0.1.2 pyyaml-6.0 sacremoses-0.0.46 senten
 <span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>torch.set_num_threads(<span class="dv">4</span>)</span>
 <span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a><span class="co">#First, we load the respective CLIP model</span></span>
-<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> SentenceTransformer(<span class="st">'clip-ViT-B-32'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> SentenceTransformer(<span class="st">'clip-ViT-B-32'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
 <script type="application/vnd.jupyter.widget-view+json">
 {"model_id":"47ae35ceb1df4bf5bc10939e87fc12fe","version_major":2,"version_minor":0,"quarto_mimetype":"application/vnd.jupyter.widget-view+json"}
@@ -372,7 +375,7 @@ Successfully installed huggingface-hub-0.1.2 pyyaml-6.0 sacremoses-0.0.46 senten
 </div>
 </div>
 <div id="southeast-entity" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;,&quot;height&quot;:81,&quot;referenced_widgets&quot;:[&quot;ae7bdb120e9d42d2a993b6ec69cd0247&quot;,&quot;d91eccc00e77481a893a3e6d69072ba1&quot;,&quot;a974420b59dc4735a174cfd0ed7669f1&quot;,&quot;7282834841444fde86d3888a1d7b13f3&quot;,&quot;672a4c5a34af473190c7337e311aaa3e&quot;,&quot;7ef1886aefb04abea914fd8a6b8f6e1e&quot;,&quot;a67919a5544e45238b4875a007e7f3e8&quot;,&quot;4652e60ae94d4cb59c5859c26d9a2252&quot;,&quot;01f6a12d93c8451c982a6ea047a6553e&quot;,&quot;3ac70f678bde4612812f43ad5580564a&quot;,&quot;99c2fe44ad1d4439a28ad2040984d3d2&quot;,&quot;73553c316e3b49cabb648e0188801fbc&quot;,&quot;1e4c0736905c445584acc6dd60814182&quot;,&quot;e8528d15393e4117afc544ffe020f073&quot;,&quot;4bd9dc32653447a8900bfc8e899e165c&quot;,&quot;3e165e97cad04275be20bdc48c0b95dc&quot;,&quot;1437f6d8d33545cbbfc14a03dfbb2212&quot;,&quot;48632e689c4a4640836103af9041dc29&quot;,&quot;c2d6ab0f2b69420e83864642d593f4c6&quot;,&quot;8a4cf9fc4fab4c05951b5bb5f912c21e&quot;,&quot;e3693cb28bd44f56ae4ad173603ca3cf&quot;,&quot;27c5dfacd55a411ca07ddd21ef8c830a&quot;]}}" data-outputid="66b39055-1aab-42ac-f89e-1b38246789ff" data-execution_count="3">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Next, we get about 25k images from Unsplash </span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Next, we get about 25k images from Unsplash </span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>img_folder <span class="op">=</span> <span class="st">'photos/'</span></span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="kw">not</span> os.path.exists(img_folder) <span class="kw">or</span> <span class="bu">len</span>(os.listdir(img_folder)) <span class="op">==</span> <span class="dv">0</span>:</span>
 <span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    os.makedirs(img_folder, exist_ok<span class="op">=</span><span class="va">True</span>)</span>
@@ -385,7 +388,7 @@ Successfully installed huggingface-hub-0.1.2 pyyaml-6.0 sacremoses-0.0.46 senten
 <span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">with</span> zipfile.ZipFile(photo_filename, <span class="st">'r'</span>) <span class="im">as</span> zf:</span>
 <span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> member <span class="kw">in</span> tqdm(zf.infolist(), desc<span class="op">=</span><span class="st">'Extracting'</span>):</span>
 <span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>            zf.extract(member, img_folder)</span>
-<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>        </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>        </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
 <script type="application/vnd.jupyter.widget-view+json">
 {"model_id":"ae7bdb120e9d42d2a993b6ec69cd0247","version_major":2,"version_minor":0,"quarto_mimetype":"application/vnd.jupyter.widget-view+json"}
@@ -398,7 +401,7 @@ Successfully installed huggingface-hub-0.1.2 pyyaml-6.0 sacremoses-0.0.46 senten
 </div>
 </div>
 <div id="static-insured" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;,&quot;height&quot;:66,&quot;referenced_widgets&quot;:[&quot;d7b6dc5644cb41709af6ba10ef17e425&quot;,&quot;4b716a0260d74c5984289c0f7002dff3&quot;,&quot;0a333850ff84477db1b959c1c0ff5141&quot;,&quot;028f984ae2e44f228d1193e647f167b6&quot;,&quot;f16466bf0a7744f593b08e20ea25af15&quot;,&quot;33fbd90953964e21926b73992d03e106&quot;,&quot;8b030878860f4a69916a91e4a94c5387&quot;,&quot;4604fc5c6d594b1eac6c7aedee0f2952&quot;,&quot;3db6abce72044975816cc31f1b592df2&quot;,&quot;0ee43660d2b040059c48baf9d14fff48&quot;,&quot;0346aabd387b4eadbc4043d9b6d03474&quot;]}}" data-outputid="70928f97-e894-4f0a-b78f-7353b7f5255a" data-execution_count="4">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Now, we need to compute the embeddings</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Now, we need to compute the embeddings</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="co"># To speed things up, we destribute pre-computed embeddings</span></span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Otherwise you can also encode the images yourself.</span></span>
 <span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="co"># To encode an image, you can use the following code:</span></span>
@@ -418,7 +421,7 @@ Successfully installed huggingface-hub-0.1.2 pyyaml-6.0 sacremoses-0.0.46 senten
 <span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span>:</span>
 <span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a>    img_names <span class="op">=</span> <span class="bu">list</span>(glob.glob(<span class="st">'unsplash/photos/*.jpg'</span>))</span>
 <span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"Images:"</span>, <span class="bu">len</span>(img_names))</span>
-<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a>    img_emb <span class="op">=</span> model.encode([Image.<span class="bu">open</span>(filepath) <span class="cf">for</span> filepath <span class="kw">in</span> img_names], batch_size<span class="op">=</span><span class="dv">128</span>, convert_to_tensor<span class="op">=</span><span class="va">True</span>, show_progress_bar<span class="op">=</span><span class="va">True</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a>    img_emb <span class="op">=</span> model.encode([Image.<span class="bu">open</span>(filepath) <span class="cf">for</span> filepath <span class="kw">in</span> img_names], batch_size<span class="op">=</span><span class="dv">128</span>, convert_to_tensor<span class="op">=</span><span class="va">True</span>, show_progress_bar<span class="op">=</span><span class="va">True</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
 <script type="application/vnd.jupyter.widget-view+json">
 {"model_id":"d7b6dc5644cb41709af6ba10ef17e425","version_major":2,"version_minor":0,"quarto_mimetype":"application/vnd.jupyter.widget-view+json"}
@@ -429,7 +432,7 @@ Successfully installed huggingface-hub-0.1.2 pyyaml-6.0 sacremoses-0.0.46 senten
 </div>
 </div>
 <div id="operating-southeast" class="cell" data-execution_count="5">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Next, we define a search function.</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Next, we define a search function.</span></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> search(query, k<span class="op">=</span><span class="dv">3</span>):</span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>    <span class="co"># First, we encode the query (which can either be an image or a text string)</span></span>
 <span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>    query_emb <span class="op">=</span> model.encode([query], convert_to_tensor<span class="op">=</span><span class="va">True</span>, show_progress_bar<span class="op">=</span><span class="va">False</span>)</span>
@@ -443,10 +446,10 @@ Successfully installed huggingface-hub-0.1.2 pyyaml-6.0 sacremoses-0.0.46 senten
 <span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>    display(query)</span>
 <span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> hit <span class="kw">in</span> hits:</span>
 <span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(img_names[hit[<span class="st">'corpus_id'</span>]])</span>
-<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>        display(IPImage(os.path.join(img_folder, img_names[hit[<span class="st">'corpus_id'</span>]]), width<span class="op">=</span><span class="dv">200</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>        display(IPImage(os.path.join(img_folder, img_names[hit[<span class="st">'corpus_id'</span>]]), width<span class="op">=</span><span class="dv">200</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div id="southeast-pound" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;,&quot;height&quot;:819}}" data-outputid="3ac5994b-dc06-4fcc-9c5a-dd31ab4d1ca5" data-execution_count="9">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>search(<span class="st">"Two cats playing on the street"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>search(<span class="st">"Two cats playing on the street"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Query:</code></pre>
 </div>
@@ -485,7 +488,7 @@ Successfully installed huggingface-hub-0.1.2 pyyaml-6.0 sacremoses-0.0.46 senten
 </div>
 </div>
 <div id="tender-blanket" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;,&quot;height&quot;:672}}" data-outputid="b9540b14-ba61-47ca-88b2-7c1159244c48" data-execution_count="7">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>search(<span class="st">"A sunset on the montain"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>search(<span class="st">"A sunset on the montain"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Query:</code></pre>
 </div>
@@ -524,7 +527,7 @@ Successfully installed huggingface-hub-0.1.2 pyyaml-6.0 sacremoses-0.0.46 senten
 </div>
 </div>
 <div id="genuine-vegetarian" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;,&quot;height&quot;:838}}" data-outputid="12f37d73-efea-45f5-9de1-cf142a5109a5" data-execution_count="10">
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>search(<span class="st">"Oslo"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>search(<span class="st">"Oslo"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Query:</code></pre>
 </div>
@@ -563,7 +566,7 @@ Successfully installed huggingface-hub-0.1.2 pyyaml-6.0 sacremoses-0.0.46 senten
 </div>
 </div>
 <div id="nuclear-lexington" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;,&quot;height&quot;:807}}" data-outputid="fe30a0b3-1023-4397-cddf-9f093221a40a">
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>search(<span class="st">"A dog in a park"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>search(<span class="st">"A dog in a park"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Query:</code></pre>
 </div>
@@ -602,7 +605,7 @@ Successfully installed huggingface-hub-0.1.2 pyyaml-6.0 sacremoses-0.0.46 senten
 </div>
 </div>
 <div id="divine-omaha" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;,&quot;height&quot;:839}}" data-outputid="8a140e2f-9db9-4d05-c334-6cbe13ff796f">
-<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>search(<span class="st">"A beach with palm trees"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>search(<span class="st">"A beach with palm trees"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Query:</code></pre>
 </div>
@@ -647,8 +650,8 @@ Successfully installed huggingface-hub-0.1.2 pyyaml-6.0 sacremoses-0.0.46 senten
 <p>To achieve this, you pass <code>Image.open('path/to/image.jpg')</code> to the search method.</p>
 <p>It will then return similar images</p>
 <div id="I1MiS4rd7j40" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;,&quot;height&quot;:1000}}" data-outputid="74575e02-df75-43b2-88fa-eb7a6e7f628d" data-execution_count="17">
-<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>img_test_folder <span class="op">=</span> <span class="st">'test/'</span></span>
-<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>search(Image.<span class="bu">open</span>(os.path.join(img_test_folder, <span class="st">'branca.jpg'</span>)), k<span class="op">=</span><span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb39"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>img_test_folder <span class="op">=</span> <span class="st">'test/'</span></span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>search(Image.<span class="bu">open</span>(os.path.join(img_test_folder, <span class="st">'branca.jpg'</span>)), k<span class="op">=</span><span class="dv">5</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Query:</code></pre>
 </div>
@@ -769,13 +772,14 @@ Successfully installed huggingface-hub-0.1.2 pyyaml-6.0 sacremoses-0.0.46 senten
       e.clearSelection();
     }
     const getTextToCopy = function(trigger) {
-        const codeEl = trigger.previousElementSibling.cloneNode(true);
-        for (const childEl of codeEl.children) {
-          if (isCodeAnnotation(childEl)) {
-            childEl.remove();
-          }
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
         }
-        return codeEl.innerText;
+      }
+      return codeEl.innerText;
     }
     const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
       text: getTextToCopy

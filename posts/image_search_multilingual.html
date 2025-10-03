@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.7.33">
+<meta name="generator" content="quarto-1.8.25">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -59,7 +59,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </style>
 
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script><script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" integrity="sha384-ZvpUoO/+PpLXR1lu4jmpXWu80pZlYUAfxl5NsBMWOEPSjUn/6Z/hRTt8+pR6L4N2" crossorigin="anonymous"></script><script src="../site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="../site_libs/quarto-nav/headroom.min.js"></script>
 <script src="../site_libs/clipboard/clipboard.min.js"></script>
 <script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
@@ -68,14 +68,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <meta name="quarto:offset" content="../">
 <script src="../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-ea385d0e468b0dd5ea5bf0780b1290d9.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-2f9bc8108cc5788f896f6d8ac1f323a2.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-ee47912cae73dc7932e3cc93c52697b6.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -112,10 +113,10 @@ function gtag(){dataLayer.push(arguments);}
 gtag('js', new Date());
 gtag('config', 'G-RK1QNXR9TB', { 'anonymize_ip': true});
 </script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/requirejs@2.3.6/require.min.js" integrity="sha384-c9c+LnTbwQ3aujuU7ULEPVvgLs+Fn6fJUvIGTsuu1ZcCf11fiEubah0ttpca4ntM sha384-6V1/AdqZRWk1KAlWbKBlGhN7VG4iE/yAZcO6NZPMF8od0vukrvr0tg4qY6NSrItx" crossorigin="anonymous"></script>
 
 <script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
-<script src="https://unpkg.com/@jupyter-widgets/html-manager@*/dist/embed-amd.js" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/@jupyter-widgets/html-manager@*/dist/embed-amd.js" crossorigin="anonymous"></script>
 
 
 <link rel="stylesheet" href="../styles.css">
@@ -128,6 +129,8 @@ gtag('config', 'G-RK1QNXR9TB', { 'anonymize_ip': true});
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
+    <a href="../index.html" class="navbar-brand navbar-brand-logo">
+    </a>
     <a class="navbar-brand" href="../index.html">
     <span class="navbar-title">Marcel Castro</span>
     </a>
@@ -229,11 +232,11 @@ gtag('config', 'G-RK1QNXR9TB', { 'anonymize_ip': true});
 
 <p><a href="https://colab.research.google.com/github/marcelcastrobr/notebooks/blob/master/_notebooks/Image_Search_multilingual.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"></a></p>
 <div id="yg2I7EvZWwMI" class="cell" data-execution_count="1">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>capture</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="op">!</span>pip install sentence<span class="op">-</span>transformers</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>capture</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="op">!</span>pip install sentence<span class="op">-</span>transformers</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div id="copyrighted-harmony" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;,&quot;height&quot;:465,&quot;referenced_widgets&quot;:[&quot;0a7e564c2d814b5a98e3a2d23e39c427&quot;,&quot;cb360af307754373a4c86548ebcfd2d7&quot;,&quot;bf402a4ebf5945ff92c7c85942ee6efc&quot;,&quot;af105cfb8be8438ab3268d3d2d080a97&quot;,&quot;fa0436f81b76444cb01c7aa5c1fdc512&quot;,&quot;d636c4afecbd40688a97f2559a6def53&quot;,&quot;ec24172aa25947abb5f7b4b6e5f460d3&quot;,&quot;3ff8a763beac4ab286c632af21fca94c&quot;,&quot;004a3dc02fe84763af9ece8612977a88&quot;,&quot;ce72ff6e41cd4301993a9f1e02e18192&quot;,&quot;f56f98aa34e7491f9f5cc55627ffa5d7&quot;,&quot;b2762b80f9354350bca639f1ceb54999&quot;,&quot;cc169051e84849c0b64a9f5af0d3b1d6&quot;,&quot;21bb685eba8c43ff8e18c306624a8520&quot;,&quot;b9a36606eeb547078460e3bd1b8167d1&quot;,&quot;a048c94bd95d4827b37ff5898f4a4dc1&quot;,&quot;fba5d2d521ac433284ab7ef32f14e940&quot;,&quot;1d6086dff4f947f6b6a7ae2cdf38b97e&quot;,&quot;708b32ba17d04efb985ff395f8fd4296&quot;,&quot;2e7393e43d574fd99a9f28c314f015e8&quot;,&quot;a93efcfdd800419fb7e3008cd9ff3df8&quot;,&quot;c9ba515cb4724507873403f0b2c1db32&quot;,&quot;03fe68844bd542dc81c79dd059634319&quot;,&quot;3eb0b4ab75aa4b979d57672128e47246&quot;,&quot;aaff48a7bab0417983797b11644c0096&quot;,&quot;3dc97620cb8e40c688bc01a92e2ad363&quot;,&quot;58c53da0f33a45d399d914ab28353c2b&quot;,&quot;a683594ce5154554a8af253323f516bc&quot;,&quot;772b107de02a44da8e1f0ed639aee92b&quot;,&quot;66f51b582cd94c70a54f36663f2f4f1e&quot;,&quot;3d7d81b91e274a74a9790a7576d23785&quot;,&quot;6e03bd07757b4d3a83b1f09d37666e09&quot;,&quot;746da45cf93f40ca938c51eed9faeb54&quot;,&quot;29e5168f89704be99d53d1715110182c&quot;,&quot;6db7fdcf13064847b8a95084d9156494&quot;,&quot;32508e165bbe4d58a83b24f35e681703&quot;,&quot;0bf09923e5b946f5b6616500fbdcd587&quot;,&quot;1c55554ed0bf40c1adf0ef2592358895&quot;,&quot;a30002c0ab0340208acef8e611237dea&quot;,&quot;0da66243fbd74c148f46df65b9a9f6bb&quot;,&quot;c2758609b3154323b76b9bb79b812477&quot;,&quot;b4760a3c41094c8c92a84a5387aa9769&quot;,&quot;3cf8a3d1647c40dd849409d56d61078e&quot;,&quot;63ad54eecba54339a749a86e4695cfc3&quot;,&quot;8326af67abeb4b58915e9ef92f9e1eed&quot;,&quot;b9fa5bf53f0a427ba4212c54be370f3b&quot;,&quot;f99cdd6ceebb45c5bd80d22f9a45e5ae&quot;,&quot;03a118608da5404d853acf4918cec5ac&quot;,&quot;7edb3f834f5b4ab180ba7a336ac53d8f&quot;,&quot;c2c21fea02b4445b8986cb73c88e5a27&quot;,&quot;1062f48f990c4f9bad700ad240a2c110&quot;,&quot;e5ac510b93864fd09613374d0069b61b&quot;,&quot;893db81f2f214c8cae35432a3ede646e&quot;,&quot;949812d08bc24a9b8ecaa5e8b7ea9306&quot;,&quot;04b3f834f47243fb8fb51078a886942e&quot;,&quot;f67ddbae76d5452580b0721c7b5bc678&quot;,&quot;d226d511311240a28195fd2b1697d1bb&quot;,&quot;f2658a8d94c5410da79ef3f30eba25e3&quot;,&quot;377eeeb5c5c14136b262f8e4228e1db4&quot;,&quot;ae48e60329954a0384c9421b08b04afa&quot;,&quot;3760ff2929a04c20a7c2f4f1571e6d9f&quot;,&quot;379f1e47102c43379c8fd7573dfcfe00&quot;,&quot;992359b868ab49f2816e2f162516c421&quot;,&quot;635fd5d9a95e4af4b706718f670198d4&quot;,&quot;2eb06b70777b4ea19b5fb1a8b10d843e&quot;,&quot;064fe83abbf7456194ed31c39eefb940&quot;,&quot;f1321a44b9ce4086bd0a11fe20ac67c5&quot;,&quot;77813f9d7c50487a95555fabbf8a6044&quot;,&quot;105e679f4b28468e8cb29c1e0b5221d7&quot;,&quot;90e11f8f39694af78a06befd5b953513&quot;,&quot;0233ac552fa54f198b46f9a5278efd27&quot;,&quot;c48647dd1e714631b1129874d884ea3b&quot;,&quot;3b0d0a7036b04adeb7087f6b7d1fa2cd&quot;,&quot;e06dd6d4e4784bd5a9bde474aaaba942&quot;,&quot;d3289250fbbc48fcb25c503a43521b2d&quot;,&quot;f844f5cd61e247078ed8c167908fef05&quot;,&quot;fe07eadd2e10413cbb427dba12eeeee4&quot;,&quot;1e78f3bfa8aa4db092e6868d60b6a8cb&quot;,&quot;617da86d44434233b6d6dd3f9355c4f8&quot;,&quot;54daaccf61c94434833278cdb045d49b&quot;,&quot;6b368e548e3d42cab56516d844ec1b51&quot;,&quot;306428d6e05f4970bbb58780ed4bb0fd&quot;,&quot;b3d331c9566746598501db846bf39d03&quot;,&quot;4df69f85b0b94f81b3ba6b150dc88913&quot;,&quot;b3897b73319d4ae184505ad9d2cf5bb0&quot;,&quot;3580e1fc1774432f81d592ffdee53803&quot;,&quot;734792912d054e3aa4dcafe0f2e8e640&quot;,&quot;80b9484c80964a52bd21f00d255c69b1&quot;,&quot;57c171a85c19484ab5d8146b6eccf0c7&quot;,&quot;fadf17aa61d447f29e140806bdaa559a&quot;,&quot;2ef231c4e390482aa842cf80c942a47b&quot;,&quot;ffaea6e3c1bc45a1ab35fa6f60635df1&quot;,&quot;61d6d5f8391d45db9b733010129a3f34&quot;,&quot;ea16170f6b084f01966241caf58d4bea&quot;,&quot;c9b1ea2329574f639c3dc5d8c232e927&quot;,&quot;5a7c9bca2fb2449e9dd936ca90224865&quot;,&quot;7638c9ec7f84446283869e8099720dc7&quot;,&quot;20c7c353db8d4c23b3fb72f21d705d52&quot;,&quot;8f77f76286874771b86893f42525e55f&quot;,&quot;6dbd5c6f4fff463294bfc9a0a67bafd7&quot;,&quot;cc461b71220444ae9e53fe1a0a9f9690&quot;,&quot;2a2414bc4c654091bc2b8524160d23c5&quot;,&quot;a3e079f576064ba2a7f36e8e1b9fc893&quot;,&quot;606bef11993c4e6d98ef521869cf86af&quot;,&quot;eb06e723392445d39c70770952fe3d84&quot;,&quot;e60289d17ac94a4d90ad2dd490e7ca77&quot;,&quot;b74b38ddaeaf4c66b4c746829d28d015&quot;,&quot;72b1b33b8d5d42ff9db0bf4101af515e&quot;,&quot;7257b708c9e74550a40e9e67cc208adc&quot;,&quot;6fbf2c0f616140dc8d083203138c89c3&quot;,&quot;80eb2d3cfedb403c8f2a3bc890a05659&quot;,&quot;9af3374595444223ad6c45a05c6049a6&quot;,&quot;a3d885bd60704264a060d6a2a7b3e0bc&quot;,&quot;aeaf5ba7ec2d4173a9debe64876fdba0&quot;,&quot;91aecb0ef089493abea79f06231ac8f2&quot;,&quot;37849f8afd0a4624bc0ec7ae3c88d5a2&quot;,&quot;17337833b6aa4183989ffae2bf842d2e&quot;,&quot;76988ba0f9c445ce814145918b91bbcb&quot;,&quot;d84a5f60e8944a7cab765d43f8dc7c0b&quot;,&quot;a13bc20eeec74034bc5bac4ae27a727a&quot;,&quot;66f67bbb8b004efa8bfc70d1457e0504&quot;,&quot;cac9b4502de644068bc1bef38ea8944e&quot;,&quot;f43d44d4780246778222ee43a1770a4b&quot;,&quot;72f600d3bc3c49e58188dab843a31b6f&quot;,&quot;848b6a5c24e24f64b6fae33b21c3df07&quot;,&quot;4e6e5d0f27bc411fa9504b63db08eed3&quot;,&quot;810321b57e8c46d797866679ffe68324&quot;,&quot;4de9d669e58a4686809eb0b522d09347&quot;,&quot;b6e78329130d4f8fb0145514a584dd45&quot;,&quot;025819ea88984a6e8b99370c9da2708e&quot;,&quot;9a22478fab59465f8af947e236d2f4ba&quot;,&quot;b554632fce524411b0ea202f518fa4bb&quot;,&quot;3670e7edbfa047cf8b5edf4ca8d058b5&quot;,&quot;6acfbbfb3d9e4725b3b46df173942d2f&quot;,&quot;5098c4d8890749a39e97f8f465e42dbc&quot;,&quot;72660f184ab24e3ba81661ee0c42f32e&quot;,&quot;a55fa101ec1044b6970d51f2118f7dbe&quot;,&quot;3d0fc99f2a98482598e0f58cf2ac211d&quot;,&quot;d9c10c4d84b348f088b8949a9e532eb5&quot;,&quot;154388d2427441fc82e37bd8990fa2c2&quot;,&quot;e6a953f5c2a54974ae3c6c13fec36a1e&quot;,&quot;dea321213de24098ba706afaf37ab47d&quot;,&quot;cddc3e4a704347489d5421c670e26622&quot;,&quot;40e1b91d14a34c048b8c746c6ccc89c3&quot;,&quot;eef40921928f41aa9f5da0bb85f07832&quot;,&quot;b7a342f3884f40b18a8d9b442277f9a9&quot;,&quot;1e3fcbde2f6243149e6df2d7b6305832&quot;,&quot;295683b81888439f8a9486dc9cee4a8f&quot;,&quot;54c81c318e1246b7934e906d2e1692bb&quot;,&quot;20dd8662887148b3afc90a564e066d96&quot;,&quot;08a7dec57915462cbfdad0114536d465&quot;,&quot;fd34bba421fd40dd9c9e00846ddc793b&quot;,&quot;25d52885d57c4163afc072ff5ac0d3cc&quot;,&quot;e608ceac252d49579deca069c5d5f029&quot;]}}" data-outputid="6fb732ef-550e-4fb2-bdd6-a1a18ec94741" data-execution_count="2">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sentence_transformers <span class="im">import</span> SentenceTransformer, util</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sentence_transformers <span class="im">import</span> SentenceTransformer, util</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> PIL <span class="im">import</span> Image</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> glob</span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> torch</span>
@@ -246,7 +249,7 @@ gtag('config', 'G-RK1QNXR9TB', { 'anonymize_ip': true});
 <span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Here we load the multilingual CLIP model. Note, this model can only encode text.</span></span>
 <span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="co"># If you need embeddings for images, you must load the 'clip-ViT-B-32' model</span></span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> SentenceTransformer(<span class="st">'clip-ViT-B-32-multilingual-v1'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> SentenceTransformer(<span class="st">'clip-ViT-B-32-multilingual-v1'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
 <script type="application/vnd.jupyter.widget-view+json">
 {"model_id":"0a7e564c2d814b5a98e3a2d23e39c427","version_major":2,"version_minor":0,"quarto_mimetype":"application/vnd.jupyter.widget-view+json"}
@@ -319,7 +322,7 @@ gtag('config', 'G-RK1QNXR9TB', { 'anonymize_ip': true});
 </div>
 </div>
 <div id="strategic-mayor" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;,&quot;height&quot;:81,&quot;referenced_widgets&quot;:[&quot;d18d76c1a741458195efa1899712f768&quot;,&quot;06262e02c70f482f95b7fc830c4e05f7&quot;,&quot;915df6f6df8848eeaf02fc8528819d1a&quot;,&quot;e8cc47c959674b75b38e4cc03a55954d&quot;,&quot;79a292e1c68a403c8d9eb44066b374cb&quot;,&quot;4fc87173ba4941ed9ab9329c8fe12d80&quot;,&quot;eb00356622964f979ac9b0251a877637&quot;,&quot;68053a5a538d4abf8b834d549f1eb92e&quot;,&quot;33229dc5372e405b94d6edb274e3bf22&quot;,&quot;a4ab151438534d188f7aa32440dbb386&quot;,&quot;4a2951102e43489a8acbb91f70d45426&quot;,&quot;54262f819d6948b68942fc4f3f8e5c83&quot;,&quot;810785d6530d46e8a21b863faf9eabe1&quot;,&quot;3f088f11604c457da5c0c4086ee11831&quot;,&quot;de7b318b224a4af89b9b8b99191b67df&quot;,&quot;e3ca9ec8bd09419e835bcb67b72648ea&quot;,&quot;8e4cd09a6e084810910d00df881a4b76&quot;,&quot;a4f41095d43143088e3581554d8b0623&quot;,&quot;00abb41fd0354453bce63aaec817bef1&quot;,&quot;4013fc9f76444de2a99244465c14b1d2&quot;,&quot;c920053bde754209aa32ffbef0142b34&quot;,&quot;b63ce070f89a45d9a1aa63f68e3507df&quot;]}}" data-outputid="dd9419b8-fefd-4cca-a822-a82019282691" data-execution_count="3">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Next, we get about 25k images from Unsplash </span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Next, we get about 25k images from Unsplash </span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>img_folder <span class="op">=</span> <span class="st">'photos/'</span></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="kw">not</span> os.path.exists(img_folder) <span class="kw">or</span> <span class="bu">len</span>(os.listdir(img_folder)) <span class="op">==</span> <span class="dv">0</span>:</span>
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    os.makedirs(img_folder, exist_ok<span class="op">=</span><span class="va">True</span>)</span>
@@ -332,7 +335,7 @@ gtag('config', 'G-RK1QNXR9TB', { 'anonymize_ip': true});
 <span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">with</span> zipfile.ZipFile(photo_filename, <span class="st">'r'</span>) <span class="im">as</span> zf:</span>
 <span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> member <span class="kw">in</span> tqdm(zf.infolist(), desc<span class="op">=</span><span class="st">'Extracting'</span>):</span>
 <span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>            zf.extract(member, img_folder)</span>
-<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>        </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>        </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
 <script type="application/vnd.jupyter.widget-view+json">
 {"model_id":"d18d76c1a741458195efa1899712f768","version_major":2,"version_minor":0,"quarto_mimetype":"application/vnd.jupyter.widget-view+json"}
@@ -345,7 +348,7 @@ gtag('config', 'G-RK1QNXR9TB', { 'anonymize_ip': true});
 </div>
 </div>
 <div id="adjacent-encyclopedia" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;,&quot;height&quot;:66,&quot;referenced_widgets&quot;:[&quot;4f1d00e4eb364c5a9a0f0fb0467f82c7&quot;,&quot;7b87a20adf5344e39b0976468e538f60&quot;,&quot;20929232a585422eafa559a6cce157ba&quot;,&quot;e301ac3eb29d42dd97cd6b8b5c45ca76&quot;,&quot;75d98e69ce73445c85536bb2d3929d95&quot;,&quot;f43db604181f454289f440933142e789&quot;,&quot;9a2e10af88134b5aa7084d14b89f3b7e&quot;,&quot;7a42a60677f54daab10b045478ba850e&quot;,&quot;64117bb80ab54726a4a8fdaaf58c8417&quot;,&quot;844aa71da20443d590917788b634f995&quot;,&quot;c5e2aa94359042198489f6eb8049b263&quot;]}}" data-outputid="048ad8f9-3bd0-4ca1-9a6f-9a538ff0eb76" data-execution_count="4">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Now, we need to compute the embeddings</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Now, we need to compute the embeddings</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="co"># To speed things up, we destribute pre-computed embeddings</span></span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Otherwise you can also encode the images yourself.</span></span>
 <span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="co"># To encode an image, you can use the following code:</span></span>
@@ -368,7 +371,7 @@ gtag('config', 'G-RK1QNXR9TB', { 'anonymize_ip': true});
 <span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a>    img_names <span class="op">=</span> <span class="bu">list</span>(glob.glob(<span class="st">'photos/*.jpg'</span>))</span>
 <span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"Images:"</span>, <span class="bu">len</span>(img_names))</span>
-<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a>    img_emb <span class="op">=</span> img_model.encode([Image.<span class="bu">open</span>(filepath) <span class="cf">for</span> filepath <span class="kw">in</span> img_names], batch_size<span class="op">=</span><span class="dv">128</span>, convert_to_tensor<span class="op">=</span><span class="va">True</span>, show_progress_bar<span class="op">=</span><span class="va">True</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a>    img_emb <span class="op">=</span> img_model.encode([Image.<span class="bu">open</span>(filepath) <span class="cf">for</span> filepath <span class="kw">in</span> img_names], batch_size<span class="op">=</span><span class="dv">128</span>, convert_to_tensor<span class="op">=</span><span class="va">True</span>, show_progress_bar<span class="op">=</span><span class="va">True</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
 <script type="application/vnd.jupyter.widget-view+json">
 {"model_id":"4f1d00e4eb364c5a9a0f0fb0467f82c7","version_major":2,"version_minor":0,"quarto_mimetype":"application/vnd.jupyter.widget-view+json"}
@@ -379,12 +382,12 @@ gtag('config', 'G-RK1QNXR9TB', { 'anonymize_ip': true});
 </div>
 </div>
 <div id="P_njv_Rg8Pj_" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;,&quot;height&quot;:458,&quot;referenced_widgets&quot;:[&quot;39070980a1f14e76a3fa88f5db342598&quot;,&quot;df80612a361b4281aa3d70601be9c5a9&quot;,&quot;9efc4c88779f4e13a848c269fda15865&quot;,&quot;a861e48501f44fbc9c47196b83c95033&quot;,&quot;bbc005c7797b40319a4d2ef931aff679&quot;,&quot;afc6b3c61eeb43d381231091904881bf&quot;,&quot;6c29a1fe40954bca9ce552c775691dcf&quot;,&quot;cc9ce04c898e4f95a33191dbbe194b35&quot;,&quot;bbd4ba71037247b2a1b76dc1d0570dc1&quot;,&quot;5597d584af7246b08a705506a2e924fd&quot;,&quot;a50b3f41406d407294f4781baa3f1668&quot;,&quot;bcdf97550ed24a66884db320daee4694&quot;,&quot;d6c237bc7c704f9fbee446f0797db74e&quot;,&quot;1b8a891024bc40ee8d60c7686eee71ce&quot;,&quot;c5eb5d94aa2c428cbd7203870bfd3b2c&quot;,&quot;affa0c99e3be413c9c9bfec6d57579e9&quot;,&quot;2d3778c40e1e4e68a22813eb5eba0bf1&quot;,&quot;2b92ae2593b54673a914cf001b7657cd&quot;,&quot;801c8fab611c4e09ad8c27399f9338ea&quot;,&quot;73a3935d044a4ed09c18af9e166248cf&quot;,&quot;394b9841a43044d88d854610da8e1952&quot;,&quot;934d8be78ad44529ada3bc800e1b6824&quot;,&quot;b0e8095db15b4854bcbe4029da42e73c&quot;,&quot;43ce200db4d04e1898ce83f93824f01e&quot;,&quot;76daa91d090646d68e0b4c2739f293a2&quot;,&quot;5ac9b0e52a6340f582ba45791330c2c3&quot;,&quot;03e8e3551ba94fdba5c66ec56e43e459&quot;,&quot;90e44d33429e41b4aa145e6056dd85f3&quot;,&quot;135da02b77ef4c2dbc7a1ee2da0af94a&quot;,&quot;74d1930d57d94aff9f62fd5d37a877e1&quot;,&quot;f4aa682ce496497f9996d50a974a55cc&quot;,&quot;71e8d449658b4e72898478e335529166&quot;,&quot;2b3f74879ccd450289b341fa65f6f625&quot;,&quot;ff0b9168eb2549e4933ba519e5c5a2cb&quot;,&quot;26579a0e05554741afdf75381e7048c9&quot;,&quot;6a7c5f28936e4bb49d01f22b9a684563&quot;,&quot;54af32aa77d148148d4569b426982043&quot;,&quot;2ac9211a6f074bd5a1847b0758cc865d&quot;,&quot;383dd05df47948d0acbe622684507ad2&quot;,&quot;e8fcc8cb774446318fa7829a65186dfe&quot;,&quot;23e895ae5a644c38ab76a492a6b9cfd1&quot;,&quot;da18fd85fd5d40eea1b25626b9c11a03&quot;,&quot;091e8b1c28574805b1c0cdfb27fc9603&quot;,&quot;0f95323d8847400a8f4bcacdf665cdd6&quot;,&quot;a0c61df181a444d7b983ed217de2f6b7&quot;,&quot;f839d19589dc4ce7b034625fd37d022a&quot;,&quot;d2eb66f8e8894b3a8e46c98ed45e6e8d&quot;,&quot;307339e3ca134b53914cd049f400a72e&quot;,&quot;7adbb5aa3df24cedaa94358d457df389&quot;,&quot;8cf41a4343834c7eae9fc5ce2798e9fb&quot;,&quot;54db78197c5b4ea8897162afa8628b20&quot;,&quot;91603feacb084b9086303fc5097315f3&quot;,&quot;5a883e44bbe648d68442ff282f4015f6&quot;,&quot;8290e5a6fbef41af96ab1f4f6bd507f5&quot;,&quot;e1fa46fdfbde41d0a3bf618d6bda245a&quot;,&quot;85d657d79daf4f0a8ce171b082072b3d&quot;,&quot;f133793eb995488591b4d11bd6d06a90&quot;,&quot;35ad3456036d4a818265d83f58cb600a&quot;,&quot;45c63f4e60c54c27b40e44e15ec57c6a&quot;,&quot;18789208ce4b4ea0a14bc1a47e79bc30&quot;,&quot;c3187ce6a35d4b069621a14deb69c7b9&quot;,&quot;5c8bcebbb0fb4553866c287eff195303&quot;,&quot;7b9e50d970d343148bb681012a3fe5eb&quot;,&quot;c9e8823ff2f94caebf3bda5d7d2c3fdc&quot;,&quot;309a9d0a80194ae8b0c34a440c840941&quot;,&quot;b0a272988ff94ff1a6f947f299501553&quot;,&quot;510c0333fa754bf9afcff70b41093c93&quot;,&quot;a227ae4349f743f594972fee1fefa950&quot;,&quot;e68da993069043b08a15c2a6248d36bf&quot;,&quot;b69ca30daceb48469679111dfa4d287f&quot;,&quot;9956892cd25d4b0c97906bc741023e41&quot;,&quot;10ddde84773347489ec2b1ac47d947de&quot;,&quot;2ed27542d4334e59850b33da99743efe&quot;,&quot;8e5740b4fe924c20b4b88660e4eb2481&quot;,&quot;f17d3fca24944e34875940290301041b&quot;,&quot;ec7db7bcaf7e4a8e9d2d0866435e2e26&quot;,&quot;ea4f45438bdc4a37a9ec81d334a94719&quot;,&quot;516b01d9e42c4ada9e2ad9ba4235cb13&quot;,&quot;08744f3994514ab0ae0f561a3762fa6e&quot;,&quot;4121da0563d54b6f8da782e08ba6f31f&quot;,&quot;3b73172fe9e248e8a2b1eddfa1705293&quot;,&quot;4839b83b64c443f5bacc7f5544243e58&quot;,&quot;55a78afb4e7442a1b20568c56defb652&quot;,&quot;88d2e0de50ec432f92b40532029dd5fd&quot;,&quot;a1a3bd63d10644d2bc9f33b7ab28042e&quot;,&quot;0b7989513ce4426ab581e3b312302680&quot;,&quot;d3799fa63f6643348366318a44973704&quot;,&quot;4bda37d5ba424635bff133277fa8a416&quot;,&quot;fc0e638e3a144082a49c015f4c3fa990&quot;,&quot;0f5f19671491473ab6c9ccfa7a77bb7a&quot;,&quot;b6dcc2d1caf5448f9885bae47d81412a&quot;,&quot;54a49e35c7c34257a697dc49e2886501&quot;,&quot;e9167fad1f4e4263a42de89dd033883c&quot;,&quot;0eac720f787844639fa422acb983338b&quot;,&quot;b96e506866e744618cd7fb40893e8b67&quot;,&quot;38606a5195394b0c931b176f9fce3be3&quot;,&quot;d5e45a8d6ed04391bb0e032fb240a418&quot;,&quot;e9f4ad59f3ea48498dfbb3dc5f48d782&quot;,&quot;69b2a1f5d0284df1a8db7ecd09cbd423&quot;,&quot;21dcaa43116a43878e64dcf9d99d3f41&quot;,&quot;c05bc90d429b47568258a0222f57dba3&quot;,&quot;880c2b27c6344635b6461d41226641dc&quot;,&quot;2dab6a7daab944a8b9f8239fdab39fd0&quot;,&quot;06d5062ca6974ea5a173e3ae03d3ec01&quot;,&quot;f830df2bea7d4b88b42568f7081150c7&quot;,&quot;783c9bfa5e7e47dc8d91c061f7c416ce&quot;,&quot;28cffd64bcb14bc99c4462234578bf13&quot;,&quot;a6d3e799bb7c48698f295392e6f74eb7&quot;,&quot;4759ff87a86043e2bbf854f2be516e2d&quot;,&quot;4ea21bac668f4eeab5194800e3e7b113&quot;,&quot;f3b2e11f54c144c9a8e1da29290fe53e&quot;,&quot;9a1825d727e74da5b1628a95bdc4137a&quot;,&quot;ad34e75c35f443f88bbe4fa0f1af62b9&quot;,&quot;36de1ceb81e14f4c95c50b757adae64e&quot;,&quot;4fa59f89470a4c918b944daec4cc701d&quot;,&quot;7e2a4f3f10044c60b6bdbe5a417ceb87&quot;,&quot;40d96963b6684cb6a7913bb07138e597&quot;,&quot;b70aa36b7a14497ba0fa720fd6b43c23&quot;,&quot;2e362e24d65b4647990d1f04f48a5657&quot;,&quot;7b9f9cb585a14226a43b45952d25cad3&quot;,&quot;a1f66514d68d4b2a845eb734b4e18ebb&quot;]}}" data-outputid="dee3292a-79e9-4099-a6df-7b309fe06f64" data-execution_count="5">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> torch</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> torch</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>filepath <span class="op">=</span> <span class="st">'photos/'</span><span class="op">+</span>img_names[<span class="dv">0</span>]</span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>one_emb <span class="op">=</span> torch.tensor(img_emb[<span class="dv">0</span>])</span>
 <span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>img_model <span class="op">=</span> SentenceTransformer(<span class="st">'clip-ViT-B-32'</span>)</span>
 <span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>comb_emb <span class="op">=</span> img_model.encode(Image.<span class="bu">open</span>(filepath), convert_to_tensor<span class="op">=</span><span class="va">True</span>).cpu()</span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(util.cos_sim(one_emb, comb_emb))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(util.cos_sim(one_emb, comb_emb))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
 <script type="application/vnd.jupyter.widget-view+json">
 {"model_id":"39070980a1f14e76a3fa88f5db342598","version_major":2,"version_minor":0,"quarto_mimetype":"application/vnd.jupyter.widget-view+json"}
@@ -450,7 +453,7 @@ gtag('config', 'G-RK1QNXR9TB', { 'anonymize_ip': true});
 </div>
 </div>
 <div id="dental-friendly" class="cell" data-execution_count="6">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Next, we define a search function.</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Next, we define a search function.</span></span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> search(query, k<span class="op">=</span><span class="dv">3</span>):</span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>    <span class="co"># First, we encode the query (which can either be an image or a text string)</span></span>
 <span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>    query_emb <span class="op">=</span> model.encode([query], convert_to_tensor<span class="op">=</span><span class="va">True</span>, show_progress_bar<span class="op">=</span><span class="va">False</span>)</span>
@@ -464,10 +467,10 @@ gtag('config', 'G-RK1QNXR9TB', { 'anonymize_ip': true});
 <span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>    display(query)</span>
 <span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> hit <span class="kw">in</span> hits:</span>
 <span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(img_names[hit[<span class="st">'corpus_id'</span>]])</span>
-<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>        display(IPImage(os.path.join(img_folder, img_names[hit[<span class="st">'corpus_id'</span>]]), width<span class="op">=</span><span class="dv">200</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>        display(IPImage(os.path.join(img_folder, img_names[hit[<span class="st">'corpus_id'</span>]]), width<span class="op">=</span><span class="dv">200</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div id="established-emphasis" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;,&quot;height&quot;:622}}" data-outputid="272fb2a6-5535-4658-d5ca-2b2234183c13" data-execution_count="7">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>search(<span class="st">"Two dogs playing in the snow"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>search(<span class="st">"Two dogs playing in the snow"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Query:</code></pre>
 </div>
@@ -504,8 +507,8 @@ Hb6nGDgWztE.jpg</code></pre>
 </div>
 </div>
 <div id="varying-feeling" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;,&quot;height&quot;:839}}" data-outputid="38cfc2dc-0644-4334-9fb5-30072cd4af72">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co">#German: A cat on a chair</span></span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>search(<span class="st">"Eine Katze auf einem Stuhl"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co">#German: A cat on a chair</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>search(<span class="st">"Eine Katze auf einem Stuhl"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Query:</code></pre>
 </div>
@@ -544,8 +547,8 @@ Hb6nGDgWztE.jpg</code></pre>
 </div>
 </div>
 <div id="union-league" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;,&quot;height&quot;:672}}" data-outputid="8f2f1675-c363-4e33-ef5d-0eb211b91a76">
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Spanish: Many fish</span></span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>search(<span class="st">"Muchos peces"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Spanish: Many fish</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>search(<span class="st">"Muchos peces"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Query:</code></pre>
 </div>
@@ -584,8 +587,8 @@ Hb6nGDgWztE.jpg</code></pre>
 </div>
 </div>
 <div id="artistic-reaction" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;,&quot;height&quot;:772}}" data-outputid="4161065b-3e20-4c3e-d1c1-9a97ebf976a2">
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Chinese: A beach with palm trees</span></span>
-<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>search(<span class="st">"棕榈树的沙滩"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Chinese: A beach with palm trees</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>search(<span class="st">"棕榈树的沙滩"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Query:</code></pre>
 </div>
@@ -624,8 +627,8 @@ Hb6nGDgWztE.jpg</code></pre>
 </div>
 </div>
 <div id="drawn-feelings" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;,&quot;height&quot;:688}}" data-outputid="7a47698d-b07e-4c7d-b571-801dc10d2896">
-<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Russian: A sunset on the beach</span></span>
-<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>search(<span class="st">"Закат на пляже"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Russian: A sunset on the beach</span></span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>search(<span class="st">"Закат на пляже"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Query:</code></pre>
 </div>
@@ -664,8 +667,8 @@ Hb6nGDgWztE.jpg</code></pre>
 </div>
 </div>
 <div id="contrary-drink" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;,&quot;height&quot;:1000}}" data-outputid="7307fb3f-6d8a-4d3e-985d-254bd3092bd2">
-<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Turkish: A dog in a park</span></span>
-<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>search(<span class="st">"Parkta bir köpek"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb39"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Turkish: A dog in a park</span></span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>search(<span class="st">"Parkta bir köpek"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Query:</code></pre>
 </div>
@@ -704,8 +707,8 @@ Hb6nGDgWztE.jpg</code></pre>
 </div>
 </div>
 <div id="statewide-symphony" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;,&quot;height&quot;:699}}" data-outputid="2dd2b65f-5e47-48e1-efac-44ca6bca94d9">
-<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Japanese: New York at night</span></span>
-<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a>search(<span class="st">"夜のニューヨーク"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb45"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Japanese: New York at night</span></span>
+<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a>search(<span class="st">"夜のニューヨーク"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Query:</code></pre>
 </div>
@@ -744,8 +747,8 @@ Hb6nGDgWztE.jpg</code></pre>
 </div>
 </div>
 <div id="OxNsvbU_NJih" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;,&quot;height&quot;:965}}" data-outputid="cbe5bc28-5939-4841-ec9d-77db6ec87570" data-execution_count="12">
-<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Portuguese: Two dog</span></span>
-<span id="cb51-2"><a href="#cb51-2" aria-hidden="true" tabindex="-1"></a>search(<span class="st">"Dois cachorro"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb51"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Portuguese: Two dog</span></span>
+<span id="cb51-2"><a href="#cb51-2" aria-hidden="true" tabindex="-1"></a>search(<span class="st">"Dois cachorro"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Query:</code></pre>
 </div>
@@ -841,13 +844,14 @@ Hb6nGDgWztE.jpg</code></pre>
       e.clearSelection();
     }
     const getTextToCopy = function(trigger) {
-        const codeEl = trigger.previousElementSibling.cloneNode(true);
-        for (const childEl of codeEl.children) {
-          if (isCodeAnnotation(childEl)) {
-            childEl.remove();
-          }
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
         }
-        return codeEl.innerText;
+      }
+      return codeEl.innerText;
     }
     const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
       text: getTextToCopy

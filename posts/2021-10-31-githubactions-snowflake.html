@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.7.33">
+<meta name="generator" content="quarto-1.8.25">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -69,14 +69,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <meta name="quarto:offset" content="../">
 <script src="../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-ea385d0e468b0dd5ea5bf0780b1290d9.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-2f9bc8108cc5788f896f6d8ac1f323a2.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-ee47912cae73dc7932e3cc93c52697b6.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -125,6 +126,8 @@ gtag('config', 'G-RK1QNXR9TB', { 'anonymize_ip': true});
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
+    <a href="../index.html" class="navbar-brand navbar-brand-logo">
+    </a>
     <a class="navbar-brand" href="../index.html">
     <span class="navbar-title">Marcel Castro</span>
     </a>
@@ -279,11 +282,11 @@ gtag('config', 'G-RK1QNXR9TB', { 'anonymize_ip': true});
 <li><p><strong>Step1 : Creating encrypted key</strong></p>
 <p>Using a a linux command line (CLI) you can generate your private (<strong>rsa_key.p8</strong>) an public key (<strong>rsa_key.pub</strong>) executing the commands below (ref. <a href="https://docs.snowflake.com/en/user-guide/key-pair-auth.html">Snowflake docs</a>).</p>
 <p>I decided to use encrypted private key, which means I created an additional passphrase needed while using the key-pair.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a private encrypted key</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a private encrypted key</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> openssl genrsa 2048 <span class="kw">|</span> <span class="ex">openssl</span> pkcs8 <span class="at">-topk8</span> <span class="at">-inform</span> PEM <span class="at">-out</span> rsa_key.p8</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a public key</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> openssl rsa <span class="at">-in</span> rsa_key.p8 <span class="at">-pubout</span> <span class="at">-out</span> rsa_key.pub</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> openssl rsa <span class="at">-in</span> rsa_key.p8 <span class="at">-pubout</span> <span class="at">-out</span> rsa_key.pub</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div></li>
 <li><p>https://docs.snowflake.com/en/user-guide/key-pair-auth.html</p>
 <p>Export your private key (<strong>rsa_key.p8</strong>) and password/passphrase to GitHub Actions under Settings-&gt; Secrets (secrets SF_PRIVATE_KEY and and SF_PRIVATE_PASSPHRASE in picture below):</p>
 <div class="quarto-figure quarto-figure-center">
@@ -293,11 +296,11 @@ gtag('config', 'G-RK1QNXR9TB', { 'anonymize_ip': true});
 </figure>
 </div></li>
 <li><p>Write your public key (<strong>rsa_key.pub</strong>) to your username in snowflake using the command below in Snowflake console:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Adding public key to snowflake user. You can add a second key also using RSA_PUBLIC_KEY_2</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Adding public key to snowflake user. You can add a second key also using RSA_PUBLIC_KEY_2</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="ex">ALTER</span> USER <span class="st">"&lt;your user&gt;"</span> SET RSA_PUBLIC_KEY=<span class="st">"&lt; your public key&gt;"</span><span class="kw">;</span></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co">#You can check if key was update by issuing the following command:</span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="ex">DESC</span> USER <span class="st">"&lt;your user&gt;"</span><span class="kw">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="ex">DESC</span> USER <span class="st">"&lt;your user&gt;"</span><span class="kw">;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div></li>
 </ul>
 <p>Beside the key-pair, you also need to pass the authentication parameters needed by snowsql, which are listed below. We will describe snowsql later in this section.</p>
 <ul>
@@ -323,15 +326,15 @@ gtag('config', 'G-RK1QNXR9TB', { 'anonymize_ip': true});
 <p>Snowsql allows us to use both Single Sign On (SSO) and key-value pair. Below are the commands needed.</p>
 <section id="snowsql-with-sso" class="level4">
 <h4 class="anchored" data-anchor-id="snowsql-with-sso">Snowsql with SSO</h4>
-<div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> snowsql <span class="at">-a</span> <span class="op">&lt;</span>snowflake_account<span class="op">&gt;</span> -u <span class="st">"&lt;snowflake_username&gt;"</span> <span class="at">--authenticator</span> externalbrowser</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> snowsql <span class="at">-a</span> <span class="op">&lt;</span>snowflake_account<span class="op">&gt;</span> -u <span class="st">"&lt;snowflake_username&gt;"</span> <span class="at">--authenticator</span> externalbrowser</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="snowsql-with-key-pair" class="level4">
 <h4 class="anchored" data-anchor-id="snowsql-with-key-pair">Snowsql with key-pair</h4>
-<div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Getting snowsql cli</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Getting snowsql cli</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> snowsql <span class="at">-a</span> <span class="op">&lt;</span>snowflake_account<span class="op">&gt;</span> -u <span class="st">"&lt;snowflake_username&gt;"</span> <span class="at">--private-key-path</span> ~/.ssh/snowflake-key-private.p8</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="co">#Running specific sql file named myfile.sql</span></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> snowsql <span class="at">-a</span> <span class="op">&lt;</span>snowflake_account<span class="op">&gt;</span> -u <span class="st">"&lt;snowflake_username&gt;"</span> <span class="at">--private-key-path</span> ~/.ssh/snowflake-key-private.p8 <span class="at">-f</span> scripts/myfile.sql</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> snowsql <span class="at">-a</span> <span class="op">&lt;</span>snowflake_account<span class="op">&gt;</span> -u <span class="st">"&lt;snowflake_username&gt;"</span> <span class="at">--private-key-path</span> ~/.ssh/snowflake-key-private.p8 <span class="at">-f</span> scripts/myfile.sql</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>See the Snowflake documentation https://docs.snowflake.net/manuals/user-guide/snowsql.html for more information on how to interact with snowsql.</p>
 </section>
 <section id="connector-python-library" class="level4">
@@ -348,7 +351,7 @@ gtag('config', 'G-RK1QNXR9TB', { 'anonymize_ip': true});
 <section id="configuring-the-pipeline-workflow" class="level3">
 <h3 class="anchored" data-anchor-id="configuring-the-pipeline-workflow">Configuring the pipeline workflow</h3>
 <p>The code below is our data pipeline workflow named <strong>snowflake-devops-demo.yml.</strong> The workflow is a yaml file located inside the path <strong>snowflake-datapipeline/.github/workflows/</strong>.Please note that github actions can run several workflow, we only need to create different yaml files within the workflow folder.</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># **snowflake-devops-demo.yml.**</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># **snowflake-devops-demo.yml.**</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">name</span><span class="kw">:</span><span class="at"> snowflake-devops-demo</span></span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Environment variable created under github secrets. </span></span>
@@ -411,9 +414,9 @@ gtag('config', 'G-RK1QNXR9TB', { 'anonymize_ip': true});
 <span id="cb5-61"><a href="#cb5-61" aria-hidden="true" tabindex="-1"></a>          echo "Step 3: Executing snowsql"</span>
 <span id="cb5-62"><a href="#cb5-62" aria-hidden="true" tabindex="-1"></a>          # Give permission to execute bash script</span>
 <span id="cb5-63"><a href="#cb5-63" aria-hidden="true" tabindex="-1"></a>          chmod u+x $GITHUB_WORKSPACE/simple_integration.sh</span>
-<span id="cb5-64"><a href="#cb5-64" aria-hidden="true" tabindex="-1"></a>          $GITHUB_WORKSPACE/simple_integration.sh</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb5-64"><a href="#cb5-64" aria-hidden="true" tabindex="-1"></a>          $GITHUB_WORKSPACE/simple_integration.sh</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>The code below is the content of the simple_integration.sh script, which reads a workflow.conf file and execute each line in snowflake using the snowsql commands.</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># simple_integration.sh script that reads workflow.conf file and execute it.</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># simple_integration.sh script that reads workflow.conf file and execute it.</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="co">#!/bin/bash</span></span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="co"># author: Marcel Castro</span></span>
 <span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="bu">set</span> <span class="at">-e</span></span>
@@ -433,9 +436,9 @@ gtag('config', 'G-RK1QNXR9TB', { 'anonymize_ip': true});
 <span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a><span class="kw">}</span></span>
 <span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a><span class="co">## running workflow</span></span>
-<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a><span class="ex">run_workflow</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a><span class="ex">run_workflow</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>An example of workflow.conf file can be:</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode txt code-with-copy"><code class="sourceCode default"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a># Create views</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode txt code-with-copy"><code class="sourceCode default"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a># Create views</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>views/my_first_view.sql</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>views/my_second_view.sql</span>
 <span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a></span>
@@ -443,7 +446,7 @@ gtag('config', 'G-RK1QNXR9TB', { 'anonymize_ip': true});
 <span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>procedures/my_first_procedure.sql</span>
 <span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a># Remember to have an empty line by the end at the end of the file</span>
-<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a># so that every line is processed</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a># so that every line is processed</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="running-the-pipeline-workflow" class="level3">
 <h3 class="anchored" data-anchor-id="running-the-pipeline-workflow">Running the pipeline workflow</h3>
@@ -526,13 +529,14 @@ gtag('config', 'G-RK1QNXR9TB', { 'anonymize_ip': true});
       e.clearSelection();
     }
     const getTextToCopy = function(trigger) {
-        const codeEl = trigger.previousElementSibling.cloneNode(true);
-        for (const childEl of codeEl.children) {
-          if (isCodeAnnotation(childEl)) {
-            childEl.remove();
-          }
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
         }
-        return codeEl.innerText;
+      }
+      return codeEl.innerText;
     }
     const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
       text: getTextToCopy

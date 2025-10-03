@@ -6,10 +6,10 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="dcterms.date" content="2024-10-23">
-<meta name="description" content="High level overview of AI Agents and evolutions.">
+<meta name="dcterms.date" content="2025-10-03">
+<meta name="description" content="The Next Frontier Moving from Perfect Prompts to Optimized Context Curation.">
 
-<title>AI Agents Revolution – Marcel Castro</title>
+<title>The Next Frontier Moving from Perfect Prompts to Optimized Context Curation – Marcel Castro</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -162,14 +162,14 @@ gtag('config', 'G-RK1QNXR9TB', { 'anonymize_ip': true});
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
-      <h1 class="title">AI Agents Revolution</h1>
+      <h1 class="title">The Next Frontier Moving from Perfect Prompts to Optimized Context Curation</h1>
                   <div>
         <div class="description">
-          High level overview of AI Agents and evolutions.
+          The Next Frontier Moving from Perfect Prompts to Optimized Context Curation.
         </div>
       </div>
                           <div class="quarto-categories">
-                <div class="quarto-category">LLM, Agents</div>
+                <div class="quarto-category">LLM, Context Engineering</div>
               </div>
                   </div>
   </div>
@@ -181,7 +181,7 @@ gtag('config', 'G-RK1QNXR9TB', { 'anonymize_ip': true});
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">October 23, 2024</p>
+        <p class="date">October 3, 2025</p>
       </div>
     </div>
     
@@ -203,15 +203,15 @@ gtag('config', 'G-RK1QNXR9TB', { 'anonymize_ip': true});
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#ai-agents-revolution" id="toc-ai-agents-revolution" class="nav-link active" data-scroll-target="#ai-agents-revolution"><span class="emoji" data-emoji="baby">👶</span> AI Agents Revolution</a>
+  <li><a href="#the-next-frontier-moving-from-perfect-prompts-to-optimized-context-curation" id="toc-the-next-frontier-moving-from-perfect-prompts-to-optimized-context-curation" class="nav-link active" data-scroll-target="#the-next-frontier-moving-from-perfect-prompts-to-optimized-context-curation">✨ The Next Frontier: Moving from Perfect Prompts to Optimized Context Curation ✨</a>
   <ul class="collapse">
-  <li><a href="#what-has-changed" id="toc-what-has-changed" class="nav-link" data-scroll-target="#what-has-changed"><span class="emoji" data-emoji="question">❓</span> What has changed?</a></li>
-  <li><a href="#things-to-consider-while-building-ai-agents-that-works" id="toc-things-to-consider-while-building-ai-agents-that-works" class="nav-link" data-scroll-target="#things-to-consider-while-building-ai-agents-that-works"><span class="emoji" data-emoji="telescope">🔭</span> Things to Consider while building AI Agents that works</a>
-  <ul class="collapse">
-  <li><a href="#test-toolset-you-need" id="toc-test-toolset-you-need" class="nav-link" data-scroll-target="#test-toolset-you-need"><span class="emoji" data-emoji="hammer_and_pick">⚒️</span> Test: toolset you need</a></li>
-  </ul></li>
-  <li><a href="#how-good-are-those-agents-today" id="toc-how-good-are-those-agents-today" class="nav-link" data-scroll-target="#how-good-are-those-agents-today"><span class="emoji" data-emoji="woman_teacher">👩‍🏫</span> How good are those agents today?</a></li>
-  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References:</a></li>
+  <li><a href="#key-definitions" id="toc-key-definitions" class="nav-link" data-scroll-target="#key-definitions"><strong>Key Definitions:</strong></a></li>
+  <li><a href="#the-core-challenge-context-size-vs.-attention" id="toc-the-core-challenge-context-size-vs.-attention" class="nav-link" data-scroll-target="#the-core-challenge-context-size-vs.-attention">The Core Challenge: Context Size vs.&nbsp;Attention</a></li>
+  <li><a href="#the-context-engineering-objective" id="toc-the-context-engineering-objective" class="nav-link" data-scroll-target="#the-context-engineering-objective">The Context Engineering Objective</a></li>
+  <li><a href="#best-practices-for-effective-context-curation" id="toc-best-practices-for-effective-context-curation" class="nav-link" data-scroll-target="#best-practices-for-effective-context-curation">Best Practices for Effective Context Curation</a></li>
+  <li><a href="#does-it-work-for-all-how-about-long-running-tasks" id="toc-does-it-work-for-all-how-about-long-running-tasks" class="nav-link" data-scroll-target="#does-it-work-for-all-how-about-long-running-tasks"><strong>Does it work for all? How about long running tasks</strong> ?</a></li>
+  <li><a href="#the-lesson-from-human-cognition" id="toc-the-lesson-from-human-cognition" class="nav-link" data-scroll-target="#the-lesson-from-human-cognition">The Lesson from Human Cognition</a></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references"><strong>References:</strong></a></li>
   </ul></li>
   </ul>
 </nav>
@@ -223,133 +223,100 @@ gtag('config', 'G-RK1QNXR9TB', { 'anonymize_ip': true});
 
 
 
-<section id="ai-agents-revolution" class="level1">
-<h1><span class="emoji" data-emoji="baby">👶</span> AI Agents Revolution</h1>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="./assets/image-20241023112100724.png" class="img-fluid figure-img"></p>
-<figcaption>AI Agents</figcaption>
-</figure>
-</div>
-<p>In the context of Large Language Models (LLMs), AI Agents are autonomous software entities designed to extend the capabilities of LLMs.</p>
-<p>Recently , we have seen several agent frameworks such as <a href="https://microsoft.github.io/autogen/0.2/">AutoGen</a>, <a href="https://www.crewai.com/">CrewAI</a> and <a href="https://langchain-ai.github.io/langgraph/">LangGraph</a> and examples such as <a href="https://github.com/Significant-Gravitas/AutoGPT">AutoGPT</a> and <a href="https://github.com/yoheinakajima/babyagi">BabyAGI</a>.</p>
-<p>These solutions leverage LLM capabilities and typically consist of the following steps:</p>
-<ul>
-<li><span class="emoji" data-emoji="page_facing_up">📄</span> <strong>Task decomposition</strong>: break complex tasks into smaller, manageable steps.</li>
-<li><span class="emoji" data-emoji="hammer_and_pick">⚒️</span> <strong>Tool integration</strong>: LLM interacting with various tools and APIs to gather data from the environment, such as web scraping tools, calculator and python interpreter.</li>
-<li><span class="emoji" data-emoji="books">📚</span> <strong>Memory</strong>: used to retain information from past interactions, allowing to provide more context information.</li>
-<li><span class="emoji" data-emoji="currency_exchange">💱</span> <strong>Autonomous execution</strong>: once plan is established, the agent can execute the steps autonomously.</li>
-</ul>
-<p>These steps make AI agents powerful as they extend the functionality of LLMs beyond simple generation tasks towards autonomous task execution. For example, <a href="https://arxiv.org/abs/2210.03629">ReAct</a> (Reasoning and Acting) is a common methodology applied to AI agents to improve performance by leveraging reasoning and acting capabilities.</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="./assets/image-20241023090742241.png" class="img-fluid figure-img"></p>
-<figcaption>ReAct</figcaption>
-</figure>
-</div>
-<p>Picture by <a href="https://rdi.berkeley.edu/llm-agents-mooc/slides/llm_agent_history.pdf">Shunyu Yao - LLM Agents - Brief History and Overview</a></p>
-<section id="what-has-changed" class="level2">
-<h2 class="anchored" data-anchor-id="what-has-changed"><span class="emoji" data-emoji="question">❓</span> What has changed?</h2>
-<p>So far, AI agent frameworks have needed to communicate with the outside world through tool integration in the form of APIs. However, today Anthropic announced a new approach—<strong>LLMs performing tasks directly on your computer</strong>.</p>
-<p>This is possible using <strong><a href="https://www.anthropic.com/news/3-5-models-and-computer-use">computer use capability</a></strong> available in Claude 3.5 sonnet and Claude 3.5 Haiku.</p>
+<section id="the-next-frontier-moving-from-perfect-prompts-to-optimized-context-curation" class="level1">
+<h1>✨ The Next Frontier: Moving from Perfect Prompts to Optimized Context Curation ✨</h1>
 <blockquote class="blockquote">
-<p>Available <a href="https://docs.anthropic.com/en/docs/build-with-claude/computer-use?ref=platformer.news">today on the API</a>, developers can direct Claude to use computers the way people do—by looking at a screen, moving a cursor, clicking buttons, and typing text. Claude 3.5 Sonnet is the first frontier AI model to offer computer use in public beta. At this stage, it is still <a href="https://www.anthropic.com/news/developing-computer-use?ref=platformer.news">experimental</a> — at times cumbersome and error-prone. We’re releasing computer use early for feedback from developers, and expect the capability to improve rapidly over time.</p>
+<p>The landscape of AI interaction is shifting. While we mastered <strong>Prompt Engineering</strong>, the next critical skill is <strong>Context Engineering</strong>…</p>
 </blockquote>
-<p>According to <a href="https://www.anthropic.com/news/3-5-models-and-computer-use">Anthropic</a>, instead of creating specific tools to help Claude complete individual tasks, we’re <strong>teaching it general computer skills</strong>—allowing it to use a wide range of standard tools and software programs designed for people.</p>
-<p>Examples of Anthropic’s computer use capability include:</p>
+<p>As intelligent agents handle multi-turn, long-horizon tasks, we face a critical challenge: managing the growing volume of system instructions, history, and data efficiently. <strong>The bottleneck isn’t just LLM size—it’s signal efficiency</strong></p>
+<section id="key-definitions" class="level3">
+<h3 class="anchored" data-anchor-id="key-definitions"><strong>Key Definitions:</strong></h3>
 <ul>
-<li>Creating an entire website on the user’s computer and even fixes bugs in the code [<a href="https://www.youtube.com/watch?v=vH2f7cjXjKI">here</a>].</li>
-<li>Using data from user’s computer and online data to fill out forms [<a href="https://www.youtube.com/watch?v=ODaHJzOyVCQ&amp;feature=youtu.be">here</a>].</li>
-<li>Orchestrating a multi-step task by searching the web, using native applications, and creating a plan with the resulting information [<a href="https://www.youtube.com/watch?v=jqx18KgIzAE">here</a>].</li>
+<li><strong>Token:</strong> A basic unit of text (often a word or part of a word) that the Large Language Model (LLM) processes.</li>
+<li><strong>Prompt:</strong> The initial input text, question, or instruction provided to the model.</li>
+<li><strong>Context:</strong> The full set of tokens included when sampling from a LLM.</li>
+<li><strong>Context Engineering:</strong> The strategy to curate and maintain the <strong>optimal set of tokens</strong> during LLM inference to achieve reliable and cost-effective outcomes.</li>
 </ul>
-<p>Figure below shows the prompt for the example “Using data from user’s computer and online data to fill out forms” from <a href="https://youtu.be/ODaHJzOyVCQ">youtube video: Computer use for automating operations</a>.</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="./assets/image-20241023083751146.png" class="img-fluid figure-img"></p>
-<figcaption>Anthropic’s Computer Use</figcaption>
-</figure>
-</div>
-<p>Picture by Anthropic’s new computer use tool from <a href="https://youtu.be/ODaHJzOyVCQ">Youtube Computer use for automating operations video</a>.</p>
 </section>
-<section id="things-to-consider-while-building-ai-agents-that-works" class="level2">
-<h2 class="anchored" data-anchor-id="things-to-consider-while-building-ai-agents-that-works"><span class="emoji" data-emoji="telescope">🔭</span> Things to Consider while building AI Agents that works</h2>
-<blockquote class="blockquote">
-<p>This section is based on my notes from the presentation given by <a href="https://www.youtube.com/watch?v=BAL5QzWmt2I&amp;list=PL_lyFNnob30vw-q0_Kttx1DrKOSXoDnwU&amp;t=11s">Manjeet Singh, Salesforce</a> on the <a href="https://eur01.safelinks.protection.outlook.com/?url=https%3A%2F%2Fgo.predibase.com%2Fe3t%2FCtc%2FL0%2B113%2Fd2BmB904%2FVVV0pL45txbtN3W8GY5VDQS-VXkGBG5qDK5DN6-TNZ82-ZVTW5BW0B06lZ3kLN6MyJC5L0v21W4qC8S25HQZPRW431hQ95y2hDTN4pDp4N_RqkrW3bpGmk5PMNdqN7pQ1kbXJFr8W80-y-S1KH_-WW8-X96d16zTjDW2zT-nS8pZsv6W3Cc1203_xn19W58MR6c7yCYkTV6vxMf2H9zDNW5zkmbx1lkw-GN5h3tWGS6sTwN7RR6d6wPzK9MNJdB1KSffvW7q23Gb5xdPHTW27QSw-2RLQ8Gf5-dw5K04&amp;data=05%7C02%7Cmarcel.castro%40km.kongsberg.com%7C73954d3f37b449172bc308dd3140a066%7Ca113bc9e1024489c902e5ac8b5fd41ce%7C0%7C0%7C638720875811932030%7CUnknown%7CTWFpbGZsb3d8eyJFbXB0eU1hcGkiOnRydWUsIlYiOiIwLjAuMDAwMCIsIlAiOiJXaW4zMiIsIkFOIjoiTWFpbCIsIldUIjoyfQ%3D%3D%7C0%7C%7C%7C&amp;sdata=MeUEEQcmVYUVDzmrWGwmiQNYXGXbjaVs4dce1TwZQT0%3D&amp;reserved=0">SMALLCON</a> conference by Predibase in Dec.&nbsp;2024.</p>
-</blockquote>
-<p>Important things to consider while building Production-ready AI agents based on steps provided above:</p>
+<section id="the-core-challenge-context-size-vs.-attention" class="level3">
+<h3 class="anchored" data-anchor-id="the-core-challenge-context-size-vs.-attention">The Core Challenge: Context Size vs.&nbsp;Attention</h3>
+<p>This new paradigm introduces a critical tension. As the overall <strong>context length increases</strong>, the model’s ability to capture token relationships effectively decreases.</p>
+<p>This is due to the Transformer architecture’s <strong>quadratic complexity</strong> (every token must attend to every other token). This creates a tension where larger context often leads to reduced focus, a phenomenon known as <strong><a href="https://research.trychroma.com/context-rot">context rot</a></strong> or the <strong>“needle-in-a-haystack” problem</strong> (as noted by Anthropic).</p>
+</section>
+<section id="the-context-engineering-objective" class="level3">
+<h3 class="anchored" data-anchor-id="the-context-engineering-objective">The Context Engineering Objective</h3>
+<p>Good context engineering is a classic optimization problem. We must find the smallest set of high-signal tokens that maximizes the likelihood of the desired outcome.</p>
+<p>This requires solving the core trade-off:</p>
+<p><img src="./assets/image-20251003145250222.png" alt="image-20251003145250222" style="zoom:50%;"></p>
+<p>The goal is to find the set of tokens (S) that maximizes the score J(S) by: <strong>Maximizing Signal (Likelihood, L(S)) while Minimizing Noise and Cost (Set Size, ∣S∣)</strong>. The factor λ determines the necessary trade-off.</p>
+</section>
+<section id="best-practices-for-effective-context-curation" class="level3">
+<h3 class="anchored" data-anchor-id="best-practices-for-effective-context-curation">Best Practices for Effective Context Curation</h3>
+<p>To ensure your LLM agents remain sharp and cost-efficient, implement these practices:</p>
 <ul>
-<li><span class="emoji" data-emoji="page_facing_up">📄</span> <strong>Task decomposition</strong>: Topics</li>
-<li><span class="emoji" data-emoji="hammer_and_pick">⚒️</span> <strong>Tool integration</strong>: Sources, knowledge quality, guardrails</li>
-<li><span class="emoji" data-emoji="books">📚</span> <strong>Memory</strong>: User context, page context</li>
-<li><span class="emoji" data-emoji="currency_exchange">💱</span> <strong>Autonomous execution</strong>: actions, intent, latency</li>
+<li><strong>Clarity &amp; Simplicity:</strong> System prompts should be clear and simple, using direct language.</li>
+<li><strong>Section Organization:</strong> Organize prompts into distinct, labeled sections (e.g., <code>BACKGROUND_INFORMATION</code>, <code>INSTRUCTIONS</code>, <code>TOOL_GUIDANCE</code>, etc.). This aids model parsing and focus.</li>
+<li><strong>Tool Efficiency:</strong> Do not cover too much functionality in a single tool. Use tools that promote efficiency by returning information that is <strong>token-efficient</strong> and encourages efficient agent behavior.</li>
+<li><strong>Example Diversity:</strong> Provide examples that are diverse but do not overload the prompt with every possible edge case.</li>
+<li><strong>“Just-in-Time” Context Strategy:</strong> Maintain lightweight identifiers (file paths, stored queries, web links) and use these references to <strong>dynamically load</strong> into context at runtime using tools.</li>
+<li><strong>Hybrid Retrieval:</strong> Maintain a <strong>trade-off between runtime exploration and pre-computed retrieving</strong>. A hybrid approach—retrieving some core data up front for speed and exploring further data as needed—is often most helpful.</li>
 </ul>
-<p>In addition, as highlight by <a href="https://www.youtube.com/watch?v=BAL5QzWmt2I&amp;list=PL_lyFNnob30vw-q0_Kttx1DrKOSXoDnwU&amp;t=11s">Manjeet Singh, Salesforce</a> customer trust on the agent is important, and common points below need to be considered:</p>
-<p><span class="emoji" data-emoji="exclamation">❗</span> Data privacy and security concerns: e.g.&nbsp;legal</p>
-<p><span class="emoji" data-emoji="exclamation">❗</span> ​lack of confidence in accuracy: “<em>how this will behave in production?</em> <em>I am getting different answer each time</em>”</p>
-<p><span class="emoji" data-emoji="exclamation">❗</span> ​negative past experience: “<em>I tried before and it did not work</em>”</p>
-<p><span class="emoji" data-emoji="exclamation">❗</span> ​ROI and cost concerns: “<em>how to calculate business value</em>?”</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="./assets/image-20250110082320573.png" class="img-fluid figure-img"></p>
-<figcaption>image-20250110082320573</figcaption>
-</figure>
-</div>
-<p>Picture by <a href="https://www.youtube.com/watch?v=BAL5QzWmt2I&amp;list=PL_lyFNnob30vw-q0_Kttx1DrKOSXoDnwU&amp;t=11s">Manjeet Singh, Salesforce</a></p>
-<p>As in in software development best practice, the agent development follows similar steps, which are:</p>
-<p><span class="emoji" data-emoji="arrow_right">➡️</span> Ideate <span class="emoji" data-emoji="arrow_right">➡️</span> Setup <span class="emoji" data-emoji="arrow_right">➡️</span> Configure <span class="emoji" data-emoji="arrow_right">➡️</span> Test <span class="emoji" data-emoji="arrow_right">➡️</span> Deploy <span class="emoji" data-emoji="arrow_right">➡️</span> Monitor <span class="emoji" data-emoji="repeat">🔁</span></p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="./assets/image-20250110083443875.png" class="img-fluid figure-img"></p>
-<figcaption>image-20250110083443875</figcaption>
-</figure>
-</div>
-<p>Picture by <a href="https://www.youtube.com/watch?v=BAL5QzWmt2I&amp;list=PL_lyFNnob30vw-q0_Kttx1DrKOSXoDnwU&amp;t=11s">Manjeet Singh, Salesforce</a></p>
-<section id="test-toolset-you-need" class="level3">
-<h3 class="anchored" data-anchor-id="test-toolset-you-need"><span class="emoji" data-emoji="hammer_and_pick">⚒️</span> Test: toolset you need</h3>
-<p>Testing and evaluation during agent application development is very important.</p>
-<p>As in all generative AI usecase, the journey normally looks like this:</p>
-<p><span class="emoji" data-emoji="arrow_right">➡️</span> Select a pre-trained LLM (e.g.&nbsp;gpt-4o or claude 3.5)</p>
-<p><span class="emoji" data-emoji="arrow_right">➡️</span> Prompt Engineering (improve prompt with few shots)</p>
-<p><span class="emoji" data-emoji="arrow_right">➡️</span> Prompt Engineering + RAG (longer prompts, slower inference)</p>
-<p><span class="emoji" data-emoji="arrow_right">➡️</span> Advanced techniques (advanced RAG, finetuning - improve speed, quality and cost)</p>
-<p>Here is an example from <a href="https://www.youtube.com/watch?v=BAL5QzWmt2I&amp;list=PL_lyFNnob30vw-q0_Kttx1DrKOSXoDnwU&amp;t=11s">Manjeet Singh, Salesforce</a> to atomate agent evaluation.</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="./assets/image-20250110084935905.png" class="img-fluid figure-img"></p>
-<figcaption>image-20250110084935905</figcaption>
-</figure>
-</div>
-<p>Picture by <a href="https://www.youtube.com/watch?v=BAL5QzWmt2I&amp;list=PL_lyFNnob30vw-q0_Kttx1DrKOSXoDnwU&amp;t=11s">Manjeet Singh, Salesforce</a></p>
-<p>Below is an example of evaluation while considering a RAG (Retrieval Augmented Generation) pipeline.</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="./assets/image-20250110085416224.png" class="img-fluid figure-img"></p>
-<figcaption>image-20250110085416224</figcaption>
-</figure>
-</div>
-<p>Picture by <a href="https://www.youtube.com/watch?v=BAL5QzWmt2I&amp;list=PL_lyFNnob30vw-q0_Kttx1DrKOSXoDnwU&amp;t=11s">Manjeet Singh, Salesforce</a></p>
 </section>
-</section>
-<section id="how-good-are-those-agents-today" class="level2">
-<h2 class="anchored" data-anchor-id="how-good-are-those-agents-today"><span class="emoji" data-emoji="woman_teacher">👩‍🏫</span> How good are those agents today?</h2>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="./assets/image-20241023120005090.png" class="img-fluid figure-img"></p>
-<figcaption>Agent Evaluations</figcaption>
-</figure>
-</div>
-<p>Picture by <a href="https://www.linkedin.com/posts/philipp-schmid-a6a2bb196_can-llms-now-control-computers-like-we-do-activity-7254766392921460736-Bx1y?utm_source=share&amp;utm_medium=member_desktop">Philipp Schimid</a></p>
-</section>
-<section id="references" class="level2">
-<h2 class="anchored" data-anchor-id="references">References:</h2>
+<section id="does-it-work-for-all-how-about-long-running-tasks" class="level3">
+<h3 class="anchored" data-anchor-id="does-it-work-for-all-how-about-long-running-tasks"><strong>Does it work for all? How about long running tasks</strong> ?</h3>
+<p>Long-horizon tasks (spanning several minutes or hours, such as managing a large codebase) require specialized techniques to work around deep context size limitations. Anthropic proposes three main strategies here:</p>
+<section id="compaction-or-distillation" class="level4">
+<h4 class="anchored" data-anchor-id="compaction-or-distillation">1. Compaction or Distillation</h4>
+<p>This involves summarizing the conversation content and initiating a new context window with the summary.</p>
+<p>Compaction is an art because it forces the dilemma of what to keep versus what to discard. A suggestion from Anthropic is to start by maximizing <strong>recall</strong> (capturing every relevant piece) and then iterating to improve <strong>precision</strong> by eliminating superfluous content.</p>
 <ul>
-<li><a href="[AI Agents: Key Concepts and How They Overcome LLM Limitations - The New Stack](https://thenewstack.io/ai-agents-key-concepts-and-how-they-overcome-llm-limitations/)">AI Agents: Key Concepts and How They Overcome LLM Limitations by TheNewStack</a></li>
-<li><a href="https://www.anthropic.com/news/3-5-models-and-computer-use">Introducing computer use, a new Claude 3.5 Sonnet, and Claude 3.5 Haiku by Anthropic</a> (20241022)</li>
-<li><a href="https://llmagents-learning.org/f24">Berkley Course: Large Language Model Agents by</a> <a href="https://people.eecs.berkeley.edu/~dawnsong/">Dawn Song</a></li>
-<li><a href="https://www.platformer.news/anthropic-ai-agents-computer-use-consequences/?ref=platformer-newsletter">The AI agents have arrived by Casey Newton</a></li>
-<li><a href="https://www.oneusefulthing.org/p/when-you-give-a-claude-a-mouse?utm_campaign=post&amp;utm_medium=web&amp;ref=platformer.news">When you give a Claude a mouse by Ethan Mollick</a></li>
-<li><a href="https://lilianweng.github.io/posts/2023-06-23-agent/">LLM Powered Autonomous Agents | Lil’Log</a></li>
-<li><a href="https://huyenchip.com//2025/01/07/agents.html">Agents by Chip Huyen</a></li>
+<li><strong>Example:</strong> Pruning or clearing detailed tool calls and their large results from the context once the agent has processed the outcome, as they aren’t relevant for the next high-level interaction.</li>
+</ul>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="./assets/image-20251003140805855.png" class="img-fluid figure-img"></p>
+<figcaption>image-20251003140805855</figcaption>
+</figure>
+</div>
+</section>
+<section id="structured-note-taking-agentic-memory" class="level4">
+<h4 class="anchored" data-anchor-id="structured-note-taking-agentic-memory">2. Structured Note-Taking / Agentic Memory</h4>
+<p>The agent regularly writes notes that are persisted to memory <em>outside</em> of the context window.</p>
+<ul>
+<li><strong>Example:</strong> The agent creates a to-do list file or main task list and tracks its progress in that file as tasks are completed, retrieving the relevant status when needed.</li>
+</ul>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="./assets/image-20251003140823567.png" class="img-fluid figure-img"></p>
+<figcaption>image-20251003140823567</figcaption>
+</figure>
+</div>
+</section>
+<section id="sub-agent-architectures" class="level4">
+<h4 class="anchored" data-anchor-id="sub-agent-architectures">3. Sub-Agent Architectures</h4>
+<p>Instead of one agent maintaining state across an entire project, use specialized sub-agents to handle focused tasks with clean context windows.</p>
+<ul>
+<li>An <strong>orchestration agent</strong> manages the high-level plan.</li>
+<li><strong>Sub-agents</strong> handle deep technical work or the use of specific tools.</li>
+</ul>
+<p>This approach implements the <strong>clear separation of concerns principle</strong> where specific search context remains isolated within the sub-agents, allowing the orchestration agent to focus solely on synthesizing and analyzing the final results.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="./assets/image-20251003140900737.png" class="img-fluid figure-img"></p>
+<figcaption>image-20251003140900737</figcaption>
+</figure>
+</div>
+</section>
+</section>
+<section id="the-lesson-from-human-cognition" class="level3">
+<h3 class="anchored" data-anchor-id="the-lesson-from-human-cognition">The Lesson from Human Cognition</h3>
+<p>Those best practices mirror how humans manage information. We generally don’t memorize an entire corpus of information but use <strong>indexing systems</strong> like file folders, inboxes, and bookmarks to retrieve relevant information on demand. The file size suggests complexity, and timestamps can proxy relevance—just like token efficiency and context loading in AI.</p>
+</section>
+<section id="references" class="level3">
+<h3 class="anchored" data-anchor-id="references"><strong>References:</strong></h3>
+<ul>
+<li><a href="https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents">Effective context engineering for AI agents by Anthropic</a></li>
+<li><a href="https://blog.langchain.com/how-to-build-an-agent/">How to Build an Agent by Langchain</a></li>
 </ul>
 
 

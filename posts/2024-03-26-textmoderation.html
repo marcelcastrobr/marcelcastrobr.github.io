@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.7.33">
+<meta name="generator" content="quarto-1.8.25">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -59,7 +59,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </style>
 
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script><script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" integrity="sha384-ZvpUoO/+PpLXR1lu4jmpXWu80pZlYUAfxl5NsBMWOEPSjUn/6Z/hRTt8+pR6L4N2" crossorigin="anonymous"></script><script src="../site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="../site_libs/quarto-nav/headroom.min.js"></script>
 <script src="../site_libs/clipboard/clipboard.min.js"></script>
 <script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
@@ -68,14 +68,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <meta name="quarto:offset" content="../">
 <script src="../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-ea385d0e468b0dd5ea5bf0780b1290d9.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-2f9bc8108cc5788f896f6d8ac1f323a2.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-ee47912cae73dc7932e3cc93c52697b6.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -112,7 +113,7 @@ function gtag(){dataLayer.push(arguments);}
 gtag('js', new Date());
 gtag('config', 'G-RK1QNXR9TB', { 'anonymize_ip': true});
 </script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/requirejs@2.3.6/require.min.js" integrity="sha384-c9c+LnTbwQ3aujuU7ULEPVvgLs+Fn6fJUvIGTsuu1ZcCf11fiEubah0ttpca4ntM sha384-6V1/AdqZRWk1KAlWbKBlGhN7VG4iE/yAZcO6NZPMF8od0vukrvr0tg4qY6NSrItx" crossorigin="anonymous"></script>
 
 <script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
 
@@ -127,6 +128,8 @@ gtag('config', 'G-RK1QNXR9TB', { 'anonymize_ip': true});
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
+    <a href="../index.html" class="navbar-brand navbar-brand-logo">
+    </a>
     <a class="navbar-brand" href="../index.html">
     <span class="navbar-title">Marcel Castro</span>
     </a>
@@ -241,7 +244,7 @@ gtag('config', 'G-RK1QNXR9TB', { 'anonymize_ip': true});
 <p>detect_toxic_content performs toxicity analysis on the list of text strings that you provide as input. The API response contains a results list that matches the size of the input list.</p>
 <p>The toxicity content labels are: GRAPHIC | HARASSMENT_OR_ABUSE | HATE_SPEECH | INSULT | PROFANITY | SEXUAL | VIOLENCE_OR_THREAT</p>
 <p>The response syntax for the API call is show below.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode json code-with-copy"><code class="sourceCode json"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">{</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode json code-with-copy"><code class="sourceCode json"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">{</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>   <span class="dt">"ResultList"</span><span class="fu">:</span> <span class="ot">[</span> </span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>      <span class="fu">{</span> </span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>         <span class="dt">"Labels"</span><span class="fu">:</span> <span class="ot">[</span> </span>
@@ -253,9 +256,9 @@ gtag('config', 'G-RK1QNXR9TB', { 'anonymize_ip': true});
 <span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>         <span class="dt">"Toxicity"</span><span class="fu">:</span> <span class="er">number</span></span>
 <span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>      <span class="fu">}</span></span>
 <span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>   <span class="ot">]</span></span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="fu">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="fu">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div id="cell-3" class="cell" data-execution_count="132">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> boto3</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> boto3</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Seeting variables</span></span>
@@ -294,7 +297,7 @@ gtag('config', 'G-RK1QNXR9TB', { 'anonymize_ip': true});
 <span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="bu">len</span>(detected) <span class="op">&gt;</span> <span class="dv">0</span>:</span>
 <span id="cb2-38"><a href="#cb2-38" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="st">"Text segment </span><span class="sc">{}</span><span class="st">"</span>.<span class="bu">format</span>(i <span class="op">+</span> <span class="dv">1</span>))</span>
 <span id="cb2-39"><a href="#cb2-39" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> d <span class="kw">in</span> detected:</span>
-<span id="cb2-40"><a href="#cb2-40" aria-hidden="true" tabindex="-1"></a>            <span class="bu">print</span>(<span class="st">"</span><span class="sc">{}</span><span class="st"> score </span><span class="sc">{:.2f}</span><span class="st">"</span>.<span class="bu">format</span>(d[<span class="st">'Name'</span>], d[<span class="st">'Score'</span>]))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-40"><a href="#cb2-40" aria-hidden="true" tabindex="-1"></a>            <span class="bu">print</span>(<span class="st">"</span><span class="sc">{}</span><span class="st"> score </span><span class="sc">{:.2f}</span><span class="st">"</span>.<span class="bu">format</span>(d[<span class="st">'Name'</span>], d[<span class="st">'Score'</span>]))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[{'Labels': [{'Name': 'PROFANITY', 'Score': 0.046799998730421066}, {'Name': 'HATE_SPEECH', 'Score': 0.056699998676776886}, {'Name': 'INSULT', 'Score': 0.10109999775886536}, {'Name': 'GRAPHIC', 'Score': 0.01860000006854534}, {'Name': 'HARASSMENT_OR_ABUSE', 'Score': 0.08330000191926956}, {'Name': 'SEXUAL', 'Score': 0.07109999656677246}, {'Name': 'VIOLENCE_OR_THREAT', 'Score': 0.03519999980926514}], 'Toxicity': 0.08330000191926956}, {'Labels': [{'Name': 'PROFANITY', 'Score': 0.353300005197525}, {'Name': 'HATE_SPEECH', 'Score': 0.15479999780654907}, {'Name': 'INSULT', 'Score': 0.2046000063419342}, {'Name': 'GRAPHIC', 'Score': 0.0812000036239624}, {'Name': 'HARASSMENT_OR_ABUSE', 'Score': 0.12559999525547028}, {'Name': 'SEXUAL', 'Score': 0.16859999299049377}, {'Name': 'VIOLENCE_OR_THREAT', 'Score': 0.08150000125169754}], 'Toxicity': 0.15479999780654907}, {'Labels': [{'Name': 'PROFANITY', 'Score': 0.353300005197525}, {'Name': 'HATE_SPEECH', 'Score': 0.15479999780654907}, {'Name': 'INSULT', 'Score': 0.2046000063419342}, {'Name': 'GRAPHIC', 'Score': 0.0812000036239624}, {'Name': 'HARASSMENT_OR_ABUSE', 'Score': 0.12559999525547028}, {'Name': 'SEXUAL', 'Score': 0.16859999299049377}, {'Name': 'VIOLENCE_OR_THREAT', 'Score': 0.08150000125169754}], 'Toxicity': 0.15479999780654907}, {'Labels': [{'Name': 'PROFANITY', 'Score': 0.6852999925613403}, {'Name': 'HATE_SPEECH', 'Score': 0.5633000135421753}, {'Name': 'INSULT', 'Score': 0.968999981880188}, {'Name': 'GRAPHIC', 'Score': 0.07450000196695328}, {'Name': 'HARASSMENT_OR_ABUSE', 'Score': 0.2046000063419342}, {'Name': 'SEXUAL', 'Score': 0.26249998807907104}, {'Name': 'VIOLENCE_OR_THREAT', 'Score': 0.10050000250339508}], 'Toxicity': 0.9890000224113464}]
 Text segment 2
@@ -340,10 +343,10 @@ SEXUAL score 0.26</code></pre>
 <h1>Step 1: Setup Notebook <a id="step1"></a></h1>
 <p>Run the below cell to install/update Python dependencies if you run the lab using a local IDE. It is optional if you use a SageMaker Studio Juypter Notebook, which already includes the dependencies in the kernel.</p>
 <div id="cell-7" class="cell" data-execution_count="8">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># First, let's get the latest installations of our dependencies</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># First, let's get the latest installations of our dependencies</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>pip install <span class="op">-</span>qU pip</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>pip install boto3 <span class="op">-</span>qU</span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>pip install sagemaker <span class="op">-</span>qU</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>pip install sagemaker <span class="op">-</span>qU</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Note: you may need to restart the kernel to use updated packages.
 Note: you may need to restart the kernel to use updated packages.
@@ -352,16 +355,16 @@ Note: you may need to restart the kernel to use updated packages.</code></pre>
 </div>
 <p>You can skip the below cell if you are using SageMaker Studio Data Science kernel or they are already installed in your environment.</p>
 <div id="cell-9" class="cell" data-execution_count="31">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># install pandas if you are using a local IDE and they are not installed in your env</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># install pandas if you are using a local IDE and they are not installed in your env</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>pip install pandas <span class="op">-</span>qU</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>pip install datetime <span class="op">-</span>qU</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>pip install datetime <span class="op">-</span>qU</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Note: you may need to restart the kernel to use updated packages.
 Note: you may need to restart the kernel to use updated packages.</code></pre>
 </div>
 </div>
 <div id="cell-10" class="cell" data-execution_count="45">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> boto3</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> boto3</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> sagemaker <span class="im">as</span> sm</span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os</span>
 <span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> io</span>
@@ -389,7 +392,7 @@ Note: you may need to restart the kernel to use updated packages.</code></pre>
 <span id="cb8-26"><a href="#cb8-26" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb8-27"><a href="#cb8-27" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb8-28"><a href="#cb8-28" aria-hidden="true" tabindex="-1"></a>s3 <span class="op">=</span> boto3session.client(<span class="st">'s3'</span>)</span>
-<span id="cb8-29"><a href="#cb8-29" aria-hidden="true" tabindex="-1"></a>comprehend <span class="op">=</span> boto3session.client(<span class="st">'comprehend'</span>, region_name<span class="op">=</span>region)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb8-29"><a href="#cb8-29" aria-hidden="true" tabindex="-1"></a>comprehend <span class="op">=</span> boto3session.client(<span class="st">'comprehend'</span>, region_name<span class="op">=</span>region)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>SageMaker role is: arn:aws:iam::754992829378:role/Admin
 Default SageMaker Bucket: s3://sagemaker-us-east-1-754992829378
@@ -402,7 +405,7 @@ AWS region: us-east-1</code></pre>
 <h1>Step 2: Prepare custom classification training dataset <a id="step2"></a></h1>
 <p>Unzip the sample data <strong>toxicity.zip</strong> and decompress files to a local folder</p>
 <div id="cell-12" class="cell" data-execution_count="23">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="op">!</span>unzip .<span class="op">/</span>datasets<span class="op">/</span>toxicity.<span class="bu">zip</span> <span class="op">-</span>d toxicity_dataset</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="op">!</span>unzip .<span class="op">/</span>datasets<span class="op">/</span>toxicity.<span class="bu">zip</span> <span class="op">-</span>d toxicity_dataset</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Archive:  ./datasets/toxicity.zip
 replace toxicity_dataset/LICENSE? [y]es, [n]o, [A]ll, [N]one, [r]ename: ^C</code></pre>
@@ -412,13 +415,13 @@ replace toxicity_dataset/LICENSE? [y]es, [n]o, [A]ll, [N]one, [r]ename: ^C</code
 <p>Columns: - text: the text of the comment - is_toxic: whether or not the comment is toxic</p>
 <p>(The dataset contained in <strong>../datasets/toxicity.zip</strong> is an unaltered redistribution of <a href="https://github.com/surge-ai/toxicity">the toxicity dataset</a> made available by Surge AI under MIT License.)</p>
 <div id="cell-14" class="cell" data-execution_count="38">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.read_csv(<span class="st">'./toxicity_dataset/toxicity_en.csv'</span>)</span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.read_csv(<span class="st">'./toxicity_dataset/toxicity_en.csv'</span>)</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>df</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="38">
 <div>
 
 
-<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
 <thead>
 <tr class="header">
 <th data-quarto-table-cell-role="th"></th>
@@ -428,57 +431,57 @@ replace toxicity_dataset/LICENSE? [y]es, [n]o, [A]ll, [N]one, [r]ename: ^C</code
 </thead>
 <tbody>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">0</td>
+<th data-quarto-table-cell-role="th">0</th>
 <td>Elon Musk is a piece of shit, greedy capitalis...</td>
 <td>Toxic</td>
 </tr>
 <tr class="even">
-<td data-quarto-table-cell-role="th">1</td>
+<th data-quarto-table-cell-role="th">1</th>
 <td>The senile credit card shrill from Delaware ne...</td>
 <td>Toxic</td>
 </tr>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">2</td>
+<th data-quarto-table-cell-role="th">2</th>
 <td>He does that a lot -- makes everyone look good...</td>
 <td>Toxic</td>
 </tr>
 <tr class="even">
-<td data-quarto-table-cell-role="th">3</td>
+<th data-quarto-table-cell-role="th">3</th>
 <td>F*ck Lizzo</td>
 <td>Toxic</td>
 </tr>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">4</td>
+<th data-quarto-table-cell-role="th">4</th>
 <td>Epstein and trump were best buds!!! Pedophiles...</td>
 <td>Toxic</td>
 </tr>
 <tr class="even">
-<td data-quarto-table-cell-role="th">...</td>
+<th data-quarto-table-cell-role="th">...</th>
 <td>...</td>
 <td>...</td>
 </tr>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">995</td>
+<th data-quarto-table-cell-role="th">995</th>
 <td>My maternal abuelita taught me how to make pla...</td>
 <td>Not Toxic</td>
 </tr>
 <tr class="even">
-<td data-quarto-table-cell-role="th">996</td>
+<th data-quarto-table-cell-role="th">996</th>
 <td>Funnily enough I was looking online last week ...</td>
 <td>Not Toxic</td>
 </tr>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">997</td>
+<th data-quarto-table-cell-role="th">997</th>
 <td>I can't bear how nice this is.\n \n I guess it...</td>
 <td>Not Toxic</td>
 </tr>
 <tr class="even">
-<td data-quarto-table-cell-role="th">998</td>
+<th data-quarto-table-cell-role="th">998</th>
 <td>Going to buy a share of Tesla just to ensure i...</td>
 <td>Not Toxic</td>
 </tr>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">999</td>
+<th data-quarto-table-cell-role="th">999</th>
 <td>I only saw a couple of these throughout the mo...</td>
 <td>Not Toxic</td>
 </tr>
@@ -495,12 +498,12 @@ replace toxicity_dataset/LICENSE? [y]es, [n]o, [A]ll, [N]one, [r]ename: ^C</code
 <p>For more information, refer to this <a href="https://docs.aws.amazon.com/comprehend/latest/dg/prep-classifier-data-multi-class.html">doc</a> for more details about the multi-class data format.</p>
 <p>Comprehend custom classifiers requires the CSV’s first column to be the label and the second column to be the text. The CSV file doesn’t require a header. The below code will create a CSV file in the expected format.</p>
 <div id="cell-17" class="cell" data-execution_count="39">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>df.to_csv(<span class="st">'toxicity-custom-classification.csv'</span>, header<span class="op">=</span><span class="va">False</span>, index<span class="op">=</span><span class="va">False</span>, columns<span class="op">=</span>[<span class="st">'is_toxic'</span>,<span class="st">'text'</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>df.to_csv(<span class="st">'toxicity-custom-classification.csv'</span>, header<span class="op">=</span><span class="va">False</span>, index<span class="op">=</span><span class="va">False</span>, columns<span class="op">=</span>[<span class="st">'is_toxic'</span>,<span class="st">'text'</span>])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Now, let’s upload the training data to the S3 bucket, ready for Comprehend to access.</p>
 <div id="cell-19" class="cell" data-execution_count="40">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>s3_key <span class="op">=</span> <span class="st">'content-moderation-im/text-moderation/toxicity-custom-classification.csv'</span></span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>s3.upload_file(<span class="ss">f'toxicity-custom-classification.csv'</span>, data_bucket, s3_key)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>s3_key <span class="op">=</span> <span class="st">'content-moderation-im/text-moderation/toxicity-custom-classification.csv'</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>s3.upload_file(<span class="ss">f'toxicity-custom-classification.csv'</span>, data_bucket, s3_key)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 </section>
@@ -509,7 +512,7 @@ replace toxicity_dataset/LICENSE? [y]es, [n]o, [A]ll, [N]one, [r]ename: ^C</code
 <p>Once we have a labeled dataset ready we are going to create and train a <a href="https://docs.aws.amazon.com/comprehend/latest/dg/how-document-classification.html">Amazon Comprehend custom classification model</a> with the dataset.</p>
 <p>This job can take ~40 minutes to complete. Once the training job is completed move on to next step.</p>
 <div id="cell-21" class="cell" data-execution_count="46">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> datetime</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> datetime</span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a Toxicity classifier</span></span>
 <span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>account_id <span class="op">=</span> boto3session.client(<span class="st">'sts'</span>).get_caller_identity().get(<span class="st">'Account'</span>)</span>
@@ -542,7 +545,7 @@ replace toxicity_dataset/LICENSE? [y]es, [n]o, [A]ll, [N]one, [r]ename: ^C</code
 <span id="cb15-31"><a href="#cb15-31" aria-hidden="true" tabindex="-1"></a>        document_classifier_arn <span class="op">=</span> <span class="ss">f'arn:aws:comprehend:</span><span class="sc">{</span>region<span class="sc">}</span><span class="ss">:</span><span class="sc">{</span>account_id<span class="sc">}</span><span class="ss">:document-classifier/</span><span class="sc">{</span>document_classifier_name<span class="sc">}</span><span class="ss">/version/</span><span class="sc">{</span>document_classifier_version<span class="sc">}</span><span class="ss">'</span></span>
 <span id="cb15-32"><a href="#cb15-32" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="ss">f'The classifier ARN is: "</span><span class="sc">{</span>document_classifier_arn<span class="sc">}</span><span class="ss">"'</span>)</span>
 <span id="cb15-33"><a href="#cb15-33" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
-<span id="cb15-34"><a href="#cb15-34" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(error)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb15-34"><a href="#cb15-34" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(error)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>A classifier with the name "Sample-Toxicity-Classifier-Content-Moderation" already exists.
 The classifier ARN is: "arn:aws:comprehend:us-east-1:754992829378:document-classifier/Sample-Toxicity-Classifier-Content-Moderation/version/v5"</code></pre>
@@ -550,7 +553,7 @@ The classifier ARN is: "arn:aws:comprehend:us-east-1:754992829378:document-class
 </div>
 <p>Check status of the Comprehend Custom Classification Job</p>
 <div id="cell-23" class="cell" data-execution_count="44">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>time</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>time</span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Loop through and wait for the training to complete . Takes up to 10 mins </span></span>
 <span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> IPython.display <span class="im">import</span> clear_output</span>
 <span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> time</span>
@@ -572,7 +575,7 @@ The classifier ARN is: "arn:aws:comprehend:us-east-1:754992829378:document-class
 <span id="cb17-20"><a href="#cb17-20" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> status <span class="op">==</span> <span class="st">"TRAINED"</span> <span class="kw">or</span> status <span class="op">==</span> <span class="st">"IN_ERROR"</span>:</span>
 <span id="cb17-21"><a href="#cb17-21" aria-hidden="true" tabindex="-1"></a>        <span class="cf">break</span></span>
 <span id="cb17-22"><a href="#cb17-22" aria-hidden="true" tabindex="-1"></a>        </span>
-<span id="cb17-23"><a href="#cb17-23" aria-hidden="true" tabindex="-1"></a>    time.sleep(<span class="dv">60</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb17-23"><a href="#cb17-23" aria-hidden="true" tabindex="-1"></a>    time.sleep(<span class="dv">60</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>10:56:52 : Custom document classifier: TRAINED
 CPU times: user 1.72 s, sys: 662 ms, total: 2.38 s
@@ -585,7 +588,7 @@ Wall time: 34min 21s</code></pre>
 <h1>Step 4: Create Amazon Comprehend real time endpoint <a id="step4"></a></h1>
 <p>Once our Comprehend custom classifier is fully trained (i.e.&nbsp;status = TRAINED). We can create a real-time endpoint. We will use this endpoint to classify text inputs in real time. The following code cells use the comprehend Boto3 client to create an endpoint, but you can also create one manually via the console. Instructions on how to do that can be found in the subsequent section.</p>
 <div id="cell-26" class="cell" data-execution_count="47">
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co">#create comprehend endpoint</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co">#create comprehend endpoint</span></span>
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>model_arn <span class="op">=</span> document_classifier_arn</span>
 <span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>ep_name <span class="op">=</span> <span class="st">'toxicity-endpoint'</span></span>
 <span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a></span>
@@ -605,13 +608,13 @@ Wall time: 34min 21s</code></pre>
 <span id="cb19-18"><a href="#cb19-18" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="ss">f'The classifier endpoint ARN is: "</span><span class="sc">{</span>ENDPOINT_ARN<span class="sc">}</span><span class="ss">"'</span>)</span>
 <span id="cb19-19"><a href="#cb19-19" aria-hidden="true" tabindex="-1"></a>        <span class="op">%</span>store ENDPOINT_ARN</span>
 <span id="cb19-20"><a href="#cb19-20" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
-<span id="cb19-21"><a href="#cb19-21" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(error)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb19-21"><a href="#cb19-21" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(error)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Endpoint created with ARN: arn:aws:comprehend:us-east-1:754992829378:document-classifier-endpoint/toxicity-endpoint</code></pre>
 </div>
 </div>
 <div id="cell-27" class="cell" data-execution_count="48">
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>display(endpoint_response)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>display(endpoint_response)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
 <pre><code>{'EndpointArn': 'arn:aws:comprehend:us-east-1:754992829378:document-classifier-endpoint/toxicity-endpoint',
  'ResponseMetadata': {'RequestId': '375b1283-0960-46d6-93a6-7cf64927b4db',
@@ -626,7 +629,7 @@ Wall time: 34min 21s</code></pre>
 <p>Alternatively, use the steps below to create a Comprehend endpoint using the AWS console. - Go to Comprehend on AWS Console and click on Endpoints in the left menu. - Click on “Create endpoint” - Give an Endpoint name; for Custom model type select Custom classification; for version select no version or the latest version of the model. - For Classifier model select from the drop down menu - For Inference Unit select 1 - Check “Acknowledge” - Click “Create endpoint”</p>
 <p><a href="https://console.aws.amazon.com/comprehend/v2/home?region=us-east-1#endpoints">It may take ~10 minutes</a> for the endpoint to get created. The code cell below checks the creation status.</p>
 <div id="cell-29" class="cell" data-execution_count="49">
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>time</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>time</span>
 <span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Loop through and wait for the training to complete . Takes up to 10 mins </span></span>
 <span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> IPython.display <span class="im">import</span> clear_output</span>
 <span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> time</span>
@@ -648,7 +651,7 @@ Wall time: 34min 21s</code></pre>
 <span id="cb23-20"><a href="#cb23-20" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> status <span class="op">==</span> <span class="st">"IN_SERVICE"</span> <span class="kw">or</span> status <span class="op">==</span> <span class="st">"FAILED"</span>:</span>
 <span id="cb23-21"><a href="#cb23-21" aria-hidden="true" tabindex="-1"></a>        <span class="cf">break</span></span>
 <span id="cb23-22"><a href="#cb23-22" aria-hidden="true" tabindex="-1"></a>        </span>
-<span id="cb23-23"><a href="#cb23-23" aria-hidden="true" tabindex="-1"></a>    time.sleep(<span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb23-23"><a href="#cb23-23" aria-hidden="true" tabindex="-1"></a>    time.sleep(<span class="dv">10</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>11:16:22 : Custom document classifier: IN_SERVICE
 CPU times: user 26.5 ms, sys: 8.7 ms, total: 35.2 ms
@@ -660,11 +663,11 @@ Wall time: 533 ms</code></pre>
 <h1>Step 5: Classify message using the real-time endpoint <a id="step5"></a></h1>
 <p>Once the endpoint has been created, we will use some sample text messages to classify them into toxic or non-toxic categories.</p>
 <div id="cell-31" class="cell" data-execution_count="50">
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>response <span class="op">=</span> comprehend.classify_document(</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>response <span class="op">=</span> comprehend.classify_document(</span>
 <span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>    Text<span class="op">=</span> <span class="st">'Why don''t you shoot him?! I hate you all!'</span>,</span>
 <span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>    EndpointArn<span class="op">=</span>ENDPOINT_ARN</span>
 <span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>display(response)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>display(response)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
 <pre><code>{'Classes': [{'Name': 'Toxic', 'Score': 0.9951152801513672},
   {'Name': 'Not Toxic', 'Score': 0.004884751979261637}],
@@ -683,7 +686,7 @@ Wall time: 533 ms</code></pre>
 <section id="step-6-classify-message-using-the-real-time-endpoint-and-capture-metrics-accross-a-random-selection-of-texts" class="level1">
 <h1>Step 6: Classify message using the real-time endpoint <a id="step6"></a> and capture metrics accross a random selection of texts</h1>
 <div id="cell-34" class="cell" data-execution_count="129">
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> time</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> time</span>
 <span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> display(text, ground_thruth):</span>
@@ -718,7 +721,7 @@ Wall time: 533 ms</code></pre>
 <span id="cb27-33"><a href="#cb27-33" aria-hidden="true" tabindex="-1"></a>  my_df <span class="op">=</span> pd.concat([my_df, df1]) </span>
 <span id="cb27-34"><a href="#cb27-34" aria-hidden="true" tabindex="-1"></a>    </span>
 <span id="cb27-35"><a href="#cb27-35" aria-hidden="true" tabindex="-1"></a>my_df.head(nsel)</span>
-<span id="cb27-36"><a href="#cb27-36" aria-hidden="true" tabindex="-1"></a></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb27-36"><a href="#cb27-36" aria-hidden="true" tabindex="-1"></a></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>/var/folders/vt/7n9vmpnn1sg9xzf_2z58706r0000gr/T/ipykernel_19577/1421068623.py:30: FutureWarning: The behavior of DataFrame concatenation with empty or all-NA entries is deprecated. In a future version, this will no longer exclude empty or all-NA columns when determining the result dtypes. To retain the old behavior, exclude the relevant entries before the concat operation.
   my_df = pd.concat([my_df, df1])</code></pre>
@@ -727,7 +730,7 @@ Wall time: 533 ms</code></pre>
 <div>
 
 
-<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
 <thead>
 <tr class="header">
 <th data-quarto-table-cell-role="th"></th>
@@ -741,7 +744,7 @@ Wall time: 533 ms</code></pre>
 </thead>
 <tbody>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">0</td>
+<th data-quarto-table-cell-role="th">0</th>
 <td>Right!! I was already excited for X Choice, &amp; ...</td>
 <td>Not Toxic</td>
 <td>Not Toxic</td>
@@ -750,7 +753,7 @@ Wall time: 533 ms</code></pre>
 <td>1.273570</td>
 </tr>
 <tr class="even">
-<td data-quarto-table-cell-role="th">0</td>
+<th data-quarto-table-cell-role="th">0</th>
 <td>If I learned anything is those teachers are li...</td>
 <td>Not Toxic</td>
 <td>Not Toxic</td>
@@ -759,7 +762,7 @@ Wall time: 533 ms</code></pre>
 <td>0.197692</td>
 </tr>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">0</td>
+<th data-quarto-table-cell-role="th">0</th>
 <td>Save them babies from their murderous mothers</td>
 <td>Toxic</td>
 <td>Toxic</td>
@@ -768,7 +771,7 @@ Wall time: 533 ms</code></pre>
 <td>2.644358</td>
 </tr>
 <tr class="even">
-<td data-quarto-table-cell-role="th">0</td>
+<th data-quarto-table-cell-role="th">0</th>
 <td>FOCH DemoCraps!!! "LET'S GO BRANDON"</td>
 <td>Toxic</td>
 <td>Toxic</td>
@@ -777,7 +780,7 @@ Wall time: 533 ms</code></pre>
 <td>0.234662</td>
 </tr>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">0</td>
+<th data-quarto-table-cell-role="th">0</th>
 <td>If you build ap with lethal tempo on him you c...</td>
 <td>Not Toxic</td>
 <td>Not Toxic</td>
@@ -796,15 +799,15 @@ Wall time: 533 ms</code></pre>
 <h1>Cleanup</h1>
 <p>Cleanup is optional if you want to execute subsequent notebooks.</p>
 <div id="cell-36" class="cell">
-<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Delete the Comprehend Endpoint</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Delete the Comprehend Endpoint</span></span>
 <span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>resp <span class="op">=</span> comprehend.delete_endpoint(EndpointArn<span class="op">=</span>ENDPOINT_ARN)</span>
-<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>display(resp)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>display(resp)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>You will need to wait a few minutes to run the below cell until the Comprehend endpoint is deleted successfully and the classifier is no longer in use.</p>
 <div id="cell-38" class="cell">
-<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Delete the Comprehend Custom Classifier </span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Delete the Comprehend Custom Classifier </span></span>
 <span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>resp <span class="op">=</span> comprehend.delete_document_classifier(DocumentClassifierArn<span class="op">=</span>document_classifier_arn)</span>
-<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>display(resp)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>display(resp)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 <section id="conclusion" class="level1">
@@ -866,13 +869,14 @@ Wall time: 533 ms</code></pre>
       e.clearSelection();
     }
     const getTextToCopy = function(trigger) {
-        const codeEl = trigger.previousElementSibling.cloneNode(true);
-        for (const childEl of codeEl.children) {
-          if (isCodeAnnotation(childEl)) {
-            childEl.remove();
-          }
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
         }
-        return codeEl.innerText;
+      }
+      return codeEl.innerText;
     }
     const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
       text: getTextToCopy
