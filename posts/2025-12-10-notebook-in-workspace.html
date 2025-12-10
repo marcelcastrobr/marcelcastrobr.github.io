@@ -9,7 +9,7 @@
 <meta name="dcterms.date" content="2025-12-10">
 <meta name="description" content="Running Snowflake Notebooks in Workspaces.">
 
-<title>Best practice on Snowflake Notebooks in Workspaces – Marcel Castro</title>
+<title>Best Practices for Snowflake Notebooks in Workspaces – Marcel Castro</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -195,7 +195,7 @@ gtag('config', 'G-RK1QNXR9TB', { 'anonymize_ip': true});
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
-      <h1 class="title">Best practice on Snowflake Notebooks in Workspaces</h1>
+      <h1 class="title">Best Practices for Snowflake Notebooks in Workspaces</h1>
                   <div>
         <div class="description">
           Running Snowflake Notebooks in Workspaces.
@@ -232,18 +232,18 @@ gtag('config', 'G-RK1QNXR9TB', { 'anonymize_ip': true});
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#best-practice-on-snowflake-notebooks-in-workspaces" id="toc-best-practice-on-snowflake-notebooks-in-workspaces" class="nav-link active" data-scroll-target="#best-practice-on-snowflake-notebooks-in-workspaces">Best practice on Snowflake Notebooks in Workspaces</a>
+  <li><a href="#best-practices-for-snowflake-notebooks-in-workspaces" id="toc-best-practices-for-snowflake-notebooks-in-workspaces" class="nav-link active" data-scroll-target="#best-practices-for-snowflake-notebooks-in-workspaces">Best Practices for Snowflake Notebooks in Workspaces</a>
   <ul class="collapse">
   <li><a href="#compute-pool-concept" id="toc-compute-pool-concept" class="nav-link" data-scroll-target="#compute-pool-concept">Compute Pool: Concept</a></li>
   <li><a href="#services-concept" id="toc-services-concept" class="nav-link" data-scroll-target="#services-concept">Services: Concept</a>
   <ul class="collapse">
   <li><a href="#scenarios-for-using-snowpark-container-services" id="toc-scenarios-for-using-snowpark-container-services" class="nav-link" data-scroll-target="#scenarios-for-using-snowpark-container-services">Scenarios for using Snowpark Container Services</a></li>
   </ul></li>
-  <li><a href="#snowflake-notebook-in-warehouse-using-services-how-it-works" id="toc-snowflake-notebook-in-warehouse-using-services-how-it-works" class="nav-link" data-scroll-target="#snowflake-notebook-in-warehouse-using-services-how-it-works">Snowflake Notebook in Warehouse using Services: How it works</a>
+  <li><a href="#snowflake-notebooks-in-workspaces-using-services-how-it-works" id="toc-snowflake-notebooks-in-workspaces-using-services-how-it-works" class="nav-link" data-scroll-target="#snowflake-notebooks-in-workspaces-using-services-how-it-works">Snowflake Notebooks in Workspaces using Services: How it works</a>
   <ul class="collapse">
   <li><a href="#key-things-to-consider" id="toc-key-things-to-consider" class="nav-link" data-scroll-target="#key-things-to-consider">Key things to consider:</a></li>
   </ul></li>
-  <li><a href="#managing-snowflake-notebooks-on-warehouse" id="toc-managing-snowflake-notebooks-on-warehouse" class="nav-link" data-scroll-target="#managing-snowflake-notebooks-on-warehouse">Managing Snowflake Notebooks on Warehouse</a>
+  <li><a href="#managing-snowflake-notebooks-in-workspaces" id="toc-managing-snowflake-notebooks-in-workspaces" class="nav-link" data-scroll-target="#managing-snowflake-notebooks-in-workspaces">Managing Snowflake Notebooks in Workspaces</a>
   <ul class="collapse">
   <li><a href="#cost-aspects" id="toc-cost-aspects" class="nav-link" data-scroll-target="#cost-aspects">Cost Aspects</a></li>
   </ul></li>
@@ -258,11 +258,17 @@ gtag('config', 'G-RK1QNXR9TB', { 'anonymize_ip': true});
 
 
 
-<section id="best-practice-on-snowflake-notebooks-in-workspaces" class="level1">
-<h1>Best practice on Snowflake Notebooks in Workspaces</h1>
-<p>DISCLAIMER: Snowflake Notebooks in Workspaces is in PrPr (Private Preview) while writing this notebook on 20251210. So you might expect some changes as service is develop further and become PuPr (Public Preview) and GA (General Available).</p>
+<section id="best-practices-for-snowflake-notebooks-in-workspaces" class="level1">
+<h1>Best Practices for Snowflake Notebooks in Workspaces</h1>
+<p>DISCLAIMER: Snowflake Notebooks in Workspaces was in PrPr (Private Preview) at the time of writing this notebook (December 10, 2025). So you might expect some changes as the service is developed further and becomes PuPr (Public Preview) and GA (Generally Available).</p>
 <p>Snowflake Notebook is a fully-managed Jupyter-powered notebook built for end-to-end DS and ML development on Snowflake data. This includes: - Familiar Jupyter experience - Get the full power of a Jupyter Python notebook environment, directly connected to the governed Snowflake data. - Full IDE features: Easy editing and file management for maximum productivity. - Powerful for AI/ML: Runs in a pre-built container environment optimized for scalable AI/ML development with fully-managed access to CPUs and GPUs, parallel data loading, distributed training APIs for popular ML packages (e.g.&nbsp;xgboost, pytorch, lightGBM). - Governed collaboration: Enable multiple users to collaborate simultaneously with built-in governance and a complete history of changes via Git or shared workspaces.</p>
-<p>In Snowflake, a notebook consumes compute resources through its configured virtual warehouses or compute pools. In this blog we are focusing on Snowflake Notebooks in Workspaces which run on Snowpark Container Services (SPCS) and a <a href="https://docs.snowflake.com/en/developer-guide/snowpark-container-services/working-with-compute-pool">computer pool</a> is required.</p>
+<p>In Snowflake, a notebook consumes compute resources through its configured virtual warehouses or compute pools. In this blog we are focusing on Snowflake Notebooks in Workspaces which run on Snowpark Container Services (SPCS) and a <a href="https://docs.snowflake.com/en/developer-guide/snowpark-container-services/working-with-compute-pool">compute pool</a> is required.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://docs.snowflake.com/en/_images/spcs-service.png" class="img-fluid figure-img"></p>
+<figcaption>SPCS Service Architecture</figcaption>
+</figure>
+</div>
 <p>References: - <a href="https://docs.snowflake.com/en/user-guide/ui-snowsight/notebooks-usage#cost-monitoring-on-container-runtime">Notebook usage and cost monitoring</a></p>
 <section id="compute-pool-concept" class="level2">
 <h2 class="anchored" data-anchor-id="compute-pool-concept">Compute Pool: Concept</h2>
@@ -274,10 +280,10 @@ gtag('config', 'G-RK1QNXR9TB', { 'anonymize_ip': true});
 <li>The maximum number of nodes the compute pool can scale to (Snowflake manages the scaling.)</li>
 </ul>
 <p>By default, all workloads can run on a compute pool, such as: - user-deployed: <strong>services</strong> and jobs - workloads managed by Snowflake: notebooks, model serving, and ML jobs.</p>
-<p>You can control which workloads run on those computer pools by using account-level parameters: Check ALLOWED_SPCS_WORKLOAD_TYPES and DISALLOWED_SPCS_WORKLOAD_TYPES to manage the workloads that can run on a compute pool.</p>
-<p>Snowflake use the placement group concept for fault isolation within Snowflake region. Chech <a href="https://docs.snowflake.com/en/developer-guide/snowpark-container-services/working-with-compute-pool#compute-pool-placement">Computer Pool Placement</a> for more information in special in cases where you would like to have low latency between nodes for tighly coupled services.</p>
-<p>Other important things to consider: - <a href="https://docs.snowflake.com/en/developer-guide/snowpark-container-services/working-with-compute-pool#compute-pool-privileges">computer pool priviledges</a> - <a href="https://docs.snowflake.com/en/developer-guide/snowpark-container-services/working-with-compute-pool#compute-pool-maintenance">computer pool maintenance</a>: In general, scheduled maintenance occurs every Saturday from 8 PM to Sunday at 8 AM, and every Sunday from 8 PM to Monday at 8 AM</p>
-<div id="show_computepools" class="cell" data-resultvariablename="dataframe_7" title="show_computepools">
+<p>You can control which workloads run on those compute pools by using account-level parameters: Check ALLOWED_SPCS_WORKLOAD_TYPES and DISALLOWED_SPCS_WORKLOAD_TYPES to manage the workloads that can run on a compute pool.</p>
+<p>Snowflake uses the placement group concept for fault isolation within Snowflake region. Check <a href="https://docs.snowflake.com/en/developer-guide/snowpark-container-services/working-with-compute-pool#compute-pool-placement">Compute Pool Placement</a> for more information, especially in cases where you would like to have low latency between nodes for tightly coupled services.</p>
+<p>Other important things to consider: - <a href="https://docs.snowflake.com/en/developer-guide/snowpark-container-services/working-with-compute-pool#compute-pool-privileges">compute pool privileges</a> - <a href="https://docs.snowflake.com/en/developer-guide/snowpark-container-services/working-with-compute-pool#compute-pool-maintenance">compute pool maintenance</a>: In general, scheduled maintenance occurs every Saturday from 8 PM to Sunday at 8 AM, and every Sunday from 8 PM to Monday at 8 AM</p>
+<div id="show_computepools" class="cell" data-resultvariablename="dataframe_7" title="show_computepools" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">--SHOW COMPUTE POOLS;</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>SHOW <span class="kw">COMPUTE</span> POOLS;</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> </span>
@@ -287,6 +293,15 @@ gtag('config', 'G-RK1QNXR9TB', { 'anonymize_ip': true});
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> <span class="kw">TABLE</span>(RESULT_SCAN(LAST_QUERY_ID()))</span>
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="kw">GROUP</span> <span class="kw">BY</span> <span class="ot">"state"</span>, <span class="ot">"instance_family"</span></span>
 <span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="kw">ORDER</span> <span class="kw">BY</span> <span class="ot">"state"</span>, number_of_pools <span class="kw">DESC</span>;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-error">
+<div class="ansi-escaped-output">
+<pre><span class="ansi-cyan-fg">  Cell </span><span class="ansi-green-fg">In[1], line 1</span>
+<span class="ansi-red-fg">    --SHOW COMPUTE POOLS;</span>
+           ^
+<span class="ansi-red-fg">SyntaxError</span><span class="ansi-red-fg">:</span> invalid syntax
+</pre>
+</div>
+</div>
 </div>
 </section>
 <section id="services-concept" class="level2">
@@ -294,17 +309,11 @@ gtag('config', 'G-RK1QNXR9TB', { 'anonymize_ip': true});
 <p>Snowpark Container Services lets you more easily deploy, manage, and scale containerized applications. After you create an application and upload the application image to a repository in your Snowflake account, you can run your application containers as a service.</p>
 <p>A <strong>service</strong> represents Snowflake running your containerized application on a compute pool, which is a collection of virtual machine (VM) nodes.</p>
 <p>There are two types of services: - Long-running services. A long-running service is like a web service that does not end automatically. After you create a service, Snowflake manages the running service. For example, if a service container stops, for whatever reason, Snowflake restarts that container so the service runs uninterrupted. (e.g.&nbsp;<a href="https://docs.snowflake.com/en/sql-reference/sql/create-service">CREATE SERVICE</a> command) - Job services. A job service terminates when your code exits, similar to a stored procedure. When all containers exit, the job service is done. (e.g.&nbsp;<a href="https://docs.snowflake.com/en/sql-reference/sql/execute-job-service">EXECUTE JOB SERVICE</a> command)</p>
-<p>See picture below for an ilustration, or in <a href="https://docs.snowflake.com/en/developer-guide/snowpark-container-services/working-with-services">working with services</a> for detailed info.</p>
+<p>See picture below for an illustration, or in <a href="https://docs.snowflake.com/en/developer-guide/snowpark-container-services/working-with-services">working with services</a> for detailed info.</p>
 <p>Important things to note: - While Snowflake might distribute instances of a service across multiple compute pool nodes, all containers within a single service instance always run on the same compute pool node. - You can create services via SQL, Snowflake Python APIs, Snowflake Rest APIs and also Snowflake CLI. - Make use of network policies for network ingress and external access integration for network egress.</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="https://docs.snowflake.com/en/_images/spcs-service.png" class="img-fluid figure-img"></p>
-<figcaption>SPCS Service Architecture</figcaption>
-</figure>
-</div>
 <section id="scenarios-for-using-snowpark-container-services" class="level3">
 <h3 class="anchored" data-anchor-id="scenarios-for-using-snowpark-container-services">Scenarios for using Snowpark Container Services</h3>
-<p>Common workload are: - Batch Data Processing Jobs: Jobs like stored procedures across multiple job instances, and graphics processing unit (GPU) for computationally intensive tasks like AI and machine learning.</p>
+<p>Common workloads are: - Batch Data Processing Jobs: Jobs like stored procedures across multiple job instances, and graphics processing unit (GPU) for computationally intensive tasks like AI and machine learning.</p>
 <ul>
 <li><p>Service Functions: See an example <a href="https://docs.snowflake.com/en/developer-guide/snowpark-container-services/tutorials/tutorial-1">here</a>.</p></li>
 <li><p>APIs or Web UI Over Snowflake Data: Deploy services that expose APIs or web interfaces with embedded business logic. Users interact with the service rather than raw data.</p></li>
@@ -312,16 +321,16 @@ gtag('config', 'G-RK1QNXR9TB', { 'anonymize_ip': true});
 <p>Check also some <a href="https://docs.snowflake.com/en/developer-guide/snowpark-container-services/additional-considerations-services-jobs">additional considerations for services</a>.</p>
 </section>
 </section>
-<section id="snowflake-notebook-in-warehouse-using-services-how-it-works" class="level2">
-<h2 class="anchored" data-anchor-id="snowflake-notebook-in-warehouse-using-services-how-it-works">Snowflake Notebook in Warehouse using Services: How it works</h2>
-<p>Once the first notebook gets connected to a service on the computer pool, other notebooks can hook onto the same service instantly. Each service occupies one compute pool node. The notebooks on the same service will share the compute resource on the compute pool node. Here, each notebook still maintains its own virtual environment.</p>
+<section id="snowflake-notebooks-in-workspaces-using-services-how-it-works" class="level2">
+<h2 class="anchored" data-anchor-id="snowflake-notebooks-in-workspaces-using-services-how-it-works">Snowflake Notebooks in Workspaces using Services: How it works</h2>
+<p>Once the first notebook gets connected to a service on the compute pool, other notebooks can hook onto the same service instantly. Each service occupies one compute pool node. The notebooks on the same service will share the compute resource on the compute pool node. Here, each notebook still maintains its own virtual environment.</p>
 <section id="key-things-to-consider" class="level3">
 <h3 class="anchored" data-anchor-id="key-things-to-consider">Key things to consider:</h3>
 <ul>
 <li><strong>Idle time</strong>: the Idle time is set on the container service. For example, if it is set to 4 hours, the container service automatically shuts down if all notebooks connected to it have stopped running for 4 hours.</li>
 <li><strong>external access integration - EAI</strong>: EAIs are managed on the container service which applies to all notebooks in the same Workspace.</li>
-<li><strong>%lsmagic</strong>: <code>%lsmagic</code>. is supported.</li>
-<li><strong>requirements.txt</strong>: Specify package versions and ensure consistent environment setup by using <code>!pip install -r requirements.txt</code> Check versions <a href="https://docs.snowflake.com/en/developer-guide/snowflake-ml/container-runtime-ml#snowflake-runtime-cpu-packages">here</a> to make sure your package version specified is outside the supported version range.</li>
+<li><strong>%lsmagic</strong>: <code>%lsmagic</code> is supported.</li>
+<li><strong>requirements.txt</strong>: Specify package versions and ensure consistent environment setup by using <code>!pip install -r requirements.txt</code> Check versions <a href="https://docs.snowflake.com/en/developer-guide/snowflake-ml/container-runtime-ml#snowflake-runtime-cpu-packages">here</a> to make sure your package version specified is compatible with the supported version range.</li>
 <li>You can upload your wheel file by: <code>!pip install file_name.whl</code></li>
 </ul>
 <section id="nice-to-know" class="level4">
@@ -331,7 +340,7 @@ gtag('config', 'G-RK1QNXR9TB', { 'anonymize_ip': true});
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> sys</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>session <span class="op">=</span> Session.builder.getOrCreate()</span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>session.<span class="bu">file</span>.get(<span class="st">"@stage_name/math_tools.py"</span>,<span class="st">"/tmp/"</span>)</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>sys.path.append(<span class="st">"tmp/"</span>)</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>sys.path.append(<span class="st">"/tmp/"</span>)</span>
 <span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> math_tools</span>
 <span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>math_tools.add_one(<span class="dv">3</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
@@ -348,9 +357,9 @@ gtag('config', 'G-RK1QNXR9TB', { 'anonymize_ip': true});
 </section>
 </section>
 </section>
-<section id="managing-snowflake-notebooks-on-warehouse" class="level2">
-<h2 class="anchored" data-anchor-id="managing-snowflake-notebooks-on-warehouse">Managing Snowflake Notebooks on Warehouse</h2>
-<p>Below you see some cosideration to take while using Snowflake Notebooks on Warehouse, which include cost and monitoring capability.</p>
+<section id="managing-snowflake-notebooks-in-workspaces" class="level2">
+<h2 class="anchored" data-anchor-id="managing-snowflake-notebooks-in-workspaces">Managing Snowflake Notebooks in Workspaces</h2>
+<p>Below you see some considerations to take while using Snowflake Notebooks in Workspaces, which include cost and monitoring capability.</p>
 <section id="cost-aspects" class="level3">
 <h3 class="anchored" data-anchor-id="cost-aspects">Cost Aspects</h3>
 <p>A notebook consumes compute resources through its configured virtual warehouses or compute pools. To manage costs and ensure efficient operations, it’s important to monitor usage across individual notebooks, users, and the underlying compute infrastructure. This visibility helps ensure efficient operations and supports cost accountability throughout your environment.</p>
