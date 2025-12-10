@@ -7,9 +7,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="dcterms.date" content="2025-12-10">
-<meta name="description" content="Running Snowflake Notebooks in Workspaces.">
+<meta name="description" content="Running Snowflake Notebooks in Workspace.">
 
-<title>Best Practices for Snowflake Notebooks in Workspaces – Marcel Castro</title>
+<title>Best Practices for Snowflake Notebooks in Workspace – Marcel Castro</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -195,10 +195,10 @@ gtag('config', 'G-RK1QNXR9TB', { 'anonymize_ip': true});
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
-      <h1 class="title">Best Practices for Snowflake Notebooks in Workspaces</h1>
+      <h1 class="title">Best Practices for Snowflake Notebooks in Workspace</h1>
                   <div>
         <div class="description">
-          Running Snowflake Notebooks in Workspaces.
+          Running Snowflake Notebooks in Workspace.
         </div>
       </div>
                           <div class="quarto-categories">
@@ -232,18 +232,18 @@ gtag('config', 'G-RK1QNXR9TB', { 'anonymize_ip': true});
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#best-practices-for-snowflake-notebooks-in-workspaces" id="toc-best-practices-for-snowflake-notebooks-in-workspaces" class="nav-link active" data-scroll-target="#best-practices-for-snowflake-notebooks-in-workspaces">Best Practices for Snowflake Notebooks in Workspaces</a>
+  <li><a href="#best-practices-for-snowflake-notebooks-in-workspace" id="toc-best-practices-for-snowflake-notebooks-in-workspace" class="nav-link active" data-scroll-target="#best-practices-for-snowflake-notebooks-in-workspace">Best Practices for Snowflake Notebooks in Workspace</a>
   <ul class="collapse">
   <li><a href="#compute-pool-concept" id="toc-compute-pool-concept" class="nav-link" data-scroll-target="#compute-pool-concept">Compute Pool: Concept</a></li>
   <li><a href="#services-concept" id="toc-services-concept" class="nav-link" data-scroll-target="#services-concept">Services: Concept</a>
   <ul class="collapse">
   <li><a href="#scenarios-for-using-snowpark-container-services" id="toc-scenarios-for-using-snowpark-container-services" class="nav-link" data-scroll-target="#scenarios-for-using-snowpark-container-services">Scenarios for using Snowpark Container Services</a></li>
   </ul></li>
-  <li><a href="#snowflake-notebooks-in-workspaces-using-services-how-it-works" id="toc-snowflake-notebooks-in-workspaces-using-services-how-it-works" class="nav-link" data-scroll-target="#snowflake-notebooks-in-workspaces-using-services-how-it-works">Snowflake Notebooks in Workspaces using Services: How it works</a>
+  <li><a href="#snowflake-notebooks-in-workspace-using-services-how-it-works" id="toc-snowflake-notebooks-in-workspace-using-services-how-it-works" class="nav-link" data-scroll-target="#snowflake-notebooks-in-workspace-using-services-how-it-works">Snowflake Notebooks in Workspace using Services: How it works</a>
   <ul class="collapse">
   <li><a href="#key-things-to-consider" id="toc-key-things-to-consider" class="nav-link" data-scroll-target="#key-things-to-consider">Key things to consider:</a></li>
   </ul></li>
-  <li><a href="#managing-snowflake-notebooks-in-workspaces" id="toc-managing-snowflake-notebooks-in-workspaces" class="nav-link" data-scroll-target="#managing-snowflake-notebooks-in-workspaces">Managing Snowflake Notebooks in Workspaces</a>
+  <li><a href="#managing-snowflake-notebooks-in-workspace" id="toc-managing-snowflake-notebooks-in-workspace" class="nav-link" data-scroll-target="#managing-snowflake-notebooks-in-workspace">Managing Snowflake Notebooks in Workspace</a>
   <ul class="collapse">
   <li><a href="#cost-aspects" id="toc-cost-aspects" class="nav-link" data-scroll-target="#cost-aspects">Cost Aspects</a></li>
   </ul></li>
@@ -258,14 +258,14 @@ gtag('config', 'G-RK1QNXR9TB', { 'anonymize_ip': true});
 
 
 
-<section id="best-practices-for-snowflake-notebooks-in-workspaces" class="level1">
-<h1>Best Practices for Snowflake Notebooks in Workspaces</h1>
-<p>DISCLAIMER: Snowflake Notebooks in Workspaces was in PrPr (Private Preview) at the time of writing this notebook (December 10, 2025). So you might expect some changes as the service is developed further and becomes PuPr (Public Preview) and GA (Generally Available).</p>
+<section id="best-practices-for-snowflake-notebooks-in-workspace" class="level1">
+<h1>Best Practices for Snowflake Notebooks in Workspace</h1>
+<p>DISCLAIMER: Snowflake Notebooks in Workspace was in PrPr (Private Preview) at the time of writing this notebook (December 10, 2025). So you might expect some changes as the service is developed further and becomes PuPr (Public Preview) and GA (Generally Available).</p>
 <p>Snowflake Notebook is a fully-managed Jupyter-powered notebook built for end-to-end DS and ML development on Snowflake data. This includes: - Familiar Jupyter experience - Get the full power of a Jupyter Python notebook environment, directly connected to the governed Snowflake data. - Full IDE features: Easy editing and file management for maximum productivity. - Powerful for AI/ML: Runs in a pre-built container environment optimized for scalable AI/ML development with fully-managed access to CPUs and GPUs, parallel data loading, distributed training APIs for popular ML packages (e.g.&nbsp;xgboost, pytorch, lightGBM). - Governed collaboration: Enable multiple users to collaborate simultaneously with built-in governance and a complete history of changes via Git or shared workspaces.</p>
-<p>In Snowflake, a notebook consumes compute resources through its configured virtual warehouses or compute pools. In this blog we are focusing on Snowflake Notebooks in Workspaces which run on Snowpark Container Services (SPCS) and a <a href="https://docs.snowflake.com/en/developer-guide/snowpark-container-services/working-with-compute-pool">compute pool</a> is required.</p>
+<p>In Snowflake, a notebook consumes compute resources through its configured virtual warehouses or compute pools. In this blog we are focusing on Snowflake Notebooks in Workspace which run on Snowpark Container Services (SPCS) and a <a href="https://docs.snowflake.com/en/developer-guide/snowpark-container-services/working-with-compute-pool">compute pool</a> is required.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://docs.snowflake.com/en/_images/spcs-service.png" class="img-fluid figure-img"></p>
+<p><img src="./images/spcs-service.png" class="img-fluid figure-img"></p>
 <figcaption>SPCS Service Architecture</figcaption>
 </figure>
 </div>
@@ -321,8 +321,8 @@ gtag('config', 'G-RK1QNXR9TB', { 'anonymize_ip': true});
 <p>Check also some <a href="https://docs.snowflake.com/en/developer-guide/snowpark-container-services/additional-considerations-services-jobs">additional considerations for services</a>.</p>
 </section>
 </section>
-<section id="snowflake-notebooks-in-workspaces-using-services-how-it-works" class="level2">
-<h2 class="anchored" data-anchor-id="snowflake-notebooks-in-workspaces-using-services-how-it-works">Snowflake Notebooks in Workspaces using Services: How it works</h2>
+<section id="snowflake-notebooks-in-workspace-using-services-how-it-works" class="level2">
+<h2 class="anchored" data-anchor-id="snowflake-notebooks-in-workspace-using-services-how-it-works">Snowflake Notebooks in Workspace using Services: How it works</h2>
 <p>Once the first notebook gets connected to a service on the compute pool, other notebooks can hook onto the same service instantly. Each service occupies one compute pool node. The notebooks on the same service will share the compute resource on the compute pool node. Here, each notebook still maintains its own virtual environment.</p>
 <section id="key-things-to-consider" class="level3">
 <h3 class="anchored" data-anchor-id="key-things-to-consider">Key things to consider:</h3>
@@ -357,9 +357,9 @@ gtag('config', 'G-RK1QNXR9TB', { 'anonymize_ip': true});
 </section>
 </section>
 </section>
-<section id="managing-snowflake-notebooks-in-workspaces" class="level2">
-<h2 class="anchored" data-anchor-id="managing-snowflake-notebooks-in-workspaces">Managing Snowflake Notebooks in Workspaces</h2>
-<p>Below you see some considerations to take while using Snowflake Notebooks in Workspaces, which include cost and monitoring capability.</p>
+<section id="managing-snowflake-notebooks-in-workspace" class="level2">
+<h2 class="anchored" data-anchor-id="managing-snowflake-notebooks-in-workspace">Managing Snowflake Notebooks in Workspace</h2>
+<p>Below you see some considerations to take while using Snowflake Notebooks in Workspace, which include cost and monitoring capability.</p>
 <section id="cost-aspects" class="level3">
 <h3 class="anchored" data-anchor-id="cost-aspects">Cost Aspects</h3>
 <p>A notebook consumes compute resources through its configured virtual warehouses or compute pools. To manage costs and ensure efficient operations, it’s important to monitor usage across individual notebooks, users, and the underlying compute infrastructure. This visibility helps ensure efficient operations and supports cost accountability throughout your environment.</p>
