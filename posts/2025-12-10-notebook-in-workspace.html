@@ -9,7 +9,7 @@
 <meta name="dcterms.date" content="2025-12-10">
 <meta name="description" content="Running Snowflake Notebooks in Workspace.">
 
-<title>Best Practices for Snowflake Notebooks in Workspace – Marcel Castro</title>
+<title>Snowflake Notebooks in Workspace – Marcel Castro</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -195,7 +195,7 @@ gtag('config', 'G-RK1QNXR9TB', { 'anonymize_ip': true});
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
-      <h1 class="title">Best Practices for Snowflake Notebooks in Workspace</h1>
+      <h1 class="title">Snowflake Notebooks in Workspace</h1>
                   <div>
         <div class="description">
           Running Snowflake Notebooks in Workspace.
@@ -220,6 +220,12 @@ gtag('config', 'G-RK1QNXR9TB', { 'anonymize_ip': true});
       </div>
     </div>
     
+      <div>
+      <div class="quarto-title-meta-heading">Modified</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date-modified">December 18, 2025</p>
+      </div>
+    </div>
       
     </div>
     
@@ -232,21 +238,22 @@ gtag('config', 'G-RK1QNXR9TB', { 'anonymize_ip': true});
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#best-practices-for-snowflake-notebooks-in-workspace" id="toc-best-practices-for-snowflake-notebooks-in-workspace" class="nav-link active" data-scroll-target="#best-practices-for-snowflake-notebooks-in-workspace">Best Practices for Snowflake Notebooks in Workspace</a>
+  <li><a href="#snowflake-notebooks-in-workspace" id="toc-snowflake-notebooks-in-workspace" class="nav-link active" data-scroll-target="#snowflake-notebooks-in-workspace">Snowflake Notebooks in Workspace</a>
   <ul class="collapse">
-  <li><a href="#compute-pool-concept" id="toc-compute-pool-concept" class="nav-link" data-scroll-target="#compute-pool-concept">Compute Pool: Concept</a></li>
-  <li><a href="#services-concept" id="toc-services-concept" class="nav-link" data-scroll-target="#services-concept">Services: Concept</a>
+  <li><a href="#deep-dive-workspace-service-and-compute-pool" id="toc-deep-dive-workspace-service-and-compute-pool" class="nav-link" data-scroll-target="#deep-dive-workspace-service-and-compute-pool">Deep dive: Workspace, Service and Compute Pool</a>
   <ul class="collapse">
-  <li><a href="#scenarios-for-using-snowpark-container-services" id="toc-scenarios-for-using-snowpark-container-services" class="nav-link" data-scroll-target="#scenarios-for-using-snowpark-container-services">Scenarios for using Snowpark Container Services</a></li>
-  </ul></li>
-  <li><a href="#snowflake-notebooks-in-workspace-using-services-how-it-works" id="toc-snowflake-notebooks-in-workspace-using-services-how-it-works" class="nav-link" data-scroll-target="#snowflake-notebooks-in-workspace-using-services-how-it-works">Snowflake Notebooks in Workspace using Services: How it works</a>
-  <ul class="collapse">
-  <li><a href="#key-things-to-consider" id="toc-key-things-to-consider" class="nav-link" data-scroll-target="#key-things-to-consider">Key things to consider:</a></li>
+  <li><a href="#how-it-works" id="toc-how-it-works" class="nav-link" data-scroll-target="#how-it-works">How it works</a></li>
   </ul></li>
   <li><a href="#managing-snowflake-notebooks-in-workspace" id="toc-managing-snowflake-notebooks-in-workspace" class="nav-link" data-scroll-target="#managing-snowflake-notebooks-in-workspace">Managing Snowflake Notebooks in Workspace</a>
   <ul class="collapse">
   <li><a href="#cost-aspects" id="toc-cost-aspects" class="nav-link" data-scroll-target="#cost-aspects">Cost Aspects</a></li>
   </ul></li>
+  <li><a href="#compute-pool-concept" id="toc-compute-pool-concept" class="nav-link" data-scroll-target="#compute-pool-concept">Compute Pool Concept</a></li>
+  <li><a href="#services-concept" id="toc-services-concept" class="nav-link" data-scroll-target="#services-concept">Services Concept</a>
+  <ul class="collapse">
+  <li><a href="#scenarios-for-using-snowpark-container-services" id="toc-scenarios-for-using-snowpark-container-services" class="nav-link" data-scroll-target="#scenarios-for-using-snowpark-container-services">Scenarios for using Snowpark Container Services</a></li>
+  </ul></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references"><strong>References:</strong></a></li>
   </ul></li>
   </ul>
 </nav>
@@ -258,102 +265,70 @@ gtag('config', 'G-RK1QNXR9TB', { 'anonymize_ip': true});
 
 
 
-<section id="best-practices-for-snowflake-notebooks-in-workspace" class="level1">
-<h1>Best Practices for Snowflake Notebooks in Workspace</h1>
-<p>DISCLAIMER: Snowflake Notebooks in Workspace was in PrPr (Private Preview) at the time of writing this notebook (December 10, 2025). So you might expect some changes as the service is developed further and becomes PuPr (Public Preview) and GA (Generally Available).</p>
-<p>Snowflake Notebook is a fully-managed Jupyter-powered notebook built for end-to-end DS and ML development on Snowflake data. This includes: - Familiar Jupyter experience - Get the full power of a Jupyter Python notebook environment, directly connected to the governed Snowflake data. - Full IDE features: Easy editing and file management for maximum productivity. - Powerful for AI/ML: Runs in a pre-built container environment optimized for scalable AI/ML development with fully-managed access to CPUs and GPUs, parallel data loading, distributed training APIs for popular ML packages (e.g.&nbsp;xgboost, pytorch, lightGBM). - Governed collaboration: Enable multiple users to collaborate simultaneously with built-in governance and a complete history of changes via Git or shared workspaces.</p>
-<p>In Snowflake, a notebook consumes compute resources through its configured virtual warehouses or compute pools. In this blog we are focusing on Snowflake Notebooks in Workspace which run on Snowpark Container Services (SPCS) and a <a href="https://docs.snowflake.com/en/developer-guide/snowpark-container-services/working-with-compute-pool">compute pool</a> is required.</p>
+<section id="snowflake-notebooks-in-workspace" class="level1">
+<h1>Snowflake Notebooks in Workspace</h1>
+<p>DISCLAIMER: Snowflake Notebooks in Workspace is in <a href="https://docs.snowflake.com/en/release-notes/2025/other/2025-12-16-notebooks-in-workspaces">PuPr</a> (Public Preview) at the time of writing this notebook (December 18, 2025).</p>
+<p>Snowflake Notebook is a fully-managed Jupyter-powered notebook built for end-to-end data science and machine learning development on Snowflake data.</p>
+<p>This includes:</p>
+<ul>
+<li><p>Familiar Jupyter experience - Get the full power of a Jupyter Python notebook environment, directly connected to the governed Snowflake data.</p></li>
+<li><p>Full IDE features: Easy editing and file management for maximum productivity.</p></li>
+<li><p>Powerful for AI/ML: Runs in a pre-built container environment optimized for scalable AI/ML development with fully-managed access to CPUs and GPUs, parallel data loading, distributed training APIs for popular ML packages (e.g.&nbsp;xgboost, pytorch, lightGBM).</p></li>
+<li><p>Governed collaboration: Enable multiple users to collaborate simultaneously with built-in governance and a complete history of changes via Git or shared workspaces.</p></li>
+</ul>
+<p>In Snowflake, a notebook consumes compute resources through its configured virtual warehouses or compute pools.</p>
+<p>In this blog we are focusing on <strong>Snowflake Notebooks in Workspace on a compute pool</strong>.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="./images/spcs-service.png" class="img-fluid figure-img"></p>
+<p><img src="./images/notebook-workspaces1.png" class="img-fluid figure-img"></p>
+<figcaption>Snowflake Notebooks in Workspaces</figcaption>
+</figure>
+</div>
+<section id="deep-dive-workspace-service-and-compute-pool" class="level2">
+<h2 class="anchored" data-anchor-id="deep-dive-workspace-service-and-compute-pool">Deep dive: Workspace, Service and Compute Pool</h2>
+<p>Workspaces provides a unified editor for creating, organizing, and managing code across multiple file types that you can use to analyze data, develop models, and build pipelines.</p>
+<p>A workspace is private to you but can be <a href="https://docs.snowflake.com/en/user-guide/ui-snowsight/workspaces-shared">shared</a> in order to allow collaboration.</p>
+<p>Snowflake Notebooks in workspace run on <strong>Snowpark Container Services (SPCS)</strong> and a <a href="https://docs.snowflake.com/en/developer-guide/snowpark-container-services/working-with-compute-pool">compute pool</a> is required.</p>
+<p>When a user run a notebook, Snowflake creates a <strong>notebook service</strong> which host the notebook kernel. Upon creation of a notebook service, the users can configure python version, Snowflake container runtime version (e.g.&nbsp;with CPU or GPU), compute pool, idle timeout and external access integrations.</p>
+<p>As depicted in picture below, each notebook service is connected to a user and sits in a node on the selected compute pool. It is important to note that all notebooks connected to the same notebook service (e.g.&nbsp;SERVICE A in picture below) share the compute resources on that node.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="./images/notebook-compute-diagram1.png" class="img-fluid figure-img"></p>
 <figcaption>SPCS Service Architecture</figcaption>
 </figure>
 </div>
-<p>References: - <a href="https://docs.snowflake.com/en/user-guide/ui-snowsight/notebooks-usage#cost-monitoring-on-container-runtime">Notebook usage and cost monitoring</a></p>
-<section id="compute-pool-concept" class="level2">
-<h2 class="anchored" data-anchor-id="compute-pool-concept">Compute Pool: Concept</h2>
-<p>A compute pool is an account-level construct, analogous to a Snowflake virtual warehouse. The naming scope of the compute pool is your account. That is, you cannot have multiple compute pools with the same name in your account.</p>
-<p>The minimum information required to create a compute pool includes the following:</p>
+<section id="how-it-works" class="level3">
+<h3 class="anchored" data-anchor-id="how-it-works">How it works</h3>
+<p>Once the first notebook gets connected to a service on the compute pool, other notebooks can hook onto the same service instantly. Each service occupies one compute pool node.</p>
+<p>The notebooks on the same service will share the compute resource on the compute pool node. Here, each notebook still maintains its own virtual environment.</p>
+<section id="key-things-to-consider" class="level4">
+<h4 class="anchored" data-anchor-id="key-things-to-consider">Key things to consider:</h4>
 <ul>
-<li>The machine type (referred to as the instance family) to provision for the compute pool nodes</li>
-<li>The minimum nodes to launch the compute pool with</li>
-<li>The maximum number of nodes the compute pool can scale to (Snowflake manages the scaling.)</li>
+<li><p><strong>Idle time</strong>: the Idle time is set on the container service. For example, if it is set to 4 hours, the container service automatically shuts down if all notebooks connected to it have stopped running for 4 hours.</p></li>
+<li><p><strong>external access integration - EAI</strong>: EAIs are managed on the container service which applies to all notebooks in the same Workspace.</p></li>
+<li><p><strong>%lsmagic</strong>: <code>%lsmagic</code> is supported.</p></li>
+<li><p><strong>requirements.txt</strong>: Specify package versions and ensure consistent environment setup by using <code>!pip install -r requirements.txt</code> Check versions <a href="https://docs.snowflake.com/en/developer-guide/snowflake-ml/container-runtime-ml#snowflake-runtime-cpu-packages">here</a> to make sure your package version specified is compatible with the supported version range.</p></li>
+<li><p>You can upload your wheel file by: <code>!pip install file_name.whl</code></p></li>
 </ul>
-<p>By default, all workloads can run on a compute pool, such as: - user-deployed: <strong>services</strong> and jobs - workloads managed by Snowflake: notebooks, model serving, and ML jobs.</p>
-<p>You can control which workloads run on those compute pools by using account-level parameters: Check ALLOWED_SPCS_WORKLOAD_TYPES and DISALLOWED_SPCS_WORKLOAD_TYPES to manage the workloads that can run on a compute pool.</p>
-<p>Snowflake uses the placement group concept for fault isolation within Snowflake region. Check <a href="https://docs.snowflake.com/en/developer-guide/snowpark-container-services/working-with-compute-pool#compute-pool-placement">Compute Pool Placement</a> for more information, especially in cases where you would like to have low latency between nodes for tightly coupled services.</p>
-<p>Other important things to consider: - <a href="https://docs.snowflake.com/en/developer-guide/snowpark-container-services/working-with-compute-pool#compute-pool-privileges">compute pool privileges</a> - <a href="https://docs.snowflake.com/en/developer-guide/snowpark-container-services/working-with-compute-pool#compute-pool-maintenance">compute pool maintenance</a>: In general, scheduled maintenance occurs every Saturday from 8 PM to Sunday at 8 AM, and every Sunday from 8 PM to Monday at 8 AM</p>
-<div id="show_computepools" class="cell" data-resultvariablename="dataframe_7" title="show_computepools" data-execution_count="1">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">--SHOW COMPUTE POOLS;</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>SHOW <span class="kw">COMPUTE</span> POOLS;</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> </span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  <span class="ot">"instance_family"</span>,</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  <span class="ot">"state"</span>,</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">COUNT</span>(<span class="op">*</span>) <span class="kw">AS</span> number_of_pools</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> <span class="kw">TABLE</span>(RESULT_SCAN(LAST_QUERY_ID()))</span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="kw">GROUP</span> <span class="kw">BY</span> <span class="ot">"state"</span>, <span class="ot">"instance_family"</span></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="kw">ORDER</span> <span class="kw">BY</span> <span class="ot">"state"</span>, number_of_pools <span class="kw">DESC</span>;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-error">
-<div class="ansi-escaped-output">
-<pre><span class="ansi-cyan-fg">  Cell </span><span class="ansi-green-fg">In[1], line 1</span>
-<span class="ansi-red-fg">    --SHOW COMPUTE POOLS;</span>
-           ^
-<span class="ansi-red-fg">SyntaxError</span><span class="ansi-red-fg">:</span> invalid syntax
-</pre>
-</div>
-</div>
-</div>
 </section>
-<section id="services-concept" class="level2">
-<h2 class="anchored" data-anchor-id="services-concept">Services: Concept</h2>
-<p>Snowpark Container Services lets you more easily deploy, manage, and scale containerized applications. After you create an application and upload the application image to a repository in your Snowflake account, you can run your application containers as a service.</p>
-<p>A <strong>service</strong> represents Snowflake running your containerized application on a compute pool, which is a collection of virtual machine (VM) nodes.</p>
-<p>There are two types of services: - Long-running services. A long-running service is like a web service that does not end automatically. After you create a service, Snowflake manages the running service. For example, if a service container stops, for whatever reason, Snowflake restarts that container so the service runs uninterrupted. (e.g.&nbsp;<a href="https://docs.snowflake.com/en/sql-reference/sql/create-service">CREATE SERVICE</a> command) - Job services. A job service terminates when your code exits, similar to a stored procedure. When all containers exit, the job service is done. (e.g.&nbsp;<a href="https://docs.snowflake.com/en/sql-reference/sql/execute-job-service">EXECUTE JOB SERVICE</a> command)</p>
-<p>See picture below for an illustration, or in <a href="https://docs.snowflake.com/en/developer-guide/snowpark-container-services/working-with-services">working with services</a> for detailed info.</p>
-<p>Important things to note: - While Snowflake might distribute instances of a service across multiple compute pool nodes, all containers within a single service instance always run on the same compute pool node. - You can create services via SQL, Snowflake Python APIs, Snowflake Rest APIs and also Snowflake CLI. - Make use of network policies for network ingress and external access integration for network egress.</p>
-<section id="scenarios-for-using-snowpark-container-services" class="level3">
-<h3 class="anchored" data-anchor-id="scenarios-for-using-snowpark-container-services">Scenarios for using Snowpark Container Services</h3>
-<p>Common workloads are: - Batch Data Processing Jobs: Jobs like stored procedures across multiple job instances, and graphics processing unit (GPU) for computationally intensive tasks like AI and machine learning.</p>
-<ul>
-<li><p>Service Functions: See an example <a href="https://docs.snowflake.com/en/developer-guide/snowpark-container-services/tutorials/tutorial-1">here</a>.</p></li>
-<li><p>APIs or Web UI Over Snowflake Data: Deploy services that expose APIs or web interfaces with embedded business logic. Users interact with the service rather than raw data.</p></li>
-</ul>
-<p>Check also some <a href="https://docs.snowflake.com/en/developer-guide/snowpark-container-services/additional-considerations-services-jobs">additional considerations for services</a>.</p>
-</section>
-</section>
-<section id="snowflake-notebooks-in-workspace-using-services-how-it-works" class="level2">
-<h2 class="anchored" data-anchor-id="snowflake-notebooks-in-workspace-using-services-how-it-works">Snowflake Notebooks in Workspace using Services: How it works</h2>
-<p>Once the first notebook gets connected to a service on the compute pool, other notebooks can hook onto the same service instantly. Each service occupies one compute pool node. The notebooks on the same service will share the compute resource on the compute pool node. Here, each notebook still maintains its own virtual environment.</p>
-<section id="key-things-to-consider" class="level3">
-<h3 class="anchored" data-anchor-id="key-things-to-consider">Key things to consider:</h3>
-<ul>
-<li><strong>Idle time</strong>: the Idle time is set on the container service. For example, if it is set to 4 hours, the container service automatically shuts down if all notebooks connected to it have stopped running for 4 hours.</li>
-<li><strong>external access integration - EAI</strong>: EAIs are managed on the container service which applies to all notebooks in the same Workspace.</li>
-<li><strong>%lsmagic</strong>: <code>%lsmagic</code> is supported.</li>
-<li><strong>requirements.txt</strong>: Specify package versions and ensure consistent environment setup by using <code>!pip install -r requirements.txt</code> Check versions <a href="https://docs.snowflake.com/en/developer-guide/snowflake-ml/container-runtime-ml#snowflake-runtime-cpu-packages">here</a> to make sure your package version specified is compatible with the supported version range.</li>
-<li>You can upload your wheel file by: <code>!pip install file_name.whl</code></li>
-</ul>
 <section id="nice-to-know" class="level4">
 <h4 class="anchored" data-anchor-id="nice-to-know">Nice to know</h4>
 <p>You can import packages from stages, with:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> snowflake.snowpark <span class="im">import</span> Session</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> sys</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>session <span class="op">=</span> Session.builder.getOrCreate()</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>session.<span class="bu">file</span>.get(<span class="st">"@stage_name/math_tools.py"</span>,<span class="st">"/tmp/"</span>)</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>sys.path.append(<span class="st">"/tmp/"</span>)</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> math_tools</span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>math_tools.add_one(<span class="dv">3</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> snowflake.snowpark <span class="im">import</span> Session</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> sys</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>session <span class="op">=</span> Session.builder.getOrCreate()</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>session.<span class="bu">file</span>.get(<span class="st">"@stage_name/math_tools.py"</span>,<span class="st">"/tmp/"</span>)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>sys.path.append(<span class="st">"/tmp/"</span>)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> math_tools</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>math_tools.add_one(<span class="dv">3</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
-<section id="limitations-to-consider" class="level4">
-<h4 class="anchored" data-anchor-id="limitations-to-consider">Limitations to consider:</h4>
+<section id="limitations-to-consider-as-per-2025-12-18" class="level4">
+<h4 class="anchored" data-anchor-id="limitations-to-consider-as-per-2025-12-18">Limitations to consider (as per 2025-12-18):</h4>
 <ul>
-<li><code>plotly</code>, <code>altair</code>, and other visualization packages that rely on HTML rendering are not yet supported.</li>
-<li>Notebooks in different Workspaces cannot share the same service.</li>
-<li>Artifact Repo and Custom Images are in the roadmap.</li>
+<li><p><code>plotly</code>, <code>altair</code>, and other visualization packages that rely on HTML rendering are not yet supported.</p></li>
+<li><p>Notebooks in different Workspaces cannot share the same service.</p></li>
+<li><p>Artifact Repo and Custom Images are in the roadmap.</p></li>
 </ul>
-<div id="08ebd156-6a31-44d1-86b8-0d680ecb69eb" class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>lsmagic</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
 </section>
 </section>
 </section>
@@ -374,99 +349,144 @@ gtag('config', 'G-RK1QNXR9TB', { 'anonymize_ip': true});
 <p>For a broader overview of compute-related cost management, see <a href="https://docs.snowflake.com/en/user-guide/cost-exploring-compute">Exploring compute cost</a>.</p>
 <section id="query-cost-to-run-a-specific-notebook" class="level4">
 <h4 class="anchored" data-anchor-id="query-cost-to-run-a-specific-notebook">Query: Cost to run a specific notebook</h4>
-<div id="monitor_cost" class="cell" data-resultvariablename="dataframe_2" title="monitor_cost">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  notebook_name,</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">SUM</span>(credits) <span class="kw">AS</span> total_credits</span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> snowflake.account_usage.notebooks_container_runtime_history</span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="kw">WHERE</span> start_time <span class="op">&gt;=</span> DATEADD(<span class="dt">day</span>, <span class="op">-</span><span class="dv">30</span>, <span class="fu">CURRENT_TIMESTAMP</span>())</span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="kw">GROUP</span> <span class="kw">BY</span> notebook_name</span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="kw">ORDER</span> <span class="kw">BY</span> total_credits <span class="kw">DESC</span>;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="monitor_cost" class="cell" data-resultvariablename="dataframe_2" title="monitor_cost" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;sql&quot;}}">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  notebook_name,</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">SUM</span>(credits) <span class="kw">AS</span> total_credits</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> snowflake.account_usage.notebooks_container_runtime_history</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="kw">WHERE</span> start_time <span class="op">&gt;=</span> DATEADD(<span class="dt">day</span>, <span class="op">-</span><span class="dv">30</span>, <span class="fu">CURRENT_TIMESTAMP</span>())</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="kw">GROUP</span> <span class="kw">BY</span> notebook_name</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="kw">ORDER</span> <span class="kw">BY</span> total_credits <span class="kw">DESC</span>;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 <section id="query-total-compute-pool-cost-per-notebook" class="level4">
 <h4 class="anchored" data-anchor-id="query-total-compute-pool-cost-per-notebook">Query: Total compute pool cost per notebook</h4>
-<div id="11086c39-38ab-4009-a963-d7623f7ef201" class="cell" data-resultvariablename="dataframe_4">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  notebook_name,</span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  compute_pool_name,</span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">SUM</span>(credits) <span class="kw">AS</span> total_credits</span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> snowflake.account_usage.notebooks_container_runtime_history</span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="co">--WHERE compute_pool_name = '&lt;example_cp_name&gt;'</span></span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="kw">GROUP</span> <span class="kw">BY</span> notebook_name, compute_pool_name</span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="kw">ORDER</span> <span class="kw">BY</span> total_credits <span class="kw">DESC</span>;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="11086c39-38ab-4009-a963-d7623f7ef201" class="cell" data-resultvariablename="dataframe_4" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;sql&quot;}}">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  notebook_name,</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  compute_pool_name,</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">SUM</span>(credits) <span class="kw">AS</span> total_credits</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> snowflake.account_usage.notebooks_container_runtime_history</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="co">--WHERE compute_pool_name = '&lt;example_cp_name&gt;'</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="kw">GROUP</span> <span class="kw">BY</span> notebook_name, compute_pool_name</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="kw">ORDER</span> <span class="kw">BY</span> total_credits <span class="kw">DESC</span>;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 <section id="query-identify-users-who-ran-a-specific-notebook" class="level4">
 <h4 class="anchored" data-anchor-id="query-identify-users-who-ran-a-specific-notebook">Query: Identify users who ran a specific notebook</h4>
-<div id="user_notebook" class="cell" data-resultvariablename="dataframe_6" title="user_notebook">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">DISTINCT</span> user_name,</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">SUM</span>(credits) <span class="kw">AS</span> total_credits</span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> snowflake.account_usage.notebooks_container_runtime_history</span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="co">--WHERE notebook_name = '&lt;example_nb_name&gt;';</span></span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="kw">GROUP</span> <span class="kw">BY</span> user_name</span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="kw">ORDER</span> <span class="kw">BY</span> total_credits <span class="kw">DESC</span>;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-<div id="9d013156-0757-4c08-a755-a15b52aa837b" class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> snowflake.snowpark.context <span class="im">import</span> get_active_session</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> plotly.express <span class="im">as</span> px</span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>session <span class="op">=</span> get_active_session()</span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Query the data</span></span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>query <span class="op">=</span> <span class="st">"""</span></span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="st">SELECT</span></span>
-<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="st">  user_name,</span></span>
-<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a><span class="st">  SUM(credits) AS total_credits</span></span>
-<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a><span class="st">FROM snowflake.account_usage.notebooks_container_runtime_history</span></span>
-<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a><span class="st">GROUP BY user_name</span></span>
-<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a><span class="st">ORDER BY total_credits DESC</span></span>
-<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a><span class="st">"""</span></span>
-<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> session.sql(query).to_pandas()</span>
-<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Create bar chart</span></span>
-<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> px.bar(df, </span>
-<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a>             x<span class="op">=</span><span class="st">'USER_NAME'</span>, </span>
-<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a>             y<span class="op">=</span><span class="st">'TOTAL_CREDITS'</span>,</span>
-<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a>             title<span class="op">=</span><span class="st">'Total Credits by User'</span>,</span>
-<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a>             labels<span class="op">=</span>{<span class="st">'USER_NAME'</span>: <span class="st">'User'</span>, <span class="st">'TOTAL_CREDITS'</span>: <span class="st">'Total Credits'</span>})</span>
-<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-25"><a href="#cb7-25" aria-hidden="true" tabindex="-1"></a>fig.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="user_notebook" class="cell" data-resultvariablename="dataframe_6" title="user_notebook" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;sql&quot;}}">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">DISTINCT</span> user_name,</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">SUM</span>(credits) <span class="kw">AS</span> total_credits</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> snowflake.account_usage.notebooks_container_runtime_history</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="co">--WHERE notebook_name = '&lt;example_nb_name&gt;';</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="kw">GROUP</span> <span class="kw">BY</span> user_name</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="kw">ORDER</span> <span class="kw">BY</span> total_credits <span class="kw">DESC</span>;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div id="c2c277ea-0aca-4646-a262-a9b2045a41ce" class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> snowflake.snowpark.context <span class="im">import</span> get_active_session</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>session <span class="op">=</span> get_active_session()</span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Query the data</span></span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>query <span class="op">=</span> <span class="st">"""</span></span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="st">SELECT</span></span>
-<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a><span class="st">  user_name,</span></span>
-<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a><span class="st">  SUM(credits) AS total_credits</span></span>
-<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a><span class="st">FROM snowflake.account_usage.notebooks_container_runtime_history</span></span>
-<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a><span class="st">GROUP BY user_name</span></span>
-<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a><span class="st">ORDER BY total_credits DESC</span></span>
-<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a><span class="st">"""</span></span>
-<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> session.sql(query).to_pandas()</span>
-<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Create bar chart</span></span>
-<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">6</span>))</span>
-<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a>plt.bar(df[<span class="st">'USER_NAME'</span>], df[<span class="st">'TOTAL_CREDITS'</span>])</span>
-<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'User'</span>)</span>
-<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Total Credits'</span>)</span>
-<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Total Credits by User'</span>)</span>
-<span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a>plt.xticks(rotation<span class="op">=</span><span class="dv">45</span>, ha<span class="op">=</span><span class="st">'right'</span>)</span>
-<span id="cb8-25"><a href="#cb8-25" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
-<span id="cb8-26"><a href="#cb8-26" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> snowflake.snowpark.context <span class="im">import</span> get_active_session</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>session <span class="op">=</span> get_active_session()</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Query the data</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>query <span class="op">=</span> <span class="st">"""</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="st">SELECT</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="st">  user_name,</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="st">  SUM(credits) AS total_credits</span></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a><span class="st">FROM snowflake.account_usage.notebooks_container_runtime_history</span></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a><span class="st">GROUP BY user_name</span></span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a><span class="st">ORDER BY total_credits DESC</span></span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a><span class="st">"""</span></span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> session.sql(query).to_pandas()</span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Create bar chart</span></span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">6</span>))</span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a>plt.bar(df[<span class="st">'USER_NAME'</span>], df[<span class="st">'TOTAL_CREDITS'</span>])</span>
+<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'User'</span>)</span>
+<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Total Credits'</span>)</span>
+<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Total Credits by User'</span>)</span>
+<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a>plt.xticks(rotation<span class="op">=</span><span class="dv">45</span>, ha<span class="op">=</span><span class="st">'right'</span>)</span>
+<span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
+<span id="cb5-26"><a href="#cb5-26" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-
-
 </section>
 </section>
+</section>
+<section id="compute-pool-concept" class="level2">
+<h2 class="anchored" data-anchor-id="compute-pool-concept">Compute Pool Concept</h2>
+<p>A compute pool is an account-level construct, analogous to a Snowflake virtual warehouse. The naming scope of the compute pool is your account. That is, you cannot have multiple compute pools with the same name in your account.</p>
+<p>The minimum information required to create a compute pool includes the following:</p>
+<ul>
+<li>The machine type (referred to as the instance family) to provision for the compute pool nodes</li>
+<li>The minimum nodes to launch the compute pool with</li>
+<li>The maximum number of nodes the compute pool can scale to (Snowflake manages the scaling.)</li>
+</ul>
+<p>By default, all workloads can run on a compute pool, such as:</p>
+<ul>
+<li>user-deployed: <strong>services</strong> and jobs</li>
+<li>workloads managed by Snowflake: <strong>notebooks</strong>, model serving, and ML jobs.</li>
+</ul>
+<p>You can control which workloads run on those compute pools by using account-level parameters: Check ALLOWED_SPCS_WORKLOAD_TYPES and DISALLOWED_SPCS_WORKLOAD_TYPES to manage the workloads that can run on a compute pool.</p>
+<p>Snowflake uses the placement group concept for fault isolation within Snowflake region. Check <a href="https://docs.snowflake.com/en/developer-guide/snowpark-container-services/working-with-compute-pool#compute-pool-placement">Compute Pool Placement</a> for more information, especially in cases where you would like to have low latency between nodes for tightly coupled services.</p>
+<p>Other important things to consider:</p>
+<ul>
+<li><p><a href="https://docs.snowflake.com/en/developer-guide/snowpark-container-services/working-with-compute-pool#compute-pool-privileges">compute pool privileges</a></p></li>
+<li><p><a href="https://docs.snowflake.com/en/developer-guide/snowpark-container-services/working-with-compute-pool#compute-pool-maintenance">compute pool maintenance</a></p></li>
+</ul>
+<div id="1d7e34c8" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;sql&quot;}}">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="op">--</span>SHOW COMPUTE POOLS<span class="op">;</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>SHOW COMPUTE POOLS<span class="op">;</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>SELECT </span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  <span class="co">"instance_family"</span>,</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>  <span class="co">"state"</span>,</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>  COUNT(<span class="op">*</span>) AS number_of_pools</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>FROM TABLE(RESULT_SCAN(LAST_QUERY_ID()))</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>GROUP BY <span class="st">"state"</span>, <span class="st">"instance_family"</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>ORDER BY <span class="st">"state"</span>, number_of_pools DESC<span class="op">;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="services-concept" class="level2">
+<h2 class="anchored" data-anchor-id="services-concept">Services Concept</h2>
+<p>Snowpark Container Services lets you more easily deploy, manage, and scale containerized applications. After you create an application and upload the application image to a repository in your Snowflake account, you can run your application containers as a service.</p>
+<p>A <strong>service</strong> represents Snowflake running your containerized application on a compute pool, which is a collection of virtual machine (VM) nodes.</p>
+<p>There are two types of services: - Long-running services. A long-running service is like a web service that does not end automatically. After you create a service, Snowflake manages the running service. For example, if a service container stops, for whatever reason, Snowflake restarts that container so the service runs uninterrupted. (e.g.&nbsp;<a href="https://docs.snowflake.com/en/sql-reference/sql/create-service">CREATE SERVICE</a> command)</p>
+<ul>
+<li>Job services. A job service terminates when your code exits, similar to a stored procedure. When all containers exit, the job service is done. (e.g.&nbsp;<a href="https://docs.snowflake.com/en/sql-reference/sql/execute-job-service">EXECUTE JOB SERVICE</a> command)</li>
+</ul>
+<p>See picture below for an illustration, or in <a href="https://docs.snowflake.com/en/developer-guide/snowpark-container-services/working-with-services">working with services</a> for detailed info.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="./images/spcs-service.png" class="img-fluid figure-img"></p>
+<figcaption>SPCS Service Architecture</figcaption>
+</figure>
+</div>
+<p>Important things to note:</p>
+<ul>
+<li><p>While Snowflake might distribute instances of a service across multiple compute pool nodes, all containers within a single service instance always run on the same compute pool node.</p></li>
+<li><p>You can create services via SQL, Snowflake Python APIs, Snowflake Rest APIs and also Snowflake CLI.</p></li>
+<li><p>Make use of network policies for network ingress and external access integration for network egress.</p></li>
+</ul>
+<section id="scenarios-for-using-snowpark-container-services" class="level3">
+<h3 class="anchored" data-anchor-id="scenarios-for-using-snowpark-container-services">Scenarios for using Snowpark Container Services</h3>
+<p>Common workloads are: - Batch Data Processing Jobs: Jobs like stored procedures across multiple job instances, and graphics processing unit (GPU) for computationally intensive tasks like AI and machine learning.</p>
+<ul>
+<li><p>Service Functions: See an example <a href="https://docs.snowflake.com/en/developer-guide/snowpark-container-services/tutorials/tutorial-1">here</a>.</p></li>
+<li><p>APIs or Web UI Over Snowflake Data: Deploy services that expose APIs or web interfaces with embedded business logic. Users interact with the service rather than raw data.</p></li>
+</ul>
+<p>Check also some <a href="https://docs.snowflake.com/en/developer-guide/snowpark-container-services/additional-considerations-services-jobs">additional considerations for services</a>.</p>
+</section>
+</section>
+<section id="references" class="level2">
+<h2 class="anchored" data-anchor-id="references"><strong>References:</strong></h2>
+<ul>
+<li><a href="https://docs.snowflake.com/en/release-notes/2025/other/2025-12-16-notebooks-in-workspaces">Annoucement: Dec 16, 2025: Notebooks in Workspaces - Preview</a></li>
+<li><a href="https://docs.snowflake.com/en/user-guide/ui-snowsight/notebooks-in-workspaces/notebooks-in-workspaces-overview">Snowflake Notebooks in Workspaces</a></li>
+<li><a href="https://docs.snowflake.com/en/user-guide/ui-snowsight/notebooks-usage#cost-monitoring-on-container-runtime">Notebook usage and cost monitoring</a></li>
+</ul>
+
+
 </section>
 </section>
 
