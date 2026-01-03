@@ -6,10 +6,10 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="dcterms.date" content="2024-11-04">
-<meta name="description" content="KL Divergence and its role on Large Language Model Training.">
+<meta name="dcterms.date" content="2026-01-03">
+<meta name="description" content="Ralph is a Bash loop, a development methodology based on continuous AI agents loops.">
 
-<title>What KL Divergence has to do with Large Language Model – Marcel Castro</title>
+<title>Using Loops in Claude Code – Marcel Castro</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -21,6 +21,41 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -80,35 +115,6 @@ gtag('js', new Date());
 gtag('config', 'G-RK1QNXR9TB', { 'anonymize_ip': true});
 </script>
 
-  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
-
-<script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
-      }
-    }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
-</script>
 
 <link rel="stylesheet" href="../styles.css">
 </head>
@@ -189,14 +195,14 @@ window.Quarto = {
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
-      <h1 class="title">What KL Divergence has to do with Large Language Model</h1>
+      <h1 class="title">Using Loops in Claude Code</h1>
                   <div>
         <div class="description">
-          KL Divergence and its role on Large Language Model Training.
+          Ralph is a Bash loop, a development methodology based on continuous AI agents loops.
         </div>
       </div>
                           <div class="quarto-categories">
-                <div class="quarto-category">Regularization, LLM, transformers, DPO, SFT, RLHF</div>
+                <div class="quarto-category">Agent, ClaudeCode</div>
               </div>
                   </div>
   </div>
@@ -208,7 +214,7 @@ window.Quarto = {
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">November 4, 2024</p>
+        <p class="date">January 3, 2026</p>
       </div>
     </div>
     
@@ -230,14 +236,12 @@ window.Quarto = {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#what-kl-divergence-has-to-do-with-large-language-model-llm-training" id="toc-what-kl-divergence-has-to-do-with-large-language-model-llm-training" class="nav-link active" data-scroll-target="#what-kl-divergence-has-to-do-with-large-language-model-llm-training">What KL Divergence has to do with Large Language Model (LLM) Training</a>
+  <li><a href="#using-loops-in-claude-code" id="toc-using-loops-in-claude-code" class="nav-link active" data-scroll-target="#using-loops-in-claude-code">Using Loops in Claude Code</a>
   <ul class="collapse">
-  <li><a href="#how-kl-divergence-relates-to-large-language-model-training" id="toc-how-kl-divergence-relates-to-large-language-model-training" class="nav-link" data-scroll-target="#how-kl-divergence-relates-to-large-language-model-training">How KL Divergence relates to Large Language Model Training</a></li>
-  <li><a href="#what-is-kl-divergence" id="toc-what-is-kl-divergence" class="nav-link" data-scroll-target="#what-is-kl-divergence">What is KL Divergence</a>
-  <ul class="collapse">
-  <li><a href="#forward-versus-reverse-kl-and-its-role-in-machine-learning" id="toc-forward-versus-reverse-kl-and-its-role-in-machine-learning" class="nav-link" data-scroll-target="#forward-versus-reverse-kl-and-its-role-in-machine-learning">Forward versus Reverse KL and its role in Machine Learning</a></li>
-  </ul></li>
-  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References:</a></li>
+  <li><a href="#ralph-wiggum-plugin" id="toc-ralph-wiggum-plugin" class="nav-link" data-scroll-target="#ralph-wiggum-plugin">Ralph Wiggum Plugin</a></li>
+  <li><a href="#using-mcp-to-interact-with-my-todo-list" id="toc-using-mcp-to-interact-with-my-todo-list" class="nav-link" data-scroll-target="#using-mcp-to-interact-with-my-todo-list">Using MCP to interact with my TODO List</a></li>
+  <li><a href="#claude-code-transcripts" id="toc-claude-code-transcripts" class="nav-link" data-scroll-target="#claude-code-transcripts">Claude Code Transcripts</a></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -249,77 +253,168 @@ window.Quarto = {
 
 
 
-<section id="what-kl-divergence-has-to-do-with-large-language-model-llm-training" class="level1">
-<h1>What KL Divergence has to do with Large Language Model (LLM) Training</h1>
-<p>KL divergence, or <strong>Kullback-Leibler divergence</strong>, is a statistical measure used in machine learning to quantify the difference between two probability distribution.</p>
-<p>KL divergency, also know as <strong>KL regularization</strong> essentially tell us how much information is lost when one probability distribution is used to approximate another.</p>
-<p>First we are going to discuss how KL-divergence related to LLMs and introduce KL-divergence and examples later.</p>
-<section id="how-kl-divergence-relates-to-large-language-model-training" class="level2">
-<h2 class="anchored" data-anchor-id="how-kl-divergence-relates-to-large-language-model-training">How KL Divergence relates to Large Language Model Training</h2>
-<p>Large Language Model (LLM) training is composed by both pre-training and post-training actions. According to <a href="https://arxiv.org/abs/2407.21783">Llama 3 report</a>, the pre-training actions involves, data curation, model architecture choice and efficient pre-training techniques .</p>
-<p>In post-training, the pre-trained model is aligned with human feedback though techniques that involves Supervised Finetuning (SFT) followed by Reinforcement Learning Human Feedback (RLHF) or Direct Preference Optimization (DPO).</p>
-<p>The alignment with human behavior is desired as described by <a href="https://arxiv.org/pdf/2305.18290">Rafailov</a>:</p>
-<blockquote class="blockquote">
-<p>“<em>we might want our language model to be aware of a common misconception believed by 50% of people, but we certainly do not want the model to claim this misconception to be true in 50% of queries about it! In other words, selecting the model’s desired responses and behavior from its very wide knowledge and abilities is crucial to building AI systems that are safe, performant, and controllable</em>”</p>
-</blockquote>
-<p>In <strong>RLHF</strong>, you first fit a reward model that reflects human preferences, and then fine-tune the large unsupervised model using <strong>Reinforcement Learning (RL)</strong> to maximize the estimated reward without drifting too far from the original model. In summary, RLHF first learn a reward and then optimize it via RL.</p>
-<p>On the other hand <strong>DPO</strong> does not require a reward model, but instead relies on a theoretical preference model that measures how well a given reward function aligns with empirical preference data. Giving a dataset of human preferences over model responses, DPO can therefore optimize a policy using binary cross entropy objective, without explicitly learning a reward function or sampling from the policy during training. In summary, DPO bypasses the reward modeling step and directly optimizes a language model using preference data (i.e.&nbsp;transform a loss function over reward function into a loss function over policies).</p>
-<p>Lately, several new LLM training has used DPO instead of RLHF as done in <a href="https://arxiv.org/abs/2407.21783">Llama 3</a> and <a href="https://arxiv.org/pdf/2310.16944">Zephyr</a>.</p>
-<p>DPO implicitly optimize the same objective as existing RLHF algorithms, which is <strong>reward maximization with a KL-divergence constraint</strong> - i.e.&nbsp;to ensure that the fine-tuned model does not deviate too much from the original pre-trained model.</p>
-<p>In other words, the KL-divergence reward maximization objective balances exploitation of reward while restricting the policy from deviating far from the reference policy. Ref. Figure 2 in <a href="https://arxiv.org/pdf/2305.18290">Rafailov</a> to see the comparison of RLHF and DPO algorithms plotting reward versus KL-divergence (a.k.a KL-discrepancy).</p>
+<section id="using-loops-in-claude-code" class="level1">
+<h1>Using Loops in Claude Code</h1>
+<p>This week I came accross the concept of “<strong>claude code loop</strong>” which I was not aware of.</p>
+<p>Basically it is a term coined from <a href="https://ghuntley.com/">Geoffrey Huntley</a> which describes it as a <strong>“Ralph is a Bash loop” - a development methodology based on continuous AI agents loops</strong> .</p>
+<p>Ralph in this case is named after <a href="https://en.wikipedia.org/wiki/Ralph_Wiggum">Ralph Wiggum from The Simpsons</a>, which represents the philosophy of <strong>persistent interactions despite setbacks</strong>.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="./assets/image-20241104094535137.png" class="img-fluid figure-img"></p>
-<figcaption>DPO versus RLHF</figcaption>
+<p><img src="./assets/image-20260102182926268.png" class="img-fluid figure-img"></p>
+<figcaption>Ralph Wiggum by Gemini</figcaption>
 </figure>
 </div>
-<p>Picture by: <a href="https://arxiv.org/pdf/2305.18290">Rafailov</a></p>
+<section id="ralph-wiggum-plugin" class="level2">
+<h2 class="anchored" data-anchor-id="ralph-wiggum-plugin">Ralph Wiggum Plugin</h2>
+<p><strong>Claude code loop</strong> is implement as a plugin named “Ralph Wiggum Plugin” at https://github.com/anthropics/claude-plugins-official/tree/main/plugins/ralph-wiggum.</p>
+<p>In my case, I use the pluging to create an MCP server for my simple <a href="https://github.com/marcelcastrobr/cc-ralph-wiggum-observability">REST API for managing TODO items</a> build with FastAPI and SQLAlchemy.</p>
+<p>But before we check the results, lets look at how to install and use the Claude Code <a href="https://github.com/anthropics/claude-plugins-official/tree/main/plugins/ralph-wiggum">Ralph Wiggum Plugin</a>.</p>
+<section id="how-to-install-the-plugin" class="level4">
+<h4 class="anchored" data-anchor-id="how-to-install-the-plugin">How to install the plugin</h4>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>**Install ralph-wiggum plugin:**</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a> /plugin install claude-plugins-official/ralph-wiggum</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a> </span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a> **Remove ralph-wiggum plugin:**    </span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a> /plugin remove ralph-wiggum</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a> </span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>**Alternative installation method:**</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a> You can also use the interactive installer which will show available plugins:</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>  /plugin install</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
-<section id="what-is-kl-divergence" class="level2">
-<h2 class="anchored" data-anchor-id="what-is-kl-divergence">What is KL Divergence</h2>
-<p>KL-divergence or KL regularization is a way to measure difference between two probability distribution.</p>
-<p>KL is expressed as: <span class="math display">\[
-D_{KL}(P∥Q)=E_{x∼P}[log\frac{P(X)}{Q(X)}]
-\]</span> Where P(x) is the true distribution and Q(x) is the approximated distribution.</p>
-<p><strong>Some properties of KL-divergence:</strong></p>
-<ol type="1">
-<li><p>not symmetric. <span class="math display">\[
-D_{KL}(P∥Q) \neq D_{KL}(Q∥P)
-\]</span></p></li>
-<li><p>Take only value from [0, inf]</p></li>
-</ol>
-<p>It can also be re-written as:</p>
-<p><span class="math display">\[
-D_{KL}(P∥Q)=E_{x∼P}[-logQ(X)] - H(P(X))
-\]</span> where the first term is the cross-entropy between P and Q and the last term is the entropy of P.</p>
-<section id="forward-versus-reverse-kl-and-its-role-in-machine-learning" class="level3">
-<h3 class="anchored" data-anchor-id="forward-versus-reverse-kl-and-its-role-in-machine-learning">Forward versus Reverse KL and its role in Machine Learning</h3>
-<p>There are two main optimizations of KL-divergence:</p>
-<ol type="1">
-<li><p><strong>Forward KL Divergence</strong>: This optimization minimizes the divergence from the true distribution (P) to the approximate distribution (Q). This approach is often used in variational inference where the goal is to approximate a complex distribution (P) with a simpler distribution (Q). Mathematically, it is represented as: <span class="math display">\[
-[ \text{argmin}_\theta D_{KL}(P \parallel Q_\theta) ]
-\]</span></p></li>
-<li><p><strong>Reverse KL Divergence</strong>: This optimization minimizes the divergence from the approximate distribution (Q) to the true distribution (P). This method is commonly used in scenarios where the approximate distribution (Q) is simpler to compute, such as in certain machine learning algorithms. Mathematically, it is represented as:</p>
-<p><span class="math display">\[
-[ \text{argmin}_\theta D_{KL}(Q_\theta \parallel P) ]
-\]</span></p></li>
-</ol>
-<p>Supervised learning algorithms such as classification (with cross entropy loss) and regression (with mean-square error loss) follow the forward KL as it has equivalent objectives. Reinforcement learning approaches follow reverse KL.</p>
+<section id="how-to-use-the-plugin" class="level4">
+<h4 class="anchored" data-anchor-id="how-to-use-the-plugin">How to use the plugin</h4>
+<p>The basic concepts are:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># You run ONCE:</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="ex">/ralph-loop</span> <span class="st">"Your task description"</span> <span class="at">--completion-promise</span> <span class="st">"DONE"</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Then Claude Code automatically:</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Works on the task</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Tries to exit</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. Stop hook blocks exit</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="co"># 4. Stop hook feeds the SAME prompt back</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="co"># 5. Repeat until completion</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>I used it to add an MCP Server using the following instructions.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">/ralph-loop</span> <span class="st">"Implement my first MCP server using FastAPI-MCP for my REST API for TODOs. </span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="st">When complete:</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="st">- Make use of the fastapi_mcp package in https://github.com/tadata-org/fastapi_mcp. A detailed fastapi_mcp documentation is at https://fastapi-mcp.tadata.com/getting-started/welcome.</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="st">- All CRUD operations as MCP tools.</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="st">- MCP server will be used to interact with REST API to create/delete/show/update TODOs.</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="st">- Make sure error handlinhg is done properly.</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="st">- MCP_README documenting how to use it.</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="st">- Output: &lt;promise&gt;COMPLETE&lt;/promise&gt;"</span> <span class="at">--completion-promise</span> <span class="st">"COMPLETE"</span> <span class="at">--max-iterations</span> 20</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>:dollar: After $1.55 , I got the following output from claude code.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a> The MCP server implementation is complete. Here's a summary of what was accomplished:</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a> </span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>Summary</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  Implementation Complete</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="ss">  1. </span>Installed FastAPI-MCP: Added fastapi-mcp package (v0.4.0)</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="ss">  2. </span>Modified main.py:</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="ss">    - </span>Added FastApiMCP import</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="ss">    - </span>Added operation_id to all CRUD endpoints for clear tool naming</span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a><span class="ss">    - </span>Initialized MCP server with appropriate configuration</span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a><span class="ss">    - </span>Mounted MCP server at /mcp using HTTP transport</span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a><span class="ss">    - </span>Fixed uvicorn startup to use string import for proper route registration</span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a><span class="ss">  3. </span>MCP Tools Available:</span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a><span class="ss">    - </span>create_todo - Create a new todo item</span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a><span class="ss">    - </span>list_todos - List todos with filtering/pagination</span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a><span class="ss">    - </span>get_todo - Get a specific todo by ID</span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a><span class="ss">    - </span>update_todo - Update an existing todo</span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a><span class="ss">    - </span>delete_todo - Delete a todo by ID</span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a><span class="ss">  4. </span>Created MCP_README.md: Comprehensive documentation including:</span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a><span class="ss">    - </span>Installation instructions</span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a><span class="ss">    - </span>Server startup guide</span>
+<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a><span class="ss">    - </span>All 5 MCP tools with parameters and examples</span>
+<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a><span class="ss">    - </span>Client configuration for Claude Desktop and Cursor</span>
+<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a><span class="ss">    - </span>Error handling documentation</span>
+<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a><span class="ss">    - </span>Example workflows</span>
+<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a><span class="ss">    - </span>Development guide for adding new tools</span>
+<span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a><span class="ss">  5. </span>Error Handling: Inherited from the REST API with proper HTTP status codes (400, 404, 422, 500)</span>
+<span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a><span class="ss">  6. </span>Testing: All 38 existing tests pass, and manual testing with curl confirms MCP functionality works correctly</span>
+<span id="cb4-30"><a href="#cb4-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-31"><a href="#cb4-31" aria-hidden="true" tabindex="-1"></a>  COMPLETE</span>
+<span id="cb4-32"><a href="#cb4-32" aria-hidden="true" tabindex="-1"></a>    </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>And here a detailed information on cost.</p>
+<pre><code>&gt; /cost --session 4 
+  ⎿  Total cost:            $1.55
+     Total duration (API):  2m 29s
+     Total duration (wall): 21m 46s
+     Total code changes:    0 lines added, 0 lines removed
+     Usage by model:
+             claude-haiku:  695 input, 97 output, 0 cache read, 0 cache write ($0.0012)
+         claude-3-5-haiku:  4 input, 387 output, 0 cache read, 2.1k cache write ($0.0037)
+          claude-opus-4-1:  58 input, 2.4k output, 43.1k cache read, 69.6k cache write ($1.55)
+</code></pre>
+</section>
+</section>
+<section id="using-mcp-to-interact-with-my-todo-list" class="level2">
+<h2 class="anchored" data-anchor-id="using-mcp-to-interact-with-my-todo-list">Using MCP to interact with my TODO List</h2>
+<p>In order to use the MCP server in claude code, we need to add the following configuration in the .claude/settings.json file.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode json code-with-copy"><code class="sourceCode json"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">{</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"mcpServers"</span><span class="fu">:</span> <span class="fu">{</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    <span class="dt">"todo-api"</span><span class="fu">:</span> <span class="fu">{</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>      <span class="dt">"type"</span><span class="fu">:</span> <span class="st">"http"</span><span class="fu">,</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>      <span class="dt">"url"</span><span class="fu">:</span> <span class="st">"http://localhost:8000/mcp"</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">}</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">}</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="fu">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Or simply run the command:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="ex">claude</span> mcp add todo-api http://localhost:8000/mcp <span class="at">--transport</span> http</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Once the mcp server is configured in claude code, we can use the newly created MCP tools in our claude code conversations:</p>
+<p>- “Use the todo MCP server to create a new todo called ‘Test MCP Integration’”</p>
+<p>- “List all pending todos using the MCP server”</p>
+<p>- “Mark todo ID 1 as complete”</p>
+<p>- “Delete todo ID 2”</p>
+<section id="creating-my-first-task-through-mcp" class="level4">
+<h4 class="anchored" data-anchor-id="creating-my-first-task-through-mcp">Creating my first task through MCP</h4>
+<p>Here is the request I did to claude code.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="./assets/image-20241104105322399.png" class="img-fluid figure-img"></p>
-<figcaption>image-20241104105322399</figcaption>
+<p><img src="./assets/image-20260103102807555.png" class="img-fluid figure-img"></p>
+<figcaption>image-20260103102807555</figcaption>
 </figure>
 </div>
-<p>Picture by Marcel (inspired by <a href="https://dibyaghosh.com/blog/probability/kldivergence.html">The RL Probabilist</a> .</p>
+<p>And here the task <strong>“Push latest code changes”</strong> added to the TODO list.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="./assets/image-20260103102949171.png" class="img-fluid figure-img"></p>
+<figcaption>image-20260103102949171</figcaption>
+</figure>
+</div>
 </section>
+</section>
+<section id="claude-code-transcripts" class="level2">
+<h2 class="anchored" data-anchor-id="claude-code-transcripts">Claude Code Transcripts</h2>
+<p>I am new user of claude code using CLI (command line). Sometimes I find useful to check what the agent has done as a way to learn from the agent during task execution. In special, when using <strong>/ralp-loop</strong> where the idea is to have claude code to develop the whole task in a loop with minimum interuption.</p>
+<p>In order to do it I came accross the <a href="https://simonwillison.net/2025/Dec/25/claude-code-transcripts/">claude-code-transcripts</a> from Simon Willison, which is a python CLI tool that converts claude code sessions to HTML pages that can be shared through Github Gists.</p>
+<p>You can run using:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="ex">uvx</span> claude-code-transcripts</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>To generate Github gist, make sure you have the github authentication and run the command:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="ex">uvx</span> claude-code-transcripts <span class="at">--gist</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Or if you have installed it through "uv tool install claude-code-transcripts"</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="ex">claude-code-transcripts</span> <span class="at">--gist</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>The result is the converted claude code session files to clean HTML pages with pagination. Thanks to <a href="https://simonwillison.net/">Simon Willison</a>.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="./assets/image-20260103111214572.png" class="img-fluid figure-img"></p>
+<figcaption>image-20260103111214572</figcaption>
+</figure>
+</div>
+<p>Check the complete Claude Code sessions at https://gisthost.github.io/?afd5c714ea23979f214903d36bae8012/index.html</p>
+<p>Additional claude code transcripts:</p>
+<ul>
+<li><a href="https://gisthost.github.io/?afd5c714ea23979f214903d36bae8012/index.html">Implementation of MCP Server using Ralph Wiggum Plugin</a></li>
+<li><a href="https://gisthost.github.io/?3f83f36ac3ba7c150493406db56b257e/index.html">Using MCP server created to add a new task to the TODO list.</a></li>
+</ul>
 </section>
 <section id="references" class="level2">
-<h2 class="anchored" data-anchor-id="references">References:</h2>
+<h2 class="anchored" data-anchor-id="references">References</h2>
 <ul>
-<li><a href="https://arxiv.org/abs/2305.18290">Direct Preference Optimization: Your Language Model is Secretly a Reward Model by Rafailov</a></li>
-<li><a href="https://arxiv.org/abs/2407.21783"><strong>The Llama 3 Herd of Model by Meta</strong></a></li>
-<li><a href="https://dibyaghosh.com/blog/probability/kldivergence.html">KL Divergence for Machine Learning by The RL Probabilist</a></li>
+<li><a href="https://github.com/anthropics/claude-plugins-official/tree/main/plugins/ralph-wiggum">Ralph Wiggum Plugin</a></li>
+<li><a href="https://simonwillison.net/2025/Dec/25/claude-code-transcripts/">claude-code-transcripts by Simon Willison</a></li>
 </ul>
 
 

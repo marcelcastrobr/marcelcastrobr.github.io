@@ -2,6 +2,7 @@
   {
     "listing": "/index.html",
     "items": [
+      "/posts/2026-01-03-UsingLoopsinClaudeCode.html",
       "/posts/2025-12-10-notebook-in-workspace.html",
       "/posts/2025-12-02-pytorchfromscratch.html",
       "/posts/2025-10-03-context-engineering.html",
