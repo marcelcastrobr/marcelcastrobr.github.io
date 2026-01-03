@@ -255,8 +255,8 @@ gtag('config', 'G-RK1QNXR9TB', { 'anonymize_ip': true});
 
 <section id="using-loops-in-claude-code" class="level1">
 <h1>Using Loops in Claude Code</h1>
-<p>This week I came accross the concept of “<strong>claude code loop</strong>” which I was not aware of.</p>
-<p>Basically it is a term coined from <a href="https://ghuntley.com/">Geoffrey Huntley</a> which describes it as a <strong>“Ralph is a Bash loop” - a development methodology based on continuous AI agents loops</strong> .</p>
+<p>This week I came across the concept of “<strong>claude code loop</strong>” which I was not aware of.</p>
+<p>Basically it is a term coined by <a href="https://ghuntley.com/">Geoffrey Huntley</a> which describes it as a <strong>“Ralph is a Bash loop” - a development methodology based on continuous AI agents loops</strong> .</p>
 <p>Ralph in this case is named after <a href="https://en.wikipedia.org/wiki/Ralph_Wiggum">Ralph Wiggum from The Simpsons</a>, which represents the philosophy of <strong>persistent interactions despite setbacks</strong>.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -266,8 +266,8 @@ gtag('config', 'G-RK1QNXR9TB', { 'anonymize_ip': true});
 </div>
 <section id="ralph-wiggum-plugin" class="level2">
 <h2 class="anchored" data-anchor-id="ralph-wiggum-plugin">Ralph Wiggum Plugin</h2>
-<p><strong>Claude code loop</strong> is implement as a plugin named “Ralph Wiggum Plugin” at https://github.com/anthropics/claude-plugins-official/tree/main/plugins/ralph-wiggum.</p>
-<p>In my case, I use the pluging to create an MCP server for my simple <a href="https://github.com/marcelcastrobr/cc-ralph-wiggum-observability">REST API for managing TODO items</a> build with FastAPI and SQLAlchemy.</p>
+<p><strong>Claude code loop</strong> is implemented as a plugin named “Ralph Wiggum Plugin” at https://github.com/anthropics/claude-plugins-official/tree/main/plugins/ralph-wiggum.</p>
+<p>In my case, I use the plugin to create an MCP server for my simple <a href="https://github.com/marcelcastrobr/cc-ralph-wiggum-observability">REST API for managing TODO items</a> built with FastAPI and SQLAlchemy.</p>
 <p>But before we check the results, lets look at how to install and use the Claude Code <a href="https://github.com/anthropics/claude-plugins-official/tree/main/plugins/ralph-wiggum">Ralph Wiggum Plugin</a>.</p>
 <section id="how-to-install-the-plugin" class="level4">
 <h4 class="anchored" data-anchor-id="how-to-install-the-plugin">How to install the plugin</h4>
@@ -300,7 +300,7 @@ gtag('config', 'G-RK1QNXR9TB', { 'anonymize_ip': true});
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="st">- Make use of the fastapi_mcp package in https://github.com/tadata-org/fastapi_mcp. A detailed fastapi_mcp documentation is at https://fastapi-mcp.tadata.com/getting-started/welcome.</span></span>
 <span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="st">- All CRUD operations as MCP tools.</span></span>
 <span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="st">- MCP server will be used to interact with REST API to create/delete/show/update TODOs.</span></span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="st">- Make sure error handlinhg is done properly.</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="st">- Make sure error handling is done properly.</span></span>
 <span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="st">- MCP_README documenting how to use it.</span></span>
 <span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="st">- Output: &lt;promise&gt;COMPLETE&lt;/promise&gt;"</span> <span class="at">--completion-promise</span> <span class="st">"COMPLETE"</span> <span class="at">--max-iterations</span> 20</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>:dollar: After $1.55 , I got the following output from claude code.</p>
@@ -387,8 +387,8 @@ gtag('config', 'G-RK1QNXR9TB', { 'anonymize_ip': true});
 </section>
 <section id="claude-code-transcripts" class="level2">
 <h2 class="anchored" data-anchor-id="claude-code-transcripts">Claude Code Transcripts</h2>
-<p>I am new user of claude code using CLI (command line). Sometimes I find useful to check what the agent has done as a way to learn from the agent during task execution. In special, when using <strong>/ralp-loop</strong> where the idea is to have claude code to develop the whole task in a loop with minimum interuption.</p>
-<p>In order to do it I came accross the <a href="https://simonwillison.net/2025/Dec/25/claude-code-transcripts/">claude-code-transcripts</a> from Simon Willison, which is a python CLI tool that converts claude code sessions to HTML pages that can be shared through Github Gists.</p>
+<p>I am a new user of claude code using CLI (command line). Sometimes I find it useful to check what the agent has done as a way to learn from the agent during task execution. In particular, when using <strong>/ralph-loop</strong> where the idea is to have claude code to develop the whole task in a loop with minimum interuption.</p>
+<p>In order to do it I came across the <a href="https://simonwillison.net/2025/Dec/25/claude-code-transcripts/">claude-code-transcripts</a> from Simon Willison, which is a Python CLI tool that converts claude code sessions to HTML pages that can be shared through Github Gists.</p>
 <p>You can run using:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="ex">uvx</span> claude-code-transcripts</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>To generate Github gist, make sure you have the github authentication and run the command:</p>
