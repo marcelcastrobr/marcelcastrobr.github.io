@@ -13,9 +13,9 @@ toc: true
 
 # Using Loops in Claude Code
 
-This week I came accross the concept of "**claude code loop**" which I was not aware of.  
+This week I came across the concept of "**claude code loop**" which I was not aware of.  
 
-Basically it is a term coined from [Geoffrey Huntley](https://ghuntley.com/) which describes it as a **"Ralph is a Bash loop" - a development methodology based on continuous AI agents loops** . 
+Basically it is a term coined by [Geoffrey Huntley](https://ghuntley.com/) which describes it as a **"Ralph is a Bash loop" - a development methodology based on continuous AI agents loops** . 
 
 Ralph in this case is named after [Ralph Wiggum from The Simpsons](https://en.wikipedia.org/wiki/Ralph_Wiggum), which represents the philosophy of **persistent interactions despite setbacks**.
 
@@ -27,9 +27,9 @@ Ralph in this case is named after [Ralph Wiggum from The Simpsons](https://en.wi
 
 ## Ralph Wiggum Plugin
 
-**Claude code loop** is implement as a plugin named  "Ralph Wiggum Plugin"  at https://github.com/anthropics/claude-plugins-official/tree/main/plugins/ralph-wiggum.
+**Claude code loop** is implemented as a plugin named  "Ralph Wiggum Plugin"  at https://github.com/anthropics/claude-plugins-official/tree/main/plugins/ralph-wiggum.
 
-In my case, I use the pluging to create an MCP server for my simple [REST API for managing TODO items](https://github.com/marcelcastrobr/cc-ralph-wiggum-observability) build with FastAPI and SQLAlchemy.
+In my case, I use the plugin to create an MCP server for my simple [REST API for managing TODO items](https://github.com/marcelcastrobr/cc-ralph-wiggum-observability) built with FastAPI and SQLAlchemy.
 
 But before we check the results, lets look at how to install and use the Claude Code [Ralph Wiggum Plugin](https://github.com/anthropics/claude-plugins-official/tree/main/plugins/ralph-wiggum).
 
@@ -76,7 +76,7 @@ When complete:
 - Make use of the fastapi_mcp package in https://github.com/tadata-org/fastapi_mcp. A detailed fastapi_mcp documentation is at https://fastapi-mcp.tadata.com/getting-started/welcome.
 - All CRUD operations as MCP tools.
 - MCP server will be used to interact with REST API to create/delete/show/update TODOs.
-- Make sure error handlinhg is done properly.
+- Make sure error handling is done properly.
 - MCP_README documenting how to use it.
 - Output: <promise>COMPLETE</promise>" --completion-promise "COMPLETE" --max-iterations 20
 ```
@@ -184,9 +184,9 @@ And here the task **"Push latest code changes"** added to the TODO list.
 
 ## Claude Code Transcripts
 
-I am new user of claude code using CLI (command line). Sometimes I find useful to check what the agent has done as a way to learn from the agent during task execution. In special, when using  **/ralp-loop** where the idea is to have claude code to develop the whole task in a loop with minimum interuption.
+I am a new user of claude code using CLI (command line). Sometimes I find it useful to check what the agent has done as a way to learn from the agent during task execution. In particular, when using  **/ralph-loop** where the idea is to have claude code to develop the whole task in a loop with minimum interuption.
 
-In order to do it I came accross the [claude-code-transcripts](https://simonwillison.net/2025/Dec/25/claude-code-transcripts/) from Simon Willison, which is a python CLI tool that converts claude code sessions to HTML pages that can be shared through Github Gists.
+In order to do it I came across the [claude-code-transcripts](https://simonwillison.net/2025/Dec/25/claude-code-transcripts/) from Simon Willison, which is a Python CLI tool that converts claude code sessions to HTML pages that can be shared through Github Gists.
 
 You can run using:
 
