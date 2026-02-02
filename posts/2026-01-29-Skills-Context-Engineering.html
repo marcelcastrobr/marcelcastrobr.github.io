@@ -6,9 +6,10 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="dcterms.date" content="2021-09-22">
+<meta name="dcterms.date" content="2026-02-02">
+<meta name="description" content="Overview of Skills.">
 
-<title>Generative Deep Learning – Marcel Castro</title>
+<title>Skills: the art of progressive disclosure in the era of context engineering – Marcel Castro</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,6 +21,41 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -83,7 +119,7 @@ gtag('config', 'G-RK1QNXR9TB', { 'anonymize_ip': true});
 <link rel="stylesheet" href="../styles.css">
 </head>
 
-<body class="nav-fixed fullcontent quarto-light">
+<body class="nav-fixed quarto-light">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top quarto-banner">
@@ -159,9 +195,14 @@ gtag('config', 'G-RK1QNXR9TB', { 'anonymize_ip': true});
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
-      <h1 class="title">Generative Deep Learning</h1>
-                                <div class="quarto-categories">
-                <div class="quarto-category">machine_learning</div>
+      <h1 class="title">Skills: the art of progressive disclosure in the era of context engineering</h1>
+                  <div>
+        <div class="description">
+          Overview of Skills.
+        </div>
+      </div>
+                          <div class="quarto-categories">
+                <div class="quarto-category">Skills, Agent, ClaudeCode</div>
               </div>
                   </div>
   </div>
@@ -173,10 +214,16 @@ gtag('config', 'G-RK1QNXR9TB', { 'anonymize_ip': true});
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">September 22, 2021</p>
+        <p class="date">February 2, 2026</p>
       </div>
     </div>
     
+      <div>
+      <div class="quarto-title-meta-heading">Modified</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date-modified">February 2, 2026</p>
+      </div>
+    </div>
       
     </div>
     
@@ -184,7 +231,26 @@ gtag('config', 'G-RK1QNXR9TB', { 'anonymize_ip': true});
   </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#skills-the-art-of-progressive-disclosure-in-the-era-of-context-engineering" id="toc-skills-the-art-of-progressive-disclosure-in-the-era-of-context-engineering" class="nav-link active" data-scroll-target="#skills-the-art-of-progressive-disclosure-in-the-era-of-context-engineering">Skills: the art of progressive disclosure in the era of context engineering</a>
+  <ul class="collapse">
+  <li><a href="#what-are-skills" id="toc-what-are-skills" class="nav-link" data-scroll-target="#what-are-skills"><strong>What are Skills:</strong></a></li>
+  <li><a href="#how-skills-work" id="toc-how-skills-work" class="nav-link" data-scroll-target="#how-skills-work"><strong>How Skills Work:</strong></a></li>
+  <li><a href="#the-skill-anatomy" id="toc-the-skill-anatomy" class="nav-link" data-scroll-target="#the-skill-anatomy"><strong>The Skill Anatomy:</strong></a></li>
+  <li><a href="#when-to-use-skills" id="toc-when-to-use-skills" class="nav-link" data-scroll-target="#when-to-use-skills"><strong>When to Use Skills:</strong></a></li>
+  <li><a href="#testing-your-skills" id="toc-testing-your-skills" class="nav-link" data-scroll-target="#testing-your-skills">Testing your Skills:</a></li>
+  <li><a href="#what-others-achieved-with-skills" id="toc-what-others-achieved-with-skills" class="nav-link" data-scroll-target="#what-others-achieved-with-skills"><strong>What others achieved with Skills</strong></a></li>
+  <li><a href="#skill.md-vs-agent.md-choosing-the-right-approach" id="toc-skill.md-vs-agent.md-choosing-the-right-approach" class="nav-link" data-scroll-target="#skill.md-vs-agent.md-choosing-the-right-approach"><strong>Skill.md vs Agent.md: Choosing the Right Approach</strong></a></li>
+  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion</a></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
 <!-- main -->
 <main class="content quarto-banner-title-block" id="quarto-document-content">
 
@@ -192,22 +258,112 @@ gtag('config', 'G-RK1QNXR9TB', { 'anonymize_ip': true});
 
 
 
-<section id="generative-deep-learning" class="level1">
-<h1>Generative Deep Learning</h1>
-<p>This repository is intended as place to keep my current experimentations on generative deep learning using tensorflow.</p>
-<p>Most of the code is based on the Coursera course <a href="https://www.coursera.org/learn/generative-deep-learning-with-tensorflow/home/welcome">Generative Deep Learning with TensorFlow</a> by Laurence Moroney and Eddy Shyu.</p>
-<p>Check notebook <a href="https://github.com/marcelcastrobr/generative_deep_learning/blob/master/fast_neural_style_transfer/fast_neural_style_transfer.ipynb">here</a>.</p>
-<section id="fast-neural-style-transfer" class="level2">
-<h2 class="anchored" data-anchor-id="fast-neural-style-transfer">Fast Neural Style Transfer</h2>
-<p>Paper describing Fast Neural Style Transfer can be found <a href="https://arxiv.org/abs/1705.06830">here</a>.</p>
-<p>The model is provided by <a href="https://tfhub.dev/google/magenta/arbitrary-image-stylization-v1-256/2">Tensorflow Hub</a>.</p>
-<p>Figure below illustrate the main concept of Neural Style Transfer, which is based on the paper <a href="https://arxiv.org/abs/1508.06576">A Neural Algorithm of Artistic Style</a> (Gatys, Ecker &amp; Bethge, 2015).</p>
+<section id="skills-the-art-of-progressive-disclosure-in-the-era-of-context-engineering" class="level1">
+<h1>Skills: the art of progressive disclosure in the era of context engineering</h1>
+<p><strong>Context Engineering</strong> is the strategy of curating and maintaining the <strong>optimal set of tokens</strong> during LLM (Large Language Models) inference. It basically address the holistic curation of information that enters the LLM which is normally composed by system prompts, tools definitions, documents retrieved, history and tools outputs.</p>
+<p>However as the context length increases, the LLM ability to capture token relationships effectively decreases. Larger context leads to reduced focus, a phenomenon known as **“needle-in-a-haystack” and addressed in my previous blog <a href="https://marcelcastrobr.github.io/posts/2025-10-03-context-engineering.html">here</a>.</p>
+<p>Skill tries to mitigate this by defining model context as files, like instructions as markdown and code as scripts. Those skills can be discovered and loaded dynamically i.e.&nbsp;it <strong>progressive disclose</strong> its capabilities while performing a task.</p>
+<blockquote class="blockquote">
+<p>As described by Anthropic, thinking of a Skill for an agent is like putting together an onboarding guide for a new hire.</p>
+</blockquote>
+<section id="what-are-skills" class="level2">
+<h2 class="anchored" data-anchor-id="what-are-skills"><strong>What are Skills:</strong></h2>
+<p><strong>Skills</strong> are folders of instructions, scripts, and resources that Claude loads dynamically to improve performance on specialized tasks.</p>
+<p>Skills are based on Agents.md and should allow coding agents like claude code to complete tasks in a repeatable way while only exposing new context whenever appropriate (i.e.&nbsp;progressive disclosure).</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="./2021-09-22-generative-deep-learning.assets/image-20210225231302419.png" class="img-fluid figure-img"></p>
-<figcaption>image-20210225231302419</figcaption>
+<p><img src="./assets/image-20260130151718449.png" class="img-fluid figure-img"></p>
+<figcaption>image-20260130151718449</figcaption>
 </figure>
 </div>
+</section>
+<section id="how-skills-work" class="level2">
+<h2 class="anchored" data-anchor-id="how-skills-work"><strong>How Skills Work:</strong></h2>
+<p>Skills are self-container in its own folder with a <strong>SKILL.md</strong> file contaning the instructions and metadata. The agent determines which skills are relevant and loads the information it needs to complete the task at hand, thus preventing context window overload.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="./assets/image-20260202082613020.png" class="img-fluid figure-img"></p>
+<figcaption>image-20260202082613020</figcaption>
+</figure>
+</div>
+</section>
+<section id="the-skill-anatomy" class="level2">
+<h2 class="anchored" data-anchor-id="the-skill-anatomy"><strong>The Skill Anatomy:</strong></h2>
+<p>According to the <a href="https://agentskills.io/home">Agent Skills Specification</a>:</p>
+<ul>
+<li><p>SKILL.md is required</p></li>
+<li><p>Optional directories: references, scripts, and assets</p></li>
+</ul>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">analyzing-marketing-campaign/</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="ex">├──</span> SKILL.md</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="ex">└──</span> references/</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    <span class="ex">└──</span> budget_reallocation_rules.md</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>The Skill.md must start with YAML frontmatter containing skill-name and description. Check <a href="https://agentskills.io/specification">here</a> the Agent Skills specification.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">name</span><span class="kw">:</span><span class="at"> skill-name</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">description</span><span class="kw">:</span><span class="at"> A description of what this skill does and when to use it.</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>One good example to check is the <a href="https://github.com/anthropics/skills/tree/main/skills/skill-creator">skill-creator</a> by Anthropic.</p>
+</section>
+<section id="when-to-use-skills" class="level2">
+<h2 class="anchored" data-anchor-id="when-to-use-skills"><strong>When to Use Skills:</strong></h2>
+<p>As described in <a href="https://agentskills.io/home">agentskills.io</a>, you should consider a skill for:</p>
+<ul>
+<li><strong>Domain expertise</strong>: Package specialized knowledge into reusable instructions, from legal review processes to data analysis pipelines.</li>
+<li><strong>New capabilities</strong>: Give agents new capabilities (e.g.&nbsp;creating presentations, building MCP servers, analyzing datasets).</li>
+<li><strong>Repeatable workflows</strong>: Turn multi-step tasks into consistent and auditable workflows, such as customer call prep workflow and quartely business review.</li>
+<li><strong>Interoperability</strong>: Reuse the same skill across different skills-compatible agent products (e.g.&nbsp;cursor, claude code, gemini CLI).</li>
+</ul>
+</section>
+<section id="testing-your-skills" class="level2">
+<h2 class="anchored" data-anchor-id="testing-your-skills">Testing your Skills:</h2>
+<p>Before deploying a skill, it’s crucial to validate that it works as intended. Anthropic provides the https://github.com/anthropics/skills/tree/main/skills/skill-creator skill, which not only helps you build new skills but also includes built-in testing capabilities.</p>
+<p>For a hands-on tutorial on creating and testing skills, check out the https://github.com/anthropics/claude-cookbooks/tree/main/skills which provides step-by-step examples, or dive into the https://www.deeplearning.ai/short-courses/agent-skills-with-anthropic/ on DeepLearning.ai for comprehensive coverage of skill development and testing strategies.</p>
+</section>
+<section id="what-others-achieved-with-skills" class="level2">
+<h2 class="anchored" data-anchor-id="what-others-achieved-with-skills"><strong>What others achieved with Skills</strong></h2>
+<p>Hugging face has showed <a href="https://huggingface.co/blog/upskill">here</a> that the use of Skills can improve some open source model on complex and specialized tasks such as writing CUDA kernels. Check here one example of skill used for <a href="https://huggingface.co/hf-skills/h100-diffusers-kernel-builder/blob/main/SKILL.md">H100-diffusers-kernel-builder</a>.</p>
+<p>Here is the workflow from Hugging Face :</p>
+<ul>
+<li>Teacher model (Opus) generates the skill</li>
+<li>Test cases (Opus) are generated automatically from the task description</li>
+<li>Student model (local) is evaluated with and without the skill</li>
+<li>Skill lift measures the improvement</li>
+</ul>
+<p>This is a good example of AI improving AI.</p>
+</section>
+<section id="skill.md-vs-agent.md-choosing-the-right-approach" class="level2">
+<h2 class="anchored" data-anchor-id="skill.md-vs-agent.md-choosing-the-right-approach"><strong>Skill.md vs Agent.md: Choosing the Right Approach</strong></h2>
+<p>While Skills represent an evolution in context engineering, the earlier <strong>Agent.md</strong> pattern remains valuable for certain use cases. Understanding when to use each approach helps teams make better architectural decisions.</p>
+<p><strong>Agent.md</strong>, a markdown document containing comprehensive instructions that define an agent’s entire behavior in a single file, excels when:</p>
+<ul>
+<li><strong>Creative and variable tasks</strong>: As Vercel discovered with their v0 agent, Agent.md <a href="https://vercel.com/blog/agents-md-outperforms-skills-in-our-agent-evals">outperformed Skills in their evaluations</a> for UI generation tasks where creativity and flexibility matter more than structured workflows</li>
+<li><strong>Smaller context windows are acceptable</strong>: When your agent’s total instructions fit comfortably in the context window without causing degradation</li>
+<li><strong>Rapid prototyping</strong>: Single-file simplicity makes Agent.md ideal for quick experiments and proof-of-concepts</li>
+<li><strong>Highly contextual decisions</strong>: Tasks requiring holistic understanding of all instructions simultaneously</li>
+</ul>
+<p><strong>Skills (Skill.md)</strong> shine when:</p>
+<ul>
+<li><strong>Progressive disclosure matters</strong>: Large codebases or complex domains where loading everything upfront would overwhelm the context window</li>
+<li><strong>Modular capabilities</strong>: Teams need to mix-and-match specialized capabilities without reloading base instructions</li>
+<li><strong>Repeatable workflows</strong>: Standardized processes like code review, testing, or deployment that follow consistent patterns</li>
+<li><strong>Team collaboration</strong>: Multiple contributors can work on different skills without conflicts</li>
+</ul>
+</section>
+<section id="conclusion" class="level2">
+<h2 class="anchored" data-anchor-id="conclusion">Conclusion</h2>
+<p>As we navigate the era of increasingly capable LLMs, context engineering emerges as the critical discipline that determines whether our AI agents can effectively harness their potential.</p>
+<p><strong>Skills</strong> represent an evolution in this journey—not as a universal replacement for simpler approaches like Agent.md, but as a sophisticated tool for managing complexity through progressive disclosure.</p>
+</section>
+<section id="references" class="level2">
+<h2 class="anchored" data-anchor-id="references">References</h2>
+<ul>
+<li><a href="https://github.com/anthropics/skills">Anthropic Agent Skills</a></li>
+<li><a href="https://www.deeplearning.ai/short-courses/agent-skills-with-anthropic/?utm_campaign=anthropic-c4-launch&amp;utm_medium=featured-card&amp;utm_source=dlai-homepage">Agent Skills with Anthropic, Deeplearning.ai course</a></li>
+<li><a href="https://github.com/muratcankoylan/Agent-Skills-for-Context-Engineering">Agent-Skills-for-Context-Engineering</a></li>
+<li><a href="https://huggingface.co/blog/upskill">We got Claude to teach open models how to write CUDA kernels!</a></li>
+<li><a href="https://github.com/anthropics/claude-cookbooks/tree/main/skills">Claude Skills Cookbook</a></li>
+</ul>
 
 
 </section>
